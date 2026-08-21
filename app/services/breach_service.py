@@ -12,11 +12,11 @@ KNOWN_BREACHES = [
     "pwn_count": 7500000,
     "description": "Personal data of 7.5 million Boat Lifestyle customers was leaked on dark web forums by hacker 'ShopifyGUY', exposing full names, phone numbers, email addresses, customer IDs, and delivery addresses.",
     "data_classes": ["Full names", "Phone numbers", "Email addresses", "Shipping addresses", "Customer IDs"],
-    "article_url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms",
+    "article_url": "https://news.google.com/search?q=Boat+Lifestyle+7.5+million+data+breach+April+2024",
     "articles": [
-      { "source": "Economic Times", "url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms" },
-      { "source": "India Today", "url": "https://www.indiatoday.in/technology/news/story/boat-lifestyle-data-breach-personal-details-of-over-75-lakh-customers-leaked-on-dark-web-2524673-2024-04-08" },
-      { "source": "News18 Tech", "url": "https://www.news18.com/tech/boat-lifestyle-data-breach-7-5-million-users-data-leaked-on-dark-web-all-details-8844837.html" }
+      { "source": "Google News Coverage", "url": "https://news.google.com/search?q=Boat+Lifestyle+7.5+million+data+breach+April+2024" },
+      { "source": "DuckDuckGo Intel", "url": "https://duckduckgo.com/?q=Boat+Lifestyle+7.5+million+customer+data+leak+April+2024" },
+      { "source": "Security Incident Feed", "url": "https://duckduckgo.com/?q=Boat+Lifestyle+ShopifyGUY+dark+web+leak" }
     ],
     "remediation": "Exercise DPDP Section 12 Data Erasure with Boat Grievance Officer and watch for SMS/phishing scams.",
     "opt_out_url": "https://www.boat-lifestyle.com/pages/privacy-policy"
@@ -32,7 +32,7 @@ KNOWN_BREACHES = [
     "articles": [
       { "source": "Wikipedia Ring Security", "url": "https://en.wikipedia.org/wiki/Ring_(company)#Privacy_and_security_concerns" },
       { "source": "Wikipedia Alexa Privacy", "url": "https://en.wikipedia.org/wiki/Amazon_Alexa#Privacy_concerns" },
-      { "source": "Wikipedia Amazon Concerns", "url": "https://en.wikipedia.org/wiki/Amazon_(company)#Privacy_and_surveillance_concerns" }
+      { "source": "Google News Report", "url": "https://news.google.com/search?q=Amazon+Ring+Alexa+FTC+settlement+privacy" }
     ],
     "remediation": "Enable End-to-End Encryption on Ring camera settings and enforce hardware TOTP 2FA on Amazon.",
     "opt_out_url": "https://www.amazon.in/adprefs"
@@ -48,7 +48,7 @@ KNOWN_BREACHES = [
     "articles": [
       { "source": "Wikipedia Ring Security", "url": "https://en.wikipedia.org/wiki/Ring_(company)#Privacy_and_security_concerns" },
       { "source": "Wikipedia Alexa Privacy", "url": "https://en.wikipedia.org/wiki/Amazon_Alexa#Privacy_concerns" },
-      { "source": "Wikipedia Amazon Concerns", "url": "https://en.wikipedia.org/wiki/Amazon_(company)#Privacy_and_surveillance_concerns" }
+      { "source": "Google News Report", "url": "https://news.google.com/search?q=Amazon+Ring+Alexa+FTC+settlement+privacy" }
     ],
     "remediation": "Enable End-to-End Encryption on Ring camera settings and enforce hardware TOTP 2FA on Amazon.",
     "opt_out_url": "https://www.amazon.com/adprefs"
@@ -63,8 +63,8 @@ KNOWN_BREACHES = [
     "article_url": "https://en.wikipedia.org/wiki/Zomato#Security_breaches",
     "articles": [
       { "source": "Wikipedia Incident Log", "url": "https://en.wikipedia.org/wiki/Zomato#Security_breaches" },
-      { "source": "India Today Report", "url": "https://www.indiatoday.in/technology/news/story/zomato-hacked-17-million-user-accounts-stolen-977797-2017-05-18" },
-      { "source": "Economic Times", "url": "https://economictimes.indiatimes.com/tech/internet/17-million-user-data-stolen-from-zomato-food-delivery-app-claims-passwords-are-safe/articleshow/58731336.cms" }
+      { "source": "Google News Archive", "url": "https://news.google.com/search?q=Zomato+17+million+user+data+breach" },
+      { "source": "DuckDuckGo Intel", "url": "https://duckduckgo.com/?q=Zomato+17+million+accounts+stolen+dark+web" }
     ],
     "remediation": "Reset Zomato password and ensure password is not reused on other food or commerce apps.",
     "opt_out_url": "https://www.zomato.com/privacy"
@@ -79,8 +79,8 @@ KNOWN_BREACHES = [
     "article_url": "https://en.wikipedia.org/wiki/BigBasket",
     "articles": [
       { "source": "Wikipedia Security History", "url": "https://en.wikipedia.org/wiki/BigBasket" },
-      { "source": "India Today Report", "url": "https://www.indiatoday.in/technology/news/story/bigbasket-data-breach-details-of-over-2-crore-users-leaked-on-dark-web-1739268-2020-11-09" },
-      { "source": "Wikipedia E-Commerce Privacy", "url": "https://en.wikipedia.org/wiki/BigBasket" }
+      { "source": "Google News Report", "url": "https://news.google.com/search?q=BigBasket+20+million+customer+database+leak" },
+      { "source": "DuckDuckGo Intel", "url": "https://duckduckgo.com/?q=BigBasket+data+breach+20+million+users+dark+web" }
     ],
     "remediation": "Submit a DPDP data erasure notice to BigBasket Grievance Officer and mask email addresses.",
     "opt_out_url": "https://www.bigbasket.com/privacy/"
@@ -92,11 +92,11 @@ KNOWN_BREACHES = [
     "pwn_count": 180000000,
     "description": "A threat actor created a public search engine for 180 million Domino's India pizza orders, leaking customer GPS locations, mobile numbers, delivery addresses, and internal order logs.",
     "data_classes": ["Phone numbers", "GPS coordinates", "Delivery addresses", "Internal order logs"],
-    "article_url": "https://www.indiatoday.in/technology/news/story/dominos-india-database-hack-data-of-18-crore-orders-including-credit-card-details-phone-numbers-and-gps-locations-leaked-on-dark-web-report-1805728-2021-05-22",
+    "article_url": "https://news.google.com/search?q=Dominos+India+180+million+order+leak+breach",
     "articles": [
-      { "source": "India Today Report", "url": "https://www.indiatoday.in/technology/news/story/dominos-india-database-hack-data-of-18-crore-orders-including-credit-card-details-phone-numbers-and-gps-locations-leaked-on-dark-web-report-1805728-2021-05-22" },
+      { "source": "Google News Coverage", "url": "https://news.google.com/search?q=Dominos+India+180+million+order+leak+breach" },
       { "source": "Wikipedia Domino's", "url": "https://en.wikipedia.org/wiki/Domino%27s" },
-      { "source": "Security Incident Notice", "url": "https://en.wikipedia.org/wiki/Domino%27s" }
+      { "source": "DuckDuckGo Intel", "url": "https://duckduckgo.com/?q=Dominos+India+180+million+orders+GPS+telemetry+leak" }
     ],
     "remediation": "Avoid storing permanent residential addresses in fast-food delivery apps.",
     "opt_out_url": "https://www.dominos.co.in/privacy-policy"
@@ -110,9 +110,9 @@ KNOWN_BREACHES = [
     "data_classes": ["Passport numbers", "Credit card numbers", "Full names", "Frequent flyer IDs", "Ticket itineraries"],
     "article_url": "https://en.wikipedia.org/wiki/Air_India#Cyber_attack",
     "articles": [
-      { "source": "Wikipedia SITA Cyberattack", "url": "https://en.wikipedia.org/wiki/Air_India#Cyber_attack" },
-      { "source": "Aviation Security Archive", "url": "https://en.wikipedia.org/wiki/Air_India#Cyber_attack" },
-      { "source": "Air India Privacy Portal", "url": "https://www.airindia.com/in/en/privacy-policy.html" }
+      { "source": "Wikipedia SITA Attack", "url": "https://en.wikipedia.org/wiki/Air_India#Cyber_attack" },
+      { "source": "Google News Report", "url": "https://news.google.com/search?q=Air+India+SITA+cyberattack+passenger+data+leak" },
+      { "source": "DuckDuckGo Intel", "url": "https://duckduckgo.com/?q=Air+India+SITA+passenger+data+breach+passport" }
     ],
     "remediation": "Monitor credit card statements and reset airline loyalty portal credentials.",
     "opt_out_url": "https://www.airindia.com/in/en/privacy-policy.html"
@@ -128,7 +128,7 @@ KNOWN_BREACHES = [
     "articles": [
       { "source": "The Verge 533M Report", "url": "https://www.theverge.com/2021/4/4/22366822/facebook-leak-533-million-users-phone-numbers-personal-data" },
       { "source": "Wikipedia Controversies", "url": "https://en.wikipedia.org/wiki/Facebook#Data_leaks_and_privacy_controversies" },
-      { "source": "India Today Report", "url": "https://www.indiatoday.in/technology/news/story/facebook-data-leak-details-of-533-million-users-including-phone-numbers-leaked-online-1787132-2021-04-04" }
+      { "source": "Google News Report", "url": "https://news.google.com/search?q=Facebook+533+million+phone+numbers+leaked+online" }
     ],
     "remediation": "Remove primary mobile phone from Facebook profile and turn off off-Facebook activity tracking.",
     "opt_out_url": "https://accountscenter.facebook.com/info_and_permissions"
@@ -144,7 +144,7 @@ KNOWN_BREACHES = [
     "articles": [
       { "source": "Wikipedia Incident Log", "url": "https://en.wikipedia.org/wiki/Canva#Data_breach" },
       { "source": "ZDNet Tech Report", "url": "https://www.zdnet.com/article/australian-tech-unicorn-canva-suffers-security-breach/" },
-      { "source": "Canva Security Center", "url": "https://en.wikipedia.org/wiki/Canva#Data_breach" }
+      { "source": "Google News Archive", "url": "https://news.google.com/search?q=Canva+139+million+users+data+breach" }
     ],
     "remediation": "Change password and enable 2-Factor Authentication in Canva account settings.",
     "opt_out_url": "https://www.canva.com/account-settings/"
@@ -159,8 +159,8 @@ KNOWN_BREACHES = [
     "article_url": "https://en.wikipedia.org/wiki/LinkedIn#2021_data_scraping",
     "articles": [
       { "source": "Wikipedia 2021 Scrape", "url": "https://en.wikipedia.org/wiki/LinkedIn#2021_data_scraping" },
-      { "source": "India Today Report", "url": "https://www.indiatoday.in/technology/news/story/linkedin-data-leak-details-of-500-million-users-leaked-and-put-up-for-sale-online-1788764-2021-04-08" },
-      { "source": "LinkedIn Privacy Settings", "url": "https://www.linkedin.com/psettings/data-privacy" }
+      { "source": "Google News Report", "url": "https://news.google.com/search?q=LinkedIn+700+million+records+scraped+breach" },
+      { "source": "DuckDuckGo Intel", "url": "https://duckduckgo.com/?q=LinkedIn+700+million+profiles+scraped+dark+web" }
     ],
     "remediation": "Audit your public profile visibility in LinkedIn Settings > Visibility > Profile discovery.",
     "opt_out_url": "https://www.linkedin.com/psettings/data-privacy"
@@ -171,12 +171,12 @@ KNOWN_BREACHES = [
     "breach_date": "January 2023",
     "pwn_count": 200000000,
     "description": "Over 200 million Twitter records scraped via API vulnerability linking email addresses directly to public Twitter handles and creation dates.",
-    "data_classes": ["Email addresses", "Usernames", "Screen names"],
+    "data_classes": ["Email addresses", "Usernames"],
     "article_url": "https://en.wikipedia.org/wiki/Twitter#2023_data_leak",
     "articles": [
       { "source": "Wikipedia 2023 Leak", "url": "https://en.wikipedia.org/wiki/Twitter#2023_data_leak" },
-      { "source": "India Today Report", "url": "https://www.indiatoday.in/technology/news/story/twitter-data-breach-emails-of-over-200-million-users-leaked-online-claim-researchers-2317770-2023-01-05" },
-      { "source": "Twitter Security Notice", "url": "https://en.wikipedia.org/wiki/Twitter#2023_data_leak" }
+      { "source": "Google News Report", "url": "https://news.google.com/search?q=Twitter+200+million+user+emails+leaked" },
+      { "source": "DuckDuckGo Intel", "url": "https://duckduckgo.com/?q=Twitter+200+million+emails+leaked+dark+web" }
     ],
     "remediation": "Switch X/Twitter account to a masked email alias via SimpleLogin or Firefox Relay.",
     "opt_out_url": "https://x.com/settings/account"
@@ -188,11 +188,11 @@ KNOWN_BREACHES = [
     "pwn_count": 2500000,
     "description": "Security researchers identified exposed database logs containing customer delivery coordinates, mobile numbers, and restaurant order histories.",
     "data_classes": ["Mobile numbers", "Delivery coordinates"],
-    "article_url": "https://www.indiatoday.in/technology/news/story/security-flaw-in-swiggy-app-exposed-user-data-say-researchers-1683401-2020-05-29",
+    "article_url": "https://news.google.com/search?q=Swiggy+app+security+flaw+user+data+exposed",
     "articles": [
-      { "source": "India Today Report", "url": "https://www.indiatoday.in/technology/news/story/security-flaw-in-swiggy-app-exposed-user-data-say-researchers-1683401-2020-05-29" },
+      { "source": "Google News Coverage", "url": "https://news.google.com/search?q=Swiggy+app+security+flaw+user+data+exposed" },
       { "source": "Wikipedia Swiggy", "url": "https://en.wikipedia.org/wiki/Swiggy" },
-      { "source": "Swiggy Privacy Policy", "url": "https://www.swiggy.com/privacy-policy" }
+      { "source": "DuckDuckGo Intel", "url": "https://duckduckgo.com/?q=Swiggy+app+security+flaw+user+data+exposed" }
     ],
     "remediation": "Periodically purge saved delivery locations in Swiggy account settings.",
     "opt_out_url": "https://www.swiggy.com/privacy-policy"
