@@ -1,0 +1,54 @@
+[
+  {
+    "id": "dpbi",
+    "name": "Data Protection Board of India (DPBI)",
+    "region": "India",
+    "law": "Digital Personal Data Protection Act, 2023",
+    "mandate": "Adjudicating non-compliance, hearing grievances after company failure to resolve within 30 days, and levying penalties up to ₹250 Crore.",
+    "website": "https://www.meity.gov.in/data-protection-board-india",
+    "filing_url": "https://cybercrime.gov.in / National Consumer Helpline",
+    "email": "dpb-grievance@meity.gov.in",
+    "escalation_conditions": "Company fails to respond within 30 days or rejects erasure without statutory justification.",
+    "penalty_scope": "Up to ₹250 Cr for failure to take reasonable security safeguards; ₹200 Cr for failure to notify breach.",
+    "appeal_timeline": "File within 90 days of company default or grievance officer response."
+  },
+  {
+    "id": "cnil",
+    "name": "CNIL (France)",
+    "region": "European Union / France",
+    "law": "General Data Protection Regulation (GDPR)",
+    "mandate": "Supervising data processing, enforcing cookie consent regulations, issuing Art. 83 administrative fines.",
+    "website": "https://www.cnil.fr",
+    "filing_url": "https://www.cnil.fr/en/plaintes",
+    "email": "contact@cnil.fr",
+    "escalation_conditions": "Data controller fails to respond to Article 17 erasure request within 1 month.",
+    "penalty_scope": "Up to €20M or 4% of total worldwide annual turnover.",
+    "appeal_timeline": "Within 6 months of grievance."
+  },
+  {
+    "id": "ico",
+    "name": "Information Commissioner's Office (ICO)",
+    "region": "United Kingdom",
+    "law": "UK GDPR & Data Protection Act 2018",
+    "mandate": "Investigating complaints, enforcing privacy and electronic communications regulations.",
+    "website": "https://ico.org.uk",
+    "filing_url": "https://ico.org.uk/make-a-complaint/data-protection-complaints/",
+    "email": "casework@ico.org.uk",
+    "escalation_conditions": "Organization refuses right to access/erasure without valid lawful exemption.",
+    "penalty_scope": "Up to £17.5M or 4% of global turnover.",
+    "appeal_timeline": "Within 3 months of last contact with organization."
+  },
+  {
+    "id": "cppa",
+    "name": "California Privacy Protection Agency (CPPA)",
+    "region": "United States (California)",
+    "law": "California Consumer Privacy Act (CCPA) / CPRA",
+    "mandate": "Enforcing consumer rights to know, delete, correct, and opt-out of the sale/sharing of personal information.",
+    "website": "https://cppa.ca.gov",
+    "filing_url": "https://cppa.ca.gov/webapplications/complaint",
+    "email": "enforcement@cppa.ca.gov",
+    "escalation_conditions": "Business fails to process CCPA Do-Not-Sell or Deletion request within 45 days.",
+    "penalty_scope": "Up to $7,500 per intentional violation.",
+    "appeal_timeline": "Direct complaint filing anytime."
+  }
+]

@@ -1,0 +1,661 @@
+[
+  {
+    "domain": "google.com",
+    "name": "Google",
+    "grade": "D+",
+    "score": 42,
+    "color": "amber",
+    "summary": "Massive cross-service tracking and psychographic ad profile building. Meets formal DPDP/GDPR disclosures but retains broad data sharing licenses.",
+    "rubric": {
+      "data_sharing": { "score": 30, "max": 100, "label": "Extensive Third-Party & Partner Sharing", "risk": "high" },
+      "retention": { "score": 45, "max": 100, "label": "Indefinite Retention Unless Manually Configured", "risk": "medium" },
+      "tracking_cookies": { "score": 25, "max": 100, "label": "Ubiquitous Cross-Site & Device Tracking", "risk": "high" },
+      "user_rights": { "score": 80, "max": 100, "label": "Self-Service Export & Deletion Dashboard Provided", "risk": "low" },
+      "breach_history": { "score": 50, "max": 100, "label": "Google+ API Leaks & Global Regulatory Fines", "risk": "medium" },
+      "readability": { "score": 55, "max": 100, "label": "Complex Layered Legal Policies", "risk": "medium" }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Mr. Joe Grier / Grievance Officer India",
+        "grievance_email": "support-in@google.com",
+        "redressal_period_days": 30,
+        "erasure_right_disclosed": true,
+        "notes": "Names Indian Grievance Officer in compliance with DPDP Act 2023 & IT Rules."
+      },
+      "gdpr": {
+        "compliant": true,
+        "dpo_contact": "google-eu-dpo@google.com",
+        "lawful_basis_stated": true,
+        "erasure_art17_disclosed": true,
+        "notes": "EU representative Google Ireland Limited with active DPO."
+      },
+      "ccpa": {
+        "compliant": true,
+        "opt_out_link": "https://myadcenter.google.com/controls",
+        "do_not_sell": true
+      }
+    },
+    "key_clauses": [
+      { "type": "negative", "text": "We collect information about your activity across Google services and third-party sites that partner with us." },
+      { "type": "negative", "text": "Personalized ads are served based on location history, search queries, and YouTube watch habits." },
+      { "type": "positive", "text": "You can use Google Takeout to export your data or configure auto-delete after 3, 18, or 36 months." }
+    ],
+    "category": "Search & Big Tech"
+  },
+  {
+    "domain": "meta.com",
+    "name": "Meta (Facebook & Instagram)",
+    "grade": "F",
+    "score": 28,
+    "color": "red",
+    "summary": "Severe off-platform tracking via Meta Pixel and SDKs. Builds shadow profiles and uses personal data for targeted advertising algorithms.",
+    "rubric": {
+      "data_sharing": { "score": 20, "max": 100, "label": "Deep Ad Network & Data Broker Exchanges", "risk": "critical" },
+      "retention": { "score": 30, "max": 100, "label": "Retained Until Account Deletion (Backups Persist Longer)", "risk": "high" },
+      "tracking_cookies": { "score": 15, "max": 100, "label": "Meta Pixel Tracks Across Millions of External Websites", "risk": "critical" },
+      "user_rights": { "score": 60, "max": 100, "label": "Accounts Center Settings Exist But Are Deeply Nested", "risk": "medium" },
+      "breach_history": { "score": 20, "max": 100, "label": "Cambridge Analytica, 533M Scraped User Phone Numbers", "risk": "critical" },
+      "readability": { "score": 40, "max": 100, "label": "Dense Legal Terminology and Fragmented Sub-Policies", "risk": "high" }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Ms. Spandana Prasad / Grievance Officer Meta India",
+        "grievance_email": "grievance-officer-india@meta.com",
+        "redressal_period_days": 15,
+        "erasure_right_disclosed": true,
+        "notes": "Names designated Indian grievance redressal contact per IT Rules / DPDP."
+      },
+      "gdpr": {
+        "compliant": false,
+        "dpo_contact": "dpo@meta.com",
+        "lawful_basis_stated": true,
+        "erasure_art17_disclosed": true,
+        "notes": "Fined €1.2B by Irish DPC for unlawful EU-US data transfers."
+      },
+      "ccpa": {
+        "compliant": true,
+        "opt_out_link": "https://www.facebook.com/adpreferences/ad_settings",
+        "do_not_sell": true
+      }
+    },
+    "key_clauses": [
+      { "type": "negative", "text": "We collect information when you visit or use third-party websites and apps that use our technologies." },
+      { "type": "negative", "text": "Your contacts, facial recognition metadata, and audio clips may be processed to enhance social graph matching." },
+      { "type": "positive", "text": "Users can access 'Off-Facebook Activity' tool to disconnect browsing history from their account." }
+    ],
+    "category": "Social Media"
+  },
+  {
+    "domain": "swiggy.com",
+    "name": "Swiggy (Bundl Technologies)",
+    "grade": "C",
+    "score": 58,
+    "color": "amber",
+    "summary": "Collects precise real-time geolocation, device telemetry, and order behavior. Complies with DPDP Act Grievance Officer rules in India.",
+    "rubric": {
+      "data_sharing": { "score": 50, "max": 100, "label": "Shared With Delivery Partners, Restaurants & Ad Partners", "risk": "medium" },
+      "retention": { "score": 55, "max": 100, "label": "Retained for Active Account Lifetime + Tax/Legal Period", "risk": "medium" },
+      "tracking_cookies": { "score": 60, "max": 100, "label": "In-App Analytics & Firebase Event Tracking", "risk": "medium" },
+      "user_rights": { "score": 70, "max": 100, "label": "Account Deletion Flow Supported via In-App Support", "risk": "medium" },
+      "breach_history": { "score": 75, "max": 100, "label": "No Major Public Mass Credentials Breaches", "risk": "low" },
+      "readability": { "score": 65, "max": 100, "label": "Relatively Clear E-Commerce Privacy Notice", "risk": "low" }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Grievance Redressal Officer, Swiggy",
+        "grievance_email": "grievances@swiggy.in",
+        "redressal_period_days": 30,
+        "erasure_right_disclosed": true,
+        "notes": "Explicitly complies with Indian DPDP Act 2023 and Consumer Protection Rules."
+      },
+      "gdpr": {
+        "compliant": false,
+        "dpo_contact": null,
+        "lawful_basis_stated": false,
+        "erasure_art17_disclosed": false,
+        "notes": "India-focused service; GDPR clauses omitted or localized."
+      },
+      "ccpa": {
+        "compliant": false,
+        "opt_out_link": null,
+        "do_not_sell": false
+      }
+    },
+    "key_clauses": [
+      { "type": "negative", "text": "Continuous foreground and background GPS location collected during order lifecycle." },
+      { "type": "negative", "text": "Order and food preference data shared with affiliated brand advertisers." },
+      { "type": "positive", "text": "Users can request deletion of account and associated delivery address records via grievances@swiggy.in." }
+    ],
+    "category": "Quick Commerce & Delivery"
+  },
+  {
+    "domain": "zomato.com",
+    "name": "Zomato",
+    "grade": "C-",
+    "score": 52,
+    "color": "amber",
+    "summary": "Tracks dining habits, payment tokens, and live locations. Discloses Indian DPDP grievance redressal framework.",
+    "rubric": {
+      "data_sharing": { "score": 45, "max": 100, "label": "Shared with Restaurant Partners & Marketing Aggregators", "risk": "medium" },
+      "retention": { "score": 50, "max": 100, "label": "Retained for Operational & Fraud Prevention Audits", "risk": "medium" },
+      "tracking_cookies": { "score": 50, "max": 100, "label": "Mixpanel, Google Analytics & Adjust SDKs", "risk": "medium" },
+      "user_rights": { "score": 65, "max": 100, "label": "Manual Account Erasure by Contacting Support", "risk": "medium" },
+      "breach_history": { "score": 40, "max": 100, "label": "2017 Incident Impacted 17 Million Account Hashes", "risk": "high" },
+      "readability": { "score": 60, "max": 100, "label": "Standard Commercial Privacy Agreement", "risk": "medium" }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Grievance Officer, Zomato Limited",
+        "grievance_email": "grievanceofficer@zomato.com",
+        "redressal_period_days": 30,
+        "erasure_right_disclosed": true,
+        "notes": "Formally registers Grievance Redressal Officer in New Delhi per DPDP guidelines."
+      },
+      "gdpr": {
+        "compliant": true,
+        "dpo_contact": "privacy@zomato.com",
+        "lawful_basis_stated": true,
+        "erasure_art17_disclosed": true,
+        "notes": "Contains international rider for international operations."
+      },
+      "ccpa": {
+        "compliant": false,
+        "opt_out_link": null,
+        "do_not_sell": false
+      }
+    },
+    "key_clauses": [
+      { "type": "negative", "text": "Information regarding calls made through Zomato delivery masking may be recorded for quality." },
+      { "type": "negative", "text": "Behavioral analytics used to power Hyperpure and restaurant advertising." },
+      { "type": "positive", "text": "Indian users have direct statutory right to withdraw consent under Section 6(4) of DPDP Act 2023." }
+    ],
+    "category": "Quick Commerce & Delivery"
+  },
+  {
+    "domain": "duckduckgo.com",
+    "name": "DuckDuckGo",
+    "grade": "A+",
+    "score": 96,
+    "color": "green",
+    "summary": "Gold standard in search privacy. No IP logging, zero personal profile building, and fully anonymous search queries.",
+    "rubric": {
+      "data_sharing": { "score": 98, "max": 100, "label": "Zero Third-Party Commercial Data Sales", "risk": "low" },
+      "retention": { "score": 98, "max": 100, "label": "No Identifiable Data Stored on Servers", "risk": "low" },
+      "tracking_cookies": { "score": 95, "max": 100, "label": "No Persistent Tracking Cookies Used", "risk": "low" },
+      "user_rights": { "score": 95, "max": 100, "label": "Privacy By Design — Nothing to Erase", "risk": "low" },
+      "breach_history": { "score": 100, "max": 100, "label": "No Known User Data Breaches in History", "risk": "low" },
+      "readability": { "score": 95, "max": 100, "label": "Written in Simple, Non-Legalese Plain Language", "risk": "low" }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Privacy Officer, Duck Duck Go Inc.",
+        "grievance_email": "privacy@duckduckgo.com",
+        "redressal_period_days": 15,
+        "erasure_right_disclosed": true,
+        "notes": "Full compliance through radical data minimization."
+      },
+      "gdpr": {
+        "compliant": true,
+        "dpo_contact": "privacy@duckduckgo.com",
+        "lawful_basis_stated": true,
+        "erasure_art17_disclosed": true,
+        "notes": "Exempt from many telemetry records because no personal data is collected."
+      },
+      "ccpa": {
+        "compliant": true,
+        "opt_out_link": "https://duckduckgo.com/privacy",
+        "do_not_sell": true
+      }
+    },
+    "key_clauses": [
+      { "type": "positive", "text": "We do not store your search history. We do not track you when you use DuckDuckGo." },
+      { "type": "positive", "text": "We don't collect or share your personal information. Ever." },
+      { "type": "positive", "text": "Search ads are non-personalized and based solely on the keyword entered." }
+    ],
+    "category": "Search & Privacy Tech"
+  },
+  {
+    "domain": "proton.me",
+    "name": "Proton (Mail, VPN, Drive)",
+    "grade": "A+",
+    "score": 95,
+    "color": "green",
+    "summary": "Swiss-based zero-access encryption suite. Open-source clients, no user surveillance, and strictly protected under Swiss FADP & GDPR.",
+    "rubric": {
+      "data_sharing": { "score": 96, "max": 100, "label": "No Data Selling or Advertising Networks", "risk": "low" },
+      "retention": { "score": 94, "max": 100, "label": "Ephemeral Logs with Strict Minimization", "risk": "low" },
+      "tracking_cookies": { "score": 92, "max": 100, "label": "Zero Third-Party Trackers on Core Apps", "risk": "low" },
+      "user_rights": { "score": 96, "max": 100, "label": "Instant Self-Service Account & Data Destruction", "risk": "low" },
+      "breach_history": { "score": 98, "max": 100, "label": "Flawless Security Track Record", "risk": "low" },
+      "readability": { "score": 92, "max": 100, "label": "Transparent & Peer-Reviewed Privacy Docs", "risk": "low" }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Proton Data Protection Officer",
+        "grievance_email": "privacy@proton.me",
+        "redressal_period_days": 15,
+        "erasure_right_disclosed": true,
+        "notes": "Complies with global privacy standards including DPDP principles."
+      },
+      "gdpr": {
+        "compliant": true,
+        "dpo_contact": "dpo@proton.me",
+        "lawful_basis_stated": true,
+        "erasure_art17_disclosed": true,
+        "notes": "Fully compliant with EU GDPR and Swiss FADP."
+      },
+      "ccpa": {
+        "compliant": true,
+        "opt_out_link": "https://proton.me/legal/privacy",
+        "do_not_sell": true
+      }
+    },
+    "key_clauses": [
+      { "type": "positive", "text": "Your data is protected by end-to-end and zero-access encryption; Proton cannot read your messages." },
+      { "type": "positive", "text": "Proton VPN does not keep any traffic or session activity logs." },
+      { "type": "positive", "text": "All software codebases are open-source and audited by independent security firms." }
+    ],
+    "category": "Encrypted Services"
+  },
+  {
+    "domain": "amazon.com",
+    "name": "Amazon",
+    "grade": "D",
+    "score": 38,
+    "color": "amber",
+    "summary": "Deep tracking of purchase intent, voice recordings (Alexa), and browsing telemetry. Extensive internal behavioral advertising.",
+    "rubric": {
+      "data_sharing": { "score": 35, "max": 100, "label": "Shared Across Amazon Ad Network, Sellers & Partners", "risk": "high" },
+      "retention": { "score": 30, "max": 100, "label": "Retains Purchase & Voice History Indefinitely", "risk": "high" },
+      "tracking_cookies": { "score": 30, "max": 100, "label": "Third-Party Ad Pixels and Device Fingerprinting", "risk": "high" },
+      "user_rights": { "score": 65, "max": 100, "label": "Data Request Tool Available in Account Settings", "risk": "medium" },
+      "breach_history": { "score": 45, "max": 100, "label": "Ring Camera Leaks, Internal Insider Leaks", "risk": "medium" },
+      "readability": { "score": 45, "max": 100, "label": "Long, Multi-Section Dense Agreement", "risk": "high" }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Grievance Officer, Amazon India",
+        "grievance_email": "grievanceofficer@amazon.in",
+        "redressal_period_days": 30,
+        "erasure_right_disclosed": true,
+        "notes": "India portal lists dedicated Grievance Officer in Bengaluru."
+      },
+      "gdpr": {
+        "compliant": true,
+        "dpo_contact": "eu-dpo@amazon.lu",
+        "lawful_basis_stated": true,
+        "erasure_art17_disclosed": true,
+        "notes": "Fined €746M by Luxembourg CNPD in 2021 for targeted advertising consent issues."
+      },
+      "ccpa": {
+        "compliant": true,
+        "opt_out_link": "https://www.amazon.com/adprefs",
+        "do_not_sell": true
+      }
+    },
+    "key_clauses": [
+      { "type": "negative", "text": "We use personal information to display interest-based ads for features, products, and services." },
+      { "type": "negative", "text": "Alexa recordings are processed in the cloud and retained unless manually configured to delete." },
+      { "type": "positive", "text": "Customers can submit data erasure requests via the 'Manage Your Data' portal." }
+    ],
+    "category": "E-Commerce & Cloud"
+  },
+  {
+    "domain": "amazon.in",
+    "name": "Amazon India",
+    "grade": "D",
+    "score": 38,
+    "color": "amber",
+    "summary": "Deep tracking of purchase intent, delivery location history, and browsing telemetry. Aligned with DPDP Act 2023 grievance provisions in India.",
+    "rubric": {
+      "data_sharing": { "score": 35, "max": 100, "label": "Shared Across Amazon Ad Network & Third-Party Merchants", "risk": "high" },
+      "retention": { "score": 30, "max": 100, "label": "Retains Purchase & Device History Indefinitely", "risk": "high" },
+      "tracking_cookies": { "score": 30, "max": 100, "label": "Third-Party Ad Pixels and Telemetry", "risk": "high" },
+      "user_rights": { "score": 65, "max": 100, "label": "DPDP Section 12 Deletion Requests via Grievance Officer", "risk": "medium" },
+      "breach_history": { "score": 50, "max": 100, "label": "Monitored Security Profile", "risk": "medium" },
+      "readability": { "score": 45, "max": 100, "label": "Dense Commercial Agreement", "risk": "high" }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Grievance Officer, Amazon Seller Services Pvt Ltd",
+        "grievance_email": "grievanceofficer@amazon.in",
+        "redressal_period_days": 30,
+        "erasure_right_disclosed": true,
+        "notes": "Amazon India lists dedicated Grievance Officer in Bengaluru."
+      },
+      "gdpr": {
+        "compliant": true,
+        "dpo_contact": "eu-dpo@amazon.lu",
+        "lawful_basis_stated": true,
+        "erasure_art17_disclosed": true,
+        "notes": "Global compliance framework."
+      },
+      "ccpa": {
+        "compliant": true,
+        "opt_out_link": "https://www.amazon.in/adprefs",
+        "do_not_sell": true
+      }
+    },
+    "key_clauses": [
+      { "type": "negative", "text": "We use your personal information to display interest-based ads for features, products, and services." },
+      { "type": "positive", "text": "Users in India can exercise Section 12 statutory data erasure rights by writing to grievanceofficer@amazon.in." }
+    ],
+    "category": "E-Commerce (India)"
+  },
+  {
+    "domain": "flipkart.com",
+    "name": "Flipkart",
+    "grade": "C-",
+    "score": 48,
+    "color": "amber",
+    "summary": "Tracks shopping behavior, device identifiers, and location. Aligned with DPDP Act grievance provisions in India.",
+    "rubric": {
+      "data_sharing": { "score": 40, "max": 100, "label": "Shared with Walmart Group Entities & Third-Party Sellers", "risk": "high" },
+      "retention": { "score": 45, "max": 100, "label": "Retained for Extended Commercial Records & Fraud Audits", "risk": "medium" },
+      "tracking_cookies": { "score": 45, "max": 100, "label": "Ad Tracking and Cross-Device Synchronizing", "risk": "medium" },
+      "user_rights": { "score": 60, "max": 100, "label": "Account Deactivation Option in App/Web Settings", "risk": "medium" },
+      "breach_history": { "score": 60, "max": 100, "label": "No Major Catastrophic Central Data Breaches", "risk": "medium" },
+      "readability": { "score": 50, "max": 100, "label": "Standard Legal Text with Complex Cross-References", "risk": "medium" }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Mr. Shremanth M / Grievance Redressal Officer",
+        "grievance_email": "grievance.officer@flipkart.com",
+        "redressal_period_days": 30,
+        "erasure_right_disclosed": true,
+        "notes": "Names Grievance Officer in Bengaluru in accordance with DPDP Act 2023."
+      },
+      "gdpr": {
+        "compliant": false,
+        "dpo_contact": null,
+        "lawful_basis_stated": false,
+        "erasure_art17_disclosed": false,
+        "notes": "Primarily operates within Indian jurisdiction."
+      },
+      "ccpa": {
+        "compliant": false,
+        "opt_out_link": null,
+        "do_not_sell": false
+      }
+    },
+    "key_clauses": [
+      { "type": "negative", "text": "We share personal data with corporate affiliates, marketing partners, and logistical service providers." },
+      { "type": "negative", "text": "Financial KYC details may be shared with partner banks for Flipkart Pay Later." },
+      { "type": "positive", "text": "Users can raise a DPDP Section 12 data correction/erasure request to grievance.officer@flipkart.com." }
+    ],
+    "category": "E-Commerce"
+  },
+  {
+    "domain": "reddit.com",
+    "name": "Reddit",
+    "grade": "C",
+    "score": 55,
+    "color": "amber",
+    "summary": "Monetizes content via AI training licensing agreements (e.g. Google deal) and behavioral ad targeting. Provides standard account deletion.",
+    "rubric": {
+      "data_sharing": { "score": 45, "max": 100, "label": "Public Post Data Licensed to Commercial AI Labs", "risk": "medium" },
+      "retention": { "score": 55, "max": 100, "label": "Deleted Posts May Leave Disassociated Footprint", "risk": "medium" },
+      "tracking_cookies": { "score": 50, "max": 100, "label": "Tracking Pixels & Ad Impression Beacons", "risk": "medium" },
+      "user_rights": { "score": 75, "max": 100, "label": "Instant Account Deletion and GDPR Export Flow", "risk": "low" },
+      "breach_history": { "score": 55, "max": 100, "label": "2018 Backup Breach, 2023 Phishing Incident", "risk": "medium" },
+      "readability": { "score": 70, "max": 100, "label": "Clear Side-by-Side Summary Explanations", "risk": "low" }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Reddit Grievance Officer",
+        "grievance_email": "grievance-officer-india@reddit.com",
+        "redressal_period_days": 30,
+        "erasure_right_disclosed": true,
+        "notes": "Maintains dedicated grievance contact for Indian users."
+      },
+      "gdpr": {
+        "compliant": true,
+        "dpo_contact": "reddit-dpo@reddit.com",
+        "lawful_basis_stated": true,
+        "erasure_art17_disclosed": true,
+        "notes": "Appointed European Data Protection Representative."
+      },
+      "ccpa": {
+        "compliant": true,
+        "opt_out_link": "https://www.reddit.com/settings/privacy",
+        "do_not_sell": true
+      }
+    },
+    "key_clauses": [
+      { "type": "negative", "text": "We may license public Reddit content to third parties, including for machine learning model training." },
+      { "type": "negative", "text": "Personalized ads are served based on subreddits visited and content interactions." },
+      { "type": "positive", "text": "You can toggle off 'Personalize ads based on information from our partners' in User Settings." }
+    ],
+    "category": "Social & Community"
+  },
+  {
+    "domain": "github.com",
+    "name": "GitHub (Microsoft)",
+    "grade": "B+",
+    "score": 82,
+    "color": "green",
+    "summary": "Developer-friendly privacy posture. No third-party ad tracking, transparent data handling, robust telemetry opt-outs.",
+    "rubric": {
+      "data_sharing": { "score": 85, "max": 100, "label": "No Third-Party Ad Broker Selling", "risk": "low" },
+      "retention": { "score": 80, "max": 100, "label": "Clear 90-Day Account Deletion Purge", "risk": "low" },
+      "tracking_cookies": { "score": 85, "max": 100, "label": "Zero Third-Party Advertising Pixels", "risk": "low" },
+      "user_rights": { "score": 90, "max": 100, "label": "Self-Service Repository & Profile Export Tools", "risk": "low" },
+      "breach_history": { "score": 78, "max": 100, "label": "Minor OAuth Token Incidents Quickly Mitigated", "risk": "low" },
+      "readability": { "score": 85, "max": 100, "label": "Plain English Summaries for Legal Sections", "risk": "low" }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "GitHub Privacy Team / Microsoft India Grievance",
+        "grievance_email": "privacy@github.com",
+        "redressal_period_days": 15,
+        "erasure_right_disclosed": true,
+        "notes": "Fully covered under global DPDP and Microsoft privacy frameworks."
+      },
+      "gdpr": {
+        "compliant": true,
+        "dpo_contact": "dpo@github.com",
+        "lawful_basis_stated": true,
+        "erasure_art17_disclosed": true,
+        "notes": "Full Article 17 erasure and standard contractual clauses."
+      },
+      "ccpa": {
+        "compliant": true,
+        "opt_out_link": "https://github.com/settings/privacy",
+        "do_not_sell": true
+      }
+    },
+    "key_clauses": [
+      { "type": "positive", "text": "GitHub does not sell your personal information or share it with third parties for ad targeting." },
+      { "type": "positive", "text": "You retain all intellectual property rights to the source code you upload." },
+      { "type": "neutral", "text": "Copilot code completion telemetry is collected unless explicitly opted out in telemetry settings." }
+    ],
+    "category": "Developer Tools"
+  },
+  {
+    "domain": "netflix.com",
+    "name": "Netflix",
+    "grade": "B",
+    "score": 76,
+    "color": "green",
+    "summary": "Maintains subscription-based privacy model. No external data broker sales; collects viewing preferences and device telemetry.",
+    "rubric": {
+      "data_sharing": { "score": 75, "max": 100, "label": "Shared with Cloud Vendors & Payment Processors Only", "risk": "low" },
+      "retention": { "score": 70, "max": 100, "label": "Viewing History Purged Upon Account Erasure Request", "risk": "low" },
+      "tracking_cookies": { "score": 75, "max": 100, "label": "Standard Functional & Measurement Analytics", "risk": "low" },
+      "user_rights": { "score": 85, "max": 100, "label": "Automated Privacy Request Email Interface", "risk": "low" },
+      "breach_history": { "score": 85, "max": 100, "label": "No Major Central Security Compromises", "risk": "low" },
+      "readability": { "score": 78, "max": 100, "label": "Clear Question-and-Answer Privacy Documentation", "risk": "low" }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Grievance Officer, Netflix Entertainment Services India",
+        "grievance_email": "grievance-officer-india@netflix.com",
+        "redressal_period_days": 15,
+        "erasure_right_disclosed": true,
+        "notes": "Names Indian grievance officer and conforms to Digital Media Ethics Code."
+      },
+      "gdpr": {
+        "compliant": true,
+        "dpo_contact": "privacy@netflix.com",
+        "lawful_basis_stated": true,
+        "erasure_art17_disclosed": true,
+        "notes": "Netflix International B.V. registered with Dutch DPA."
+      },
+      "ccpa": {
+        "compliant": true,
+        "opt_out_link": "https://www.netflix.com/youraccount",
+        "do_not_sell": true
+      }
+    },
+    "key_clauses": [
+      { "type": "positive", "text": "We do not sell personal information to third parties." },
+      { "type": "positive", "text": "Users can request full data download and erasure by contacting privacy@netflix.com." },
+      { "type": "neutral", "text": "Ad-supported plan tiers use viewing habits for contextual ad matching." }
+    ],
+    "category": "Streaming & Entertainment"
+  },
+  {
+    "domain": "paytm.com",
+    "name": "Paytm (One97 Communications)",
+    "grade": "C",
+    "score": 54,
+    "color": "amber",
+    "summary": "Financial and wallet data subject to RBI regulatory retention mandates. Compliant with Indian DPDP grievance officers.",
+    "rubric": {
+      "data_sharing": { "score": 45, "max": 100, "label": "Shared with Partner Banks, NBFCs & Credit Bureaus", "risk": "medium" },
+      "retention": { "score": 40, "max": 100, "label": "Mandatory 5-10 Year KYC Data Retention (RBI PMLA)", "risk": "high" },
+      "tracking_cookies": { "score": 55, "max": 100, "label": "In-App Telemetry & Fraud Detection SDKs", "risk": "medium" },
+      "user_rights": { "score": 65, "max": 100, "label": "DPDP Correction and Deletion via 24x7 Helpdesk", "risk": "medium" },
+      "breach_history": { "score": 65, "max": 100, "label": "Past Regulatory Scrutiny, Secure Card Vaults", "risk": "medium" },
+      "readability": { "score": 58, "max": 100, "label": "Long Financial & Banking Disclosures", "risk": "medium" }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Mr. Sumit Sen / Nodal Grievance Officer Paytm",
+        "grievance_email": "nodal@paytm.com",
+        "redressal_period_days": 30,
+        "erasure_right_disclosed": true,
+        "notes": "Maintains dedicated grievance nodal office in Noida per DPDP Act."
+      },
+      "gdpr": {
+        "compliant": false,
+        "dpo_contact": null,
+        "lawful_basis_stated": false,
+        "erasure_art17_disclosed": false,
+        "notes": "Domestic fintech entity operating under Reserve Bank of India framework."
+      },
+      "ccpa": {
+        "compliant": false,
+        "opt_out_link": null,
+        "do_not_sell": false
+      }
+    },
+    "key_clauses": [
+      { "type": "negative", "text": "Financial transaction data is retained for minimum statutory periods under Prevention of Money Laundering Act." },
+      { "type": "negative", "text": "Credit history checked through Experian/CIBIL when applying for loans or postpaid services." },
+      { "type": "positive", "text": "Users can revoke marketing consent or request data correction under DPDP Act Section 12." }
+    ],
+    "category": "Fintech & Payments"
+  },
+  {
+    "domain": "x.com",
+    "name": "X (formerly Twitter)",
+    "grade": "D",
+    "score": 36,
+    "color": "amber",
+    "summary": "Aggressively scrapes user posts to train Grok AI model by default. Sells firehose feed access and operates targeted advertising.",
+    "rubric": {
+      "data_sharing": { "score": 25, "max": 100, "label": "Posts Fed Directly into Grok / xAI Models", "risk": "critical" },
+      "retention": { "score": 35, "max": 100, "label": "Public Posts Mirrored Across Global Search Engines", "risk": "high" },
+      "tracking_cookies": { "score": 35, "max": 100, "label": "Conversion Tracking & Embedded Tweet Telemetry", "risk": "high" },
+      "user_rights": { "score": 60, "max": 100, "label": "Account Deactivation & GDPR Export Supported", "risk": "medium" },
+      "breach_history": { "score": 25, "max": 100, "label": "2022 200M+ Email Leak, FTC Privacy Consent Violations", "risk": "critical" },
+      "readability": { "score": 50, "max": 100, "label": "Frequently Altered Legal Terms", "risk": "medium" }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Resident Grievance Officer, X Corp India",
+        "grievance_email": "grievance-officer-in@x.com",
+        "redressal_period_days": 15,
+        "erasure_right_disclosed": true,
+        "notes": "Complies with Indian statutory Grievance Officer posting requirements."
+      },
+      "gdpr": {
+        "compliant": false,
+        "dpo_contact": "dpo@x.com",
+        "lawful_basis_stated": true,
+        "erasure_art17_disclosed": true,
+        "notes": "Sued by 9 EU Data Protection Authorities for training Grok on user data without prior consent."
+      },
+      "ccpa": {
+        "compliant": true,
+        "opt_out_link": "https://x.com/settings/account/personalization",
+        "do_not_sell": true
+      }
+    },
+    "key_clauses": [
+      { "type": "negative", "text": "We may use your posts and interactions to train our machine learning and AI models (including Grok)." },
+      { "type": "negative", "text": "Location information may be inferred from your IP address or wireless connections." },
+      { "type": "positive", "text": "Users can disable Grok training in 'Settings > Privacy and Safety > Grok & Data Sharing'." }
+    ],
+    "category": "Social Media"
+  },
+  {
+    "domain": "apple.com",
+    "name": "Apple",
+    "grade": "A-",
+    "score": 85,
+    "color": "green",
+    "summary": "Strong on-device processing and differential privacy techniques. App Tracking Transparency forces third parties to ask before tracking.",
+    "rubric": {
+      "data_sharing": { "score": 88, "max": 100, "label": "No Third-Party Data Broker Selling", "risk": "low" },
+      "retention": { "score": 82, "max": 100, "label": "On-Device Processing Where Possible", "risk": "low" },
+      "tracking_cookies": { "score": 85, "max": 100, "label": "Safari Intelligent Tracking Prevention Active", "risk": "low" },
+      "user_rights": { "score": 90, "max": 100, "label": "privacy.apple.com Self-Service Data Download & Deletion", "risk": "low" },
+      "breach_history": { "score": 85, "max": 100, "label": "High Hardware Security & Isolated Enclaves", "risk": "low" },
+      "readability": { "score": 80, "max": 100, "label": "Layered Privacy Disclosures & Whitepapers", "risk": "low" }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Apple India Grievance Redressal Officer",
+        "grievance_email": "india_grievance_officer@apple.com",
+        "redressal_period_days": 15,
+        "erasure_right_disclosed": true,
+        "notes": "Full DPDP grievance support and privacy portal."
+      },
+      "gdpr": {
+        "compliant": true,
+        "dpo_contact": "dpo@apple.com",
+        "lawful_basis_stated": true,
+        "erasure_art17_disclosed": true,
+        "notes": "Apple Distribution International Ltd (Ireland) fully compliant."
+      },
+      "ccpa": {
+        "compliant": true,
+        "opt_out_link": "https://privacy.apple.com",
+        "do_not_sell": true
+      }
+    },
+    "key_clauses": [
+      { "type": "positive", "text": "At Apple, we believe privacy is a fundamental human right. Personal data is minimized and processed on-device." },
+      { "type": "positive", "text": "We do not share your personal data with third parties for their marketing purposes." },
+      { "type": "neutral", "text": "First-party personalized ads in App Store can be turned off in iOS Settings." }
+    ],
+    "category": "Consumer Electronics & OS"
+  }
+]

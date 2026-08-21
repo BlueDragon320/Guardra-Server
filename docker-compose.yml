@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  guardra-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: guardra-server-api
+    restart: unless-stopped
+    ports:
+      - "${SERVER_PORT:-8000}:8000"
+    environment:
+      - PORT=8000
+      - HOST=0.0.0.0
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-*}
+    volumes:
+      - guardra-data:/app/data
+      - ./app/data:/app/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  guardra-data:
+    driver: local

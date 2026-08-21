@@ -1,0 +1,155 @@
+[
+  {
+    "id": "google",
+    "platform": "Google",
+    "icon": "google",
+    "category": "Search & Ecosystem",
+    "controls": [
+      {
+        "name": "My Ad Center (Personalized Ads)",
+        "description": "Disable personalized ads across Google Search, YouTube, Maps, and millions of partner websites.",
+        "direct_url": "https://myadcenter.google.com/controls",
+        "action": "Toggle 'Personalized ads' OFF",
+        "impact": "Stops ad targeting based on search queries and watch history."
+      },
+      {
+        "name": "Location History / Timeline",
+        "description": "Pause automatic tracking of places visited and routes traveled with mobile devices.",
+        "direct_url": "https://myactivity.google.com/locationhistory",
+        "action": "Click 'Turn off' or 'Auto-delete (3 months)'",
+        "impact": "Prevents permanent geospatial tracking."
+      },
+      {
+        "name": "Web & App Activity + Voice Recordings",
+        "description": "Stop saving audio recordings from Google Assistant and search app browsing history.",
+        "direct_url": "https://myactivity.google.com/activitycontrols",
+        "action": "Uncheck 'Include voice and audio recordings'",
+        "impact": "Halts human audio review and transcription storage."
+      },
+      {
+        "name": "Third-Party App Access",
+        "description": "Revoke permissions from apps and games that have access to your Google account and Gmail.",
+        "direct_url": "https://myaccount.google.com/connections",
+        "action": "Remove unnecessary third-party apps",
+        "impact": "Eliminates backdoor data leaks from inactive apps."
+      }
+    ]
+  },
+  {
+    "id": "meta",
+    "platform": "Meta (Facebook & Instagram)",
+    "icon": "facebook",
+    "category": "Social Media",
+    "controls": [
+      {
+        "name": "Off-Facebook Activity Disconnection",
+        "description": "Disconnect external website visits and app activities transmitted to Meta via Meta Pixel.",
+        "direct_url": "https://accountscenter.facebook.com/info_and_permissions/off_facebook_activity",
+        "action": "Click 'Disconnect specific activity' or 'Clear previous activity'",
+        "impact": "Breaks cross-site ad retargeting chain."
+      },
+      {
+        "name": "Ad Settings & Partner Data Matching",
+        "description": "Block advertisers from targeting you using your uploaded customer lists (phone number/email).",
+        "direct_url": "https://accountscenter.facebook.com/ad_preferences",
+        "action": "Set 'Data about your activity from partners' to NOT ALLOWED",
+        "impact": "Stops CRM matching from e-commerce checkouts."
+      },
+      {
+        "name": "Facial & Biometric Recognition Settings",
+        "description": "Verify biometric recognition tagging and automatic photo suggestions are disabled.",
+        "direct_url": "https://www.facebook.com/settings?tab=face_recognition",
+        "action": "Confirm disabled",
+        "impact": "Prevents automated facial vector generation."
+      }
+    ]
+  },
+  {
+    "id": "amazon",
+    "platform": "Amazon",
+    "icon": "shopping-cart",
+    "category": "E-Commerce",
+    "controls": [
+      {
+        "name": "Interest-Based Ads Preferences",
+        "description": "Opt out of behavioral ad profiling across Amazon storefronts and affiliated ad networks.",
+        "direct_url": "https://www.amazon.com/adprefs",
+        "action": "Select 'Do not personalize ads from Amazon'",
+        "impact": "Stops ads based on recent shopping browsing."
+      },
+      {
+        "name": "Alexa Voice Privacy & Recording Retention",
+        "description": "Configure auto-deletion of voice recordings and disable manual human review.",
+        "direct_url": "https://www.amazon.com/alexaprivacysettings",
+        "action": "Disable 'Help improve Alexa' and enable auto-delete",
+        "impact": "Prevents retention of home microphone clips."
+      }
+    ]
+  },
+  {
+    "id": "microsoft",
+    "platform": "Microsoft & Windows",
+    "icon": "laptop",
+    "category": "Operating System & Cloud",
+    "controls": [
+      {
+        "name": "Microsoft Privacy Dashboard",
+        "description": "View and clear Windows diagnostic telemetry, Cortana logs, and Bing search queries.",
+        "direct_url": "https://account.microsoft.com/privacy",
+        "action": "Clear browsing and search history, set diagnostic data to 'Required only'",
+        "impact": "Reduces operating system telemetry leakage."
+      },
+      {
+        "name": "Personalized Ad Opt-Out",
+        "description": "Disable personalized ad targeting associated with your Microsoft account across Edge and Windows.",
+        "direct_url": "https://account.microsoft.com/privacy/ad-settings",
+        "action": "Toggle 'See ads that interest you' OFF",
+        "impact": "Disables advertising ID tracking."
+      }
+    ]
+  },
+  {
+    "id": "x_twitter",
+    "platform": "X (Twitter)",
+    "icon": "twitter",
+    "category": "Social Media",
+    "controls": [
+      {
+        "name": "Grok AI Data Sharing & Training",
+        "description": "Opt out of having your posts, replies, and account interactions used to train Grok and xAI models.",
+        "direct_url": "https://x.com/settings/account/personalization",
+        "action": "Uncheck 'Allow your posts as well as your interactions with Grok to be used for training'",
+        "impact": "Protects public contributions from uncompensated AI training."
+      },
+      {
+        "name": "Off-Twitter Data & Personalization",
+        "description": "Prevent X from tracking which websites you visit that have embedded tweets or pixels.",
+        "direct_url": "https://x.com/settings/privacy_and_safety",
+        "action": "Turn off 'Personalize based on your inferred identity'",
+        "impact": "Disables device matching algorithms."
+      }
+    ]
+  },
+  {
+    "id": "apple",
+    "platform": "Apple",
+    "icon": "smartphone",
+    "category": "Consumer Electronics",
+    "controls": [
+      {
+        "name": "Apple Data & Privacy Portal",
+        "description": "Download a complete copy of Apple ID data, correct info, or request complete Apple ID deletion.",
+        "direct_url": "https://privacy.apple.com",
+        "action": "Sign in to inspect stored records or request erasure",
+        "impact": "Direct exercise of right to access and deletion."
+      },
+      {
+        "name": "Personalized Ads in App Store",
+        "description": "Turn off first-party personalized ad targeting across App Store, Apple News, and Stocks.",
+        "direct_url": "https://support.apple.com/HT202074",
+        "action": "On iOS: Settings > Privacy & Security > Apple Advertising > Turn OFF",
+        "impact": "Prevents profile creation inside App Store."
+      }
+    ]
+  }
+]
