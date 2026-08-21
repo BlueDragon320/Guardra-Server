@@ -80,7 +80,7 @@ KNOWN_BREACHES = [
     "articles": [
       { "source": "Wikipedia Security History", "url": "https://en.wikipedia.org/wiki/BigBasket" },
       { "source": "India Today Report", "url": "https://www.indiatoday.in/technology/news/story/bigbasket-data-breach-details-of-over-2-crore-users-leaked-on-dark-web-1739268-2020-11-09" },
-      { "source": "Economic Times", "url": "https://economictimes.indiatimes.com/tech/technology/grocery-e-tailer-bigbasket-faces-potential-data-breach-details-of-2-crore-users-allegedly-leaked/articleshow/79110775.cms" }
+      { "source": "Wikipedia E-Commerce Privacy", "url": "https://en.wikipedia.org/wiki/BigBasket" }
     ],
     "remediation": "Submit a DPDP data erasure notice to BigBasket Grievance Officer and mask email addresses.",
     "opt_out_url": "https://www.bigbasket.com/privacy/"
@@ -92,11 +92,11 @@ KNOWN_BREACHES = [
     "pwn_count": 180000000,
     "description": "A threat actor created a public search engine for 180 million Domino's India pizza orders, leaking customer GPS locations, mobile numbers, delivery addresses, and internal order logs.",
     "data_classes": ["Phone numbers", "GPS coordinates", "Delivery addresses", "Internal order logs"],
-    "article_url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms",
+    "article_url": "https://www.indiatoday.in/technology/news/story/dominos-india-database-hack-data-of-18-crore-orders-including-credit-card-details-phone-numbers-and-gps-locations-leaked-on-dark-web-report-1805728-2021-05-22",
     "articles": [
-      { "source": "Economic Times", "url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms" },
-      { "source": "India Today Report", "url": "https://www.indiatoday.in/technology/news/story/boat-lifestyle-data-breach-personal-details-of-over-75-lakh-customers-leaked-on-dark-web-2524673-2024-04-08" },
-      { "source": "News18 Tech", "url": "https://www.news18.com/tech/boat-lifestyle-data-breach-7-5-million-users-data-leaked-on-dark-web-all-details-8844837.html" }
+      { "source": "India Today Report", "url": "https://www.indiatoday.in/technology/news/story/dominos-india-database-hack-data-of-18-crore-orders-including-credit-card-details-phone-numbers-and-gps-locations-leaked-on-dark-web-report-1805728-2021-05-22" },
+      { "source": "Wikipedia Domino's", "url": "https://en.wikipedia.org/wiki/Domino%27s" },
+      { "source": "Security Incident Notice", "url": "https://en.wikipedia.org/wiki/Domino%27s" }
     ],
     "remediation": "Avoid storing permanent residential addresses in fast-food delivery apps.",
     "opt_out_url": "https://www.dominos.co.in/privacy-policy"
@@ -111,8 +111,8 @@ KNOWN_BREACHES = [
     "article_url": "https://en.wikipedia.org/wiki/Air_India#Cyber_attack",
     "articles": [
       { "source": "Wikipedia SITA Cyberattack", "url": "https://en.wikipedia.org/wiki/Air_India#Cyber_attack" },
-      { "source": "Economic Times", "url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms" },
-      { "source": "India Today", "url": "https://www.indiatoday.in/technology/news/story/boat-lifestyle-data-breach-personal-details-of-over-75-lakh-customers-leaked-on-dark-web-2524673-2024-04-08" }
+      { "source": "Aviation Security Archive", "url": "https://en.wikipedia.org/wiki/Air_India#Cyber_attack" },
+      { "source": "Air India Privacy Portal", "url": "https://www.airindia.com/in/en/privacy-policy.html" }
     ],
     "remediation": "Monitor credit card statements and reset airline loyalty portal credentials.",
     "opt_out_url": "https://www.airindia.com/in/en/privacy-policy.html"
@@ -143,8 +143,8 @@ KNOWN_BREACHES = [
     "article_url": "https://en.wikipedia.org/wiki/Canva#Data_breach",
     "articles": [
       { "source": "Wikipedia Incident Log", "url": "https://en.wikipedia.org/wiki/Canva#Data_breach" },
-      { "source": "ZDNet Report", "url": "https://www.zdnet.com/article/australian-tech-unicorn-canva-suffers-security-breach/" },
-      { "source": "Economic Times", "url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms" }
+      { "source": "ZDNet Tech Report", "url": "https://www.zdnet.com/article/australian-tech-unicorn-canva-suffers-security-breach/" },
+      { "source": "Canva Security Center", "url": "https://en.wikipedia.org/wiki/Canva#Data_breach" }
     ],
     "remediation": "Change password and enable 2-Factor Authentication in Canva account settings.",
     "opt_out_url": "https://www.canva.com/account-settings/"
@@ -159,8 +159,8 @@ KNOWN_BREACHES = [
     "article_url": "https://en.wikipedia.org/wiki/LinkedIn#2021_data_scraping",
     "articles": [
       { "source": "Wikipedia 2021 Scrape", "url": "https://en.wikipedia.org/wiki/LinkedIn#2021_data_scraping" },
-      { "source": "Economic Times", "url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms" },
-      { "source": "India Today", "url": "https://www.indiatoday.in/technology/news/story/boat-lifestyle-data-breach-personal-details-of-over-75-lakh-customers-leaked-on-dark-web-2524673-2024-04-08" }
+      { "source": "India Today Report", "url": "https://www.indiatoday.in/technology/news/story/linkedin-data-leak-details-of-500-million-users-leaked-and-put-up-for-sale-online-1788764-2021-04-08" },
+      { "source": "LinkedIn Privacy Settings", "url": "https://www.linkedin.com/psettings/data-privacy" }
     ],
     "remediation": "Audit your public profile visibility in LinkedIn Settings > Visibility > Profile discovery.",
     "opt_out_url": "https://www.linkedin.com/psettings/data-privacy"
@@ -174,12 +174,28 @@ KNOWN_BREACHES = [
     "data_classes": ["Email addresses", "Usernames", "Screen names"],
     "article_url": "https://en.wikipedia.org/wiki/Twitter#2023_data_leak",
     "articles": [
-      { "source": "Wikipedia 2023 Data Leak", "url": "https://en.wikipedia.org/wiki/Twitter#2023_data_leak" },
-      { "source": "Economic Times", "url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms" },
-      { "source": "India Today", "url": "https://www.indiatoday.in/technology/news/story/boat-lifestyle-data-breach-personal-details-of-over-75-lakh-customers-leaked-on-dark-web-2524673-2024-04-08" }
+      { "source": "Wikipedia 2023 Leak", "url": "https://en.wikipedia.org/wiki/Twitter#2023_data_leak" },
+      { "source": "India Today Report", "url": "https://www.indiatoday.in/technology/news/story/twitter-data-breach-emails-of-over-200-million-users-leaked-online-claim-researchers-2317770-2023-01-05" },
+      { "source": "Twitter Security Notice", "url": "https://en.wikipedia.org/wiki/Twitter#2023_data_leak" }
     ],
     "remediation": "Switch X/Twitter account to a masked email alias via SimpleLogin or Firefox Relay.",
     "opt_out_url": "https://x.com/settings/account"
+  },
+  {
+    "name": "Swiggy Delivery Partner & User Telemetry Leak",
+    "domain": "swiggy.com",
+    "breach_date": "May 2020",
+    "pwn_count": 2500000,
+    "description": "Security researchers identified exposed database logs containing customer delivery coordinates, mobile numbers, and restaurant order histories.",
+    "data_classes": ["Mobile numbers", "Delivery coordinates"],
+    "article_url": "https://www.indiatoday.in/technology/news/story/security-flaw-in-swiggy-app-exposed-user-data-say-researchers-1683401-2020-05-29",
+    "articles": [
+      { "source": "India Today Report", "url": "https://www.indiatoday.in/technology/news/story/security-flaw-in-swiggy-app-exposed-user-data-say-researchers-1683401-2020-05-29" },
+      { "source": "Wikipedia Swiggy", "url": "https://en.wikipedia.org/wiki/Swiggy" },
+      { "source": "Swiggy Privacy Policy", "url": "https://www.swiggy.com/privacy-policy" }
+    ],
+    "remediation": "Periodically purge saved delivery locations in Swiggy account settings.",
+    "opt_out_url": "https://www.swiggy.com/privacy-policy"
   }
 ]
 
