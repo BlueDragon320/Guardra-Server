@@ -842,34 +842,54 @@
     function openAddSiteModal() {
       document.getElementById('addModal').classList.remove('hidden');
       document.getElementById('addDomainInput').value = '';
+      document.getElementById('addError').classList.add('hidden');
     }
     function closeAddSiteModal() {
       document.getElementById('addModal').classList.add('hidden');
     }
     async function submitAddSite() {
-      const domain = document.getElementById('addDomainInput').value.trim();
+      const rawDomain = document.getElementById('addDomainInput').value.trim();
       const autoScrape = document.getElementById('addAutoScrape').checked;
       const err = document.getElementById('addError');
       err.classList.add('hidden');
 
-      if (!domain) return;
+      if (!rawDomain) return;
+
+      // Clean domain from full URLs, http/https, and paths
+      const clean = rawDomain.replace(/^https?:\/\//i, '').replace(/^www\./i, '').split('/')[0].toLowerCase().trim();
+
+      // If already present, open editor directly
+      const existing = allSites.find(s => s.domain === clean);
+      if (existing) {
+        alert(`"${clean}" is already in your database. Opening rating editor now.`);
+        closeAddSiteModal();
+        openEditModal(clean);
+        return;
+      }
 
       try {
         const res = await fetch('/api/admin/sites', {
           method: 'POST',
           headers: authHeaders(),
-          body: JSON.stringify({ domain, auto_scrape: autoScrape })
+          body: JSON.stringify({ domain: clean, auto_scrape: autoScrape })
         });
         if (res.ok) {
           closeAddSiteModal();
           loadSites();
+        } else if (res.status === 401 || res.status === 403) {
+          localStorage.removeItem('guardra_admin_token');
+          adminToken = '';
+          closeAddSiteModal();
+          showLoginModal();
+          document.getElementById('loginError').innerText = 'Session expired. Please enter your Admin Secret Key.';
+          document.getElementById('loginError').classList.remove('hidden');
         } else {
           const d = await res.json();
           err.innerText = d.detail || 'Failed to add site.';
           err.classList.remove('hidden');
         }
       } catch (e) {
-        err.innerText = 'Network error.';
+        err.innerText = 'Network error connecting to server.';
         err.classList.remove('hidden');
       }
     }

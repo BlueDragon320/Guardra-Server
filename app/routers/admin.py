@@ -42,6 +42,12 @@ class AddSiteRequest(BaseModel):
 class RescoreSiteRequest(BaseModel):
     domain: str
 
+import hmac
+import hashlib
+
+def get_master_session_token() -> str:
+    return hmac.new(ADMIN_SECRET_KEY.encode('utf-8'), b"guardra_persistent_admin_session", hashlib.sha256).hexdigest()
+
 # Dependency for Admin Authentication
 async def verify_admin(
     x_admin_key: Optional[str] = Header(None),
@@ -57,7 +63,7 @@ async def verify_admin(
             detail="Admin authentication required (Provide X-Admin-Key or Bearer token)"
         )
 
-    if token == ADMIN_SECRET_KEY or token in ACTIVE_SESSIONS:
+    if token == ADMIN_SECRET_KEY or token == get_master_session_token() or token in ACTIVE_SESSIONS:
         return True
 
     raise HTTPException(
@@ -68,7 +74,7 @@ async def verify_admin(
 @router.post("/login")
 async def admin_login(payload: AdminLoginRequest):
     if payload.admin_key == ADMIN_SECRET_KEY:
-        session_token = secrets.token_hex(24)
+        session_token = get_master_session_token()
         ACTIVE_SESSIONS.add(session_token)
         return {
             "status": "authenticated",
