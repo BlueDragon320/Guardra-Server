@@ -214,15 +214,20 @@ def analyze_live_policy(url: str, html_text: str) -> Dict[str, Any]:
     }
 
 async def get_site_rating(domain_or_url: str) -> Dict[str, Any]:
+    from app.services.breach_service import get_domain_breaches
     clean = clean_domain(domain_or_url)
     cached = load_cached_policies()
     
+    # Check verified breach intelligence
+    domain_breaches = get_domain_breaches(clean)
+
     # Exact or suffix match in cached policies
     for site in cached:
         site_domain = clean_domain(site["domain"])
         if clean == site_domain or clean.endswith("." + site_domain) or site_domain.endswith("." + clean):
             result = dict(site)
             result["source"] = "cache"
+            result["breaches"] = domain_breaches if domain_breaches else result.get("breaches", [])
             return result
             
     # Try fetching live privacy policy
@@ -242,7 +247,9 @@ async def get_site_rating(domain_or_url: str) -> Dict[str, Any]:
             try:
                 resp = await client.get(url, headers=headers)
                 if resp.status_code == 200 and len(resp.text) > 500:
-                    return analyze_live_policy(clean, resp.text)
+                    live_res = analyze_live_policy(clean, resp.text)
+                    live_res["breaches"] = domain_breaches
+                    return live_res
             except Exception:
                 continue
                 
@@ -250,10 +257,11 @@ async def get_site_rating(domain_or_url: str) -> Dict[str, Any]:
     return {
         "domain": clean,
         "name": clean.split(".")[0].title(),
-        "grade": "C-",
-        "score": 50,
-        "color": "amber",
-        "summary": f"Standard baseline privacy profile for {clean}. Live policy endpoint was not reachable; default commercial rubric applied.",
+        "grade": "C-" if not domain_breaches else "D",
+        "score": 50 if not domain_breaches else 38,
+        "color": "amber" if not domain_breaches else "red",
+        "summary": f"Standard baseline privacy profile for {clean}." + (f" Known data breach recorded in {domain_breaches[0]['breach_date']}." if domain_breaches else ""),
+        "breaches": domain_breaches,
         "rubric": {
             "data_sharing": { "score": 50, "max": 100, "label": "Standard Commercial Third-Party Sharing", "risk": "medium" },
             "retention": { "score": 50, "max": 100, "label": "Standard Operational Retention", "risk": "medium" },
