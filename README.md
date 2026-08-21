@@ -1,151 +1,100 @@
-# Guardra Server — Dedicated API & Scoring Engine
+# Guardra Server — Dedicated API, Admin Portal & Crawler Engine
 
 A production-ready containerized FastAPI server that powers the **Guardra Privacy Suite** and **Guardra Standalone Browser Extension**.
 
-Provides real-time policy evaluation (DPDP Act 2023 / GDPR / CCPA), live web policy scraping, statutory data deletion request generation, zero-knowledge k-anonymity breach audits, and privacy hub telemetry.
+Provides real-time policy evaluation (DPDP Act 2023 / GDPR / CCPA), an authorized **Admin Portal** for rating overrides, an **Automated Policy Crawler & Re-scoring Engine**, statutory data deletion generation, zero-knowledge k-anonymity breach audits, and privacy hub telemetry.
+
+---
+
+## 🛡️ Admin Rating Portal & Crawler
+
+Guardra Server includes a built-in single-page **Admin Portal** served at `/admin`.
+
+### Key Features:
+* **Site Management**: View, search, and filter all cataloged websites by Grade (`A+` to `F`) and compliance status.
+* **Rating & Rubric Overrides**: Authorized admins can manually adjust composite grades, numerical scores (`0–100`), 6-pillar rubric weights, DPDP Grievance Officer details, and summaries.
+* **Automated Crawler & Re-scoring**:
+  * Single-click **"🔄 Auto-Rescore All Sites"** runs background web scraping across all tracked domains.
+  * Detects policy revisions, re-evaluates 6-pillar NLP rubric metrics, and publishes updated scores instantly to connected extensions and client dashboards.
+* **Add Website**: Enter any domain (e.g. `zerodha.com`) with instant live scraping.
+
+### Accessing the Admin Portal:
+1. Open in browser:
+   ```text
+   https://guardra-api.botvaibhav.dev/admin
+   ```
+   *(or `http://localhost:8756/admin`)*
+2. Enter your secret admin key:
+   * **Default Secret Key**: `guardra_admin_secret_2026` *(Configurable via `ADMIN_SECRET_KEY` in `.env`)*.
+
+---
+
+## 📜 Rating Methodology & Rubric Specification
+
+For the complete technical specification of how ratings are calculated, see [**`RATING_METHODOLOGY.md`**](RATING_METHODOLOGY.md).
+
+### Summary Formula:
+\[
+S_{\text{total}} = \sum_{i=1}^{6} (w_i \times S_i) - P_{\text{penalties}}
+\]
+
+| Pillar | Weight | Focus Area |
+|---|---|---|
+| **1. Third-Party Data Sharing** | **25%** | Ad networks, data brokers, commercial syndication |
+| **2. Cookies & Tracker Density** | **20%** | Pixels, fingerprinters, analytics SDKs |
+| **3. User Rights & Erasure Flow** | **20%** | Self-service deletion, Section 12 DPDP / GDPR Art 17 |
+| **4. Data Retention Limits** | **15%** | Auto-purging limits vs indefinite retention |
+| **5. Breach History & Safeguards**| **10%** | Technical encryption (AES-256, TLS 1.3) & past breaches |
+| **6. Plain-Language Clarity** | **10%** | Flesch Reading Ease readability index |
 
 ---
 
 ## 🚀 Quickstart with Docker (Recommended)
 
-### 1. Prerequisites
-Ensure you have Docker and Docker Compose installed on your host server:
-```bash
-docker --version
-docker compose version
-```
-
----
-
-### 2. Configure Environment
-Clone or navigate to the server directory:
+### 1. Configure Environment
 ```bash
 cd /home/blue/CIH/Guardra-Server
 cp .env.example .env
 ```
 
-*(Optional: Edit `.env` if you wish to change the exposed port or restrict CORS origins)*.
-
----
-
-### 3. Build & Run Container
-Launch the server in detached mode:
+### 2. Build & Run Container
 ```bash
 docker compose up -d --build
 ```
 
----
-
-### 4. Verify Server Health
-Check running container status:
+### 3. Verify Server Status
 ```bash
-docker compose ps
-```
-
-Test the health check endpoint:
-```bash
-curl http://localhost:8000/api/health
-```
-
-Expected response:
-```json
-{
-  "status": "healthy",
-  "service": "Guardra Server Backend",
-  "version": "1.0.0"
-}
+curl http://localhost:8756/api/health
 ```
 
 ---
 
-## 🌐 Production Domain & SSL Setup (HTTPS)
+## 📡 API Reference
 
-When deploying to a public VPS / cloud server (e.g. AWS EC2, DigitalOcean, Hetzner), set up a reverse proxy with SSL.
-
-### Option A: Caddy (Simplest — Automatic Free SSL)
-Create a `Caddyfile`:
-```caddy
-api.yourdomain.com {
-    reverse_proxy localhost:8000
-}
-```
-Run Caddy: `caddy run` (Caddy automatically provisions Let's Encrypt SSL certificates).
-
----
-
-### Option B: Nginx + Certbot
-Example Nginx server block (`/etc/nginx/sites-available/guardra`):
-```nginx
-server {
-    server_name api.yourdomain.com;
-
-    location / {
-        proxy_pass http://127.0.0.1:8000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}
-```
-Enable and provision SSL:
-```bash
-sudo ln -s /etc/nginx/sites-available/guardra /etc/nginx/sites-enabled/
-sudo certbot --nginx -d api.yourdomain.com
-```
-
----
-
-## 🔌 Connecting the Standalone Extension
-
-Once your server is live at `https://api.yourdomain.com`:
-
-1. Click the **Guardra extension icon** in your browser.
-2. Click **⚙️ Settings** (or open `chrome-extension://<id>/options/options.html`).
-3. Set **API Server URL** to:
-   ```text
-   https://api.yourdomain.com
-   ```
-4. Click **Save**.
-
-The standalone extension will now query your remote server for real-time live site scoring while falling back to its internal offline database whenever internet is unavailable.
-
----
-
-## 📡 API Reference Overview
-
-Interactive Swagger documentation is available at: `http://localhost:8000/docs`
+Interactive Swagger documentation is available at: `/docs`
 
 | Method | Endpoint | Description |
 |---|---|---|
-| `GET` | `/api/health` | Service health and active modules |
-| `GET` | `/api/policy/rating?domain=example.com` | Evaluates site privacy against DPDP/GDPR rubric |
-| `POST` | `/api/policy/analyze` | Scrapes and NLP-evaluates raw policy URL |
-| `GET` | `/api/policy/cached` | Returns pre-scored platform database |
-| `POST` | `/api/deletion/generate-notice` | Generates DPDP Sec 12 / GDPR Art 17 statutory notice |
-| `POST` | `/api/deletion/generate-pdf` | Returns downloadable official PDF deletion letter |
+| `GET` | `/admin` | Admin Portal UI (SPA) |
+| `POST` | `/api/admin/login` | Authenticates admin session |
+| `GET` | `/api/admin/sites` | Lists all monitored sites (search & filter) |
+| `PUT` | `/api/admin/sites/{domain}` | Overrides site rating, rubric, and DPDP contacts |
+| `POST` | `/api/admin/sites` | Adds a new website with optional auto-scraping |
+| `DELETE` | `/api/admin/sites/{domain}` | Deletes a site from the database |
+| `POST` | `/api/admin/crawler/rescore-site` | Live scrapes and re-scores a single site |
+| `POST` | `/api/admin/crawler/rescore-all` | Triggers bulk background policy crawler |
+| `GET` | `/api/admin/crawler/status` | Polling endpoint for crawler progress |
+| `GET` | `/api/policy/rating?domain=example.com` | Public policy scoring query |
+| `POST` | `/api/deletion/generate-notice` | Generates DPDP Sec 12 statutory notice |
 | `POST` | `/api/breach/check-password` | Zero-knowledge K-Anonymity password audit |
-| `POST` | `/api/breach/check-email` | Scans breach records for email exposure |
-| `GET` | `/api/hub/platforms` | Platform privacy opt-out directory deep-links |
-| `GET` | `/api/deletion/regulators` | Data protection authority directory (DPBI, CNIL, ICO) |
 
 ---
 
-## 🛠️ Management Commands
+## 🛠️ Updating Container on Your VPS
 
-* **View live logs**:
-  ```bash
-  docker compose logs -f guardra-api
-  ```
-* **Restart service**:
-  ```bash
-  docker compose restart
-  ```
-* **Stop service**:
-  ```bash
-  docker compose down
-  ```
-* **Update and rebuild**:
-  ```bash
-  docker compose up -d --build
-  ```
+When updating files on your production server:
+```bash
+cd ~/Guardra-Server
+git pull
+docker compose up -d --build
+```

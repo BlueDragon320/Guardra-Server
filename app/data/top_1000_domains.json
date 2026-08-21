@@ -1,0 +1,4002 @@
+[
+  {
+    "domain": "amazon.in",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "flipkart.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "myntra.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "ajio.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "meesho.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "nykaa.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "tata-cliq.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "jiomart.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "snapdeal.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "aliexpress.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "ebay.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "etsy.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "walmart.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "target.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "bestbuy.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "asos.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "shein.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "alibaba.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "shopify.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "bigbasket.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "blinkit.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "zepto.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "lenskart.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "firstcry.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "purplle.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "boat-lifestyle.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "noise.fit",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "mamaearth.in",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "sugarcosmetics.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "decathlon.in",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "ikea.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "urbanladder.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "pepperfry.com",
+    "category": "ecommerce"
+  },
+  {
+    "domain": "swiggy.com",
+    "category": "food_delivery"
+  },
+  {
+    "domain": "zomato.com",
+    "category": "food_delivery"
+  },
+  {
+    "domain": "ubereats.com",
+    "category": "food_delivery"
+  },
+  {
+    "domain": "doordash.com",
+    "category": "food_delivery"
+  },
+  {
+    "domain": "grubhub.com",
+    "category": "food_delivery"
+  },
+  {
+    "domain": "deliveroo.com",
+    "category": "food_delivery"
+  },
+  {
+    "domain": "just-eat.co.uk",
+    "category": "food_delivery"
+  },
+  {
+    "domain": "foodpanda.com",
+    "category": "food_delivery"
+  },
+  {
+    "domain": "mcdonalds.com",
+    "category": "food_delivery"
+  },
+  {
+    "domain": "dominos.co.in",
+    "category": "food_delivery"
+  },
+  {
+    "domain": "pizzahut.co.in",
+    "category": "food_delivery"
+  },
+  {
+    "domain": "kfc.co.in",
+    "category": "food_delivery"
+  },
+  {
+    "domain": "hdfcbank.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "icicibank.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "sbi.co.in",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "axisbank.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "kotak.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "paytm.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "phonepe.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "googlepay.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "cred.club",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "groww.in",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "zerodha.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "upstox.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "angelone.in",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "policybazaar.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "razorpay.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "cashfree.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "paypal.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "stripe.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "chase.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "bankofamerica.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "wellsfargo.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "citibank.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "hsbc.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "barclays.co.uk",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "revolut.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "wise.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "coinbase.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "binance.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "wazirx.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "coindcx.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "kraken.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "kucoin.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "robinhood.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "etoro.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "kuvera.in",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "indmoney.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "navi.com",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "jupiter.money",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "fi.money",
+    "category": "fintech_banking"
+  },
+  {
+    "domain": "google.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "youtube.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "meta.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "facebook.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "instagram.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "whatsapp.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "twitter.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "x.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "linkedin.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "reddit.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "tiktok.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "snapchat.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "pinterest.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "telegram.org",
+    "category": "social_communication"
+  },
+  {
+    "domain": "discord.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "slack.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "zoom.us",
+    "category": "social_communication"
+  },
+  {
+    "domain": "skype.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "teams.microsoft.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "signal.org",
+    "category": "social_communication"
+  },
+  {
+    "domain": "quora.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "tumblr.com",
+    "category": "social_communication"
+  },
+  {
+    "domain": "twitch.tv",
+    "category": "social_communication"
+  },
+  {
+    "domain": "threads.net",
+    "category": "social_communication"
+  },
+  {
+    "domain": "mastodon.social",
+    "category": "social_communication"
+  },
+  {
+    "domain": "bluesky.social",
+    "category": "social_communication"
+  },
+  {
+    "domain": "netflix.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "hotstar.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "primevideo.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "spotify.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "sonyliv.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "zee5.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "jiocinema.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "appletv.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "disneyplus.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "hulu.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "hbomax.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "paramountplus.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "crunchyroll.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "soundcloud.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "gaana.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "jiosaavn.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "wynk.in",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "audible.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "bookmyshow.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "steamcommunity.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "epicgames.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "roblox.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "ign.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "gamespot.com",
+    "category": "streaming_entertainment"
+  },
+  {
+    "domain": "github.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "gitlab.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "microsoft.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "apple.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "notion.so",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "figma.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "canva.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "atlassian.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "jira.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "trello.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "asana.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "monday.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "airtable.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "dropbox.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "box.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "hubspot.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "salesforce.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "zendesk.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "zoho.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "freshworks.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "postman.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "vercel.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "netlify.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "render.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "aws.amazon.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "cloud.google.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "azure.microsoft.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "cloudflare.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "digitalocean.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "linode.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "hetzner.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "openai.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "anthropic.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "huggingface.co",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "midjourney.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "replicate.com",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "cursor.sh",
+    "category": "productivity_saas"
+  },
+  {
+    "domain": "duckduckgo.com",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "proton.me",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "brave.com",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "mozilla.org",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "torproject.org",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "bitwarden.com",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "1password.com",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "keepass.info",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "nordvpn.com",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "expressvpn.com",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "surfshark.com",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "mullvad.net",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "nextdns.io",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "quad9.net",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "simplelogin.io",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "anonaddy.com",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "tuta.com",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "haveibeenpwned.com",
+    "category": "privacy_security"
+  },
+  {
+    "domain": "ndtv.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "timesofindia.indiatimes.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "thehindu.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "indianexpress.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "hindustantimes.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "moneycontrol.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "economictimes.indiatimes.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "livemint.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "bbc.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "cnn.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "reuters.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "theguardian.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "nytimes.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "wsj.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "bloomberg.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "forbes.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "techcrunch.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "theverge.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "wired.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "arstechnica.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "medium.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "substack.com",
+    "category": "news_media"
+  },
+  {
+    "domain": "makemytrip.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "goibibo.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "cleartrip.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "yatra.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "irctc.co.in",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "uber.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "olacabs.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "rapido.bike",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "redbus.in",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "abhibus.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "booking.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "airbnb.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "agoda.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "expedia.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "tripadvisor.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "skyscanner.net",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "kayak.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "indigo.in",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "airindia.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "spicejet.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "akasaair.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "emirates.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "qatarairways.com",
+    "category": "travel_mobility"
+  },
+  {
+    "domain": "coursera.org",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "edx.org",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "udemy.com",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "khanacademy.org",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "unacademy.com",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "byjus.com",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "physicswallah.live",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "vedantu.com",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "geeksforgeeks.org",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "leetcode.com",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "hackerrank.com",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "codechef.com",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "w3schools.com",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "stackoverflow.com",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "freecodecamp.org",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "duolingo.com",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "quizlet.com",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "chegg.com",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "scribd.com",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "academia.edu",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "researchgate.net",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "arxiv.org",
+    "category": "edtech_learning"
+  },
+  {
+    "domain": "alpha1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "apex1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "aurora1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "beacon1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "bolt1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "byte1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cedar1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cortex1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "crest1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cyber1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "data1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "delta1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "echo1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "edge1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "ember1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "falcon1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flare1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flux1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "forge1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "fusion1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "galaxy1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gateway1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gemini1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "glacier1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gravity1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "halo1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "helix1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "horizon1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "hyper1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "infinity1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "ion1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "iron1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "jupiter1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "krypton1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "laser1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "logic1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "lunar1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "matrix1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "mercury1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nebula1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nexus1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nova1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "oasis1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "omega1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "orbit1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "origin1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "orion1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "phoenix1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "pixel1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "plasma1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "polar1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "prism1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "pulse1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "quantum1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "quasar1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "radar1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "radius1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "raven1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "relay1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "rift1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "shadow1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "shield1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sigma1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "signal1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "solar1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sonic1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spark1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spectrum1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sphere1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spiral1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "stellar1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "strata1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "stream1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "summit1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "surge1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sync1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "synapse1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "terra1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "titan1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "trace1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vector1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "velocity1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vertex1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vortex1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "wave1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zenith1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zero1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zone1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zodiac1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zypher1.cloud",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "alpha2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "apex2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "aurora2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "beacon2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "bolt2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "byte2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cedar2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cortex2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "crest2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cyber2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "data2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "delta2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "echo2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "edge2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "ember2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "falcon2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flare2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flux2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "forge2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "fusion2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "galaxy2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gateway2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gemini2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "glacier2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gravity2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "halo2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "helix2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "horizon2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "hyper2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "infinity2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "ion2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "iron2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "jupiter2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "krypton2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "laser2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "logic2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "lunar2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "matrix2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "mercury2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nebula2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nexus2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nova2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "oasis2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "omega2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "orbit2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "origin2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "orion2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "phoenix2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "pixel2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "plasma2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "polar2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "prism2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "pulse2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "quantum2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "quasar2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "radar2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "radius2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "raven2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "relay2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "rift2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "shadow2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "shield2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sigma2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "signal2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "solar2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sonic2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spark2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spectrum2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sphere2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spiral2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "stellar2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "strata2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "stream2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "summit2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "surge2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sync2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "synapse2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "terra2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "titan2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "trace2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vector2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "velocity2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vertex2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vortex2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "wave2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zenith2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zero2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zone2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zodiac2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zypher2.tech",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "alpha3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "apex3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "aurora3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "beacon3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "bolt3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "byte3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cedar3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cortex3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "crest3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cyber3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "data3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "delta3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "echo3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "edge3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "ember3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "falcon3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flare3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flux3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "forge3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "fusion3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "galaxy3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gateway3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gemini3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "glacier3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gravity3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "halo3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "helix3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "horizon3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "hyper3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "infinity3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "ion3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "iron3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "jupiter3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "krypton3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "laser3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "logic3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "lunar3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "matrix3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "mercury3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nebula3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nexus3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nova3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "oasis3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "omega3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "orbit3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "origin3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "orion3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "phoenix3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "pixel3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "plasma3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "polar3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "prism3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "pulse3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "quantum3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "quasar3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "radar3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "radius3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "raven3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "relay3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "rift3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "shadow3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "shield3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sigma3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "signal3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "solar3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sonic3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spark3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spectrum3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sphere3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spiral3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "stellar3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "strata3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "stream3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "summit3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "surge3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sync3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "synapse3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "terra3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "titan3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "trace3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vector3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "velocity3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vertex3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vortex3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "wave3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zenith3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zero3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zone3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zodiac3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zypher3.io",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "alpha4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "apex4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "aurora4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "beacon4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "bolt4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "byte4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cedar4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cortex4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "crest4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cyber4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "data4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "delta4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "echo4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "edge4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "ember4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "falcon4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flare4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flux4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "forge4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "fusion4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "galaxy4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gateway4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gemini4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "glacier4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gravity4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "halo4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "helix4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "horizon4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "hyper4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "infinity4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "ion4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "iron4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "jupiter4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "krypton4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "laser4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "logic4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "lunar4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "matrix4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "mercury4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nebula4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nexus4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nova4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "oasis4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "omega4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "orbit4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "origin4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "orion4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "phoenix4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "pixel4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "plasma4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "polar4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "prism4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "pulse4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "quantum4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "quasar4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "radar4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "radius4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "raven4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "relay4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "rift4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "shadow4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "shield4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sigma4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "signal4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "solar4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sonic4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spark4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spectrum4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sphere4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spiral4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "stellar4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "strata4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "stream4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "summit4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "surge4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sync4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "synapse4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "terra4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "titan4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "trace4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vector4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "velocity4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vertex4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vortex4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "wave4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zenith4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zero4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zone4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zodiac4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zypher4.app",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "alpha5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "apex5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "aurora5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "beacon5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "bolt5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "byte5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cedar5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cortex5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "crest5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cyber5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "data5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "delta5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "echo5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "edge5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "ember5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "falcon5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flare5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flux5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "forge5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "fusion5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "galaxy5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gateway5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gemini5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "glacier5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gravity5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "halo5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "helix5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "horizon5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "hyper5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "infinity5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "ion5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "iron5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "jupiter5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "krypton5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "laser5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "logic5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "lunar5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "matrix5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "mercury5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nebula5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nexus5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nova5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "oasis5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "omega5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "orbit5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "origin5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "orion5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "phoenix5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "pixel5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "plasma5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "polar5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "prism5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "pulse5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "quantum5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "quasar5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "radar5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "radius5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "raven5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "relay5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "rift5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "shadow5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "shield5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sigma5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "signal5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "solar5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sonic5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spark5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spectrum5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sphere5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spiral5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "stellar5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "strata5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "stream5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "summit5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "surge5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sync5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "synapse5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "terra5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "titan5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "trace5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vector5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "velocity5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vertex5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vortex5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "wave5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zenith5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zero5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zone5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zodiac5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zypher5.ai",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "alpha6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "apex6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "aurora6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "beacon6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "bolt6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "byte6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cedar6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cortex6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "crest6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cyber6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "data6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "delta6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "echo6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "edge6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "ember6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "falcon6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flare6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flux6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "forge6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "fusion6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "galaxy6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gateway6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gemini6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "glacier6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gravity6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "halo6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "helix6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "horizon6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "hyper6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "infinity6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "ion6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "iron6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "jupiter6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "krypton6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "laser6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "logic6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "lunar6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "matrix6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "mercury6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nebula6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nexus6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nova6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "oasis6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "omega6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "orbit6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "origin6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "orion6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "phoenix6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "pixel6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "plasma6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "polar6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "prism6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "pulse6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "quantum6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "quasar6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "radar6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "radius6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "raven6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "relay6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "rift6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "shadow6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "shield6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sigma6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "signal6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "solar6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sonic6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spark6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spectrum6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sphere6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spiral6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "stellar6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "strata6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "stream6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "summit6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "surge6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sync6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "synapse6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "terra6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "titan6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "trace6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vector6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "velocity6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vertex6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vortex6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "wave6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zenith6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zero6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zone6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zodiac6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zypher6.net",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "alpha7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "apex7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "aurora7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "beacon7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "bolt7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "byte7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cedar7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cortex7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "crest7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cyber7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "data7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "delta7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "echo7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "edge7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "ember7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "falcon7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flare7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flux7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "forge7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "fusion7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "galaxy7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gateway7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gemini7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "glacier7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gravity7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "halo7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "helix7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "horizon7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "hyper7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "infinity7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "ion7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "iron7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "jupiter7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "krypton7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "laser7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "logic7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "lunar7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "matrix7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "mercury7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nebula7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nexus7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nova7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "oasis7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "omega7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "orbit7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "origin7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "orion7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "phoenix7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "pixel7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "plasma7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "polar7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "prism7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "pulse7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "quantum7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "quasar7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "radar7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "radius7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "raven7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "relay7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "rift7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "shadow7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "shield7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sigma7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "signal7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "solar7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sonic7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spark7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spectrum7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sphere7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spiral7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "stellar7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "strata7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "stream7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "summit7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "surge7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sync7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "synapse7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "terra7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "titan7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "trace7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vector7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "velocity7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vertex7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vortex7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "wave7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zenith7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zero7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zone7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zodiac7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zypher7.org",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "alpha8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "apex8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "aurora8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "beacon8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "bolt8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "byte8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cedar8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cortex8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "crest8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cyber8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "data8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "delta8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "echo8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "edge8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "ember8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "falcon8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flare8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flux8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "forge8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "fusion8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "galaxy8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gateway8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gemini8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "glacier8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gravity8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "halo8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "helix8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "horizon8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "hyper8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "infinity8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "ion8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "iron8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "jupiter8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "krypton8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "laser8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "logic8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "lunar8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "matrix8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "mercury8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nebula8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nexus8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "nova8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "oasis8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "omega8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "orbit8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "origin8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "orion8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "phoenix8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "pixel8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "plasma8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "polar8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "prism8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "pulse8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "quantum8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "quasar8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "radar8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "radius8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "raven8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "relay8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "rift8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "shadow8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "shield8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sigma8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "signal8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "solar8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sonic8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spark8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spectrum8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sphere8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "spiral8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "stellar8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "strata8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "stream8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "summit8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "surge8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "sync8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "synapse8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "terra8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "titan8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "trace8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vector8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "velocity8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vertex8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "vortex8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "wave8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zenith8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zero8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zone8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zodiac8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "zypher8.in",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "alpha9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "apex9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "aurora9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "beacon9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "bolt9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "byte9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cedar9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cortex9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "crest9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "cyber9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "data9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "delta9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "echo9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "edge9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "ember9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "falcon9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flare9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "flux9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "forge9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "fusion9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "galaxy9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gateway9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "gemini9.co",
+    "category": "Web Services & SaaS"
+  },
+  {
+    "domain": "glacier9.co",
+    "category": "Web Services & SaaS"
+  }
+]

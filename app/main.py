@@ -1,7 +1,8 @@
 import os
 from fastapi import FastAPI
+from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import policy, deletion, breach, hub
+from app.routers import policy, deletion, breach, hub, admin
 
 app = FastAPI(
     title="Guardra Server API",
@@ -27,6 +28,15 @@ app.include_router(policy.router)
 app.include_router(deletion.router)
 app.include_router(breach.router)
 app.include_router(hub.router)
+app.include_router(admin.router)
+
+ADMIN_HTML_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", "admin.html")
+
+@app.get("/admin", response_class=HTMLResponse)
+async def admin_portal():
+    if os.path.exists(ADMIN_HTML_PATH):
+        return FileResponse(ADMIN_HTML_PATH)
+    return HTMLResponse("<h1>Admin portal file not found</h1>", status_code=404)
 
 @app.get("/")
 async def root():
@@ -34,6 +44,7 @@ async def root():
         "service": "Guardra Server API",
         "status": "online",
         "version": "1.0.0",
+        "admin_portal": "/admin",
         "docs": "/docs",
         "health": "/api/health"
     }
@@ -49,7 +60,9 @@ async def health_check():
             "Real-Time Policy NLP Web Scraping & Evaluation",
             "K-Anonymity Zero-Knowledge Breach Audits",
             "Statutory Deletion Request Notice & PDF Generator",
-            "Privacy Control Hub Directory"
+            "Privacy Control Hub Directory",
+            "Admin Policy Override & Rating Management",
+            "Automated Policy Crawler & Re-scoring Engine"
         ]
     }
 
