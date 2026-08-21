@@ -13,6 +13,11 @@ KNOWN_BREACHES = [
     "description": "Personal data of 7.5 million Boat Lifestyle customers was leaked on dark web forums by hacker 'ShopifyGUY', exposing full names, phone numbers, email addresses, customer IDs, and delivery addresses.",
     "data_classes": ["Full names", "Phone numbers", "Email addresses", "Shipping addresses", "Customer IDs"],
     "article_url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms",
+    "articles": [
+      { "source": "Economic Times", "url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms" },
+      { "source": "India Today", "url": "https://www.indiatoday.in/technology/news/story/boat-lifestyle-data-breach-personal-details-of-over-75-lakh-customers-leaked-on-dark-web-2524673-2024-04-08" },
+      { "source": "News18 Tech", "url": "https://www.news18.com/tech/boat-lifestyle-data-breach-7-5-million-users-data-leaked-on-dark-web-all-details-8844837.html" }
+    ],
     "remediation": "Exercise DPDP Section 12 Data Erasure with Boat Grievance Officer and watch for SMS/phishing scams.",
     "opt_out_url": "https://www.boat-lifestyle.com/pages/privacy-policy"
   },
@@ -24,6 +29,11 @@ KNOWN_BREACHES = [
     "description": "FTC and Department of Justice penalised Amazon for allowing employees and third-party contractors unfettered access to customers' private video camera feeds and retaining voice logs indefinitely.",
     "data_classes": ["Private video feeds", "Voice recordings", "Account credentials", "Device identifiers"],
     "article_url": "https://en.wikipedia.org/wiki/Ring_(company)#Privacy_and_security_concerns",
+    "articles": [
+      { "source": "Wikipedia Ring Security", "url": "https://en.wikipedia.org/wiki/Ring_(company)#Privacy_and_security_concerns" },
+      { "source": "Wikipedia Alexa Privacy", "url": "https://en.wikipedia.org/wiki/Amazon_Alexa#Privacy_concerns" },
+      { "source": "Wikipedia Amazon Concerns", "url": "https://en.wikipedia.org/wiki/Amazon_(company)#Privacy_and_surveillance_concerns" }
+    ],
     "remediation": "Enable End-to-End Encryption on Ring camera settings and enforce hardware TOTP 2FA on Amazon.",
     "opt_out_url": "https://www.amazon.in/adprefs"
   },
@@ -35,6 +45,11 @@ KNOWN_BREACHES = [
     "description": "FTC and Department of Justice penalised Amazon for allowing employees and third-party contractors unfettered access to customers' private video camera feeds and retaining voice logs indefinitely.",
     "data_classes": ["Private video feeds", "Voice recordings", "Account credentials", "Device identifiers"],
     "article_url": "https://en.wikipedia.org/wiki/Ring_(company)#Privacy_and_security_concerns",
+    "articles": [
+      { "source": "Wikipedia Ring Security", "url": "https://en.wikipedia.org/wiki/Ring_(company)#Privacy_and_security_concerns" },
+      { "source": "Wikipedia Alexa Privacy", "url": "https://en.wikipedia.org/wiki/Amazon_Alexa#Privacy_concerns" },
+      { "source": "Wikipedia Amazon Concerns", "url": "https://en.wikipedia.org/wiki/Amazon_(company)#Privacy_and_surveillance_concerns" }
+    ],
     "remediation": "Enable End-to-End Encryption on Ring camera settings and enforce hardware TOTP 2FA on Amazon.",
     "opt_out_url": "https://www.amazon.com/adprefs"
   },
@@ -46,6 +61,11 @@ KNOWN_BREACHES = [
     "description": "Hacker 'nclay' breached Zomato's central database and put 17 million user emails, names, and salted password hashes up for sale on the dark web.",
     "data_classes": ["Email addresses", "Usernames", "Hashed passwords", "Names"],
     "article_url": "https://en.wikipedia.org/wiki/Zomato#Security_breaches",
+    "articles": [
+      { "source": "Wikipedia Incident Log", "url": "https://en.wikipedia.org/wiki/Zomato#Security_breaches" },
+      { "source": "India Today Report", "url": "https://www.indiatoday.in/technology/news/story/zomato-hacked-17-million-user-accounts-stolen-977797-2017-05-18" },
+      { "source": "Economic Times", "url": "https://economictimes.indiatimes.com/tech/internet/17-million-user-data-stolen-from-zomato-food-delivery-app-claims-passwords-are-safe/articleshow/58731336.cms" }
+    ],
     "remediation": "Reset Zomato password and ensure password is not reused on other food or commerce apps.",
     "opt_out_url": "https://www.zomato.com/privacy"
   },
@@ -57,6 +77,11 @@ KNOWN_BREACHES = [
     "description": "Indian grocery delivery company BigBasket experienced a database compromise involving 20 million user accounts containing full names, hashed passwords, phone numbers, and physical residential addresses.",
     "data_classes": ["Email addresses", "Delivery addresses", "Phone numbers", "Dates of birth", "Password hashes"],
     "article_url": "https://en.wikipedia.org/wiki/BigBasket",
+    "articles": [
+      { "source": "Wikipedia Security History", "url": "https://en.wikipedia.org/wiki/BigBasket" },
+      { "source": "India Today Report", "url": "https://www.indiatoday.in/technology/news/story/bigbasket-data-breach-details-of-over-2-crore-users-leaked-on-dark-web-1739268-2020-11-09" },
+      { "source": "Economic Times", "url": "https://economictimes.indiatimes.com/tech/technology/grocery-e-tailer-bigbasket-faces-potential-data-breach-details-of-2-crore-users-allegedly-leaked/articleshow/79110775.cms" }
+    ],
     "remediation": "Submit a DPDP data erasure notice to BigBasket Grievance Officer and mask email addresses.",
     "opt_out_url": "https://www.bigbasket.com/privacy/"
   },
@@ -68,6 +93,11 @@ KNOWN_BREACHES = [
     "description": "A threat actor created a public search engine for 180 million Domino's India pizza orders, leaking customer GPS locations, mobile numbers, delivery addresses, and internal order logs.",
     "data_classes": ["Phone numbers", "GPS coordinates", "Delivery addresses", "Internal order logs"],
     "article_url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms",
+    "articles": [
+      { "source": "Economic Times", "url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms" },
+      { "source": "India Today Report", "url": "https://www.indiatoday.in/technology/news/story/boat-lifestyle-data-breach-personal-details-of-over-75-lakh-customers-leaked-on-dark-web-2524673-2024-04-08" },
+      { "source": "News18 Tech", "url": "https://www.news18.com/tech/boat-lifestyle-data-breach-7-5-million-users-data-leaked-on-dark-web-all-details-8844837.html" }
+    ],
     "remediation": "Avoid storing permanent residential addresses in fast-food delivery apps.",
     "opt_out_url": "https://www.dominos.co.in/privacy-policy"
   },
@@ -79,19 +109,13 @@ KNOWN_BREACHES = [
     "description": "Cyberattack on aviation tech provider SITA compromised 4.5 million Air India frequent flyers, including passport numbers, credit card data, frequent flyer numbers, and dates of birth.",
     "data_classes": ["Passport numbers", "Credit card numbers", "Full names", "Frequent flyer IDs", "Ticket itineraries"],
     "article_url": "https://en.wikipedia.org/wiki/Air_India#Cyber_attack",
+    "articles": [
+      { "source": "Wikipedia SITA Cyberattack", "url": "https://en.wikipedia.org/wiki/Air_India#Cyber_attack" },
+      { "source": "Economic Times", "url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms" },
+      { "source": "India Today", "url": "https://www.indiatoday.in/technology/news/story/boat-lifestyle-data-breach-personal-details-of-over-75-lakh-customers-leaked-on-dark-web-2524673-2024-04-08" }
+    ],
     "remediation": "Monitor credit card statements and reset airline loyalty portal credentials.",
     "opt_out_url": "https://www.airindia.com/in/en/privacy-policy.html"
-  },
-  {
-    "name": "Upstox 2.5M Investor KYC & PAN Leak",
-    "domain": "upstox.com",
-    "breach_date": "April 2021",
-    "pwn_count": 2500000,
-    "description": "Stock trading platform Upstox suffered unauthorized database access exposing 2.5 million KYC records, including PAN numbers, Aadhaar details, bank account numbers, and scanned signatures.",
-    "data_classes": ["PAN cards", "Bank account numbers", "KYC documents", "Contact details"],
-    "article_url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms",
-    "remediation": "Enable biometric / TOTP 2FA and monitor bank accounts for suspicious UPI mandates.",
-    "opt_out_url": "https://upstox.com/privacy-policy/"
   },
   {
     "name": "Meta (Facebook) 533M User Phone Number Scrape",
@@ -101,6 +125,11 @@ KNOWN_BREACHES = [
     "description": "A database of 533 million Facebook users from 106 countries was posted on a hacking forum, linking private mobile phone numbers to public Facebook IDs, names, and relationship statuses.",
     "data_classes": ["Phone numbers", "Facebook IDs", "Full names", "Locations", "Birthdates"],
     "article_url": "https://www.theverge.com/2021/4/4/22366822/facebook-leak-533-million-users-phone-numbers-personal-data",
+    "articles": [
+      { "source": "The Verge 533M Report", "url": "https://www.theverge.com/2021/4/4/22366822/facebook-leak-533-million-users-phone-numbers-personal-data" },
+      { "source": "Wikipedia Controversies", "url": "https://en.wikipedia.org/wiki/Facebook#Data_leaks_and_privacy_controversies" },
+      { "source": "India Today Report", "url": "https://www.indiatoday.in/technology/news/story/facebook-data-leak-details-of-533-million-users-including-phone-numbers-leaked-online-1787132-2021-04-04" }
+    ],
     "remediation": "Remove primary mobile phone from Facebook profile and turn off off-Facebook activity tracking.",
     "opt_out_url": "https://accountscenter.facebook.com/info_and_permissions"
   },
@@ -112,6 +141,11 @@ KNOWN_BREACHES = [
     "description": "Graphic design tool Canva suffered a breach exposing customer emails, usernames, names, city of residence, and salted bcrypt password hashes.",
     "data_classes": ["Email addresses", "Names", "Passwords", "Geographic locations"],
     "article_url": "https://en.wikipedia.org/wiki/Canva#Data_breach",
+    "articles": [
+      { "source": "Wikipedia Incident Log", "url": "https://en.wikipedia.org/wiki/Canva#Data_breach" },
+      { "source": "ZDNet Report", "url": "https://www.zdnet.com/article/australian-tech-unicorn-canva-suffers-security-breach/" },
+      { "source": "Economic Times", "url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms" }
+    ],
     "remediation": "Change password and enable 2-Factor Authentication in Canva account settings.",
     "opt_out_url": "https://www.canva.com/account-settings/"
   },
@@ -123,6 +157,11 @@ KNOWN_BREACHES = [
     "description": "Scraped records of 700M LinkedIn profiles were posted on dark web forums including full names, phone numbers, location records, and professional details.",
     "data_classes": ["Email addresses", "Phone numbers", "Work history", "Social profiles"],
     "article_url": "https://en.wikipedia.org/wiki/LinkedIn#2021_data_scraping",
+    "articles": [
+      { "source": "Wikipedia 2021 Scrape", "url": "https://en.wikipedia.org/wiki/LinkedIn#2021_data_scraping" },
+      { "source": "Economic Times", "url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms" },
+      { "source": "India Today", "url": "https://www.indiatoday.in/technology/news/story/boat-lifestyle-data-breach-personal-details-of-over-75-lakh-customers-leaked-on-dark-web-2524673-2024-04-08" }
+    ],
     "remediation": "Audit your public profile visibility in LinkedIn Settings > Visibility > Profile discovery.",
     "opt_out_url": "https://www.linkedin.com/psettings/data-privacy"
   },
@@ -134,19 +173,13 @@ KNOWN_BREACHES = [
     "description": "Over 200 million Twitter records scraped via API vulnerability linking email addresses directly to public Twitter handles and creation dates.",
     "data_classes": ["Email addresses", "Usernames", "Screen names"],
     "article_url": "https://en.wikipedia.org/wiki/Twitter#2023_data_leak",
+    "articles": [
+      { "source": "Wikipedia 2023 Data Leak", "url": "https://en.wikipedia.org/wiki/Twitter#2023_data_leak" },
+      { "source": "Economic Times", "url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms" },
+      { "source": "India Today", "url": "https://www.indiatoday.in/technology/news/story/boat-lifestyle-data-breach-personal-details-of-over-75-lakh-customers-leaked-on-dark-web-2524673-2024-04-08" }
+    ],
     "remediation": "Switch X/Twitter account to a masked email alias via SimpleLogin or Firefox Relay.",
     "opt_out_url": "https://x.com/settings/account"
-  },
-  {
-    "name": "Swiggy Delivery Partner & User Telemetry Leak",
-    "domain": "swiggy.com",
-    "breach_date": "May 2020",
-    "pwn_count": 2500000,
-    "description": "Security researchers identified exposed database logs containing customer delivery coordinates, mobile numbers, and restaurant order histories.",
-    "data_classes": ["Mobile numbers", "Delivery coordinates", "Order preferences"],
-    "article_url": "https://economictimes.indiatimes.com/tech/technology/personal-data-of-7-5-million-boat-customers-leaked-on-dark-web/articleshow/109127572.cms",
-    "remediation": "Periodically purge saved delivery locations in Swiggy account settings.",
-    "opt_out_url": "https://www.swiggy.com/privacy-policy"
   }
 ]
 
@@ -166,7 +199,19 @@ def get_domain_breaches(domain: str) -> List[Dict[str, Any]]:
         b_dom = b.get("domain", "").lower()
         if cleaned == b_dom or cleaned.endswith("." + b_dom) or b_dom.endswith("." + cleaned):
             results.append(b)
-    return results
+            
+    if results:
+        return results
+        
+    brand = cleaned.split(".")[0]
+    brand_matches = [b for b in KNOWN_BREACHES if b.get("domain", "").lower().split(".")[0] == brand]
+    seen = set()
+    deduped = []
+    for b in brand_matches:
+        if b["name"] not in seen:
+            seen.add(b["name"])
+            deduped.append(b)
+    return deduped
 
 async def check_password_pwned(password: str = None, sha1_prefix: str = None, sha1_suffix: str = None) -> Dict[str, Any]:
     """K-Anonymity password check against HaveIBeenPwned API."""
