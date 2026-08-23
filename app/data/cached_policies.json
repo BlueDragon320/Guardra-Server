@@ -1606,5 +1606,94 @@
         "opt_out_url": "https://www.boat-lifestyle.com/pages/privacy-policy"
       }
     ]
+  },
+  {
+    "domain": "nonexistentdomain12345xyz.com",
+    "name": "Nonexistentdomain12345Xyz",
+    "policy_url": null,
+    "grade": "F",
+    "score": 0,
+    "color": "#ef4444",
+    "summary": "🚨 Critical Privacy Alert: No valid privacy policy exists or could be found for Nonexistentdomain12345Xyz (nonexistentdomain12345xyz.com).",
+    "breaches": [],
+    "rubric": {
+      "data_sharing": {
+        "score": 0,
+        "max": 100,
+        "label": "🚨 Undisclosed Data Sharing",
+        "risk": "high"
+      },
+      "retention": {
+        "score": 0,
+        "max": 100,
+        "label": "🚨 Undisclosed Retention Limits",
+        "risk": "high"
+      },
+      "tracking_cookies": {
+        "score": 0,
+        "max": 100,
+        "label": "🚨 Unregulated Telemetry",
+        "risk": "high"
+      },
+      "user_rights": {
+        "score": 0,
+        "max": 100,
+        "label": "🚨 No Erasure Rights",
+        "risk": "high"
+      },
+      "breach_history": {
+        "score": 10,
+        "max": 100,
+        "label": "No Disclosed Security Safeguards",
+        "risk": "high"
+      },
+      "readability": {
+        "score": 0,
+        "max": 100,
+        "label": "No Policy Found",
+        "risk": "high"
+      }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": false,
+        "grievance_officer": null,
+        "grievance_email": null,
+        "redressal_period_days": null,
+        "erasure_right_disclosed": false
+      },
+      "gdpr": {
+        "compliant": false,
+        "dpo_contact": null,
+        "erasure_art17_disclosed": false
+      },
+      "ccpa": {
+        "compliant": false,
+        "do_not_sell": false
+      }
+    },
+    "key_clauses": [
+      {
+        "type": "negative",
+        "text": "No public privacy policy could be located for this domain."
+      }
+    ],
+    "findings": {
+      "data_sharing": [
+        "No privacy policy was located to verify data sharing safeguards."
+      ],
+      "retention": [
+        "No privacy policy was located to verify data retention limits."
+      ],
+      "user_rights": [
+        "No mechanism disclosed for users to exercise data erasure or deletion rights."
+      ]
+    },
+    "key_concerns": [
+      "No privacy policy exists for nonexistentdomain12345xyz.com. All data handling is completely undisclosed and unverified."
+    ],
+    "category": "Web Service",
+    "last_crawled": "2026-08-24 00:28:52",
+    "source": "missing_policy_zero_score"
   }
 ]

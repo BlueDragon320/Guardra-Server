@@ -775,26 +775,26 @@ async def get_site_rating(domain_or_url: str, tracker_data: List = None,
         live_res["breaches"] = domain_breaches
         return live_res
     
-    # Fallback for unreachable sites — automatic low score
-    fallback_score = 38 if domain_breaches else 50
+    # Fallback when privacy policy does not exist or cannot be found — completely honest score: 0/100 (Grade F)
+    fallback_score = 0
     grade, color = _get_grade(fallback_score)
     
     return {
         "domain": clean,
         "name": clean.split(".")[0].title(),
-        "policy_url": f"https://www.{clean}/privacy-policy",
+        "policy_url": None,
         "grade": grade,
         "score": fallback_score,
         "color": color,
-        "summary": f"Standard baseline privacy profile for {clean}." + (f" Known data breach recorded in {domain_breaches[0]['breach_date']}." if domain_breaches else ""),
+        "summary": f"🚨 Critical Privacy Alert: No valid privacy policy exists or could be found for {clean}. Without a disclosed policy, users have zero legal guarantees regarding data retention, third-party sharing, or user rights.",
         "breaches": domain_breaches,
         "rubric": {
-            "data_sharing": {"score": 50, "max": 100, "label": "Standard Commercial Third-Party Sharing", "risk": "medium"},
-            "retention": {"score": 50, "max": 100, "label": "Standard Operational Retention", "risk": "medium"},
-            "tracking_cookies": {"score": 50, "max": 100, "label": "Session & Analytics Cookies", "risk": "medium"},
-            "user_rights": {"score": 60, "max": 100, "label": "Standard Support Request Erasure", "risk": "medium"},
-            "breach_history": {"score": 60, "max": 100, "label": "No Known Public Breaches", "risk": "low"},
-            "readability": {"score": 55, "max": 100, "label": "Average Readability", "risk": "medium"}
+            "data_sharing": {"score": 0, "max": 100, "label": "🚨 Undisclosed Third-Party Data Sharing", "risk": "high"},
+            "retention": {"score": 0, "max": 100, "label": "🚨 Undisclosed Data Retention Policy", "risk": "high"},
+            "tracking_cookies": {"score": 0, "max": 100, "label": "🚨 Unregulated Tracking & Telemetry", "risk": "high"},
+            "user_rights": {"score": 0, "max": 100, "label": "🚨 No Erasure or Deletion Flow Disclosed", "risk": "high"},
+            "breach_history": {"score": (0 if domain_breaches else 10), "max": 100, "label": ("🚨 Recorded Security Breach" if domain_breaches else "No Disclosed Security Policy"), "risk": "high"},
+            "readability": {"score": 0, "max": 100, "label": "No Policy Found", "risk": "high"}
         },
         "compliance": {
             "dpdp": {
@@ -803,14 +803,14 @@ async def get_site_rating(domain_or_url: str, tracker_data: List = None,
                 "grievance_email": None,
                 "redressal_period_days": None,
                 "erasure_right_disclosed": False,
-                "notes": "Grievance Officer not found."
+                "notes": "Non-compliant: No privacy policy or Indian DPDP grievance officer disclosed."
             },
             "gdpr": {
                 "compliant": False,
                 "dpo_contact": None,
                 "lawful_basis_stated": False,
                 "erasure_art17_disclosed": False,
-                "notes": "GDPR DPO not found."
+                "notes": "Non-compliant: No GDPR privacy statement or DPO contact."
             },
             "ccpa": {
                 "compliant": False,
@@ -819,10 +819,14 @@ async def get_site_rating(domain_or_url: str, tracker_data: List = None,
             }
         },
         "key_clauses": [
-            {"type": "neutral", "text": "Policy could not be retrieved live; please verify on the site's official legal portal."}
+            {"type": "negative", "text": "No public privacy policy could be located for this domain."}
         ],
-        "findings": {"data_sharing": [], "retention": [], "user_rights": []},
-        "key_concerns": [f"Privacy policy for {clean} could not be retrieved for analysis."],
+        "findings": {
+            "data_sharing": ["No privacy policy was located to verify data sharing safeguards."],
+            "retention": ["No privacy policy was located to verify data retention limits."],
+            "user_rights": ["No mechanism disclosed for users to exercise data erasure or deletion rights."]
+        },
+        "key_concerns": [f"No privacy policy exists for {clean}. All data handling is completely undisclosed and unverified."],
         "category": "Web Service",
-        "source": "heuristic_fallback"
+        "source": "missing_policy_zero_score"
     }
