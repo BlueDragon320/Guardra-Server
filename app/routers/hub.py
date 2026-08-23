@@ -170,28 +170,41 @@ async def _record_ping_db(payload: PingPayload, request: Request):
     import json
     
     clean = clean_domain(payload.domain)
-    score = payload.score if payload.score is not None else 0.0
-    grade = payload.grade if payload.grade is not None else "N/A"
+    if not clean:
+        return {"status": "ignored"}
     
     conn = get_db_connection()
     try:
         cursor = conn.cursor()
+        
+        # 1. 30-Second Backend Deduplication Check
+        cursor.execute("SELECT id, timestamp FROM browser_pings WHERE domain = ? ORDER BY id DESC LIMIT 1", (clean,))
+        last_ping = cursor.fetchone()
+        now = datetime.utcnow()
+        if last_ping and last_ping["timestamp"]:
+            try:
+                last_time = datetime.fromisoformat(last_ping["timestamp"])
+                if (now - last_time).total_seconds() < 30:
+                    return {"status": "ok", "deduplicated": True}
+            except Exception:
+                pass
+
+        # 2. Get Authoritative Score and Grade from Database or NLP Engine
         cursor.execute("SELECT id, overall_score, grade FROM websites WHERE domain = ?", (clean,))
         row = cursor.fetchone()
         
-        now = datetime.utcnow()
         now_iso = now.isoformat()
         expires_at = (now + timedelta(hours=24)).isoformat()
         
         if not row:
             try:
                 rating = await get_site_rating(clean)
-                score = rating.get("score", score)
-                grade = rating.get("grade", grade)
+                score = rating.get("score", 50)
+                grade = rating.get("grade", "C")
             except Exception:
                 rating = {}
-                score = score
-                grade = grade
+                score = 50
+                grade = "C"
                 
             cursor.execute('''
                 INSERT INTO websites (
@@ -209,9 +222,8 @@ async def _record_ping_db(payload: PingPayload, request: Request):
                 now_iso, now_iso, expires_at, now_iso
             ))
         else:
-            if score <= 0 or grade in (None, 'N/A'):
-                score = row["overall_score"]
-                grade = row["grade"]
+            score = row["overall_score"]
+            grade = row["grade"]
             cursor.execute('''
                 UPDATE websites
                 SET last_analyzed_at = ?, expires_at = ?, scan_count = scan_count + 1, updated_at = ?
@@ -219,17 +231,11 @@ async def _record_ping_db(payload: PingPayload, request: Request):
             ''', (now_iso, expires_at, now_iso, clean))
             
         conn.commit()
-    finally:
-        conn.close()
-            
-    response_time_ms = payload.response_time_ms if payload.response_time_ms is not None else 0.0
-    if response_time_ms <= 0:
-        response_time_ms = round(float(28.5), 1)
-
-    client_ip = request.client.host if request.client else "unknown"
-    conn = get_db_connection()
-    try:
-        cursor = conn.cursor()
+        
+        # 3. Record Exactly One Clean Ping Row
+        response_time_ms = payload.response_time_ms if payload.response_time_ms is not None and payload.response_time_ms > 0 else round(float(28.5), 1)
+        client_ip = request.client.host if request.client else "unknown"
+        
         cursor.execute('''
             INSERT INTO browser_pings (domain, client_ip, score, grade, response_time_ms, client_type, timestamp)
             VALUES (?, ?, ?, ?, ?, ?, ?)

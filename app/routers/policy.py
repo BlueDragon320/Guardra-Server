@@ -64,16 +64,6 @@ async def get_rating(request: Request, domain: str = Query(..., description="Tar
                 result["breaches"] = result.pop("breach_history", [])
                 result["source"] = "db_cache"
                 
-                response_time = (time.time() - start_time) * 1000
-                try:
-                    cursor.execute('''
-                        INSERT INTO browser_pings (domain, client_ip, score, grade, response_time_ms, client_type, timestamp)
-                        VALUES (?, ?, ?, ?, ?, ?, ?)
-                    ''', (clean, client_ip, result.get("score"), result.get("grade"), response_time, 'extension', now_iso))
-                    conn.commit()
-                except Exception:
-                    pass
-                
                 return result
             else:
                 result = await get_site_rating(clean)
@@ -115,16 +105,6 @@ async def get_rating(request: Request, domain: str = Query(..., description="Tar
                             cookie_json, tracker_json, dark_pattern_json,
                             'live_scan', now_iso, now_iso, expires_at_iso, now_iso
                         ))
-                    conn.commit()
-                except Exception:
-                    pass
-                
-                response_time = (time.time() - start_time) * 1000
-                try:
-                    cursor.execute('''
-                        INSERT INTO browser_pings (domain, client_ip, score, grade, response_time_ms, client_type, timestamp)
-                        VALUES (?, ?, ?, ?, ?, ?, ?)
-                    ''', (clean, client_ip, result.get("score", 0), result.get("grade", "N/A"), response_time, 'extension', now_iso))
                     conn.commit()
                 except Exception:
                     pass
