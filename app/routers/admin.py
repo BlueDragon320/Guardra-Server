@@ -789,7 +789,29 @@ async def get_visit_analytics(timeframe: str = Query("day", regex="^(day|week|mo
             visit_series.append(v["visits"])
             unique_series.append(len(v["unique_domains"]))
             
-        top_domains = sorted(domain_counts.values(), key=lambda x: x["visits"], reverse=True)[:20]
+        top_domains = sorted(domain_counts.values(), key=lambda x: x["visits"], reverse=True)[:10]
+        
+        # Fallback to overall top sites if fewer than 10 in this specific timeframe
+        if len(top_domains) < 10:
+            cursor.execute("""
+                SELECT domain, COUNT(*) as visit_count, MAX(score) as score, MAX(grade) as grade, MAX(timestamp) as last_visited
+                FROM browser_pings
+                GROUP BY domain
+                ORDER BY visit_count DESC
+                LIMIT 10
+            """)
+            fallback_rows = cursor.fetchall()
+            existing_domains = {td["domain"] for td in top_domains}
+            for fr in fallback_rows:
+                if fr["domain"] not in existing_domains and len(top_domains) < 10:
+                    top_domains.append({
+                        "domain": fr["domain"],
+                        "visits": fr["visit_count"],
+                        "score": fr["score"] or 0,
+                        "grade": fr["grade"] or "C",
+                        "last_visited": fr["last_visited"]
+                    })
+
         if top_domains:
             domain_list = [d["domain"] for d in top_domains]
             placeholders = ','.join('?' for _ in domain_list)
@@ -805,24 +827,30 @@ async def get_visit_analytics(timeframe: str = Query("day", regex="^(day|week|mo
                     td["name"] = td["domain"].split(".")[0].title()
                     td["category"] = "Web Platform"
         
-        unique_domains_count = len(domain_counts)
-        avg_score = round(score_sum / total_visits, 1) if total_visits > 0 else 0
+        # Build Top 10 Sites Chart Dataset
+        top10_chart = {
+            "labels": [td.get("name") or td["domain"] for td in top_domains],
+            "domains": [td["domain"] for td in top_domains],
+            "visits": [td["visits"] for td in top_domains],
+            "scores": [round(float(td["score"])) for td in top_domains],
+            "grades": [td["grade"] for td in top_domains],
+            "categories": [td["category"] for td in top_domains]
+        }
+        
+        unique_domains_count = len(domain_counts) if domain_counts else len(top_domains)
+        avg_score = round(score_sum / total_visits, 1) if total_visits > 0 else (round(sum(td["score"] for td in top_domains) / len(top_domains), 1) if top_domains else 0)
         
         busiest = max(slots.items(), key=lambda x: x[1]["visits"]) if slots else (None, {"visits": 0})
-        busiest_label = f"{busiest[0]} ({busiest[1]['visits']} visits)" if busiest and busiest[1]["visits"] > 0 else "N/A"
+        busiest_label = f"{busiest[0]} ({busiest[1]['visits']} visits)" if busiest and busiest[1]["visits"] > 0 else (f"{top_domains[0]['name']} ({top_domains[0]['visits']} hits)" if top_domains else "N/A")
         
         return {
             "timeframe": timeframe,
-            "total_visits": total_visits,
+            "total_visits": total_visits if total_visits > 0 else sum(td["visits"] for td in top_domains),
             "unique_domains": unique_domains_count,
             "avg_score": avg_score,
             "busiest_period": busiest_label,
             "grade_distribution": grade_dist,
-            "chart": {
-                "labels": labels,
-                "visits": visit_series,
-                "unique_domains": unique_series
-            },
+            "top10_chart": top10_chart,
             "top_domains": top_domains
         }
     finally:

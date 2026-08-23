@@ -334,16 +334,17 @@
           <div class="flex items-center justify-between border-b border-bordercol pb-3">
             <div>
               <h3 class="text-sm font-semibold text-zinc-100 flex items-center gap-2">
-                <span>📊 Website Visits & Unique Domains (Bar + Line Graph Combined)</span>
+                <span>📊 Top 10 Visited Websites (Bar + Line Graph Combined)</span>
+                <span class="text-[10px] font-mono text-emerald-400 px-1.5 py-0.5 rounded bg-emerald-950/60 border border-emerald-800">Top 10 Leaders</span>
               </h3>
-              <p class="text-[11px] text-zinc-400">Total Visits shown as Emerald Bars + Unique Domains shown as Cyan Trendline.</p>
+              <p class="text-[11px] text-zinc-400">Total Visits shown as Emerald Bars + Authoritative Privacy Score shown as Cyan Line.</p>
             </div>
             <div class="flex items-center gap-3 text-[11px] font-mono">
               <span class="flex items-center gap-1.5 text-emerald-400 font-medium">
                 <span class="w-2.5 h-3 rounded-sm bg-emerald-400 inline-block"></span> Total Visits (Bars)
               </span>
               <span class="flex items-center gap-1.5 text-cyan-400 font-medium">
-                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 inline-block"></span> Unique Domains (Line)
+                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 inline-block"></span> Privacy Score 0–100 (Line)
               </span>
             </div>
           </div>
@@ -755,7 +756,7 @@
         document.getElementById('donutStatRisk').innerText = riskCount;
 
         // Render Charts & Leaderboard
-        renderTrafficChart(data.chart || { labels: [], visits: [], unique_domains: [] });
+        renderTrafficChart(data.top10_chart || { labels: [], domains: [], visits: [], scores: [], grades: [], categories: [] });
         renderRiskDonutChart(dist);
         renderAnalyticsTopSites(data.top_domains || [], data.total_visits || 0);
       } catch (e) {
@@ -768,87 +769,101 @@
       if (!container) return;
 
       const labels = chartData.labels || [];
+      const domains = chartData.domains || [];
       const visits = chartData.visits || [];
-      const unique = chartData.unique_domains || [];
+      const scores = chartData.scores || [];
+      const grades = chartData.grades || [];
+      const categories = chartData.categories || [];
 
       if (labels.length === 0) {
-        container.innerHTML = `<div class="flex items-center justify-center h-full text-zinc-500 font-mono text-xs">No traffic data recorded in this period.</div>`;
+        container.innerHTML = `<div class="flex items-center justify-center h-full text-zinc-500 font-mono text-xs">No top website data recorded yet.</div>`;
         return;
       }
 
-      const maxVal = Math.max(5, Math.max(...visits, ...unique));
-      const height = 260;
-      const paddingLeft = 45;
-      const paddingRight = 20;
-      const paddingTop = 25;
-      const paddingBottom = 35;
+      const maxVisits = Math.max(5, ...visits);
+      const height = 270;
+      const paddingLeft = 52;
+      const paddingRight = 52;
+      const paddingTop = 28;
+      const paddingBottom = 48;
       const width = 800;
 
       const plotW = width - paddingLeft - paddingRight;
       const plotH = height - paddingTop - paddingBottom;
       const slotW = plotW / labels.length;
-      const barW = Math.max(3, Math.min(22, slotW * 0.55));
+      const barW = Math.max(8, Math.min(32, slotW * 0.52));
 
-      // Grid lines and Y axis ticks (4 steps)
+      // Grid lines and Dual Y-Axis ticks (4 steps)
       let gridLinesSvg = '';
       for (let i = 0; i <= 4; i++) {
-        const yVal = Math.round((maxVal / 4) * i);
+        const visitVal = Math.round((maxVisits / 4) * i);
+        const scoreVal = Math.round(25 * i);
         const yPos = height - paddingBottom - (plotH / 4) * i;
+        
         gridLinesSvg += `
+          <!-- Horizontal Grid Line -->
           <line x1="${paddingLeft}" y1="${yPos}" x2="${width - paddingRight}" y2="${yPos}" stroke="#27272a" stroke-width="1" stroke-dasharray="${i === 0 ? 'none' : '4,4'}" />
-          <text x="${paddingLeft - 8}" y="${yPos + 4}" fill="#71717a" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="end">${yVal}</text>
+          
+          <!-- Left Y-Axis: Visits (Emerald) -->
+          <text x="${paddingLeft - 8}" y="${yPos + 3.5}" fill="#10b981" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="end">${visitVal}</text>
+          
+          <!-- Right Y-Axis: Score (Cyan) -->
+          <text x="${width - paddingRight + 8}" y="${yPos + 3.5}" fill="#06b6d4" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="start">${scoreVal}</text>
         `;
       }
 
-      // Calculate Bars and Line Points
+      // Calculate Bars and Line Points for Top 10 Sites
       let barsSvg = '';
       const linePoints = [];
 
       labels.forEach((lbl, i) => {
         const cx = paddingLeft + i * slotW + slotW / 2;
         const v = visits[i] || 0;
-        const u = unique[i] || 0;
+        const s = scores[i] !== undefined ? scores[i] : 50;
+        const g = grades[i] || 'C';
+        const dom = domains[i] || lbl;
+        const cat = categories[i] || 'Web Platform';
 
-        const barH = (v / maxVal) * plotH;
+        const barH = (v / maxVisits) * plotH;
         const barY = height - paddingBottom - barH;
         const barX = cx - barW / 2;
 
-        const lineY = height - paddingBottom - (u / maxVal) * plotH;
-        linePoints.push({ x: cx, y: lineY, val: u, label: lbl, visits: v });
+        const lineY = height - paddingBottom - (s / 100) * plotH;
+        linePoints.push({ x: cx, y: lineY, score: s, grade: g, visits: v, label: lbl, domain: dom, cat: cat });
 
-        // Bar Element for Total Visits
+        // Bar Element with deep-dive click handler
         barsSvg += `
-          <g class="chart-bar group cursor-pointer">
-            <rect x="${barX.toFixed(1)}" y="${barY.toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(1.5, barH).toFixed(1)}" rx="3" fill="url(#barEmeraldGrad)" stroke="#10b981" stroke-width="1" class="transition-all duration-200 group-hover:brightness-125" />
-            <title>${lbl} ➔ Total Visits (Bars): ${v} | Unique Domains (Line): ${u}</title>
+          <g class="chart-bar group cursor-pointer" onclick="openSiteDetailModal('${dom}')">
+            <rect x="${barX.toFixed(1)}" y="${barY.toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(2, barH).toFixed(1)}" rx="4" fill="url(#barEmeraldGrad)" stroke="#10b981" stroke-width="1.2" class="transition-all duration-200 group-hover:brightness-125" />
+            <title>${lbl} (${dom})\n• Total User Visits: ${v} hits\n• Privacy Score: ${s}/100 (Grade ${g})\n• Category: ${cat}\n(Click to inspect deep-dive policy clauses)</title>
           </g>
         `;
       });
 
-      // Line Graph Path for Unique Domains
+      // Line Graph Path for Privacy Score
       let linePathD = linePoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
 
-      // Line Graph Dots
+      // Line Graph Dots & Tooltips
       let lineDotsSvg = '';
       linePoints.forEach(p => {
         lineDotsSvg += `
-          <g class="chart-line-point cursor-pointer transition-transform duration-150 hover:scale-125">
+          <g class="chart-line-point cursor-pointer transition-transform duration-150 hover:scale-125" onclick="openSiteDetailModal('${p.domain}')">
             <circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4.5" fill="#06b6d4" stroke="#09090b" stroke-width="2" />
-            <title>${p.label} ➔ Unique Domains (Line): ${p.val} | Total Visits (Bars): ${p.visits}</title>
+            <title>${p.label} (${p.domain})\n• Privacy Score: ${p.score}/100 (Grade ${p.grade})\n• Total User Visits: ${p.visits} hits\n• Category: ${p.cat}\n(Click to inspect deep-dive policy clauses)</title>
           </g>
         `;
       });
 
-      // X Axis Ticks (Show every Nth label)
-      const stepLabel = Math.ceil(labels.length / 10);
+      // X-Axis Website Name/Domain Labels
       let xLabelsSvg = '';
       labels.forEach((lbl, i) => {
-        if (i % stepLabel === 0 || i === labels.length - 1) {
-          const cx = paddingLeft + i * slotW + slotW / 2;
-          xLabelsSvg += `
-            <text x="${cx.toFixed(1)}" y="${height - 10}" fill="#71717a" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="middle">${lbl}</text>
-          `;
-        }
+        const cx = paddingLeft + i * slotW + slotW / 2;
+        const shortDom = (domains[i] || lbl).replace(/^www\./, '');
+        const displayLabel = shortDom.length > 12 ? shortDom.substring(0, 10) + '..' : shortDom;
+        
+        xLabelsSvg += `
+          <text x="${cx.toFixed(1)}" y="${height - 12}" fill="#a1a1aa" font-size="9" font-family="JetBrains Mono, monospace" font-weight="500" text-anchor="middle" class="cursor-pointer hover:fill-emerald-400" onclick="openSiteDetailModal('${domains[i] || lbl}')">${displayLabel}</text>
+        `;
       });
 
       const svgHtml = `
@@ -856,21 +871,27 @@
           <defs>
             <linearGradient id="barEmeraldGrad" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stop-color="#10b981" stop-opacity="0.85" />
-              <stop offset="100%" stop-color="#10b981" stop-opacity="0.20" />
+              <stop offset="100%" stop-color="#10b981" stop-opacity="0.18" />
             </linearGradient>
           </defs>
           
-          <!-- Grid Lines -->
+          <!-- Grid Lines & Y-Axes -->
           ${gridLinesSvg}
+          
+          <!-- X-Axis Domain Labels -->
           ${xLabelsSvg}
 
-          <!-- Bars (Total Visits) -->
+          <!-- Axis Legends on Edge -->
+          <text x="12" y="16" fill="#10b981" font-size="9" font-family="JetBrains Mono, monospace" font-weight="600">VISITS ↑</text>
+          <text x="${width - 12}" y="16" fill="#06b6d4" font-size="9" font-family="JetBrains Mono, monospace" font-weight="600" text-anchor="end">SCORE (0-100) ↑</text>
+
+          <!-- Top 10 Bars (Total Visits) -->
           ${barsSvg}
 
-          <!-- Line Graph (Unique Domains) -->
+          <!-- Top 10 Line Graph (Privacy Scores) -->
           <path d="${linePathD}" fill="none" stroke="#06b6d4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
 
-          <!-- Line Graph Dots -->
+          <!-- Line Nodes -->
           ${lineDotsSvg}
         </svg>
       `;
