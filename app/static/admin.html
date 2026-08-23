@@ -334,9 +334,9 @@
           <div class="flex items-center justify-between border-b border-bordercol pb-3">
             <div>
               <h3 class="text-sm font-semibold text-zinc-100 flex items-center gap-2">
-                <span>📊 Website Visits & Unique Domains (Time-Series)</span>
+                <span>📊 Website Visits & Unique Domains (Linear Time-Series)</span>
               </h3>
-              <p class="text-[11px] text-zinc-400">Live timeline breakdown across the selected timeframe.</p>
+              <p class="text-[11px] text-zinc-400">Live linear traffic volume across the selected timeframe.</p>
             </div>
             <div class="flex items-center gap-3 text-[11px] font-mono">
               <span class="flex items-center gap-1.5 text-emerald-400">
@@ -347,8 +347,8 @@
               </span>
             </div>
           </div>
-          <div class="relative h-[280px] w-full">
-            <canvas id="trafficLineChart"></canvas>
+          <div id="trafficLineChartContainer" class="relative h-[270px] w-full flex items-center justify-center">
+            <!-- Rendered as interactive vector Linear Graph -->
           </div>
         </div>
 
@@ -358,8 +358,8 @@
             <h3 class="text-sm font-semibold text-zinc-100">🛡️ Visited Sites Privacy Risk</h3>
             <p class="text-[11px] text-zinc-400">Compliance distribution of visited sites.</p>
           </div>
-          <div class="relative h-[200px] w-full flex items-center justify-center">
-            <canvas id="riskDonutChart"></canvas>
+          <div id="riskDonutContainer" class="relative h-[180px] w-full flex items-center justify-center">
+            <!-- Rendered as SVG Donut -->
           </div>
           <div class="grid grid-cols-3 gap-2 pt-2 border-t border-bordercol/60 text-center font-mono text-[10px]">
             <div class="bg-emerald-950/40 border border-emerald-800/60 rounded p-1.5">
@@ -764,126 +764,155 @@
     }
 
     function renderTrafficChart(chartData) {
-      const ctx = document.getElementById('trafficLineChart');
-      if (!ctx) return;
+      const container = document.getElementById('trafficLineChartContainer');
+      if (!container) return;
 
-      if (trafficChartInstance) {
-        trafficChartInstance.destroy();
+      const labels = chartData.labels || [];
+      const visits = chartData.visits || [];
+      const unique = chartData.unique_domains || [];
+
+      if (labels.length === 0) {
+        container.innerHTML = `<div class="flex items-center justify-center h-full text-zinc-500 font-mono text-xs">No traffic data recorded in this period.</div>`;
+        return;
       }
 
-      trafficChartInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: chartData.labels || [],
-          datasets: [
-            {
-              label: 'Total Visits',
-              data: chartData.visits || [],
-              borderColor: '#10b981',
-              backgroundColor: 'rgba(16, 185, 129, 0.12)',
-              borderWidth: 2,
-              fill: true,
-              tension: 0.35,
-              pointBackgroundColor: '#10b981',
-              pointRadius: chartData.labels.length > 20 ? 2 : 4,
-              pointHoverRadius: 6
-            },
-            {
-              label: 'Unique Domains',
-              data: chartData.unique_domains || [],
-              borderColor: '#06b6d4',
-              backgroundColor: 'rgba(6, 182, 212, 0.08)',
-              borderWidth: 2,
-              fill: true,
-              tension: 0.35,
-              pointBackgroundColor: '#06b6d4',
-              pointRadius: chartData.labels.length > 20 ? 2 : 4,
-              pointHoverRadius: 6
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          interaction: {
-            mode: 'index',
-            intersect: false
-          },
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              backgroundColor: '#18181b',
-              borderColor: '#27272a',
-              borderWidth: 1,
-              titleColor: '#f4f4f5',
-              bodyColor: '#d4d4d8',
-              titleFont: { family: 'JetBrains Mono', size: 12 },
-              bodyFont: { family: 'Inter', size: 11 },
-              padding: 10,
-              displayColors: true
-            }
-          },
-          scales: {
-            x: {
-              grid: { color: '#27272a', drawBorder: false },
-              ticks: { color: '#71717a', font: { family: 'JetBrains Mono', size: 10 } }
-            },
-            y: {
-              beginAtZero: true,
-              grid: { color: '#27272a', drawBorder: false },
-              ticks: {
-                color: '#71717a',
-                font: { family: 'JetBrains Mono', size: 10 },
-                precision: 0
-              }
-            }
-          }
+      const maxVal = Math.max(5, Math.max(...visits, ...unique));
+      const height = 260;
+      const paddingLeft = 45;
+      const paddingRight = 20;
+      const paddingTop = 20;
+      const paddingBottom = 35;
+      const width = 800;
+
+      const plotW = width - paddingLeft - paddingRight;
+      const plotH = height - paddingTop - paddingBottom;
+
+      // Grid lines and Y axis ticks (4 steps)
+      let gridLinesSvg = '';
+      for (let i = 0; i <= 4; i++) {
+        const yVal = Math.round((maxVal / 4) * i);
+        const yPos = height - paddingBottom - (plotH / 4) * i;
+        gridLinesSvg += `
+          <line x1="${paddingLeft}" y1="${yPos}" x2="${width - paddingRight}" y2="${yPos}" stroke="#27272a" stroke-width="1" stroke-dasharray="${i === 0 ? 'none' : '4,4'}" />
+          <text x="${paddingLeft - 8}" y="${yPos + 4}" fill="#71717a" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="end">${yVal}</text>
+        `;
+      }
+
+      // Calculate points
+      const stepX = labels.length > 1 ? plotW / (labels.length - 1) : plotW;
+      
+      const visitPoints = visits.map((v, i) => ({
+        x: paddingLeft + i * stepX,
+        y: height - paddingBottom - (v / maxVal) * plotH,
+        val: v,
+        label: labels[i]
+      }));
+
+      const uniquePoints = unique.map((u, i) => ({
+        x: paddingLeft + i * stepX,
+        y: height - paddingBottom - (u / maxVal) * plotH,
+        val: u,
+        label: labels[i]
+      }));
+
+      let visitPathD = visitPoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+      let visitAreaD = `${visitPathD} L ${visitPoints[visitPoints.length - 1].x.toFixed(1)} ${height - paddingBottom} L ${visitPoints[0].x.toFixed(1)} ${height - paddingBottom} Z`;
+
+      let uniquePathD = uniquePoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+
+      // X Axis Ticks (Show every Nth label)
+      const stepLabel = Math.ceil(labels.length / 10);
+      let xLabelsSvg = '';
+      labels.forEach((lbl, i) => {
+        if (i % stepLabel === 0 || i === labels.length - 1) {
+          const xPos = paddingLeft + i * stepX;
+          xLabelsSvg += `
+            <text x="${xPos.toFixed(1)}" y="${height - 10}" fill="#71717a" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="middle">${lbl}</text>
+          `;
         }
       });
+
+      // Interactive Hover Dots
+      let dotsSvg = '';
+      visitPoints.forEach((p, i) => {
+        dotsSvg += `
+          <g class="chart-point cursor-pointer transition-transform duration-150 hover:scale-125">
+            <circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4.5" fill="#10b981" stroke="#09090b" stroke-width="2" />
+            <title>${p.label} ➔ Visits: ${p.val} | Unique Sites: ${uniquePoints[i] ? uniquePoints[i].val : 0}</title>
+          </g>
+        `;
+      });
+
+      const svgHtml = `
+        <svg viewBox="0 0 ${width} ${height}" class="w-full h-full overflow-visible">
+          <defs>
+            <linearGradient id="emeraldGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#10b981" stop-opacity="0.30" />
+              <stop offset="100%" stop-color="#10b981" stop-opacity="0.0" />
+            </linearGradient>
+          </defs>
+          
+          <!-- Grid Lines -->
+          ${gridLinesSvg}
+          ${xLabelsSvg}
+
+          <!-- Filled Gradient Area -->
+          <path d="${visitAreaD}" fill="url(#emeraldGrad)" />
+
+          <!-- Linear Path Lines -->
+          <path d="${visitPathD}" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="${uniquePathD}" fill="none" stroke="#06b6d4" stroke-width="2" stroke-dasharray="3,3" stroke-linecap="round" />
+
+          <!-- Interactive Dots -->
+          ${dotsSvg}
+        </svg>
+      `;
+
+      container.innerHTML = svgHtml;
     }
 
     function renderRiskDonutChart(dist) {
-      const ctx = document.getElementById('riskDonutChart');
-      if (!ctx) return;
-
-      if (riskDonutChartInstance) {
-        riskDonutChartInstance.destroy();
-      }
+      const container = document.getElementById('riskDonutContainer');
+      if (!container) return;
 
       const safe = (dist.A || 0) + (dist.B || 0);
       const mod = dist.C || 0;
       const risk = (dist.D || 0) + (dist.F || 0);
-      const hasData = (safe + mod + risk) > 0;
+      const total = safe + mod + risk;
 
-      riskDonutChartInstance = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-          labels: ['Safe (A/B)', 'Moderate Risk (C)', 'High Risk (D/F)'],
-          datasets: [{
-            data: hasData ? [safe, mod, risk] : [1, 0, 0],
-            backgroundColor: hasData ? ['#10b981', '#f59e0b', '#f43f5e'] : ['#27272a', '#27272a', '#27272a'],
-            borderColor: '#121214',
-            borderWidth: 3,
-            hoverOffset: 4
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          cutout: '70%',
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              backgroundColor: '#18181b',
-              borderColor: '#27272a',
-              borderWidth: 1,
-              padding: 8,
-              titleFont: { family: 'Inter', size: 11 },
-              bodyFont: { family: 'JetBrains Mono', size: 11 }
-            }
-          }
-        }
-      });
+      if (total === 0) {
+        container.innerHTML = `<div class="flex items-center justify-center h-full text-zinc-500 font-mono text-xs">No risk metrics recorded.</div>`;
+        return;
+      }
+
+      const safePct = Math.round((safe / total) * 100);
+      const modPct = Math.round((mod / total) * 100);
+      const riskPct = Math.max(0, 100 - safePct - modPct);
+
+      const c = 251.2;
+      const safeDash = (safePct / 100) * c;
+      const modDash = (modPct / 100) * c;
+      const riskDash = (riskPct / 100) * c;
+
+      const modOffset = -safeDash;
+      const riskOffset = -(safeDash + modDash);
+
+      const donutSvg = `
+        <div class="relative flex items-center justify-center">
+          <svg viewBox="0 0 100 100" class="w-36 h-36 transform -rotate-90">
+            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#27272a" stroke-width="12" />
+            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#10b981" stroke-width="12" stroke-dasharray="${safeDash} ${c - safeDash}" stroke-dashoffset="0" />
+            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#f59e0b" stroke-width="12" stroke-dasharray="${modDash} ${c - modDash}" stroke-dashoffset="${modOffset}" />
+            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#f43f5e" stroke-width="12" stroke-dasharray="${riskDash} ${c - riskDash}" stroke-dashoffset="${riskOffset}" />
+          </svg>
+          <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+            <span class="text-xl font-bold font-mono text-zinc-100">${safePct}%</span>
+            <span class="text-[9px] font-mono text-emerald-400">Safe Sites</span>
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = donutSvg;
     }
 
     function renderAnalyticsTopSites(topDomains, totalVisits) {
