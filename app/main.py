@@ -40,14 +40,38 @@ app.include_router(admin.router)
 @app.on_event("startup")
 async def startup_event():
     """Initialize database, seed data, and migrate cached policies."""
-    # Ensure all tables exist (init_db is also called on module import, but this is explicit)
     init_db()
-    
-    # Seed default global cookie rules
     seed_default_rules()
-    
-    # Migrate cached_policies.json into the websites table if empty
     _seed_cached_policies()
+    _sync_visited_pings_to_websites()
+
+
+def _sync_visited_pings_to_websites():
+    """Ensures all user-visited domains logged in browser_pings are stored in websites table."""
+    from datetime import timedelta
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT DISTINCT domain FROM browser_pings")
+        ping_domains = [r["domain"].replace("www.", "") for r in cursor.fetchall() if r["domain"]]
+        
+        now_iso = datetime.utcnow().isoformat()
+        expires_iso = (datetime.utcnow() + timedelta(hours=24)).isoformat()
+        
+        for dom in ping_domains:
+            cursor.execute("SELECT id FROM websites WHERE domain = ?", (dom,))
+            if not cursor.fetchone():
+                cursor.execute("""
+                    INSERT INTO websites (
+                        domain, name, category, overall_score, grade, grade_color,
+                        pillar_scores, compliance, source, scan_count, first_analyzed_at, last_analyzed_at, expires_at, updated_at
+                    ) VALUES (?, ?, 'Visited Site', 60, 'C', 'amber', '{}', '{}', 'extension_visited', 1, ?, ?, ?, ?)
+                """, (dom, dom.split(".")[0].upper(), now_iso, now_iso, expires_iso, now_iso))
+        conn.commit()
+    except Exception:
+        pass
+    finally:
+        conn.close()
 
 
 def _seed_cached_policies():

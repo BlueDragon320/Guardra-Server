@@ -166,45 +166,81 @@ class PingPayload(BaseModel):
 
 async def _record_ping_db(payload: PingPayload, request: Request):
     from app.services.policy_analyzer import clean_domain, get_site_rating
-    clean = clean_domain(payload.domain)
-    client_ip = request.client.host if request.client else "unknown"
-    now_iso = datetime.utcnow().isoformat()
+    from datetime import timedelta
     
-    score = payload.score or 0.0
-    grade = payload.grade or "N/A"
-    latency = payload.response_time_ms if payload.response_time_ms and payload.response_time_ms > 0 else 32.5
+    clean = clean_domain(payload.domain)
+    if not clean:
+        return {"status": "error", "message": "Invalid domain"}
+
+    client_ip = request.client.host if request.client else "unknown"
+    now = datetime.utcnow()
+    now_iso = now.isoformat()
+    expires_at_iso = (now + timedelta(hours=24)).isoformat()
     
     conn = get_db_connection()
     try:
         cursor = conn.cursor()
-        if score <= 0 or grade in (None, "N/A"):
-            cursor.execute("SELECT overall_score, grade FROM websites WHERE domain = ?", (clean,))
-            row = cursor.fetchone()
-            if row and row["overall_score"]:
-                score = row["overall_score"]
-                grade = row["grade"]
-            else:
-                try:
-                    rating = await get_site_rating(clean)
-                    score = rating.get("score", 55)
-                    grade = rating.get("grade", "C")
-                except Exception:
-                    score = 55.0
-                    grade = "C"
-                    
-        cursor.execute('''
+        cursor.execute("SELECT id, overall_score, grade FROM websites WHERE domain = ?", (clean,))
+        existing = cursor.fetchone()
+        
+        score = payload.score or 0.0
+        grade = payload.grade or "N/A"
+        
+        if existing:
+            score = existing["overall_score"] or score
+            grade = existing["grade"] or grade
+            cursor.execute("""
+                UPDATE websites 
+                SET last_analyzed_at = ?, expires_at = ?, scan_count = scan_count + 1, updated_at = ?
+                WHERE domain = ?
+            """, (now_iso, expires_at_iso, now_iso, clean))
+        else:
+            # Domain is NEW! Run evaluation and save to websites table
+            try:
+                rating = await get_site_rating(clean)
+                score = rating.get("score", 55)
+                grade = rating.get("grade", "C")
+                grade_color = rating.get("color", "gray")
+                rubric_json = json.dumps(rating.get("rubric", {}))
+                comp_json = json.dumps(rating.get("compliance", {}))
+                findings_json = json.dumps(rating.get("findings", {}))
+                concerns_json = json.dumps(rating.get("key_concerns", []))
+                clauses_json = json.dumps(rating.get("key_clauses", []))
+                breaches_json = json.dumps(rating.get("breaches", []))
+                cookie_json = json.dumps(rating.get("cookie_data", []))
+                tracker_json = json.dumps(rating.get("tracker_data", []))
+                dark_json = json.dumps(rating.get("dark_pattern_data", []))
+                
+                cursor.execute("""
+                    INSERT INTO websites (
+                        domain, name, category, overall_score, grade, grade_color,
+                        pillar_scores, compliance, findings, key_concerns, key_clauses,
+                        breach_history, cookie_data, tracker_data, dark_pattern_data,
+                        source, scan_count, first_analyzed_at, last_analyzed_at, expires_at, updated_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'extension_visited', 1, ?, ?, ?, ?)
+                """, (
+                    clean, rating.get("name", clean), rating.get("category", "Web Service"),
+                    score, grade, grade_color, rubric_json, comp_json, findings_json, concerns_json,
+                    clauses_json, breaches_json, cookie_json, tracker_json, dark_json,
+                    now_iso, now_iso, expires_at_iso, now_iso
+                ))
+            except Exception:
+                pass
+                
+        response_time_ms = payload.response_time_ms if payload.response_time_ms and payload.response_time_ms > 0 else 32.5
+        cursor.execute("""
             INSERT INTO browser_pings (domain, client_ip, score, grade, response_time_ms, client_type, timestamp)
             VALUES (?, ?, ?, ?, ?, ?, ?)
-        ''', (clean, client_ip, score, grade, latency, payload.client_type or 'extension', now_iso))
+        """, (clean, client_ip, score, grade, response_time_ms, 'extension', now_iso))
         
-        # Also retroactively fix older 0/100 pings for this domain
+        # Also clean up older 0/100 pings
         cursor.execute("UPDATE browser_pings SET domain = ? WHERE domain = ? OR domain = ?", (clean, clean, f"www.{clean}"))
         cursor.execute("UPDATE browser_pings SET score = ?, grade = ? WHERE domain = ? AND (score = 0 OR grade = 'N/A')", (score, grade, clean))
         
         conn.commit()
     finally:
         conn.close()
-    return {"status": "ok", "score": score, "grade": grade}
+    return {"status": "ok", "domain": clean, "score": score, "grade": grade}
 
 @router.post("/telemetry")
 async def post_telemetry(payload: PingPayload, request: Request):
