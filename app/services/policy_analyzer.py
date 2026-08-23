@@ -391,7 +391,8 @@ def _calculate_dark_pattern_penalty(dark_patterns: List = None) -> int:
 
 
 def analyze_live_policy(url: str, html_text: str, tracker_data: List = None,
-                         cookie_data: List = None, dark_patterns: List = None) -> Dict[str, Any]:
+                         cookie_data: List = None, dark_patterns: List = None,
+                         domain_breaches: List = None) -> Dict[str, Any]:
     """Analyze a live privacy policy with improved scoring engine.
     
     Enhanced with: negation-aware keyword matching, weighted severity tiers,
@@ -479,16 +480,28 @@ def analyze_live_policy(url: str, html_text: str, tracker_data: List = None,
     else:
         ret_label, ret_risk = "Extended or Indefinite Retention Window", "high"
     
-    # Pillar 5: Breach History & Security (weight: 0.10)
-    br_score = _score_pillar_with_context(text, base_score=65, keywords=PILLAR5_KEYWORDS)
-    if br_score >= 80:
-        br_label, br_risk = "Strong Security Architecture Disclosed", "low"
-    elif br_score >= 55:
-        br_label, br_risk = "Standard Technical Safeguards", "medium"
+    # Pillar 5: Breach History & Real-World Incident Radar
+    if domain_breaches:
+        total_pwned = sum(b.get("pwn_count", 0) for b in domain_breaches if isinstance(b, dict))
+        if total_pwned >= 1_000_000:
+            br_score = 10
+            br_label, br_risk = f"🚨 Massive Customer Leak ({total_pwned:,} Records)", "high"
+        elif total_pwned > 0:
+            br_score = 20
+            br_label, br_risk = f"🚨 Confirmed Data Leak ({total_pwned:,} Records)", "high"
+        else:
+            br_score = 25
+            br_label, br_risk = "🚨 Confirmed Security Incident", "high"
     else:
-        br_label, br_risk = "Security Concerns or Breach History", "high"
+        br_score = _score_pillar_with_context(text, base_score=75, keywords=PILLAR5_KEYWORDS)
+        if br_score >= 80:
+            br_label, br_risk = "Strong Security Architecture Disclosed", "low"
+        elif br_score >= 55:
+            br_label, br_risk = "Standard Technical Safeguards", "medium"
+        else:
+            br_label, br_risk = "Security Concerns or Incomplete Safeguards", "high"
     
-    # Pillar 6: Readability (weight: 0.10)
+    # Pillar 6: Readability (weight: 0.07)
     read_score = calculate_readability(text[:5000])
     read_label = "Plain Language Clarity" if read_score > 65 else ("Moderate Complexity" if read_score > 40 else "Dense Legal Terminology")
     read_risk = "low" if read_score > 65 else ("medium" if read_score > 40 else "high")
@@ -507,6 +520,12 @@ def analyze_live_policy(url: str, html_text: str, tracker_data: List = None,
     weights = [0.20, 0.10, 0.40, 0.15, 0.08, 0.07]
     scores = [ds_score, ret_score, trk_score, ur_score, br_score, read_score]
     total_score = int(sum(s * w for s, w in zip(scores, weights)))
+    
+    # Apply severe direct penalty for real-world verified data breaches (-30 pts for major leaks)
+    if domain_breaches:
+        total_pwned = sum(b.get("pwn_count", 0) for b in domain_breaches if isinstance(b, dict))
+        breach_penalty = 30 if total_pwned >= 1_000_000 else 20
+        total_score = max(5, total_score - breach_penalty)
     
     # Apply compliance bonus/penalty
     compliance_bonus = _calculate_compliance_bonus(compliance)
@@ -728,7 +747,7 @@ async def get_site_rating(domain_or_url: str, tracker_data: List = None,
     # Try fetching live privacy policy
     policy_url, policy_html = await discover_and_fetch_policy(clean)
     if policy_url and policy_html:
-        live_res = analyze_live_policy(policy_url, policy_html, tracker_data, cookie_data, dark_patterns)
+        live_res = analyze_live_policy(policy_url, policy_html, tracker_data, cookie_data, dark_patterns, domain_breaches)
         live_res["breaches"] = domain_breaches
         return live_res
     
