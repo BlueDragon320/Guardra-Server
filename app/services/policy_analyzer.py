@@ -635,11 +635,18 @@ def _extract_concerns(text: str, score: int) -> List[str]:
 async def discover_and_fetch_policy(clean_domain: str) -> tuple[str, str]:
     """
     Builds candidate URLs checking BOTH https://www.{clean}/... and https://{clean}/...
+    including Shopify /pages/privacy-policy, /policies/privacy-policy, and legal portal paths.
     """
     paths = [
+        # Standard paths
         "/privacy-policy", "/privacy-policy/", "/privacy", "/privacy/",
-        "/legal/privacy-policy", "/legal/privacy", "/privacy-statement",
-        "/privacypolicy", "/terms-and-privacy"
+        # Shopify & D2C Brand E-Commerce (Noise, Boat Lifestyle, Mamaearth, Sugar, Snitch, Lenskart)
+        "/pages/privacy-policy", "/pages/privacy-policy/", "/pages/privacypolicy", "/pages/privacy",
+        "/policies/privacy-policy", "/policies/privacy-policy/",
+        # Legal & Corporate Portals (Apple, Flipkart, Google, Netflix, Amazon)
+        "/pages/privacypolicy", "/legal/privacy", "/legal/privacy-policy", "/legal/privacy/",
+        "/legal/privacy-policy/", "/privacy-statement", "/privacypolicy", "/terms-and-privacy",
+        "/about/privacy", "/about/privacy-policy", "/in/privacy-policy", "/en-in/privacy-policy"
     ]
     
     candidates = []
@@ -648,15 +655,19 @@ async def discover_and_fetch_policy(clean_domain: str) -> tuple[str, str]:
         candidates.append(f"https://{clean_domain}{p}")
         
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Guardra/1.0"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9"
     }
     
     async with httpx.AsyncClient(timeout=10.0, follow_redirects=True, verify=False) as client:
         for url in candidates:
             try:
                 resp = await client.get(url, headers=headers)
-                if resp.status_code == 200 and len(resp.text) > 500:
-                    return str(resp.url), resp.text
+                if resp.status_code == 200 and len(resp.text) > 400:
+                    text_lower = resp.text.lower()
+                    if "privacy" in text_lower or "personal data" in text_lower or "information" in text_lower or "cookies" in text_lower:
+                        return str(resp.url), resp.text
             except Exception:
                 continue
                 
