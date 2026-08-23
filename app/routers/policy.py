@@ -64,6 +64,27 @@ async def get_rating(request: Request, domain: str = Query(..., description="Tar
                 result["breaches"] = result.pop("breach_history", [])
                 result["source"] = "db_cache"
                 
+                # Record website visit in browser_pings table (with 15s deduplication)
+                try:
+                    latency_ms = round((time.time() - start_time) * 1000, 1)
+                    cursor.execute("SELECT id, timestamp FROM browser_pings WHERE domain = ? ORDER BY id DESC LIMIT 1", (clean,))
+                    last_p = cursor.fetchone()
+                    should_insert = True
+                    if last_p and last_p["timestamp"]:
+                        try:
+                            if (now - datetime.fromisoformat(last_p["timestamp"])).total_seconds() < 15:
+                                should_insert = False
+                        except Exception:
+                            pass
+                    if should_insert:
+                        cursor.execute('''
+                            INSERT INTO browser_pings (domain, client_ip, score, grade, response_time_ms, client_type, timestamp)
+                            VALUES (?, ?, ?, ?, ?, 'extension', ?)
+                        ''', (clean, client_ip, result.get("score", 50), result.get("grade", "C"), latency_ms, now_iso))
+                        conn.commit()
+                except Exception:
+                    pass
+
                 return result
             else:
                 result = await get_site_rating(clean)
@@ -105,6 +126,13 @@ async def get_rating(request: Request, domain: str = Query(..., description="Tar
                             cookie_json, tracker_json, dark_pattern_json,
                             'live_scan', now_iso, now_iso, expires_at_iso, now_iso
                         ))
+                    
+                    # Record visit in browser_pings table
+                    latency_ms = round((time.time() - start_time) * 1000, 1)
+                    cursor.execute('''
+                        INSERT INTO browser_pings (domain, client_ip, score, grade, response_time_ms, client_type, timestamp)
+                        VALUES (?, ?, ?, ?, ?, 'extension', ?)
+                    ''', (clean, client_ip, result.get("score", 50), result.get("grade", "C"), latency_ms, now_iso))
                     conn.commit()
                 except Exception:
                     pass
