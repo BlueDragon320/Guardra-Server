@@ -178,6 +178,41 @@ async def get_all_sites(limit: int = 1000):
         conn.close()
 
 
+@router.post("/sites")
+async def add_site_legacy(payload: dict):
+    """Add a new website from the admin modal."""
+    raw_domain = payload.get("domain")
+    if not raw_domain:
+        raise HTTPException(status_code=400, detail="Domain is required")
+    clean = clean_domain(raw_domain)
+    auto_scrape = payload.get("auto_scrape", True)
+    
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT id FROM websites WHERE domain = ?", (clean,))
+        existing = cursor.fetchone()
+        
+        if auto_scrape:
+            from app.services.crawler_service import crawl_and_rescore_domain
+            result = await crawl_and_rescore_domain(clean)
+            return {"status": "success", "domain": clean, "result": result}
+        else:
+            now_iso = datetime.utcnow().isoformat()
+            expires_at = (datetime.utcnow() + timedelta(hours=24)).isoformat()
+            if not existing:
+                cursor.execute("""
+                    INSERT INTO websites (
+                        domain, name, category, overall_score, grade, grade_color,
+                        source, scan_count, first_analyzed_at, last_analyzed_at, expires_at, updated_at
+                    ) VALUES (?, ?, 'Web Service', 50, 'C', '#f59e0b', 'admin', 1, ?, ?, ?, ?)
+                """, (clean, clean.split(".")[0].title(), now_iso, now_iso, expires_at, now_iso))
+                conn.commit()
+            return {"status": "success", "domain": clean}
+    finally:
+        conn.close()
+
+
 @router.put("/sites/{domain}")
 async def update_site_legacy(domain: str, payload: dict):
     """Updates website details from legacy admin form."""
@@ -673,11 +708,11 @@ async def rescore_single_site(payload: dict):
 
 @router.post("/crawler/rescore-all")
 async def rescore_all_cached(background_tasks: BackgroundTasks):
-    """Triggers background rescore for all cached domains."""
+    """Triggers background rescore for all database websites."""
     try:
-        from app.services.crawler_service import run_bulk_crawler_job
-        background_tasks.add_task(run_bulk_crawler_job)
-        return {"status": "started", "message": "Bulk crawler job started in background"}
+        from app.services.crawler_service import run_bulk_rescore_job
+        background_tasks.add_task(run_bulk_rescore_job)
+        return {"status": "started", "message": "Database rescore job started in background"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

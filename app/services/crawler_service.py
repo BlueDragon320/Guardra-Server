@@ -237,11 +237,74 @@ async def run_top_1000_crawler_job() -> Dict[str, Any]:
         "last_run": CRAWLER_STATUS["last_run"]
     }
 
-async def run_bulk_rescore_job() -> List[Dict[str, Any]]:
-    """Crawls all currently cached sites."""
-    all_policies = load_cached_policies()
-    top_domains = [{"domain": p.get("domain")} for p in all_policies if p.get("domain")]
-    return await run_top_1000_crawler_job()
+async def run_bulk_rescore_job() -> Dict[str, Any]:
+    """Rescores all domains currently present in the database and cached policies."""
+    global CRAWLER_STATUS
+    if CRAWLER_STATUS["is_running"]:
+        return {"status": "already_running"}
+
+    from app.database import get_db_connection
+    domains_to_rescore = []
+    
+    # 1. Fetch domains from database
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT domain FROM websites")
+        rows = cursor.fetchall()
+        for r in rows:
+            d = clean_domain(r["domain"] if isinstance(r, dict) else r[0])
+            if d and d not in domains_to_rescore:
+                domains_to_rescore.append(d)
+        conn.close()
+    except Exception:
+        pass
+        
+    # 2. Fetch cached policies
+    cached = load_cached_policies()
+    for p in cached:
+        d = clean_domain(p.get("domain", ""))
+        if d and d not in domains_to_rescore:
+            domains_to_rescore.append(d)
+            
+    if not domains_to_rescore:
+        return {"status": "error", "message": "No websites in database to rescore."}
+
+    CRAWLER_STATUS["is_running"] = True
+    CRAWLER_STATUS["total"] = len(domains_to_rescore)
+    CRAWLER_STATUS["progress"] = 0
+    CRAWLER_STATUS["scanned_count"] = 0
+    CRAWLER_STATUS["last_results"] = []
+
+    results = []
+    chunk_size = 5
+    for i in range(0, len(domains_to_rescore), chunk_size):
+        chunk = domains_to_rescore[i:i+chunk_size]
+        tasks = [crawl_and_rescore_domain(d) for d in chunk]
+        chunk_results = await asyncio.gather(*tasks, return_exceptions=True)
+
+        for cr in chunk_results:
+            if isinstance(cr, dict):
+                results.append(cr)
+            else:
+                results.append({"status": "error", "message": str(cr)})
+
+        CRAWLER_STATUS["progress"] = min(i + chunk_size, len(domains_to_rescore))
+        CRAWLER_STATUS["current_site"] = chunk[-1] if chunk else None
+        CRAWLER_STATUS["scanned_count"] = len(results)
+
+        await asyncio.sleep(0.3)
+
+    CRAWLER_STATUS["is_running"] = False
+    CRAWLER_STATUS["current_site"] = None
+    CRAWLER_STATUS["last_run"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    CRAWLER_STATUS["last_results"] = results[:50]
+
+    return {
+        "status": "completed",
+        "total_scanned": len(results),
+        "last_run": CRAWLER_STATUS["last_run"]
+    }
 
 def get_crawler_status() -> Dict[str, Any]:
     return CRAWLER_STATUS

@@ -103,17 +103,18 @@ async def receive_scan_result(payload: ScanPayload):
         tracker_json = json.dumps([t if isinstance(t, dict) else t for t in payload.trackers])
         dark_pattern_json = json.dumps([d if isinstance(d, dict) else d for d in payload.dark_patterns])
         
+        expires_at = (datetime.utcnow() + timedelta(hours=24)).isoformat()
         if existing:
-            # Update existing record with latest scan data
+            # Update existing record with latest scan data and refresh 24h TTL
             cursor.execute("""
                 UPDATE websites 
                 SET cookie_data = ?, tracker_data = ?, dark_pattern_data = ?,
-                    scan_count = scan_count + 1, last_analyzed_at = ?, updated_at = ?
+                    scan_count = scan_count + 1, last_analyzed_at = ?, expires_at = ?, updated_at = ?
                 WHERE domain = ?
-            """, (cookie_json, tracker_json, dark_pattern_json, now, now, clean))
+            """, (cookie_json, tracker_json, dark_pattern_json, now, expires_at, now, clean))
             conn.commit()
         else:
-            # New domain — run full analysis and store
+            # New domain — run full analysis, store, and set 24h TTL
             rating = await get_site_rating(clean, 
                                             tracker_data=payload.trackers,
                                             cookie_data=payload.cookies,
@@ -124,15 +125,15 @@ async def receive_scan_result(payload: ScanPayload):
                     domain, name, category, overall_score, grade, grade_color,
                     pillar_scores, compliance, findings, key_concerns, key_clauses,
                     breach_history, cookie_data, tracker_data, dark_pattern_data,
-                    source, scan_count, first_analyzed_at, last_analyzed_at, updated_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'auto_scan', 1, ?, ?, ?)
+                    source, scan_count, first_analyzed_at, last_analyzed_at, expires_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'auto_scan', 1, ?, ?, ?, ?)
             """, (
                 clean, rating.get("name", clean), rating.get("category", "Web Service"),
                 rating.get("score", 0), rating.get("grade", "N/A"), rating.get("color", "gray"),
                 json.dumps(rating.get("rubric", {})), json.dumps(rating.get("compliance", {})),
                 json.dumps(rating.get("findings", {})), json.dumps(rating.get("key_concerns", [])),
                 json.dumps(rating.get("key_clauses", [])), json.dumps(rating.get("breaches", [])),
-                cookie_json, tracker_json, dark_pattern_json, now, now, now
+                cookie_json, tracker_json, dark_pattern_json, now, now, expires_at, now
             ))
             conn.commit()
         
