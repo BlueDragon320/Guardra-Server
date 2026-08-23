@@ -702,6 +702,8 @@ async def get_site_rating(domain_or_url: str, tracker_data: List = None,
         if clean == site_domain or clean.endswith("." + site_domain) or site_domain.endswith("." + clean):
             result = dict(site)
             result["source"] = "cache"
+            if not result.get("policy_url"):
+                result["policy_url"] = f"https://www.{site_domain}/privacy-policy"
             result["breaches"] = domain_breaches if domain_breaches else result.get("breaches", [])
             return result
             

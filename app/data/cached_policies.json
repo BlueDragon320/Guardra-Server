@@ -141,7 +141,7 @@
         "dpo_contact": "dpo@meta.com",
         "lawful_basis_stated": true,
         "erasure_art17_disclosed": true,
-        "notes": "Fined €1.2B by Irish DPC for unlawful EU-US data transfers."
+        "notes": "Fined \u20ac1.2B by Irish DPC for unlawful EU-US data transfers."
       },
       "ccpa": {
         "compliant": true,
@@ -360,7 +360,7 @@
       "user_rights": {
         "score": 95,
         "max": 100,
-        "label": "Privacy By Design — Nothing to Erase",
+        "label": "Privacy By Design \u2014 Nothing to Erase",
         "risk": "low"
       },
       "breach_history": {
@@ -556,7 +556,7 @@
         "dpo_contact": "eu-dpo@amazon.lu",
         "lawful_basis_stated": true,
         "erasure_art17_disclosed": true,
-        "notes": "Fined €746M by Luxembourg CNPD in 2021 for targeted advertising consent issues."
+        "notes": "Fined \u20ac746M by Luxembourg CNPD in 2021 for targeted advertising consent issues."
       },
       "ccpa": {
         "compliant": true,

@@ -44,6 +44,46 @@ async def startup_event():
     seed_default_rules()
     _seed_cached_policies()
     _sync_visited_pings_to_websites()
+    _migrate_and_fix_policy_urls()
+
+
+def _migrate_and_fix_policy_urls():
+    """Fixes any legacy policy URLs stored in the SQLite database to proper working endpoints."""
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+        known = {
+            "croma.com": "https://www.croma.com/privacy-policy",
+            "kletech.ac.in": "https://www.kletech.ac.in/privacy-policy",
+            "swiggy.com": "https://www.swiggy.com/privacy-policy",
+            "zomato.com": "https://www.zomato.com/privacy",
+            "flipkart.com": "https://www.flipkart.com/pages/privacypolicy",
+            "apple.com": "https://www.apple.com/legal/privacy/en-ww/",
+            "boat-lifestyle.com": "https://www.boat-lifestyle.com/pages/privacy-policy",
+            "zerodha.com": "https://zerodha.com/privacy",
+            "google.com": "https://policies.google.com/privacy",
+            "meta.com": "https://www.facebook.com/privacy/policy/",
+            "amazon.in": "https://www.amazon.in/gp/help/customer/display.html?nodeId=200534380",
+            "paytm.com": "https://paytm.com/privacy-policy",
+            "netflix.com": "https://help.netflix.com/legal/privacy"
+        }
+        for d, u in known.items():
+            cursor.execute("UPDATE websites SET policy_url = ? WHERE domain = ?", (u, d))
+        
+        # General cleanup for any remaining rows
+        cursor.execute("SELECT domain, policy_url FROM websites")
+        rows = cursor.fetchall()
+        for r in rows:
+            dom = r["domain"]
+            p_url = r["policy_url"] or ""
+            if not p_url or p_url.endswith(f"{dom}/privacy") or not p_url.startswith("http"):
+                new_url = f"https://www.{dom}/privacy-policy"
+                cursor.execute("UPDATE websites SET policy_url = ? WHERE domain = ?", (new_url, dom))
+        conn.commit()
+    except Exception:
+        pass
+    finally:
+        conn.close()
 
 
 def _sync_visited_pings_to_websites():
@@ -63,7 +103,7 @@ def _sync_visited_pings_to_websites():
             if not cursor.fetchone():
                 cursor.execute("""
                     INSERT INTO websites (
-                        domain, name, category, overall_score, grade, grade_color,
+                        domain, name, category, policy_url, overall_score, grade, grade_color,
                         pillar_scores, compliance, source, scan_count, first_analyzed_at, last_analyzed_at, expires_at, updated_at
                     ) VALUES (?, ?, 'Visited Site', 60, 'C', 'amber', '{}', '{}', 'extension_visited', 1, ?, ?, ?, ?)
                 """, (dom, dom.split(".")[0].upper(), now_iso, now_iso, expires_iso, now_iso))
@@ -82,9 +122,6 @@ def _seed_cached_policies():
         cursor.execute("SELECT COUNT(*) as count FROM websites")
         count = cursor.fetchone()["count"]
         
-        if count > 0:
-            return  # Already seeded
-        
         data_path = os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "data", "cached_policies.json"
         )
@@ -101,16 +138,18 @@ def _seed_cached_policies():
         for site in cached:
             try:
                 cursor.execute("""
-                    INSERT OR IGNORE INTO websites (
-                        domain, name, category, overall_score, grade, grade_color,
+                    INSERT INTO websites (
+                        domain, name, category, policy_url, overall_score, grade, grade_color,
                         pillar_scores, compliance, findings, key_concerns, key_clauses,
                         breach_history, source, scan_count, first_analyzed_at,
                         last_analyzed_at, updated_at
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'cached', 1, ?, ?, ?)
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'cached', 1, ?, ?, ?)
+                    ON CONFLICT(domain) DO UPDATE SET policy_url=excluded.policy_url, key_clauses=excluded.key_clauses, compliance=excluded.compliance, pillar_scores=excluded.pillar_scores, overall_score=excluded.overall_score, grade=excluded.grade, findings=excluded.findings
                 """, (
                     site.get("domain", ""),
                     site.get("name", ""),
                     site.get("category", "Web Service"),
+                    site.get("policy_url", ""),
                     site.get("score", 0),
                     site.get("grade", "N/A"),
                     site.get("color", "gray"),

@@ -778,7 +778,15 @@
       document.getElementById('detailCategory').innerText = site.category || 'Web Platform';
       document.getElementById('detailDate').innerText = `Last Analyzed: ${site.last_analyzed || new Date().toISOString().split('T')[0]}`;
       
-      document.getElementById('detailPolicyLink').href = site.policy_url || `https://${domain}/privacy`;
+      let pUrl = site.policy_url;
+      if (!pUrl || pUrl === `https://${domain}/privacy` || pUrl === `https://${domain}`) {
+        pUrl = `https://www.${domain}/privacy-policy`;
+      }
+      if (domain === 'croma.com') pUrl = 'https://www.croma.com/privacy-policy';
+      else if (domain === 'kletech.ac.in') pUrl = 'https://www.kletech.ac.in/privacy-policy';
+      else if (domain === 'flipkart.com') pUrl = 'https://www.flipkart.com/pages/privacypolicy';
+      else if (domain === 'boat-lifestyle.com') pUrl = 'https://www.boat-lifestyle.com/pages/privacy-policy';
+      document.getElementById('detailPolicyLink').href = pUrl;
 
       const rubricDiv = document.getElementById('detailRubric');
       rubricDiv.innerHTML = '';

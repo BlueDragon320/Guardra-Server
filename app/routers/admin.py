@@ -146,9 +146,18 @@ async def get_all_sites(limit: int = 1000):
         sites = []
         for r in rows:
             d = _parse_json_fields(dict(r))
+            dom = d.get("domain")
+            p_url = d.get("policy_url")
+            if dom == "croma.com" or p_url == "https://croma.com/privacy":
+                p_url = "https://www.croma.com/privacy-policy"
+            elif dom == "kletech.ac.in" or p_url == "https://kletech.ac.in/privacy":
+                p_url = "https://www.kletech.ac.in/privacy-policy"
+            elif not p_url or p_url == f"https://{dom}/privacy" or p_url == f"https://{dom}":
+                p_url = f"https://www.{dom}/privacy-policy"
+
             sites.append({
-                "domain": d.get("domain"),
-                "name": d.get("name") or d.get("domain"),
+                "domain": dom,
+                "name": d.get("name") or dom,
                 "score": d.get("overall_score", 0),
                 "grade": d.get("grade", "C"),
                 "category": d.get("category", "Web Platform"),
@@ -160,7 +169,7 @@ async def get_all_sites(limit: int = 1000):
                 "key_clauses": d.get("key_clauses", []),
                 "snippets": d.get("key_clauses", []),
                 "breaches": d.get("breach_history", []),
-                "policy_url": d.get("policy_url") or f"https://www.{d.get('domain')}/privacy-policy",
+                "policy_url": p_url,
                 "summary": d.get("findings", {}).get("summary", "") if isinstance(d.get("findings"), dict) else (d.get("findings") or ""),
                 "last_analyzed_at": d.get("last_analyzed_at")
             })
