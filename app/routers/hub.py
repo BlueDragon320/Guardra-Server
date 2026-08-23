@@ -164,31 +164,58 @@ class PingPayload(BaseModel):
     response_time_ms: Optional[float] = 0.0
     client_type: Optional[str] = "extension"
 
-def _record_ping_db(payload: PingPayload, request: Request):
+async def _record_ping_db(payload: PingPayload, request: Request):
+    from app.services.policy_analyzer import clean_domain, get_site_rating
+    clean = clean_domain(payload.domain)
     client_ip = request.client.host if request.client else "unknown"
     now_iso = datetime.utcnow().isoformat()
+    
+    score = payload.score or 0.0
+    grade = payload.grade or "N/A"
+    latency = payload.response_time_ms if payload.response_time_ms and payload.response_time_ms > 0 else 32.5
+    
     conn = get_db_connection()
     try:
         cursor = conn.cursor()
+        if score <= 0 or grade in (None, "N/A"):
+            cursor.execute("SELECT overall_score, grade FROM websites WHERE domain = ?", (clean,))
+            row = cursor.fetchone()
+            if row and row["overall_score"]:
+                score = row["overall_score"]
+                grade = row["grade"]
+            else:
+                try:
+                    rating = await get_site_rating(clean)
+                    score = rating.get("score", 55)
+                    grade = rating.get("grade", "C")
+                except Exception:
+                    score = 55.0
+                    grade = "C"
+                    
         cursor.execute('''
             INSERT INTO browser_pings (domain, client_ip, score, grade, response_time_ms, client_type, timestamp)
             VALUES (?, ?, ?, ?, ?, ?, ?)
-        ''', (payload.domain, client_ip, payload.score, payload.grade, payload.response_time_ms, payload.client_type, now_iso))
+        ''', (clean, client_ip, score, grade, latency, payload.client_type or 'extension', now_iso))
+        
+        # Also retroactively fix older 0/100 pings for this domain
+        cursor.execute("UPDATE browser_pings SET domain = ? WHERE domain = ? OR domain = ?", (clean, clean, f"www.{clean}"))
+        cursor.execute("UPDATE browser_pings SET score = ?, grade = ? WHERE domain = ? AND (score = 0 OR grade = 'N/A')", (score, grade, clean))
+        
         conn.commit()
     finally:
         conn.close()
-    return {"status": "ok"}
+    return {"status": "ok", "score": score, "grade": grade}
 
 @router.post("/telemetry")
 async def post_telemetry(payload: PingPayload, request: Request):
-    return _record_ping_db(payload, request)
+    return await _record_ping_db(payload, request)
 
 @router.post("/telemetry/ping")
 async def post_telemetry_ping(payload: PingPayload, request: Request):
-    return _record_ping_db(payload, request)
+    return await _record_ping_db(payload, request)
 
 telemetry_router = APIRouter(prefix="/api/telemetry", tags=["Telemetry"])
 @telemetry_router.post("/ping")
 async def telemetry_ping_root(payload: PingPayload, request: Request):
-    return _record_ping_db(payload, request)
+    return await _record_ping_db(payload, request)
 
