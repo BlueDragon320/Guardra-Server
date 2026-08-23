@@ -240,34 +240,40 @@ def _score_tracking_with_real_data(policy_score: int, tracker_data: List = None,
     non_essential_trackers = len([t for t in (tracker_data or []) 
                                    if isinstance(t, dict) and t.get('category') != 'essential'])
     
+    # Cut points aggressively when non-essential trackers are detected
     if non_essential_trackers == 0:
-        real_tracker_score = 95
-    elif non_essential_trackers <= 2:
-        real_tracker_score = 80
-    elif non_essential_trackers <= 5:
+        real_tracker_score = 98
+    elif non_essential_trackers == 1:
+        real_tracker_score = 75
+    elif non_essential_trackers == 2:
         real_tracker_score = 60
+    elif non_essential_trackers <= 4:
+        real_tracker_score = 40
+    elif non_essential_trackers <= 7:
+        real_tracker_score = 25
     elif non_essential_trackers <= 10:
-        real_tracker_score = 35
+        real_tracker_score = 10
     else:
-        real_tracker_score = 15
+        real_tracker_score = 0
     
-    # Cookie invasiveness penalty
+    # Cookie invasiveness penalty (advertising/analytics/social)
     cookie_penalty = 0
     if cookie_data:
         for cookie in cookie_data:
             if isinstance(cookie, dict):
                 cat = cookie.get('category', 'unknown')
                 if cat == 'advertising':
-                    cookie_penalty -= 8
+                    cookie_penalty -= 10
                 elif cat == 'analytics':
-                    cookie_penalty -= 3
-                elif cat == 'social_media':
                     cookie_penalty -= 5
+                elif cat == 'social_media':
+                    cookie_penalty -= 8
     
-    # Cap cookie penalty
-    cookie_penalty = max(cookie_penalty, -30)
+    # Cap cookie penalty at -40
+    cookie_penalty = max(cookie_penalty, -40)
     
-    blended = int(policy_score * 0.4 + real_tracker_score * 0.6) + cookie_penalty
+    # Give 75% weight to real detected trackers/cookies and 25% to policy disclosure
+    blended = int(policy_score * 0.25 + real_tracker_score * 0.75) + cookie_penalty
     return max(0, min(100, blended))
 
 
@@ -496,8 +502,9 @@ def analyze_live_policy(url: str, html_text: str, tracker_data: List = None,
         "readability": {"score": read_score, "max": 100, "label": read_label, "risk": read_risk}
     }
 
-    # Calculate overall weighted score
-    weights = [0.25, 0.15, 0.20, 0.20, 0.10, 0.10]
+    # Calculate overall weighted score with 40% weightage on Trackers & Cookies
+    # Weights: Data Sharing (0.20), Retention (0.10), Tracking & Cookies (0.40), User Rights (0.15), Breach History (0.08), Readability (0.07)
+    weights = [0.20, 0.10, 0.40, 0.15, 0.08, 0.07]
     scores = [ds_score, ret_score, trk_score, ur_score, br_score, read_score]
     total_score = int(sum(s * w for s, w in zip(scores, weights)))
     
