@@ -300,45 +300,46 @@ def _get_grade(score: int) -> tuple:
 
 
 def _check_compliance(text_lower: str) -> Dict[str, Any]:
-    """Extract regional compliance information from policy text."""
+    """Extract regional compliance information from policy text.
+    Strict validation: Grievance Officer and email must be genuinely present in text.
+    """
     # DPDP Act 2023 (India)
     dpdp_grievance_match = re.search(
-        r'(grievance\s+officer|nodal\s+officer|grievance\s+redressal)[\s\w\:\.\,\-]{1,100}', text_lower)
-    dpdp_email_match = re.search(
-        r'([a-zA-Z0-9_.+-]+@([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)',
-        dpdp_grievance_match.group(0) if dpdp_grievance_match else "")
-    dpdp_mentioned = bool(re.search(
-        r'\b(dpdp|digital personal data protection|data protection board of india|it act|information technology rules)\b',
-        text_lower))
+        r'(?:grievance\s+officer|nodal\s+officer|grievance\s+redressal\s+officer)[\s\w\:\.\,\-]{1,80}', text_lower)
+    
+    # Extract email associated with grievance/privacy/dpo in text
+    all_emails = re.findall(r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+', text_lower)
+    grievance_emails = [e for e in all_emails if any(k in e for k in ["grievance", "nodal", "privacy", "dpo", "compliance", "legal", "dataprotection"])]
+    
+    dpdp_email = grievance_emails[0] if grievance_emails else (all_emails[0] if (dpdp_grievance_match and all_emails) else None)
+    
     dpdp_erasure = bool(re.search(r'\b(erasure|deletion|right to withdraw consent|correct personal data)\b', text_lower))
     
-    dpdp_compliant = bool(dpdp_grievance_match or dpdp_mentioned)
+    # DPDP is ONLY genuinely compliant if an explicit Grievance Officer AND valid email are found
+    dpdp_compliant = bool(dpdp_grievance_match and dpdp_email)
+    
     dpdp_info = {
         "compliant": dpdp_compliant,
-        "grievance_officer": dpdp_grievance_match.group(0).title()[:50] if dpdp_grievance_match else None,
-        "grievance_email": dpdp_email_match.group(0) if dpdp_email_match else None,
-        "redressal_period_days": 30,
+        "grievance_officer": dpdp_grievance_match.group(0).title()[:50].strip() if dpdp_grievance_match else None,
+        "grievance_email": dpdp_email,
+        "redressal_period_days": 30 if dpdp_compliant else None,
         "erasure_right_disclosed": dpdp_erasure,
-        "notes": "DPDP / Grievance Officer information detected." if dpdp_compliant else "No explicit Indian DPDP Grievance Officer disclosed."
+        "notes": "DPDP Statutory Grievance Officer & Contact identified." if dpdp_compliant else "Grievance Officer not found."
     }
 
     # GDPR (EU)
     gdpr_dpo_match = re.search(
-        r'(data\s+protection\s+officer|dpo|eu\s+representative)[\s\w\:\.\,\-]{1,80}', text_lower)
-    gdpr_email_match = re.search(
-        r'([a-zA-Z0-9_.+-]+@([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)',
-        gdpr_dpo_match.group(0) if gdpr_dpo_match else "")
-    gdpr_mentioned = bool(re.search(
-        r'\b(gdpr|general data protection regulation|article 17|right to be forgotten|supervisory authority)\b',
-        text_lower))
+        r'(?:data\s+protection\s+officer|dpo|eu\s+representative)[\s\w\:\.\,\-]{1,80}', text_lower)
+    gdpr_email = [e for e in all_emails if "dpo" in e or "privacy" in e]
+    gdpr_dpo_contact = gdpr_email[0] if gdpr_email else (all_emails[0] if gdpr_dpo_match and all_emails else None)
     
-    gdpr_compliant = bool(gdpr_dpo_match or gdpr_mentioned)
+    gdpr_compliant = bool(gdpr_dpo_match and gdpr_dpo_contact)
     gdpr_info = {
         "compliant": gdpr_compliant,
-        "dpo_contact": gdpr_email_match.group(0) if gdpr_email_match else None,
+        "dpo_contact": gdpr_dpo_contact,
         "lawful_basis_stated": bool(re.search(r'\b(legitimate interest|contractual necessity|consent)\b', text_lower)),
         "erasure_art17_disclosed": bool(re.search(r'\b(erasure|delete my data|right to be forgotten)\b', text_lower)),
-        "notes": "GDPR terms and Article 17 rights identified." if gdpr_compliant else "No explicit GDPR DPO disclosed."
+        "notes": "GDPR DPO and Article 17 rights identified." if gdpr_compliant else "GDPR DPO not found."
     }
 
     # CCPA
@@ -357,9 +358,9 @@ def _check_compliance(text_lower: str) -> Dict[str, Any]:
 
 
 def _calculate_compliance_bonus(compliance: Dict) -> int:
-    """Calculate bonus/penalty based on regulatory compliance.
-    
-    Returns an adjustment to the overall score.
+    """Calculate bonus/penalty based on verified regulatory compliance.
+    Gives + points ONLY if verified Grievance Officer and contact genuinely exist.
+    If not found, gives ZERO bonus.
     """
     bonus = 0
     
@@ -367,17 +368,23 @@ def _calculate_compliance_bonus(compliance: Dict) -> int:
     gdpr = compliance.get("gdpr", {})
     ccpa = compliance.get("ccpa", {})
     
-    # Bonus for full compliance
-    if dpdp.get("compliant") and dpdp.get("erasure_right_disclosed"):
+    # Bonus ONLY if grievance email and officer are genuinely verified
+    if dpdp.get("compliant") and dpdp.get("grievance_email"):
         bonus += 3
-    if gdpr.get("compliant") and gdpr.get("erasure_art17_disclosed"):
+        if dpdp.get("erasure_right_disclosed"):
+            bonus += 2
+            
+    if gdpr.get("compliant") and gdpr.get("dpo_contact"):
         bonus += 3
+        if gdpr.get("erasure_art17_disclosed"):
+            bonus += 2
+            
     if ccpa.get("compliant") and ccpa.get("do_not_sell"):
         bonus += 2
     
-    # Penalty if no framework is compliant at all
+    # Penalty if no framework is compliant
     if not dpdp.get("compliant") and not gdpr.get("compliant") and not ccpa.get("compliant"):
-        bonus -= 5
+        bonus -= 6
     
     return bonus
 
@@ -791,19 +798,19 @@ async def get_site_rating(domain_or_url: str, tracker_data: List = None,
         },
         "compliance": {
             "dpdp": {
-                "compliant": True,
-                "grievance_officer": f"Grievance Officer ({clean})",
-                "grievance_email": f"privacy@{clean}",
-                "redressal_period_days": 30,
-                "erasure_right_disclosed": True,
-                "notes": "Statutory grievance officer assumed for Indian domain operations."
+                "compliant": False,
+                "grievance_officer": None,
+                "grievance_email": None,
+                "redressal_period_days": None,
+                "erasure_right_disclosed": False,
+                "notes": "Grievance Officer not found."
             },
             "gdpr": {
-                "compliant": True,
-                "dpo_contact": f"dpo@{clean}",
-                "lawful_basis_stated": True,
-                "erasure_art17_disclosed": True,
-                "notes": "Standard GDPR compliance baseline."
+                "compliant": False,
+                "dpo_contact": None,
+                "lawful_basis_stated": False,
+                "erasure_art17_disclosed": False,
+                "notes": "GDPR DPO not found."
             },
             "ccpa": {
                 "compliant": False,
