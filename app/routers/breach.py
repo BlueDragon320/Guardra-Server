@@ -20,3 +20,16 @@ async def verify_email(req: EmailCheckRequest):
         raise HTTPException(status_code=400, detail="Valid email is required")
     res = await check_email_exposure(req.email)
     return res
+
+@router.get("/search")
+async def search_domain_breach(domain: str):
+    """Real-time OSINT security radar search for any domain or enterprise."""
+    if not domain:
+        raise HTTPException(status_code=400, detail="Domain parameter required")
+    from app.services.breach_service import search_live_domain_breaches
+    breaches = await search_live_domain_breaches(domain)
+    return {
+        "domain": domain,
+        "breaches_found": len(breaches),
+        "breaches": breaches
+    }

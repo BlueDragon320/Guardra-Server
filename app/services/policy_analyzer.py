@@ -725,13 +725,13 @@ async def discover_and_fetch_policy(clean_domain: str) -> tuple[str, str]:
 
 async def get_site_rating(domain_or_url: str, tracker_data: List = None,
                            cookie_data: List = None, dark_patterns: List = None) -> Dict[str, Any]:
-    """Get privacy rating for a domain. Enhanced with real tracker/cookie data integration."""
-    from app.services.breach_service import get_domain_breaches
+    """Get privacy rating for a domain. Enhanced with real-time OSINT breach discovery & tracker intelligence."""
+    from app.services.breach_service import search_live_domain_breaches
     clean = clean_domain(domain_or_url)
     cached = load_cached_policies()
     
-    # Check verified breach intelligence
-    domain_breaches = get_domain_breaches(clean)
+    # Check verified breach intelligence and real-time security radar
+    domain_breaches = await search_live_domain_breaches(clean)
 
     # Exact or suffix match in cached policies
     for site in cached:
@@ -742,6 +742,23 @@ async def get_site_rating(domain_or_url: str, tracker_data: List = None,
             if not result.get("policy_url"):
                 result["policy_url"] = f"https://www.{site_domain}/privacy-policy"
             result["breaches"] = domain_breaches if domain_breaches else result.get("breaches", [])
+            # Re-apply breach penalty dynamically if newly discovered breach exists
+            if domain_breaches:
+                total_pwned = sum(b.get("pwn_count", 0) for b in domain_breaches if isinstance(b, dict))
+                deduction = 30 if total_pwned >= 1_000_000 else 20
+                if result.get("overall_score", 0) > 40:
+                    result["overall_score"] = max(10, result["overall_score"] - deduction)
+                    grade, color = _get_grade(result["overall_score"])
+                    result["grade"] = grade
+                    result["grade_color"] = color
+                    result["color"] = color
+                    if "pillar_scores" in result and isinstance(result["pillar_scores"], dict):
+                        result["pillar_scores"]["breach_history"] = {
+                            "score": 10 if total_pwned >= 1_000_000 else 20,
+                            "max": 100,
+                            "label": f"🚨 Confirmed Data Leak ({total_pwned:,} Records)",
+                            "risk": "high"
+                        }
             return result
             
     # Try fetching live privacy policy
