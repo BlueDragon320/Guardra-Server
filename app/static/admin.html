@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Guardra Server — Admin Rating & Crawler Portal</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -16,7 +17,7 @@
           colors: {
             brand: '#10b981',
             darkbg: '#09090b',
-            surface: '#121215',
+            surface: '#121214',
             surfaceHover: '#1c1c20',
             bordercol: '#27272a'
           },
@@ -53,13 +54,16 @@
     </div>
 
     <!-- View Switcher Tabs -->
-    <div class="flex items-center bg-darkbg p-1 rounded-lg border border-bordercol">
+    <div class="flex items-center bg-darkbg p-1 rounded-lg border border-bordercol gap-1">
       <button id="tabBtnSites" onclick="switchTab('sites')" class="px-3 py-1 text-xs font-medium rounded-md bg-surface text-brand border border-bordercol transition">
         🏢 1000+ Monitored Sites
       </button>
+      <button id="tabBtnAnalytics" onclick="switchTab('analytics')" class="px-3 py-1 text-xs font-medium rounded-md text-zinc-400 hover:text-zinc-200 transition flex items-center gap-1.5">
+        <span>📈 Traffic & Graphs</span>
+      </button>
       <button id="tabBtnPings" onclick="switchTab('pings')" class="px-3 py-1 text-xs font-medium rounded-md text-zinc-400 hover:text-zinc-200 transition flex items-center gap-1.5">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span>📡 Live Extension Pings</span>
+        <span>📡 Live Stream</span>
       </button>
     </div>
 
@@ -260,6 +264,145 @@
               </tr>
             </thead>
             <tbody id="pingsTableBody" class="divide-y divide-bordercol/60 font-mono text-[11px]">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+    </div>
+
+    <!-- TAB 3: TRAFFIC ANALYTICS & GRAPHS -->
+    <div id="tabAnalyticsSection" class="space-y-6 hidden">
+      <!-- Analytics Header & Timeframe Switcher -->
+      <div class="bg-surface border border-bordercol rounded-lg p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-sm font-semibold text-zinc-100 flex items-center gap-2">
+            <span>📈 User Web Traffic & Browsing Analytics</span>
+            <span class="text-[10px] font-mono text-brand px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-800">Live Telemetry</span>
+          </h2>
+          <p class="text-xs text-zinc-400 mt-0.5">Aggregated website traffic and privacy compliance exposure across all users.</p>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <div class="flex items-center bg-darkbg p-1 rounded-lg border border-bordercol">
+            <button id="tfBtnDay" onclick="setAnalyticsTimeframe('day')" class="px-3 py-1 text-xs font-medium rounded-md bg-surface text-brand border border-bordercol transition">
+              📅 24 Hours (Day)
+            </button>
+            <button id="tfBtnWeek" onclick="setAnalyticsTimeframe('week')" class="px-3 py-1 text-xs font-medium rounded-md text-zinc-400 hover:text-zinc-200 transition">
+              📊 7 Days (Week)
+            </button>
+            <button id="tfBtnMonth" onclick="setAnalyticsTimeframe('month')" class="px-3 py-1 text-xs font-medium rounded-md text-zinc-400 hover:text-zinc-200 transition">
+              🗓️ 30 Days (Month)
+            </button>
+          </div>
+
+          <button onclick="loadAnalytics(currentAnalyticsTimeframe)" class="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 border border-bordercol text-zinc-200 text-xs font-medium rounded-md flex items-center gap-1.5 transition">
+            <span>🔄 Refresh Analytics</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Analytics KPI Summary Bar -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-surface border border-bordercol rounded-lg p-4 space-y-1">
+          <div class="text-[11px] font-medium text-zinc-400">Total Website Visits Logged</div>
+          <div id="kpiAnalyticsTotalVisits" class="text-2xl font-bold font-mono text-brand">--</div>
+          <div class="text-[10px] text-zinc-500">Across all connected users</div>
+        </div>
+
+        <div class="bg-surface border border-bordercol rounded-lg p-4 space-y-1">
+          <div class="text-[11px] font-medium text-zinc-400">Unique Websites Visited</div>
+          <div id="kpiAnalyticsUniqueDomains" class="text-2xl font-bold font-mono text-zinc-100">--</div>
+          <div class="text-[10px] text-zinc-500">Distinct web platforms</div>
+        </div>
+
+        <div class="bg-surface border border-bordercol rounded-lg p-4 space-y-1">
+          <div class="text-[11px] font-medium text-zinc-400">Average Visited Privacy Score</div>
+          <div id="kpiAnalyticsAvgScore" class="text-2xl font-bold font-mono text-zinc-100">-- / 100</div>
+          <div class="text-[10px] text-zinc-500">Traffic-weighted average score</div>
+        </div>
+
+        <div class="bg-surface border border-bordercol rounded-lg p-4 space-y-1">
+          <div class="text-[11px] font-medium text-zinc-400">Peak Browsing Activity</div>
+          <div id="kpiAnalyticsBusiest" class="text-sm font-bold font-mono text-amber-400 mt-1 truncate">--</div>
+          <div class="text-[10px] text-zinc-500">Highest volume traffic slot</div>
+        </div>
+      </div>
+
+      <!-- Interactive Charts Grid (Area Chart + Risk Donut) -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Left 2 Cols: Traffic Volume Over Time Area/Line Chart -->
+        <div class="lg:col-span-2 bg-surface border border-bordercol rounded-lg p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-bordercol pb-3">
+            <div>
+              <h3 class="text-sm font-semibold text-zinc-100 flex items-center gap-2">
+                <span>📊 Website Visits & Unique Domains (Time-Series)</span>
+              </h3>
+              <p class="text-[11px] text-zinc-400">Live timeline breakdown across the selected timeframe.</p>
+            </div>
+            <div class="flex items-center gap-3 text-[11px] font-mono">
+              <span class="flex items-center gap-1.5 text-emerald-400">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> Total Visits
+              </span>
+              <span class="flex items-center gap-1.5 text-cyan-400">
+                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span> Unique Domains
+              </span>
+            </div>
+          </div>
+          <div class="relative h-[280px] w-full">
+            <canvas id="trafficLineChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Right 1 Col: Visited Sites Risk Breakdown Donut Chart -->
+        <div class="bg-surface border border-bordercol rounded-lg p-5 space-y-4 flex flex-col justify-between">
+          <div class="border-b border-bordercol pb-3">
+            <h3 class="text-sm font-semibold text-zinc-100">🛡️ Visited Sites Privacy Risk</h3>
+            <p class="text-[11px] text-zinc-400">Compliance distribution of visited sites.</p>
+          </div>
+          <div class="relative h-[200px] w-full flex items-center justify-center">
+            <canvas id="riskDonutChart"></canvas>
+          </div>
+          <div class="grid grid-cols-3 gap-2 pt-2 border-t border-bordercol/60 text-center font-mono text-[10px]">
+            <div class="bg-emerald-950/40 border border-emerald-800/60 rounded p-1.5">
+              <div class="text-emerald-400 font-bold" id="donutStatSafe">0</div>
+              <div class="text-zinc-400 text-[9px]">Safe (A/B)</div>
+            </div>
+            <div class="bg-amber-950/40 border border-amber-800/60 rounded p-1.5">
+              <div class="text-amber-400 font-bold" id="donutStatMod">0</div>
+              <div class="text-zinc-400 text-[9px]">Mod (C)</div>
+            </div>
+            <div class="bg-rose-950/40 border border-rose-800/60 rounded p-1.5">
+              <div class="text-rose-400 font-bold" id="donutStatRisk">0</div>
+              <div class="text-zinc-400 text-[9px]">Risk (D/F)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Visited Websites Leaderboard Table -->
+      <div class="bg-surface border border-bordercol rounded-lg overflow-hidden space-y-4 p-5">
+        <div class="flex items-center justify-between pb-2 border-b border-bordercol">
+          <div class="flex items-center gap-2">
+            <span class="text-base">🏆</span>
+            <h3 class="text-sm font-semibold text-zinc-100">Top Visited Websites & Traffic Distribution</h3>
+          </div>
+          <span class="text-xs text-zinc-400 font-mono">Ranked by Total Hits</span>
+        </div>
+
+        <div class="overflow-x-auto max-h-[500px] overflow-y-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="sticky top-0 bg-surface z-10">
+              <tr class="border-b border-bordercol text-zinc-400 font-mono text-[11px]">
+                <th class="pb-3 font-medium w-12 text-center">Rank</th>
+                <th class="pb-3 font-medium">Domain / Platform</th>
+                <th class="pb-3 font-medium">Total User Visits</th>
+                <th class="pb-3 font-medium">Traffic Share</th>
+                <th class="pb-3 font-medium">Grade & Score</th>
+                <th class="pb-3 font-medium">Category</th>
+                <th class="pb-3 font-medium">Last Visited</th>
+                <th class="pb-3 font-medium text-right">Deep-Dive</th>
+              </tr>
+            </thead>
+            <tbody id="analyticsTopSitesBody" class="divide-y divide-bordercol/60">
               <!-- Populated dynamically -->
             </tbody>
           </table>
@@ -519,6 +662,9 @@
     let currentEditingDomain = null;
     let pollInterval = null;
     let currentTab = 'sites';
+    let currentAnalyticsTimeframe = 'day';
+    let trafficChartInstance = null;
+    let riskDonutChartInstance = null;
 
     window.onload = () => {
       if (!adminToken) {
@@ -531,19 +677,275 @@
 
     function switchTab(tab) {
       currentTab = tab;
+      
+      const secSites = document.getElementById('tabSitesSection');
+      const secAnalytics = document.getElementById('tabAnalyticsSection');
+      const secPings = document.getElementById('tabPingsSection');
+      
+      const btnSites = document.getElementById('tabBtnSites');
+      const btnAnalytics = document.getElementById('tabBtnAnalytics');
+      const btnPings = document.getElementById('tabBtnPings');
+
+      // Reset all sections
+      secSites.classList.add('hidden');
+      secAnalytics.classList.add('hidden');
+      secPings.classList.add('hidden');
+
+      // Reset all button styles
+      btnSites.className = 'px-3 py-1 text-xs font-medium rounded-md text-zinc-400 hover:text-zinc-200 transition';
+      btnAnalytics.className = 'px-3 py-1 text-xs font-medium rounded-md text-zinc-400 hover:text-zinc-200 transition flex items-center gap-1.5';
+      btnPings.className = 'px-3 py-1 text-xs font-medium rounded-md text-zinc-400 hover:text-zinc-200 transition flex items-center gap-1.5';
+
       if (tab === 'sites') {
-        document.getElementById('tabSitesSection').classList.remove('hidden');
-        document.getElementById('tabPingsSection').classList.add('hidden');
-        document.getElementById('tabBtnSites').className = 'px-3 py-1 text-xs font-medium rounded-md bg-surface text-brand border border-bordercol transition';
-        document.getElementById('tabBtnPings').className = 'px-3 py-1 text-xs font-medium rounded-md text-zinc-400 hover:text-zinc-200 transition flex items-center gap-1.5';
+        secSites.classList.remove('hidden');
+        btnSites.className = 'px-3 py-1 text-xs font-medium rounded-md bg-surface text-brand border border-bordercol transition';
         loadSites();
+      } else if (tab === 'analytics') {
+        secAnalytics.classList.remove('hidden');
+        btnAnalytics.className = 'px-3 py-1 text-xs font-medium rounded-md bg-surface text-brand border border-bordercol transition flex items-center gap-1.5';
+        loadAnalytics(currentAnalyticsTimeframe);
       } else {
-        document.getElementById('tabSitesSection').classList.add('hidden');
-        document.getElementById('tabPingsSection').classList.remove('hidden');
-        document.getElementById('tabBtnSites').className = 'px-3 py-1 text-xs font-medium rounded-md text-zinc-400 hover:text-zinc-200 transition';
-        document.getElementById('tabBtnPings').className = 'px-3 py-1 text-xs font-medium rounded-md bg-surface text-brand border border-bordercol transition flex items-center gap-1.5';
+        secPings.classList.remove('hidden');
+        btnPings.className = 'px-3 py-1 text-xs font-medium rounded-md bg-surface text-brand border border-bordercol transition flex items-center gap-1.5';
         loadPings();
       }
+    }
+
+    function setAnalyticsTimeframe(tf) {
+      currentAnalyticsTimeframe = tf;
+      
+      const btnDay = document.getElementById('tfBtnDay');
+      const btnWeek = document.getElementById('tfBtnWeek');
+      const btnMonth = document.getElementById('tfBtnMonth');
+
+      btnDay.className = 'px-3 py-1 text-xs font-medium rounded-md text-zinc-400 hover:text-zinc-200 transition';
+      btnWeek.className = 'px-3 py-1 text-xs font-medium rounded-md text-zinc-400 hover:text-zinc-200 transition';
+      btnMonth.className = 'px-3 py-1 text-xs font-medium rounded-md text-zinc-400 hover:text-zinc-200 transition';
+
+      if (tf === 'day') btnDay.className = 'px-3 py-1 text-xs font-medium rounded-md bg-surface text-brand border border-bordercol transition';
+      else if (tf === 'week') btnWeek.className = 'px-3 py-1 text-xs font-medium rounded-md bg-surface text-brand border border-bordercol transition';
+      else if (tf === 'month') btnMonth.className = 'px-3 py-1 text-xs font-medium rounded-md bg-surface text-brand border border-bordercol transition';
+
+      loadAnalytics(tf);
+    }
+
+    async function loadAnalytics(timeframe = 'day') {
+      try {
+        const res = await fetch(`/api/admin/analytics/visits?timeframe=${timeframe}`, { headers: authHeaders() });
+        if (res.status === 401 || res.status === 403) {
+          showLoginModal();
+          return;
+        }
+        const data = await res.json();
+        
+        // Update KPIs
+        document.getElementById('kpiAnalyticsTotalVisits').innerText = data.total_visits || 0;
+        document.getElementById('kpiAnalyticsUniqueDomains').innerText = data.unique_domains || 0;
+        document.getElementById('kpiAnalyticsAvgScore').innerText = `${data.avg_score || 0} / 100`;
+        document.getElementById('kpiAnalyticsBusiest').innerText = data.busiest_period || 'N/A';
+
+        // Update Donut KPI Badges
+        const dist = data.grade_distribution || {};
+        const safeCount = (dist.A || 0) + (dist.B || 0);
+        const modCount = dist.C || 0;
+        const riskCount = (dist.D || 0) + (dist.F || 0);
+        
+        document.getElementById('donutStatSafe').innerText = safeCount;
+        document.getElementById('donutStatMod').innerText = modCount;
+        document.getElementById('donutStatRisk').innerText = riskCount;
+
+        // Render Charts & Leaderboard
+        renderTrafficChart(data.chart || { labels: [], visits: [], unique_domains: [] });
+        renderRiskDonutChart(dist);
+        renderAnalyticsTopSites(data.top_domains || [], data.total_visits || 0);
+      } catch (e) {
+        console.error('Error loading analytics:', e);
+      }
+    }
+
+    function renderTrafficChart(chartData) {
+      const ctx = document.getElementById('trafficLineChart');
+      if (!ctx) return;
+
+      if (trafficChartInstance) {
+        trafficChartInstance.destroy();
+      }
+
+      trafficChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: chartData.labels || [],
+          datasets: [
+            {
+              label: 'Total Visits',
+              data: chartData.visits || [],
+              borderColor: '#10b981',
+              backgroundColor: 'rgba(16, 185, 129, 0.12)',
+              borderWidth: 2,
+              fill: true,
+              tension: 0.35,
+              pointBackgroundColor: '#10b981',
+              pointRadius: chartData.labels.length > 20 ? 2 : 4,
+              pointHoverRadius: 6
+            },
+            {
+              label: 'Unique Domains',
+              data: chartData.unique_domains || [],
+              borderColor: '#06b6d4',
+              backgroundColor: 'rgba(6, 182, 212, 0.08)',
+              borderWidth: 2,
+              fill: true,
+              tension: 0.35,
+              pointBackgroundColor: '#06b6d4',
+              pointRadius: chartData.labels.length > 20 ? 2 : 4,
+              pointHoverRadius: 6
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#18181b',
+              borderColor: '#27272a',
+              borderWidth: 1,
+              titleColor: '#f4f4f5',
+              bodyColor: '#d4d4d8',
+              titleFont: { family: 'JetBrains Mono', size: 12 },
+              bodyFont: { family: 'Inter', size: 11 },
+              padding: 10,
+              displayColors: true
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: '#27272a', drawBorder: false },
+              ticks: { color: '#71717a', font: { family: 'JetBrains Mono', size: 10 } }
+            },
+            y: {
+              beginAtZero: true,
+              grid: { color: '#27272a', drawBorder: false },
+              ticks: {
+                color: '#71717a',
+                font: { family: 'JetBrains Mono', size: 10 },
+                precision: 0
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function renderRiskDonutChart(dist) {
+      const ctx = document.getElementById('riskDonutChart');
+      if (!ctx) return;
+
+      if (riskDonutChartInstance) {
+        riskDonutChartInstance.destroy();
+      }
+
+      const safe = (dist.A || 0) + (dist.B || 0);
+      const mod = dist.C || 0;
+      const risk = (dist.D || 0) + (dist.F || 0);
+      const hasData = (safe + mod + risk) > 0;
+
+      riskDonutChartInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Safe (A/B)', 'Moderate Risk (C)', 'High Risk (D/F)'],
+          datasets: [{
+            data: hasData ? [safe, mod, risk] : [1, 0, 0],
+            backgroundColor: hasData ? ['#10b981', '#f59e0b', '#f43f5e'] : ['#27272a', '#27272a', '#27272a'],
+            borderColor: '#121214',
+            borderWidth: 3,
+            hoverOffset: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '70%',
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#18181b',
+              borderColor: '#27272a',
+              borderWidth: 1,
+              padding: 8,
+              titleFont: { family: 'Inter', size: 11 },
+              bodyFont: { family: 'JetBrains Mono', size: 11 }
+            }
+          }
+        }
+      });
+    }
+
+    function renderAnalyticsTopSites(topDomains, totalVisits) {
+      const tbody = document.getElementById('analyticsTopSitesBody');
+      tbody.innerHTML = '';
+
+      if (!topDomains || topDomains.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="py-8 text-center text-zinc-500 font-sans">No user visit data recorded in this timeframe.</td></tr>`;
+        return;
+      }
+
+      topDomains.forEach((site, index) => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-surfaceHover/50 transition cursor-pointer';
+        tr.onclick = (e) => {
+          if (!e.target.closest('button')) openSiteDetailModal(site.domain);
+        };
+
+        const pct = totalVisits > 0 ? Math.round((site.visits / totalVisits) * 100) : 0;
+        const score = site.score || 0;
+        const gradeColor = score >= 80 ? 'text-emerald-400 bg-emerald-950/40 border-emerald-800' :
+                           (score >= 50 ? 'text-amber-400 bg-amber-950/40 border-amber-800' : 'text-rose-400 bg-rose-950/40 border-rose-800');
+
+        const rankBadge = index === 0 ? '🥇 1' : (index === 1 ? '🥈 2' : (index === 2 ? '🥉 3' : `#${index + 1}`));
+
+        tr.innerHTML = `
+          <td class="py-3 text-center font-mono font-bold text-zinc-400">${rankBadge}</td>
+          <td class="py-3 pr-3">
+            <div class="font-medium text-zinc-100">${site.name || site.domain}</div>
+            <div class="font-mono text-[11px] text-zinc-400">${site.domain}</div>
+          </td>
+          <td class="py-3 pr-3 font-mono font-bold text-zinc-200">
+            ${site.visits.toLocaleString()} <span class="text-[10px] text-zinc-500 font-normal">hits</span>
+          </td>
+          <td class="py-3 pr-3 w-40">
+            <div class="flex items-center gap-2 font-mono text-[11px] text-zinc-300">
+              <span>${pct}%</span>
+              <div class="flex-1 bg-darkbg border border-bordercol h-1.5 rounded-full overflow-hidden">
+                <div class="h-full bg-brand rounded-full" style="width: ${pct}%"></div>
+              </div>
+            </div>
+          </td>
+          <td class="py-3 pr-3">
+            <div class="flex items-center gap-1.5">
+              <span class="px-2 py-0.5 rounded font-mono font-bold text-xs border ${gradeColor}">${site.grade || 'C'}</span>
+              <span class="font-mono text-zinc-300">${score}/100</span>
+            </div>
+          </td>
+          <td class="py-3 pr-3 font-mono text-[11px] text-zinc-400">
+            ${site.category || 'Web Platform'}
+          </td>
+          <td class="py-3 pr-3 font-mono text-[11px] text-zinc-400">
+            ${site.last_visited ? site.last_visited.split('T')[0] : '--'}
+          </td>
+          <td class="py-3 text-right">
+            <button onclick="openSiteDetailModal('${site.domain}')" class="px-2.5 py-1 rounded bg-brand/20 hover:bg-brand/30 text-emerald-400 text-[11px] font-medium transition">
+              Inspect 🔍
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
     }
 
     function showLoginModal() {

@@ -1,6 +1,6 @@
 import json
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Optional
 from fastapi import APIRouter, HTTPException, BackgroundTasks, Query
 from app.database import get_db_connection
@@ -709,6 +709,121 @@ async def get_pings_stats():
             "total_pings": row["total_pings"] or 0,
             "unique_domains": row["unique_domains"] or 0,
             "avg_latency_ms": row["avg_latency_ms"] or 0.0
+        }
+    finally:
+        conn.close()
+
+
+@router.get("/analytics/visits")
+async def get_visit_analytics(timeframe: str = Query("day", regex="^(day|week|month)$")):
+    """Aggregates visited websites across all users by day (24h), week (7d), and month (30d)."""
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+        now = datetime.utcnow()
+        
+        if timeframe == "day":
+            since = (now - timedelta(hours=24)).isoformat()
+            slots = {}
+            for i in range(23, -1, -1):
+                h = (now - timedelta(hours=i)).replace(minute=0, second=0, microsecond=0)
+                slots[h.strftime("%H:00")] = {"label": h.strftime("%H:00"), "visits": 0, "unique_domains": set()}
+        elif timeframe == "week":
+            since = (now - timedelta(days=7)).isoformat()
+            slots = {}
+            for i in range(6, -1, -1):
+                d = (now - timedelta(days=i)).replace(hour=0, minute=0, second=0, microsecond=0)
+                slots[d.strftime("%b %d")] = {"label": d.strftime("%b %d"), "visits": 0, "unique_domains": set()}
+        else:  # month
+            since = (now - timedelta(days=30)).isoformat()
+            slots = {}
+            for i in range(29, -1, -1):
+                d = (now - timedelta(days=i)).replace(hour=0, minute=0, second=0, microsecond=0)
+                slots[d.strftime("%b %d")] = {"label": d.strftime("%b %d"), "visits": 0, "unique_domains": set()}
+        
+        cursor.execute("SELECT id, domain, score, grade, timestamp, response_time_ms FROM browser_pings WHERE timestamp >= ? ORDER BY timestamp ASC", (since,))
+        rows = cursor.fetchall()
+        
+        total_visits = len(rows)
+        domain_counts = {}
+        grade_dist = {"A": 0, "B": 0, "C": 0, "D": 0, "F": 0}
+        score_sum = 0
+        
+        for r in rows:
+            ts_str = r["timestamp"]
+            dom = r["domain"]
+            score = r["score"] or 0
+            raw_grade = (r["grade"] or "C")[0].upper()
+            if raw_grade in grade_dist:
+                grade_dist[raw_grade] += 1
+            score_sum += score
+            
+            if dom not in domain_counts:
+                domain_counts[dom] = {
+                    "domain": dom,
+                    "visits": 0,
+                    "score": score,
+                    "grade": r["grade"] or "C",
+                    "last_visited": ts_str
+                }
+            domain_counts[dom]["visits"] += 1
+            domain_counts[dom]["last_visited"] = ts_str
+            
+            try:
+                dt = datetime.fromisoformat(ts_str)
+                if timeframe == "day":
+                    key = dt.strftime("%H:00")
+                else:
+                    key = dt.strftime("%b %d")
+                if key in slots:
+                    slots[key]["visits"] += 1
+                    slots[key]["unique_domains"].add(dom)
+            except Exception:
+                pass
+                
+        labels = []
+        visit_series = []
+        unique_series = []
+        for k, v in slots.items():
+            labels.append(v["label"])
+            visit_series.append(v["visits"])
+            unique_series.append(len(v["unique_domains"]))
+            
+        top_domains = sorted(domain_counts.values(), key=lambda x: x["visits"], reverse=True)[:20]
+        if top_domains:
+            domain_list = [d["domain"] for d in top_domains]
+            placeholders = ','.join('?' for _ in domain_list)
+            cursor.execute(f"SELECT domain, name, category, overall_score, grade FROM websites WHERE domain IN ({placeholders})", domain_list)
+            meta_map = {row["domain"]: dict(row) for row in cursor.fetchall()}
+            for td in top_domains:
+                if td["domain"] in meta_map:
+                    td["name"] = meta_map[td["domain"]].get("name") or td["domain"]
+                    td["category"] = meta_map[td["domain"]].get("category") or "Web Service"
+                    td["score"] = meta_map[td["domain"]].get("overall_score", td["score"])
+                    td["grade"] = meta_map[td["domain"]].get("grade", td["grade"])
+                else:
+                    td["name"] = td["domain"].split(".")[0].title()
+                    td["category"] = "Web Platform"
+        
+        unique_domains_count = len(domain_counts)
+        avg_score = round(score_sum / total_visits, 1) if total_visits > 0 else 0
+        
+        busiest = max(slots.items(), key=lambda x: x[1]["visits"]) if slots else (None, {"visits": 0})
+        busiest_label = f"{busiest[0]} ({busiest[1]['visits']} visits)" if busiest and busiest[1]["visits"] > 0 else "N/A"
+        
+        return {
+            "timeframe": timeframe,
+            "total_visits": total_visits,
+            "unique_domains": unique_domains_count,
+            "avg_score": avg_score,
+            "busiest_period": busiest_label,
+            "grade_distribution": grade_dist,
+            "chart": {
+                "labels": labels,
+                "visits": visit_series,
+                "unique_domains": unique_series
+            },
+            "top_domains": top_domains
         }
     finally:
         conn.close()
