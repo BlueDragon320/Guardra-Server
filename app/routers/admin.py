@@ -136,6 +136,9 @@ async def get_all_sites(limit: int = 1000):
     conn = get_db_connection()
     try:
         cursor = conn.cursor()
+        cursor.execute("SELECT COUNT(*) as count FROM websites")
+        total_count = cursor.fetchone()["count"]
+        
         cursor.execute("SELECT * FROM websites ORDER BY overall_score DESC LIMIT ?", (limit,))
         rows = cursor.fetchall()
         sites = []
@@ -152,7 +155,7 @@ async def get_all_sites(limit: int = 1000):
                 "summary": d.get("findings", {}).get("summary", "") if isinstance(d.get("findings"), dict) else "",
                 "last_analyzed_at": d.get("last_analyzed_at")
             })
-        return {"sites": sites, "total": len(sites)}
+        return {"sites": sites, "total": total_count}
     finally:
         conn.close()
 
