@@ -33,6 +33,7 @@ app.include_router(policy.router)
 app.include_router(deletion.router)
 app.include_router(breach.router)
 app.include_router(hub.router)
+app.include_router(hub.telemetry_router)
 app.include_router(admin.router)
 
 

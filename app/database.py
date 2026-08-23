@@ -73,6 +73,7 @@ def init_db():
         scan_count INTEGER DEFAULT 1,
         first_analyzed_at TEXT,
         last_analyzed_at TEXT,
+        expires_at TEXT,
         updated_at TEXT
     )
     """)
@@ -103,6 +104,21 @@ def init_db():
     )
     """)
 
+
+    # Extension telemetry pings
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS browser_pings (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        domain TEXT NOT NULL,
+        client_ip TEXT,
+        score REAL,
+        grade TEXT,
+        response_time_ms REAL,
+        client_type TEXT,
+        timestamp TEXT NOT NULL
+    )
+    ''')
+
     # Admin action audit trail
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS admin_audit_log (
@@ -113,6 +129,13 @@ def init_db():
         performed_at TEXT
     )
     """)
+
+    # Auto-migrations for existing databases
+    for col, col_type in [("expires_at", "TEXT"), ("is_top_5000", "INTEGER DEFAULT 0"), ("tranco_rank", "INTEGER")]:
+        try:
+            cursor.execute(f"ALTER TABLE websites ADD COLUMN {col} {col_type}")
+        except Exception:
+            pass
 
     # Check if default user profile exists
     cursor.execute("SELECT id FROM user_profile WHERE id = 'default'")

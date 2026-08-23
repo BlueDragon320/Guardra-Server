@@ -151,3 +151,44 @@ async def receive_scan_result(payload: ScanPayload):
         }
     finally:
         conn.close()
+
+
+from fastapi import Request
+from pydantic import BaseModel
+from typing import Optional
+
+class PingPayload(BaseModel):
+    domain: str
+    score: Optional[float] = 0.0
+    grade: Optional[str] = "N/A"
+    response_time_ms: Optional[float] = 0.0
+    client_type: Optional[str] = "extension"
+
+def _record_ping_db(payload: PingPayload, request: Request):
+    client_ip = request.client.host if request.client else "unknown"
+    now_iso = datetime.utcnow().isoformat()
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO browser_pings (domain, client_ip, score, grade, response_time_ms, client_type, timestamp)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        ''', (payload.domain, client_ip, payload.score, payload.grade, payload.response_time_ms, payload.client_type, now_iso))
+        conn.commit()
+    finally:
+        conn.close()
+    return {"status": "ok"}
+
+@router.post("/telemetry")
+async def post_telemetry(payload: PingPayload, request: Request):
+    return _record_ping_db(payload, request)
+
+@router.post("/telemetry/ping")
+async def post_telemetry_ping(payload: PingPayload, request: Request):
+    return _record_ping_db(payload, request)
+
+telemetry_router = APIRouter(prefix="/api/telemetry", tags=["Telemetry"])
+@telemetry_router.post("/ping")
+async def telemetry_ping_root(payload: PingPayload, request: Request):
+    return _record_ping_db(payload, request)
+
