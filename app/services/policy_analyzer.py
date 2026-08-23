@@ -405,6 +405,35 @@ def analyze_live_policy(url: str, html_text: str, tracker_data: List = None,
     # Compliance detection
     compliance = _check_compliance(text_lower)
     
+    
+    # Extract DPO / Grievance Officer contacts
+    contacts = {
+        "email": [],
+        "phone": [],
+        "address": [],
+        "officer": []
+    }
+    
+    # Emails
+    emails = re.findall(r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+', text)
+    if emails:
+        contacts["email"] = list(set([e for e in emails if "privacy" in e.lower() or "dpo" in e.lower() or "grievance" in e.lower()] or emails))[:3]
+        
+    # Phones
+    phones = re.findall(r'\+?\d[\d -]{8,12}\d', text)
+    if phones:
+        contacts["phone"] = list(set(phones))[:3]
+        
+    # Officers
+    officers = re.findall(r'(?:Grievance Officer|Data Protection Officer|DPO|Privacy Officer)[^.!?\n]{0,100}', text, re.IGNORECASE)
+    if officers:
+        contacts["officer"] = list(set([o.strip() for o in officers]))[:3]
+        
+    # Addresses
+    addresses = re.findall(r'(?:P\.?O\.? Box|Street|Avenue|Boulevard|Bldg|Building)[^.!?\n]{0,100}', text, re.IGNORECASE)
+    if addresses:
+        contacts["address"] = list(set([a.strip() for a in addresses]))[:3]
+
     # ===== 6-Pillar Scoring with Improved Engine =====
     
     # Pillar 1: Third-Party Data Sharing (weight: 0.25)
@@ -512,6 +541,7 @@ def analyze_live_policy(url: str, html_text: str, tracker_data: List = None,
 
     return {
         "domain": domain,
+        "policy_url": url,
         "name": site_title[:40],
         "policy_url": url if url.startswith("http") else f"https://www.{domain}/privacy-policy",
         "grade": grade,
@@ -523,6 +553,7 @@ def analyze_live_policy(url: str, html_text: str, tracker_data: List = None,
         "key_clauses": key_clauses,
         "findings": findings,
         "key_concerns": key_concerns,
+        "contacts": contacts,
         "category": "Web Service",
         "source": "live_nlp"
     }
@@ -555,94 +586,104 @@ def _extract_findings(text: str) -> Dict[str, List[str]]:
 
 
 def _extract_concerns(text: str, score: int) -> List[str]:
-    """Extract key privacy concerns based on score and detected patterns."""
+    """Extract key privacy concerns based on score and detected patterns, using rich quotes where possible."""
     concerns = []
     text_lower = text.lower()
+    sentences = re.split(r'(?<=[.!?])\s+', text)
     
     if score < 50:
         concerns.append(f"Overall privacy score ({score}/100) indicates significant privacy concerns.")
     if score < 25:
         concerns.append("Critical privacy risk — this site may be hostile to user privacy.")
-    
-    if re.search(r'\b(sell|sold)\s+(your\s+)?data\b', text_lower):
-        concerns.append("Policy mentions selling or sharing user data with third parties.")
-    if re.search(r'\bdata\s+broker\b', text_lower):
-        concerns.append("Data broker relationships disclosed — user data may be commercially syndicated.")
-    if re.search(r'\bindefinitely\b', text_lower):
-        concerns.append("Indefinite data retention clause detected.")
-    if re.search(r'\bcannot\s+be\s+deleted\b', text_lower):
-        concerns.append("Policy suggests some user data cannot be fully deleted.")
-    if re.search(r'\bfingerprint', text_lower):
-        concerns.append("Browser or device fingerprinting techniques referenced.")
+        
+    def find_quote(pattern):
+        for s in sentences:
+            if re.search(pattern, s, re.IGNORECASE) and len(s) < 300:
+                return s.strip()
+        return None
+        
+    q = find_quote(r'\b(sell|sold)\s+(your\s+)?data\b')
+    if q: concerns.append(f"Policy mentions selling or sharing user data: '{q}'")
+    elif re.search(r'\b(sell|sold)\s+(your\s+)?data\b', text_lower): concerns.append("Policy mentions selling or sharing user data with third parties.")
+        
+    q = find_quote(r'\bdata\s+broker\b')
+    if q: concerns.append(f"Data broker relationships disclosed: '{q}'")
+    elif re.search(r'\bdata\s+broker\b', text_lower): concerns.append("Data broker relationships disclosed.")
+        
+    q = find_quote(r'\bindefinitely\b')
+    if q: concerns.append(f"Indefinite data retention clause detected: '{q}'")
+    elif 'indefinitely' in text_lower: concerns.append("Indefinite data retention clause detected.")
+        
+    q = find_quote(r'\bcannot\s+be\s+deleted\b')
+    if q: concerns.append(f"Policy suggests some user data cannot be fully deleted: '{q}'")
+    elif re.search(r'\bcannot\s+be\s+deleted\b', text_lower): concerns.append("Policy suggests some user data cannot be fully deleted.")
+        
+    q = find_quote(r'\bfingerprint')
+    if q: concerns.append(f"Browser or device fingerprinting techniques referenced: '{q}'")
+    elif 'fingerprint' in text_lower: concerns.append("Browser or device fingerprinting techniques referenced.")
+        
     if not re.search(r'\b(delete|erasure|removal)\b', text_lower):
         concerns.append("No clear data deletion or erasure mechanism disclosed.")
-    if re.search(r'\bbehavioral\s+advertising\b', text_lower):
-        concerns.append("Behavioral advertising and interest-based profiling in use.")
+        
+    q = find_quote(r'\bbehavioral\s+advertising\b')
+    if q: concerns.append(f"Behavioral advertising and interest-based profiling in use: '{q}'")
+    elif 'behavioral advertising' in text_lower: concerns.append("Behavioral advertising and interest-based profiling in use.")
     
     return concerns
 
 
-async def discover_and_fetch_policy(clean: str) -> tuple:
-    """Discovers and fetches the live privacy policy text and verified URL for a domain."""
-    from urllib.parse import urljoin
-    
-    # Priority list of direct paths on both www and apex domain
-    candidates = [
-        f"https://www.{clean}/privacy-policy",
-        f"https://{clean}/privacy-policy",
-        f"https://www.{clean}/privacy",
-        f"https://{clean}/privacy",
-        f"https://www.{clean}/privacy-policy/",
-        f"https://{clean}/privacy-policy/",
-        f"https://www.{clean}/privacy/",
-        f"https://{clean}/privacy/",
-        f"https://www.{clean}/legal/privacy-policy",
-        f"https://{clean}/legal/privacy",
-        f"https://www.{clean}/privacy-statement",
-        f"https://www.{clean}/privacypolicy",
-        f"http://www.{clean}/privacy-policy",
-        f"http://{clean}/privacy-policy",
+async def discover_and_fetch_policy(clean_domain: str) -> tuple[str, str]:
+    """
+    Builds candidate URLs checking BOTH https://www.{clean}/... and https://{clean}/...
+    """
+    paths = [
+        "/privacy-policy", "/privacy-policy/", "/privacy", "/privacy/",
+        "/legal/privacy-policy", "/legal/privacy", "/privacy-statement",
+        "/privacypolicy", "/terms-and-privacy"
     ]
     
+    candidates = []
+    for p in paths:
+        candidates.append(f"https://www.{clean_domain}{p}")
+        candidates.append(f"https://{clean_domain}{p}")
+        
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 Guardra/2.0"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Guardra/1.0"
     }
     
     async with httpx.AsyncClient(timeout=10.0, follow_redirects=True, verify=False) as client:
-        # Phase 1: Try direct candidate paths
-        for u in candidates:
+        for url in candidates:
             try:
-                resp = await client.get(u, headers=headers)
-                if resp.status_code == 200 and len(resp.text) > 400:
-                    text_lower = resp.text.lower()
-                    if "privacy" in text_lower or "personal data" in text_lower or "information" in text_lower:
-                        return str(resp.url), resp.text
+                resp = await client.get(url, headers=headers)
+                if resp.status_code == 200 and len(resp.text) > 500:
+                    return str(resp.url), resp.text
             except Exception:
                 continue
                 
-        # Phase 2: Fallback to crawling homepage HTML for privacy links
-        homepages = [f"https://www.{clean}", f"https://{clean}"]
-        for home in homepages:
+        # Try homepage
+        homepages = [f"https://www.{clean_domain}", f"https://{clean_domain}"]
+        for hp in homepages:
             try:
-                resp = await client.get(home, headers=headers)
-                if resp.status_code == 200 and len(resp.text) > 200:
+                resp = await client.get(hp, headers=headers)
+                if resp.status_code == 200:
+                    from bs4 import BeautifulSoup
+                    from urllib.parse import urljoin
                     soup = BeautifulSoup(resp.text, "html.parser")
-                    links = soup.find_all("a", href=True)
-                    for a in links:
-                        href = a["href"].strip()
-                        anchor_text = a.get_text().strip().lower()
-                        if re.search(r"privacy|privacy-policy|privacypolicy|legal/privacy", href, re.I) or "privacy policy" in anchor_text or "privacy notice" in anchor_text:
-                            full_url = urljoin(str(resp.url), href)
+                    for a in soup.find_all('a', href=True):
+                        href = a['href']
+                        text = a.get_text(strip=True).lower()
+                        if 'privacy' in href.lower() or 'privacy' in text:
+                            target_url = urljoin(hp, href)
                             try:
-                                p_resp = await client.get(full_url, headers=headers)
-                                if p_resp.status_code == 200 and len(p_resp.text) > 400:
+                                p_resp = await client.get(target_url, headers=headers)
+                                if p_resp.status_code == 200 and len(p_resp.text) > 500:
                                     return str(p_resp.url), p_resp.text
                             except Exception:
-                                pass
+                                continue
             except Exception:
                 continue
                 
-    return None, None
+    return "", ""
 
 
 async def get_site_rating(domain_or_url: str, tracker_data: List = None,
@@ -662,18 +703,16 @@ async def get_site_rating(domain_or_url: str, tracker_data: List = None,
             result = dict(site)
             result["source"] = "cache"
             result["breaches"] = domain_breaches if domain_breaches else result.get("breaches", [])
-            result["policy_url"] = result.get("policy_url") or f"https://www.{clean}/privacy-policy"
             return result
             
-    # Try discovering live privacy policy
+    # Try fetching live privacy policy
     policy_url, policy_html = await discover_and_fetch_policy(clean)
     if policy_url and policy_html:
-        live_res = analyze_live_policy(clean, policy_html, tracker_data, cookie_data, dark_patterns)
-        live_res["policy_url"] = policy_url
+        live_res = analyze_live_policy(policy_url, policy_html, tracker_data, cookie_data, dark_patterns)
         live_res["breaches"] = domain_breaches
         return live_res
     
-    # Fallback for unreachable sites — automatic baseline score
+    # Fallback for unreachable sites — automatic low score
     fallback_score = 38 if domain_breaches else 50
     grade, color = _get_grade(fallback_score)
     

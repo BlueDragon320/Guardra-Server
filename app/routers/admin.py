@@ -74,33 +74,35 @@ async def _scan_and_store(domain: str, source: str = "admin") -> dict:
         key_clauses = json.dumps(rating.get("key_clauses", []))
         breach_history = json.dumps(rating.get("breaches", []))
         
+        policy_url = rating.get("policy_url") or f"https://www.{clean}/privacy-policy"
+        
         if existing:
             cursor.execute("""
                 UPDATE websites 
                 SET name = ?, category = ?, overall_score = ?, grade = ?, grade_color = ?,
                     pillar_scores = ?, compliance = ?, findings = ?, key_concerns = ?,
-                    key_clauses = ?, breach_history = ?, last_analyzed_at = ?,
+                    key_clauses = ?, breach_history = ?, policy_url = ?, last_analyzed_at = ?,
                     scan_count = scan_count + 1, updated_at = ?
                 WHERE domain = ?
             """, (
                 rating.get("name", clean), rating.get("category", "Web Service"),
                 rating.get("score", 0), rating.get("grade", "N/A"), rating.get("color", "gray"),
                 pillar_scores, compliance, findings, key_concerns,
-                key_clauses, breach_history, now, now, clean
+                key_clauses, breach_history, policy_url, now, now, clean
             ))
         else:
             cursor.execute("""
                 INSERT INTO websites (
                     domain, name, category, overall_score, grade, grade_color,
                     pillar_scores, compliance, findings, key_concerns, key_clauses,
-                    breach_history, source, scan_count, first_analyzed_at, 
+                    breach_history, policy_url, source, scan_count, first_analyzed_at, 
                     last_analyzed_at, updated_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?)
             """, (
                 clean, rating.get("name", clean), rating.get("category", "Web Service"),
                 rating.get("score", 0), rating.get("grade", "N/A"), rating.get("color", "gray"),
                 pillar_scores, compliance, findings, key_concerns, key_clauses,
-                breach_history, source, now, now, now
+                breach_history, policy_url, source, now, now, now
             ))
         
         conn.commit()

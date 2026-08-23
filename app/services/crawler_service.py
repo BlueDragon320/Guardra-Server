@@ -42,41 +42,19 @@ def save_cached_policies(policies: List[Dict[str, Any]]) -> bool:
         return False
 
 async def crawl_and_rescore_domain(domain: str) -> Dict[str, Any]:
-    """Scrapes a single domain's live policy endpoints, computes fresh rubric scores, and updates cache."""
+    """Scrapes a single domain's live policy endpoints, computes fresh rubric scores, and updates database."""
+    from app.services.policy_analyzer import discover_and_fetch_policy
+    from app.database import get_db_connection
     clean = clean_domain(domain)
-    target_urls = [
-        f"https://{clean}/privacy",
-        f"https://{clean}/privacy-policy",
-        f"https://{clean}/legal/privacy",
-        f"https://www.{clean}/privacy",
-        f"https://www.{clean}/privacy-policy",
-        f"https://{clean}"
-    ]
 
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 GuardraCrawler/1.0"
-    }
-
-    scraped_html = None
-    successful_url = None
-
-    async with httpx.AsyncClient(timeout=6.0, follow_redirects=True) as client:
-        for url in target_urls:
-            try:
-                resp = await client.get(url, headers=headers)
-                if resp.status_code == 200 and len(resp.text) > 400:
-                    scraped_html = resp.text
-                    successful_url = url
-                    break
-            except Exception:
-                continue
+    policy_url, scraped_html = await discover_and_fetch_policy(clean)
 
     if not scraped_html:
-        # Fallback to smart heuristic baseline if site blocks automated scrapers
         name = clean.split(".")[0].title()
         fresh_rating = {
             "domain": clean,
             "name": name,
+            "policy_url": f"https://www.{clean}/privacy-policy",
             "grade": "C",
             "score": 54,
             "color": "amber",
@@ -103,10 +81,57 @@ async def crawl_and_rescore_domain(domain: str) -> Dict[str, Any]:
         fresh_rating = analyze_live_policy(clean, scraped_html)
         fresh_rating["last_crawled"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         fresh_rating["policy_hash"] = content_hash
-        fresh_rating["policy_url"] = successful_url
+        fresh_rating["policy_url"] = policy_url or f"https://www.{clean}/privacy-policy"
         fresh_rating["source"] = "automated_crawler"
 
-    # Update cache
+    # 1. Update SQLite database
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+        now_iso = datetime.utcnow().isoformat()
+        cursor.execute("SELECT id FROM websites WHERE domain = ?", (clean,))
+        existing = cursor.fetchone()
+        
+        pillar_json = json.dumps(fresh_rating.get("rubric", {}))
+        comp_json = json.dumps(fresh_rating.get("compliance", {}))
+        find_json = json.dumps(fresh_rating.get("findings", {}))
+        concerns_json = json.dumps(fresh_rating.get("key_concerns", []))
+        clauses_json = json.dumps(fresh_rating.get("key_clauses", []))
+        breaches_json = json.dumps(fresh_rating.get("breaches", []))
+        
+        if existing:
+            cursor.execute("""
+                UPDATE websites SET
+                    name = ?, category = ?, overall_score = ?, grade = ?, grade_color = ?,
+                    pillar_scores = ?, compliance = ?, findings = ?, key_concerns = ?,
+                    key_clauses = ?, breach_history = ?, policy_url = ?, last_analyzed_at = ?,
+                    scan_count = scan_count + 1, updated_at = ?
+                WHERE domain = ?
+            """, (
+                fresh_rating.get("name", clean), fresh_rating.get("category", "Web Service"),
+                fresh_rating.get("score", 50), fresh_rating.get("grade", "C"), fresh_rating.get("color", "gray"),
+                pillar_json, comp_json, find_json, concerns_json,
+                clauses_json, breaches_json, fresh_rating.get("policy_url"), now_iso, now_iso, clean
+            ))
+        else:
+            cursor.execute("""
+                INSERT INTO websites (
+                    domain, name, category, overall_score, grade, grade_color,
+                    pillar_scores, compliance, findings, key_concerns, key_clauses,
+                    breach_history, policy_url, source, scan_count, first_analyzed_at,
+                    last_analyzed_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'automated_crawler', 1, ?, ?, ?)
+            """, (
+                clean, fresh_rating.get("name", clean), fresh_rating.get("category", "Web Service"),
+                fresh_rating.get("score", 50), fresh_rating.get("grade", "C"), fresh_rating.get("color", "gray"),
+                pillar_json, comp_json, find_json, concerns_json,
+                clauses_json, breaches_json, fresh_rating.get("policy_url"), now_iso, now_iso, now_iso
+            ))
+        conn.commit()
+    finally:
+        conn.close()
+
+    # 2. Update cached_policies.json
     all_policies = load_cached_policies()
     updated = False
     old_grade = None
