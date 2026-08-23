@@ -1,9 +1,40 @@
 import sqlite3
 import os
+import shutil
 import json
 from datetime import datetime
 
-DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "guardra.db")
+def _resolve_db_path():
+    env_path = os.environ.get("DATABASE_PATH")
+    if env_path:
+        os.makedirs(os.path.dirname(os.path.abspath(env_path)), exist_ok=True)
+        return env_path
+    
+    env_dir = os.environ.get("GUARDRA_DATA_DIR")
+    if env_dir:
+        os.makedirs(env_dir, exist_ok=True)
+        return os.path.join(env_dir, "guardra.db")
+        
+    # Check if running in Docker container with mounted /app/data volume
+    if os.path.exists("/app/data"):
+        data_dir = "/app/data"
+        os.makedirs(data_dir, exist_ok=True)
+        target = os.path.join(data_dir, "guardra.db")
+        
+        # Migrate legacy DB if exists in app directory and target doesn't exist
+        legacy_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "guardra.db")
+        if os.path.exists(legacy_path) and not os.path.exists(target):
+            try:
+                shutil.copy2(legacy_path, target)
+            except Exception:
+                pass
+        return target
+        
+    # Local fallback
+    legacy_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "guardra.db")
+    return legacy_path
+
+DB_PATH = _resolve_db_path()
 
 def get_db_connection():
     conn = sqlite3.connect(DB_PATH)

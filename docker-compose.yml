@@ -13,9 +13,9 @@ services:
       - PORT=8000
       - HOST=0.0.0.0
       - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-*}
+      - DATABASE_PATH=/app/data/guardra.db
     volumes:
       - guardra-data:/app/data
-      - ./app/data:/app/app/data
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
       interval: 30s
