@@ -42,29 +42,34 @@ def save_cached_policies(policies: List[Dict[str, Any]]) -> bool:
         return False
 
 async def crawl_and_rescore_domain(domain: str) -> Dict[str, Any]:
-    """Scrapes a single domain's live policy endpoints, computes fresh rubric scores, and updates database."""
-    from app.services.policy_analyzer import discover_and_fetch_policy
+    """Scrapes a single domain's live policy endpoints, computes fresh rubric scores with breach intelligence, and updates database."""
+    from app.services.policy_analyzer import discover_and_fetch_policy, analyze_live_policy, _get_grade
+    from app.services.breach_service import get_domain_breaches
     from app.database import get_db_connection
     clean = clean_domain(domain)
 
+    domain_breaches = get_domain_breaches(clean)
     policy_url, scraped_html = await discover_and_fetch_policy(clean)
 
     if not scraped_html:
         name = clean.split(".")[0].title()
+        fallback_score = 30 if domain_breaches else 50
+        grade, color = _get_grade(fallback_score)
         fresh_rating = {
             "domain": clean,
             "name": name,
-            "policy_url": f"https://www.{clean}/privacy-policy",
-            "grade": "C",
-            "score": 54,
-            "color": "amber",
-            "summary": f"Privacy analysis generated for {name}.",
+            "policy_url": policy_url or f"https://www.{clean}/privacy-policy",
+            "grade": grade,
+            "score": fallback_score,
+            "color": color,
+            "summary": f"Privacy analysis generated for {name}." + (f" Known data breach recorded in {domain_breaches[0]['breach_date']}." if domain_breaches else ""),
+            "breaches": domain_breaches,
             "rubric": {
                 "data_sharing": { "score": 50, "max": 100, "label": "Commercial Partner Sharing", "risk": "medium" },
-                "retention": { "score": 55, "max": 100, "label": "Standard Retention Policy", "risk": "medium" },
-                "tracking_cookies": { "score": 50, "max": 100, "label": "Analytics & Ad Tracking Pixels", "risk": "medium" },
+                "retention": { "score": 50, "max": 100, "label": "Standard Retention Policy", "risk": "medium" },
+                "tracking_cookies": { "score": 40, "max": 100, "label": "Analytics & Ad Tracking Pixels", "risk": "high" },
                 "user_rights": { "score": 60, "max": 100, "label": "Statutory Erasure Flow", "risk": "medium" },
-                "breach_history": { "score": 65, "max": 100, "label": "Standard Security Safeguards", "risk": "low" },
+                "breach_history": { "score": (10 if domain_breaches else 75), "max": 100, "label": ("🚨 Recorded Data Incident" if domain_breaches else "Standard Security Safeguards"), "risk": ("high" if domain_breaches else "low") },
                 "readability": { "score": 50, "max": 100, "label": "Standard Terms Readability", "risk": "medium" }
             },
             "compliance": {
@@ -78,10 +83,11 @@ async def crawl_and_rescore_domain(domain: str) -> Dict[str, Any]:
         }
     else:
         content_hash = hashlib.sha256(scraped_html.encode('utf-8')).hexdigest()[:16]
-        fresh_rating = analyze_live_policy(clean, scraped_html)
+        fresh_rating = analyze_live_policy(policy_url or clean, scraped_html, domain_breaches=domain_breaches)
         fresh_rating["last_crawled"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         fresh_rating["policy_hash"] = content_hash
         fresh_rating["policy_url"] = policy_url or f"https://www.{clean}/privacy-policy"
+        fresh_rating["breaches"] = domain_breaches
         fresh_rating["source"] = "automated_crawler"
 
     # 1. Update SQLite database

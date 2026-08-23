@@ -659,7 +659,14 @@ async def rescore_single_site(payload: dict):
     try:
         from app.services.crawler_service import crawl_and_rescore_domain
         result = await crawl_and_rescore_domain(domain)
-        return {"status": "success", "result": result}
+        score = result.get("new_score") if result.get("new_score") is not None else (result.get("score") if result.get("score") is not None else result.get("rating", {}).get("score", 50))
+        grade = result.get("new_grade") or result.get("grade") or result.get("rating", {}).get("grade", "C")
+        return {
+            "status": "success",
+            "new_score": score,
+            "new_grade": grade,
+            "result": result
+        }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

@@ -1433,7 +1433,9 @@
         });
         const data = await res.json();
         if (data.status === 'success') {
-          alert(`Rescored ${domain} successfully! New Grade: ${data.new_grade} (${data.new_score}/100)`);
+          const score = data.new_score ?? data.result?.score ?? data.result?.overall_score ?? 50;
+          const grade = data.new_grade ?? data.result?.grade ?? 'C';
+          alert(`Rescored ${domain} successfully! New Grade: ${grade} (${score}/100)`);
           loadSites();
         } else {
           alert(`Scrape alert: ${data.message || 'Could not fetch live policy.'}`);

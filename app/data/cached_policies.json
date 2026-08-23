@@ -141,7 +141,7 @@
         "dpo_contact": "dpo@meta.com",
         "lawful_basis_stated": true,
         "erasure_art17_disclosed": true,
-        "notes": "Fined \u20ac1.2B by Irish DPC for unlawful EU-US data transfers."
+        "notes": "Fined €1.2B by Irish DPC for unlawful EU-US data transfers."
       },
       "ccpa": {
         "compliant": true,
@@ -360,7 +360,7 @@
       "user_rights": {
         "score": 95,
         "max": 100,
-        "label": "Privacy By Design \u2014 Nothing to Erase",
+        "label": "Privacy By Design — Nothing to Erase",
         "risk": "low"
       },
       "breach_history": {
@@ -556,7 +556,7 @@
         "dpo_contact": "eu-dpo@amazon.lu",
         "lawful_basis_stated": true,
         "erasure_art17_disclosed": true,
-        "notes": "Fined \u20ac746M by Luxembourg CNPD in 2021 for targeted advertising consent issues."
+        "notes": "Fined €746M by Luxembourg CNPD in 2021 for targeted advertising consent issues."
       },
       "ccpa": {
         "compliant": true,
@@ -1440,5 +1440,171 @@
     ],
     "category": "E-Commerce & Retail",
     "source": "verified_policy"
+  },
+  {
+    "domain": "boat-lifestyle.com",
+    "policy_url": "https://www.boat-lifestyle.com/pages/privacy-policy",
+    "name": "boAt Privacy Policy | Data Protection & ",
+    "grade": "D",
+    "score": 33,
+    "color": "#f97316",
+    "summary": "Scanned live policy for boat-lifestyle.com. Scored 33/100 based on data sharing, user rights disclosures, and regional DPDP/GDPR alignment.",
+    "rubric": {
+      "data_sharing": {
+        "score": 58,
+        "max": 100,
+        "label": "Moderate Partner & Vendor Sharing",
+        "risk": "medium"
+      },
+      "retention": {
+        "score": 50,
+        "max": 100,
+        "label": "Standard Operational Retention",
+        "risk": "medium"
+      },
+      "tracking_cookies": {
+        "score": 60,
+        "max": 100,
+        "label": "Standard Functional & Analytics Tracking",
+        "risk": "medium"
+      },
+      "user_rights": {
+        "score": 100,
+        "max": 100,
+        "label": "Comprehensive User Rights & Erasure Flow",
+        "risk": "low"
+      },
+      "breach_history": {
+        "score": 10,
+        "max": 100,
+        "label": "🚨 Massive Customer Leak (7,500,000 Records)",
+        "risk": "high"
+      },
+      "readability": {
+        "score": 14,
+        "max": 100,
+        "label": "Dense Legal Terminology",
+        "risk": "high"
+      }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Grievance Officer. If You Are Not\n                ",
+        "grievance_email": null,
+        "redressal_period_days": 30,
+        "erasure_right_disclosed": true,
+        "notes": "DPDP / Grievance Officer information detected."
+      },
+      "gdpr": {
+        "compliant": true,
+        "dpo_contact": null,
+        "lawful_basis_stated": true,
+        "erasure_art17_disclosed": true,
+        "notes": "GDPR terms and Article 17 rights identified."
+      },
+      "ccpa": {
+        "compliant": false,
+        "opt_out_link": null,
+        "do_not_sell": false
+      }
+    },
+    "key_clauses": [
+      {
+        "type": "negative",
+        "text": "The payment information may also be shared with the third parties, as may be necessary, to complete your Transaction (for example, to process the payment made through the credit card)."
+      },
+      {
+        "type": "positive",
+        "text": "You may opt-out of receiving these messages from boAt at any time (see below)."
+      },
+      {
+        "type": "positive",
+        "text": "Any marketing communication will clearly identify its purpose and provide easy opt-out mechanisms."
+      },
+      {
+        "type": "positive",
+        "text": "Since Critical Emails would consist of important information you shall not have the option to opt-out of receiving Critical Emails."
+      }
+    ],
+    "findings": {
+      "data_sharing": [
+        "This includes details about fitness data, health information, and third-party integrations.",
+        "You hereby agree and acknowledge that\n                  a third party shall be taking Your payment information including but not limited to\n                  billing address billing address, method of payment, banking details, credit/debit/other payment information.",
+        "Details relating to your fitness and exercise information where you choose to share them; Government ID Data.",
+        "boAt may share this Personal Data with third party sponsors of such contests, competitions and promotions (irrespective of whether it is hosted by boAt), in accordance with the rules applicable to such contest, competition or promotion.",
+        "Third Party Service Providers: boAt works with third parties who provide services, including website hosting, credit card processing, data analysis, newsletter services, promotional activities, other administrative services and other services which enhance user experience."
+      ],
+      "retention": [
+        "When determining retention periods, we consider: whether the data is still required; legal compliance needs; and legitimate interests in fraud prevention and dispute resolution.",
+        "Once the purpose for which consent was obtained is successfully fulfilled, and there is no further legitimate basis for retention, your Personal Data will be permanently deleted or anonymized.",
+        "If you withdraw your consent for processing your Personal Data (where consent was the lawful basis for processing), we will delete your Personal Data unless retention is legally required or justified under a different lawful basis.",
+        "Upon verification, we will erase your Personal Data within the legally mandated timeline, except where retention is necessary for compliance with legal obligations or dispute resolution.",
+        "When assessing retention periods, we first carefully examine whether it is necessary to retain the personal data collected and, if retention is required, work to retain the Personal Data for the shortest possible period permissible under law."
+      ],
+      "user_rights": [
+        "The particulars regarding the collection, use, processing, transfer, and disclosure of your Personal Data, including the specific purposes of processing, will be provided in the consent notice displayed at the time of data collection - and/or this policy.",
+        "boAt collects health and fitness data only with your explicit consent and does not process this data for profiling, automated decision-making, or marketing purposes unless authorized by you; Fitness Information.",
+        "boAt may also use IP addresses to communicate or to block access by Visitors who fail to comply with the Policy and/or the Terms and Conditions of Use of the Website.",
+        "Cookies are an industry standard used by most websites and help facilitate users' ongoing access to and use of a particular website.",
+        "Cookies do not cause damage to the computer system or files, and only the website that transfers a particular cookie to the computer system can read, modify or delete such cookie."
+      ]
+    },
+    "key_concerns": [
+      "Overall privacy score (33/100) indicates significant privacy concerns."
+    ],
+    "contacts": {
+      "email": [
+        "info@imaginemarketingindia.com"
+      ],
+      "phone": [
+        "022-6918-1920"
+      ],
+      "address": [
+        "Avenue, Andheri Ghatkopar Link Road, Mumbai"
+      ],
+      "officer": [
+        "Data Protection Officer; Updating your preferences in your account settings; Writing to us at the contact information provi",
+        "Data Protection Officer through",
+        "Data Protection Officer, or submitting a formal deletion request"
+      ]
+    },
+    "category": "Web Service",
+    "source": "automated_crawler",
+    "last_crawled": "2026-08-24 00:03:21",
+    "policy_hash": "8a6f9388654c9725",
+    "breaches": [
+      {
+        "name": "Boat Lifestyle 7.5M Customer Records Leak",
+        "domain": "boat-lifestyle.com",
+        "breach_date": "April 2024",
+        "pwn_count": 7500000,
+        "description": "Personal data of 7.5 million Boat Lifestyle customers was leaked on dark web forums by hacker 'ShopifyGUY', exposing full names, phone numbers, email addresses, customer IDs, and delivery addresses.",
+        "data_classes": [
+          "Full names",
+          "Phone numbers",
+          "Email addresses",
+          "Shipping addresses",
+          "Customer IDs"
+        ],
+        "article_url": "https://news.google.com/search?q=Boat+Lifestyle+7.5+million+data+breach+April+2024",
+        "articles": [
+          {
+            "source": "Google News Coverage",
+            "url": "https://news.google.com/search?q=Boat+Lifestyle+7.5+million+data+breach+April+2024"
+          },
+          {
+            "source": "DuckDuckGo Intel",
+            "url": "https://duckduckgo.com/?q=Boat+Lifestyle+7.5+million+customer+data+leak+April+2024"
+          },
+          {
+            "source": "Security Incident Feed",
+            "url": "https://duckduckgo.com/?q=Boat+Lifestyle+ShopifyGUY+dark+web+leak"
+          }
+        ],
+        "remediation": "Exercise DPDP Section 12 Data Erasure with Boat Grievance Officer and watch for SMS/phishing scams.",
+        "opt_out_url": "https://www.boat-lifestyle.com/pages/privacy-policy"
+      }
+    ]
   }
 ]
