@@ -506,3 +506,52 @@ async def get_audit_log(
         }
     finally:
         conn.close()
+
+
+# ===== Legacy Crawler Endpoints =====
+
+@router.get("/crawler/status")
+async def get_crawler_progress():
+    """Returns real-time status of background crawler jobs."""
+    try:
+        from app.services.crawler_service import get_crawler_status
+        return get_crawler_status()
+    except Exception as e:
+        return {"is_running": False, "progress": 0, "total": 0, "error": str(e)}
+
+
+@router.post("/crawler/rescore-site")
+async def rescore_single_site(payload: dict):
+    """Scrapes and updates a single domain."""
+    domain = payload.get("domain")
+    if not domain:
+        raise HTTPException(status_code=400, detail="Missing domain parameter")
+    try:
+        from app.services.crawler_service import crawl_and_rescore_domain
+        result = await crawl_and_rescore_domain(domain)
+        return {"status": "success", "result": result}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/crawler/rescore-all")
+async def rescore_all_cached(background_tasks: BackgroundTasks):
+    """Triggers background rescore for all cached domains."""
+    try:
+        from app.services.crawler_service import run_bulk_crawler_job
+        background_tasks.add_task(run_bulk_crawler_job)
+        return {"status": "started", "message": "Bulk crawler job started in background"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/crawler/scan-top-1000")
+async def scan_top_1000(background_tasks: BackgroundTasks):
+    """Triggers background crawler for top 1,000 domains."""
+    try:
+        from app.services.crawler_service import run_top_1000_crawler_job
+        background_tasks.add_task(run_top_1000_crawler_job)
+        return {"status": "started", "message": "Top 1000 crawler job started in background"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
