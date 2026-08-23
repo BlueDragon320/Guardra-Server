@@ -195,8 +195,8 @@ async def run_top_1000_crawler_job() -> Dict[str, Any]:
 
     results = []
 
-    # Process in concurrent chunks of 5
-    chunk_size = 5
+    # Process in concurrent chunks of 12 (optimized for 1 CPU core + 2GB RAM)
+    chunk_size = 12
     for i in range(0, len(top_domains), chunk_size):
         chunk = top_domains[i:i+chunk_size]
         tasks = [crawl_and_rescore_domain(d["domain"]) for d in chunk]
@@ -212,8 +212,8 @@ async def run_top_1000_crawler_job() -> Dict[str, Any]:
         CRAWLER_STATUS["current_site"] = chunk[-1]["domain"] if chunk else None
         CRAWLER_STATUS["scanned_count"] = len(results)
 
-        # Brief rest between chunks
-        await asyncio.sleep(0.5)
+        # Non-blocking async interval
+        await asyncio.sleep(0.15)
 
     CRAWLER_STATUS["is_running"] = False
     CRAWLER_STATUS["current_site"] = None

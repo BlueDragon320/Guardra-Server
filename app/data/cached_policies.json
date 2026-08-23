@@ -105,147 +105,154 @@
   },
   {
     "domain": "meta.com",
-    "name": "Meta (Facebook & Instagram)",
+    "name": "Meta",
+    "policy_url": null,
     "grade": "F",
-    "score": 28,
-    "color": "red",
-    "summary": "Severe off-platform tracking via Meta Pixel and SDKs. Builds shadow profiles and uses personal data for targeted advertising algorithms.",
+    "score": 0,
+    "color": "#ef4444",
+    "summary": "🚨 Critical Privacy Alert: No valid privacy policy exists or could be found for Meta (meta.com).",
+    "breaches": [],
     "rubric": {
       "data_sharing": {
-        "score": 20,
+        "score": 0,
         "max": 100,
-        "label": "Deep Ad Network & Data Broker Exchanges",
-        "risk": "critical"
+        "label": "🚨 Undisclosed Data Sharing",
+        "risk": "high"
       },
       "retention": {
-        "score": 30,
+        "score": 0,
         "max": 100,
-        "label": "Retained Until Account Deletion (Backups Persist Longer)",
+        "label": "🚨 Undisclosed Retention Limits",
         "risk": "high"
       },
       "tracking_cookies": {
-        "score": 15,
+        "score": 0,
         "max": 100,
-        "label": "Meta Pixel Tracks Across Millions of External Websites",
-        "risk": "critical"
+        "label": "🚨 Unregulated Telemetry",
+        "risk": "high"
       },
       "user_rights": {
-        "score": 60,
+        "score": 0,
         "max": 100,
-        "label": "Accounts Center Settings Exist But Are Deeply Nested",
-        "risk": "medium"
+        "label": "🚨 No Erasure Rights",
+        "risk": "high"
       },
       "breach_history": {
-        "score": 20,
+        "score": 10,
         "max": 100,
-        "label": "Cambridge Analytica, 533M Scraped User Phone Numbers",
-        "risk": "critical"
+        "label": "No Disclosed Security Safeguards",
+        "risk": "high"
       },
       "readability": {
-        "score": 40,
+        "score": 0,
         "max": 100,
-        "label": "Dense Legal Terminology and Fragmented Sub-Policies",
+        "label": "No Policy Found",
         "risk": "high"
       }
     },
     "compliance": {
       "dpdp": {
-        "compliant": true,
-        "grievance_officer": "Ms. Spandana Prasad / Grievance Officer Meta India",
-        "grievance_email": "grievance-officer-india@meta.com",
-        "redressal_period_days": 15,
-        "erasure_right_disclosed": true,
-        "notes": "Names designated Indian grievance redressal contact per IT Rules / DPDP."
+        "compliant": false,
+        "grievance_officer": null,
+        "grievance_email": null,
+        "redressal_period_days": null,
+        "erasure_right_disclosed": false
       },
       "gdpr": {
         "compliant": false,
-        "dpo_contact": "dpo@meta.com",
-        "lawful_basis_stated": true,
-        "erasure_art17_disclosed": true,
-        "notes": "Fined €1.2B by Irish DPC for unlawful EU-US data transfers."
+        "dpo_contact": null,
+        "erasure_art17_disclosed": false
       },
       "ccpa": {
-        "compliant": true,
-        "opt_out_link": "https://www.facebook.com/adpreferences/ad_settings",
-        "do_not_sell": true
+        "compliant": false,
+        "do_not_sell": false
       }
     },
     "key_clauses": [
       {
         "type": "negative",
-        "text": "We collect information when you visit or use third-party websites and apps that use our technologies."
-      },
-      {
-        "type": "negative",
-        "text": "Your contacts, facial recognition metadata, and audio clips may be processed to enhance social graph matching."
-      },
-      {
-        "type": "positive",
-        "text": "Users can access 'Off-Facebook Activity' tool to disconnect browsing history from their account."
+        "text": "No public privacy policy could be located for this domain."
       }
     ],
-    "category": "Social Media"
+    "findings": {
+      "data_sharing": [
+        "No privacy policy was located to verify data sharing safeguards."
+      ],
+      "retention": [
+        "No privacy policy was located to verify data retention limits."
+      ],
+      "user_rights": [
+        "No mechanism disclosed for users to exercise data erasure or deletion rights."
+      ]
+    },
+    "key_concerns": [
+      "No privacy policy exists for meta.com. All data handling is completely undisclosed and unverified."
+    ],
+    "category": "Social Media",
+    "last_crawled": "2026-08-24 00:37:12",
+    "source": "missing_policy_zero_score"
   },
   {
     "domain": "swiggy.com",
-    "name": "Swiggy (Bundl Technologies)",
-    "grade": "C",
-    "score": 58,
-    "color": "amber",
-    "summary": "Collects precise real-time geolocation, device telemetry, and order behavior. Complies with DPDP Act Grievance Officer rules in India.",
+    "policy_url": "https://www.swiggy.com/privacy-policy",
+    "name": "Privacy Policy | Swiggy",
+    "grade": "F",
+    "score": 17,
+    "color": "#ef4444",
+    "summary": "Scanned live policy for swiggy.com. Scored 17/100 based on data sharing, user rights disclosures, and regional DPDP/GDPR alignment.",
     "rubric": {
       "data_sharing": {
-        "score": 50,
+        "score": 65,
         "max": 100,
-        "label": "Shared With Delivery Partners, Restaurants & Ad Partners",
+        "label": "Moderate Partner & Vendor Sharing",
         "risk": "medium"
       },
       "retention": {
-        "score": 55,
+        "score": 50,
         "max": 100,
-        "label": "Retained for Active Account Lifetime + Tax/Legal Period",
+        "label": "Standard Operational Retention",
         "risk": "medium"
       },
       "tracking_cookies": {
-        "score": 60,
+        "score": 65,
         "max": 100,
-        "label": "In-App Analytics & Firebase Event Tracking",
+        "label": "Standard Functional & Analytics Tracking",
         "risk": "medium"
       },
       "user_rights": {
-        "score": 70,
+        "score": 50,
         "max": 100,
-        "label": "Account Deletion Flow Supported via In-App Support",
-        "risk": "medium"
+        "label": "Opaque or Difficult Deletion Procedures",
+        "risk": "high"
       },
       "breach_history": {
-        "score": 75,
+        "score": 10,
         "max": 100,
-        "label": "No Major Public Mass Credentials Breaches",
-        "risk": "low"
+        "label": "🚨 Massive Customer Leak (2,500,000 Records)",
+        "risk": "high"
       },
       "readability": {
-        "score": 65,
+        "score": 10,
         "max": 100,
-        "label": "Relatively Clear E-Commerce Privacy Notice",
-        "risk": "low"
+        "label": "Dense Legal Terminology",
+        "risk": "high"
       }
     },
     "compliance": {
       "dpdp": {
-        "compliant": true,
-        "grievance_officer": "Grievance Redressal Officer, Swiggy",
-        "grievance_email": "grievances@swiggy.in",
-        "redressal_period_days": 30,
-        "erasure_right_disclosed": true,
-        "notes": "Explicitly complies with Indian DPDP Act 2023 and Consumer Protection Rules."
+        "compliant": false,
+        "grievance_officer": null,
+        "grievance_email": null,
+        "redressal_period_days": null,
+        "erasure_right_disclosed": false,
+        "notes": "Grievance Officer not found."
       },
       "gdpr": {
         "compliant": false,
         "dpo_contact": null,
         "lawful_basis_stated": false,
         "erasure_art17_disclosed": false,
-        "notes": "India-focused service; GDPR clauses omitted or localized."
+        "notes": "GDPR DPO not found."
       },
       "ccpa": {
         "compliant": false,
@@ -256,79 +263,125 @@
     "key_clauses": [
       {
         "type": "negative",
-        "text": "Continuous foreground and background GPS location collected during order lifecycle."
-      },
-      {
-        "type": "negative",
-        "text": "Order and food preference data shared with affiliated brand advertisers."
+        "text": "Collects device metrics, IP address, and cookie tokens for service operation."
       },
       {
         "type": "positive",
-        "text": "Users can request deletion of account and associated delivery address records via grievances@swiggy.in."
+        "text": "Users may contact the privacy desk to request access or deletion of their account records."
       }
     ],
-    "category": "Quick Commerce & Delivery"
+    "findings": {
+      "data_sharing": [],
+      "retention": [],
+      "user_rights": []
+    },
+    "key_concerns": [
+      "Overall privacy score (17/100) indicates significant privacy concerns.",
+      "Critical privacy risk — this site may be hostile to user privacy.",
+      "No clear data deletion or erasure mechanism disclosed."
+    ],
+    "contacts": {
+      "email": [],
+      "phone": [],
+      "address": [],
+      "officer": []
+    },
+    "category": "Quick Commerce & Delivery",
+    "source": "automated_crawler",
+    "last_crawled": "2026-08-24 00:37:13",
+    "policy_hash": "8281369ad365fbba",
+    "breaches": [
+      {
+        "name": "Swiggy Delivery Partner & User Telemetry Leak",
+        "domain": "swiggy.com",
+        "breach_date": "May 2020",
+        "pwn_count": 2500000,
+        "description": "Security researchers identified exposed database logs containing customer delivery coordinates, mobile numbers, and restaurant order histories.",
+        "data_classes": [
+          "Mobile numbers",
+          "Delivery coordinates"
+        ],
+        "article_url": "https://news.google.com/search?q=Swiggy+app+security+flaw+user+data+exposed",
+        "articles": [
+          {
+            "source": "Google News Coverage",
+            "url": "https://news.google.com/search?q=Swiggy+app+security+flaw+user+data+exposed"
+          },
+          {
+            "source": "Wikipedia Swiggy",
+            "url": "https://en.wikipedia.org/wiki/Swiggy"
+          },
+          {
+            "source": "DuckDuckGo Intel",
+            "url": "https://duckduckgo.com/?q=Swiggy+app+security+flaw+user+data+exposed"
+          }
+        ],
+        "remediation": "Periodically purge saved delivery locations in Swiggy account settings.",
+        "opt_out_url": "https://www.swiggy.com/privacy-policy"
+      }
+    ]
   },
   {
     "domain": "zomato.com",
-    "name": "Zomato",
-    "grade": "C-",
-    "score": 52,
-    "color": "amber",
-    "summary": "Tracks dining habits, payment tokens, and live locations. Discloses Indian DPDP grievance redressal framework.",
+    "policy_url": "https://www.zomato.com/policies/privacy/",
+    "name": "Privacy Policy | Zomato",
+    "grade": "F",
+    "score": 8,
+    "color": "#ef4444",
+    "summary": "Scanned live policy for zomato.com. Scored 8/100 based on data sharing, user rights disclosures, and regional DPDP/GDPR alignment.",
     "rubric": {
       "data_sharing": {
-        "score": 45,
+        "score": 0,
         "max": 100,
-        "label": "Shared with Restaurant Partners & Marketing Aggregators",
-        "risk": "medium"
+        "label": "Broad Third-Party & Commercial Sharing",
+        "risk": "high"
       },
       "retention": {
-        "score": 50,
+        "score": 36,
         "max": 100,
-        "label": "Retained for Operational & Fraud Prevention Audits",
-        "risk": "medium"
+        "label": "Extended or Indefinite Retention Window",
+        "risk": "high"
       },
       "tracking_cookies": {
-        "score": 50,
+        "score": 21,
         "max": 100,
-        "label": "Mixpanel, Google Analytics & Adjust SDKs",
-        "risk": "medium"
+        "label": "Extensive Tracking Pixels & Telemetry",
+        "risk": "high"
       },
       "user_rights": {
-        "score": 65,
+        "score": 36,
         "max": 100,
-        "label": "Manual Account Erasure by Contacting Support",
-        "risk": "medium"
+        "label": "Opaque or Difficult Deletion Procedures",
+        "risk": "high"
       },
       "breach_history": {
-        "score": 40,
+        "score": 10,
         "max": 100,
-        "label": "2017 Incident Impacted 17 Million Account Hashes",
+        "label": "🚨 Massive Customer Leak (17,000,000 Records)",
         "risk": "high"
       },
       "readability": {
-        "score": 60,
+        "score": 10,
         "max": 100,
-        "label": "Standard Commercial Privacy Agreement",
-        "risk": "medium"
+        "label": "Dense Legal Terminology",
+        "risk": "high"
       }
     },
     "compliance": {
       "dpdp": {
-        "compliant": true,
-        "grievance_officer": "Grievance Officer, Zomato Limited",
-        "grievance_email": "grievanceofficer@zomato.com",
-        "redressal_period_days": 30,
+        "compliant": false,
+        "grievance_officer": null,
+        "grievance_email": "privacy@zomato.com",
+        "redressal_period_days": null,
         "erasure_right_disclosed": true,
-        "notes": "Formally registers Grievance Redressal Officer in New Delhi per DPDP guidelines."
+        "notes": "Grievance Officer not found."
       },
       "gdpr": {
         "compliant": true,
         "dpo_contact": "privacy@zomato.com",
         "lawful_basis_stated": true,
-        "erasure_art17_disclosed": true,
-        "notes": "Contains international rider for international operations."
+        "erasure_art17_disclosed": false,
+        "notes": "GDPR DPO and Article 17 rights identified."
       },
       "ccpa": {
         "compliant": false,
@@ -339,18 +392,95 @@
     "key_clauses": [
       {
         "type": "negative",
-        "text": "Information regarding calls made through Zomato delivery masking may be recorded for quality."
+        "text": "This information may be shared with third-parties which assist in processing and fulfilling your requests, including PCI compliant payment gateway processors."
       },
       {
         "type": "negative",
-        "text": "Behavioral analytics used to power Hyperpure and restaurant advertising."
+        "text": "We may display this information on the Services, share it with businesses, and further distribute it to a wider audience through third party sites and services."
       },
       {
         "type": "positive",
-        "text": "Indian users have direct statutory right to withdraw consent under Section 6(4) of DPDP Act 2023."
+        "text": "We are not responsible for the function or accuracy of third-party opt-out mechanisms."
+      },
+      {
+        "type": "positive",
+        "text": "Deletion: If you would like to permanently delete your account, please use the \"Contact Us\" link at the bottom of every page (also located here)."
       }
     ],
-    "category": "Quick Commerce & Delivery"
+    "findings": {
+      "data_sharing": [
+        "This policy does not apply to information that you provide to, or that is collected by, any third-party, such as restaurants at which you make reservations and/or pay through Eternal Services and social networks that you use in connection with its Services.",
+        "The information we collect and how we use it ​ Eternal and its platforms and affiliate companies collect information from and about users of our Services, which includes: Your Personal Information :Information that relates to an identified or identifiable individual.",
+        "As detailed elsewhere in this policy, we collect this information through various means: directly from you, automatically during your interaction with our Services (utilizing technologies like cookies and tracking tools), and indirectly from third-party sources.",
+        "You may optionally provide us with this information through third-party sign-in services such as Facebook and Google.",
+        "We may display this information on the Services, share it with businesses, and further distribute it to a wider audience through third party sites and services."
+      ],
+      "retention": [
+        "By accessing or using Eternal’s Services and/or registering for an account with Eternal or any of its affiliates, you agree to this privacy policy and you provide your informed consent to the collection, use, disclosure, retention, and protection of your personal information as described here.",
+        "In such cases, we fetch and store whatever information is made available to us through these sign-in services.",
+        "If you exchange messages with others through the Services, we may store them in order to process and deliver them, allow you to manage them, and investigate possible violations of our Terms of Service and wrongdoing in connection with the Services.",
+        "We may do this to store your preferences and track your use of our applications.",
+        "Cookies and Other Electronic Tools: We, and third parties with whom we partner, may use cookies, pixel tags, web beacons, mobile device IDs, \"flash cookies\" and other similar files or technologies to collect and store information in respect to your use of the Services and third party websites."
+      ],
+      "user_rights": [
+        "This policy describes: the types of information that Eternal may collect from you when you access or use its websites, applications and other online services (collectively, referred as “Services”); and its practices for collecting, using, maintaining, protecting and disclosing that information.",
+        "By accessing or using Eternal’s Services and/or registering for an account with Eternal or any of its affiliates, you agree to this privacy policy and you provide your informed consent to the collection, use, disclosure, retention, and protection of your personal information as described here.",
+        "This may include data you provide directly, data generated through your use of the Services, or data obtained from third parties, which, either alone or in combination with other information we possess or are likely to access, can identify you.",
+        "This includes, but is not limited to, information about your internet connection, the specific device(s) and equipment you use to access our Services, and details about your usage patterns and interactions with the Services.",
+        "Information volunteered by you: As part of various service offerings provided by us from time to time, you may be given the opportunity to provide us with information that allows us to facilitate these services and in doing so, you consent to providing us with such information."
+      ]
+    },
+    "key_concerns": [
+      "Overall privacy score (8/100) indicates significant privacy concerns.",
+      "Critical privacy risk — this site may be hostile to user privacy.",
+      "Policy suggests some user data cannot be fully deleted: 'Unlike cookies, mobile device IDs cannot be deleted.'"
+    ],
+    "contacts": {
+      "email": [
+        "privacy@zomato.com"
+      ],
+      "phone": [],
+      "address": [],
+      "officer": [
+        "Data Protection Officer (DPO) at privacy@zomato"
+      ]
+    },
+    "category": "Quick Commerce & Delivery",
+    "source": "automated_crawler",
+    "last_crawled": "2026-08-24 00:37:15",
+    "policy_hash": "b5d37410d46aeaa0",
+    "breaches": [
+      {
+        "name": "Zomato 17M User Records Compromised",
+        "domain": "zomato.com",
+        "breach_date": "May 2017",
+        "pwn_count": 17000000,
+        "description": "Hacker 'nclay' breached Zomato's central database and put 17 million user emails, names, and salted password hashes up for sale on the dark web.",
+        "data_classes": [
+          "Email addresses",
+          "Usernames",
+          "Hashed passwords",
+          "Names"
+        ],
+        "article_url": "https://en.wikipedia.org/wiki/Zomato#Security_breaches",
+        "articles": [
+          {
+            "source": "Wikipedia Incident Log",
+            "url": "https://en.wikipedia.org/wiki/Zomato#Security_breaches"
+          },
+          {
+            "source": "Google News Archive",
+            "url": "https://news.google.com/search?q=Zomato+17+million+user+data+breach"
+          },
+          {
+            "source": "DuckDuckGo Intel",
+            "url": "https://duckduckgo.com/?q=Zomato+17+million+accounts+stolen+dark+web"
+          }
+        ],
+        "remediation": "Reset Zomato password and ensure password is not reused on other food or commerce apps.",
+        "opt_out_url": "https://www.zomato.com/privacy"
+      }
+    ]
   },
   {
     "domain": "duckduckgo.com",
@@ -994,86 +1124,101 @@
   },
   {
     "domain": "reddit.com",
+    "policy_url": "https://www.reddit.com/privacy-policy",
     "name": "Reddit",
     "grade": "C",
-    "score": 55,
-    "color": "amber",
-    "summary": "Monetizes content via AI training licensing agreements (e.g. Google deal) and behavioral ad targeting. Provides standard account deletion.",
+    "score": 54,
+    "color": "#f59e0b",
+    "summary": "Scanned live policy for reddit.com. Scored 54/100 based on data sharing, user rights disclosures, and regional DPDP/GDPR alignment.",
     "rubric": {
       "data_sharing": {
-        "score": 45,
+        "score": 65,
         "max": 100,
-        "label": "Public Post Data Licensed to Commercial AI Labs",
+        "label": "Moderate Partner & Vendor Sharing",
         "risk": "medium"
       },
       "retention": {
-        "score": 55,
+        "score": 50,
         "max": 100,
-        "label": "Deleted Posts May Leave Disassociated Footprint",
+        "label": "Standard Operational Retention",
         "risk": "medium"
       },
       "tracking_cookies": {
-        "score": 50,
+        "score": 65,
         "max": 100,
-        "label": "Tracking Pixels & Ad Impression Beacons",
+        "label": "Standard Functional & Analytics Tracking",
         "risk": "medium"
       },
       "user_rights": {
-        "score": 75,
+        "score": 50,
         "max": 100,
-        "label": "Instant Account Deletion and GDPR Export Flow",
-        "risk": "low"
+        "label": "Opaque or Difficult Deletion Procedures",
+        "risk": "high"
       },
       "breach_history": {
-        "score": 55,
+        "score": 75,
         "max": 100,
-        "label": "2018 Backup Breach, 2023 Phishing Incident",
+        "label": "Standard Technical Safeguards",
         "risk": "medium"
       },
       "readability": {
-        "score": 70,
+        "score": 36,
         "max": 100,
-        "label": "Clear Side-by-Side Summary Explanations",
-        "risk": "low"
+        "label": "Dense Legal Terminology",
+        "risk": "high"
       }
     },
     "compliance": {
       "dpdp": {
-        "compliant": true,
-        "grievance_officer": "Reddit Grievance Officer",
-        "grievance_email": "grievance-officer-india@reddit.com",
-        "redressal_period_days": 30,
-        "erasure_right_disclosed": true,
-        "notes": "Maintains dedicated grievance contact for Indian users."
+        "compliant": false,
+        "grievance_officer": null,
+        "grievance_email": null,
+        "redressal_period_days": null,
+        "erasure_right_disclosed": false,
+        "notes": "Grievance Officer not found."
       },
       "gdpr": {
-        "compliant": true,
-        "dpo_contact": "reddit-dpo@reddit.com",
-        "lawful_basis_stated": true,
-        "erasure_art17_disclosed": true,
-        "notes": "Appointed European Data Protection Representative."
+        "compliant": false,
+        "dpo_contact": null,
+        "lawful_basis_stated": false,
+        "erasure_art17_disclosed": false,
+        "notes": "GDPR DPO not found."
       },
       "ccpa": {
-        "compliant": true,
-        "opt_out_link": "https://www.reddit.com/settings/privacy",
-        "do_not_sell": true
+        "compliant": false,
+        "opt_out_link": null,
+        "do_not_sell": false
       }
     },
     "key_clauses": [
       {
         "type": "negative",
-        "text": "We may license public Reddit content to third parties, including for machine learning model training."
-      },
-      {
-        "type": "negative",
-        "text": "Personalized ads are served based on subreddits visited and content interactions."
+        "text": "Collects device metrics, IP address, and cookie tokens for service operation."
       },
       {
         "type": "positive",
-        "text": "You can toggle off 'Personalize ads based on information from our partners' in User Settings."
+        "text": "Users may contact the privacy desk to request access or deletion of their account records."
       }
     ],
-    "category": "Social & Community"
+    "findings": {
+      "data_sharing": [],
+      "retention": [],
+      "user_rights": []
+    },
+    "key_concerns": [
+      "No clear data deletion or erasure mechanism disclosed."
+    ],
+    "contacts": {
+      "email": [],
+      "phone": [],
+      "address": [],
+      "officer": []
+    },
+    "category": "Social & Community",
+    "source": "automated_crawler",
+    "last_crawled": "2026-08-24 00:37:13",
+    "policy_hash": "fea8f13541f04784",
+    "breaches": []
   },
   {
     "domain": "github.com",
@@ -1373,86 +1518,132 @@
   },
   {
     "domain": "x.com",
-    "name": "X (formerly Twitter)",
-    "grade": "D",
-    "score": 36,
-    "color": "amber",
-    "summary": "Aggressively scrapes user posts to train Grok AI model by default. Sells firehose feed access and operates targeted advertising.",
+    "policy_url": "https://x.com/privacy-policy",
+    "name": "X.Com",
+    "grade": "F",
+    "score": 20,
+    "color": "#ef4444",
+    "summary": "Scanned live policy for x.com. Scored 20/100 based on data sharing, user rights disclosures, and regional DPDP/GDPR alignment.",
     "rubric": {
       "data_sharing": {
-        "score": 25,
+        "score": 65,
         "max": 100,
-        "label": "Posts Fed Directly into Grok / xAI Models",
-        "risk": "critical"
-      },
-      "retention": {
-        "score": 35,
-        "max": 100,
-        "label": "Public Posts Mirrored Across Global Search Engines",
-        "risk": "high"
-      },
-      "tracking_cookies": {
-        "score": 35,
-        "max": 100,
-        "label": "Conversion Tracking & Embedded Tweet Telemetry",
-        "risk": "high"
-      },
-      "user_rights": {
-        "score": 60,
-        "max": 100,
-        "label": "Account Deactivation & GDPR Export Supported",
+        "label": "Moderate Partner & Vendor Sharing",
         "risk": "medium"
       },
-      "breach_history": {
-        "score": 25,
-        "max": 100,
-        "label": "2022 200M+ Email Leak, FTC Privacy Consent Violations",
-        "risk": "critical"
-      },
-      "readability": {
+      "retention": {
         "score": 50,
         "max": 100,
-        "label": "Frequently Altered Legal Terms",
+        "label": "Standard Operational Retention",
+        "risk": "medium"
+      },
+      "tracking_cookies": {
+        "score": 65,
+        "max": 100,
+        "label": "Standard Functional & Analytics Tracking",
+        "risk": "medium"
+      },
+      "user_rights": {
+        "score": 50,
+        "max": 100,
+        "label": "Opaque or Difficult Deletion Procedures",
+        "risk": "high"
+      },
+      "breach_history": {
+        "score": 10,
+        "max": 100,
+        "label": "🚨 Massive Customer Leak (200,000,000 Records)",
+        "risk": "high"
+      },
+      "readability": {
+        "score": 56,
+        "max": 100,
+        "label": "Moderate Complexity",
         "risk": "medium"
       }
     },
     "compliance": {
       "dpdp": {
-        "compliant": true,
-        "grievance_officer": "Resident Grievance Officer, X Corp India",
-        "grievance_email": "grievance-officer-in@x.com",
-        "redressal_period_days": 15,
-        "erasure_right_disclosed": true,
-        "notes": "Complies with Indian statutory Grievance Officer posting requirements."
+        "compliant": false,
+        "grievance_officer": null,
+        "grievance_email": null,
+        "redressal_period_days": null,
+        "erasure_right_disclosed": false,
+        "notes": "Grievance Officer not found."
       },
       "gdpr": {
         "compliant": false,
-        "dpo_contact": "dpo@x.com",
-        "lawful_basis_stated": true,
-        "erasure_art17_disclosed": true,
-        "notes": "Sued by 9 EU Data Protection Authorities for training Grok on user data without prior consent."
+        "dpo_contact": null,
+        "lawful_basis_stated": false,
+        "erasure_art17_disclosed": false,
+        "notes": "GDPR DPO not found."
       },
       "ccpa": {
-        "compliant": true,
-        "opt_out_link": "https://x.com/settings/account/personalization",
-        "do_not_sell": true
+        "compliant": false,
+        "opt_out_link": null,
+        "do_not_sell": false
       }
     },
     "key_clauses": [
       {
         "type": "negative",
-        "text": "We may use your posts and interactions to train our machine learning and AI models (including Grok)."
-      },
-      {
-        "type": "negative",
-        "text": "Location information may be inferred from your IP address or wireless connections."
+        "text": "Collects device metrics, IP address, and cookie tokens for service operation."
       },
       {
         "type": "positive",
-        "text": "Users can disable Grok training in 'Settings > Privacy and Safety > Grok & Data Sharing'."
+        "text": "Users may contact the privacy desk to request access or deletion of their account records."
       }
     ],
-    "category": "Social Media"
+    "findings": {
+      "data_sharing": [],
+      "retention": [],
+      "user_rights": []
+    },
+    "key_concerns": [
+      "Overall privacy score (20/100) indicates significant privacy concerns.",
+      "Critical privacy risk — this site may be hostile to user privacy.",
+      "No clear data deletion or erasure mechanism disclosed."
+    ],
+    "contacts": {
+      "email": [],
+      "phone": [],
+      "address": [],
+      "officer": []
+    },
+    "category": "Social Media",
+    "source": "automated_crawler",
+    "last_crawled": "2026-08-24 00:37:14",
+    "policy_hash": "c0d4827307072d39",
+    "breaches": [
+      {
+        "name": "Twitter / X 200M Account Scrape",
+        "domain": "x.com",
+        "breach_date": "January 2023",
+        "pwn_count": 200000000,
+        "description": "Over 200 million Twitter records scraped via API vulnerability linking email addresses directly to public Twitter handles and creation dates.",
+        "data_classes": [
+          "Email addresses",
+          "Usernames"
+        ],
+        "article_url": "https://en.wikipedia.org/wiki/Twitter#2023_data_leak",
+        "articles": [
+          {
+            "source": "Wikipedia 2023 Leak",
+            "url": "https://en.wikipedia.org/wiki/Twitter#2023_data_leak"
+          },
+          {
+            "source": "Google News Report",
+            "url": "https://news.google.com/search?q=Twitter+200+million+user+emails+leaked"
+          },
+          {
+            "source": "DuckDuckGo Intel",
+            "url": "https://duckduckgo.com/?q=Twitter+200+million+emails+leaked+dark+web"
+          }
+        ],
+        "remediation": "Switch X/Twitter account to a masked email alias via SimpleLogin or Firefox Relay.",
+        "opt_out_url": "https://x.com/settings/account"
+      }
+    ]
   },
   {
     "domain": "apple.com",

@@ -14,6 +14,14 @@ services:
       - HOST=0.0.0.0
       - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-*}
       - DATABASE_PATH=/app/data/guardra.db
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 2048M
+        reservations:
+          cpus: '0.5'
+          memory: 512M
     volumes:
       - guardra-data:/app/data
     healthcheck:
