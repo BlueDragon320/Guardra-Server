@@ -1346,5 +1346,99 @@
     "source": "automated_crawler",
     "last_crawled": "2026-08-23 17:24:25",
     "policy_hash": "37afbda5a613f9f1"
+  },
+  {
+    "domain": "croma.com",
+    "name": "Croma (Infiniti Retail - Tata Group)",
+    "policy_url": "https://www.croma.com/privacy-policy",
+    "grade": "C+",
+    "score": 62,
+    "color": "amber",
+    "summary": "Tata Group retail privacy policy. Discloses commercial partner sharing for order fulfillment, analytics cookies, and DPDP grievance redressal mechanism.",
+    "rubric": {
+      "data_sharing": {
+        "score": 58,
+        "max": 100,
+        "label": "Shared with Logistics & Tata Group Affiliates",
+        "risk": "medium"
+      },
+      "retention": {
+        "score": 60,
+        "max": 100,
+        "label": "Operational & Statutory Tax Retention",
+        "risk": "medium"
+      },
+      "tracking_cookies": {
+        "score": 55,
+        "max": 100,
+        "label": "Analytics, Retargeting & Session Cookies",
+        "risk": "medium"
+      },
+      "user_rights": {
+        "score": 68,
+        "max": 100,
+        "label": "Email Request for Data Correction & Erasure",
+        "risk": "medium"
+      },
+      "breach_history": {
+        "score": 75,
+        "max": 100,
+        "label": "No Major Public Data Breaches Recorded",
+        "risk": "low"
+      },
+      "readability": {
+        "score": 60,
+        "max": 100,
+        "label": "Clear Commercial E-Commerce Terms",
+        "risk": "medium"
+      }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Grievance Officer, Infiniti Retail Limited",
+        "grievance_email": "grievance.officer@croma.com",
+        "redressal_period_days": 30,
+        "erasure_right_disclosed": true,
+        "notes": "Statutory Indian grievance redressal published under IT Rules & DPDP Act 2023."
+      },
+      "gdpr": {
+        "compliant": false,
+        "dpo_contact": null,
+        "lawful_basis_stated": true,
+        "erasure_art17_disclosed": true
+      },
+      "ccpa": {
+        "compliant": false,
+        "do_not_sell": false
+      }
+    },
+    "key_clauses": [
+      {
+        "type": "positive",
+        "text": "We do not sell your personal information to third parties without your explicit consent."
+      },
+      {
+        "type": "negative",
+        "text": "Information is shared with group companies and authorized service partners for payment processing and delivery logistics."
+      }
+    ],
+    "findings": {
+      "data_sharing": [
+        "Personal data is shared with Tata Group entities and authorized logistics partners.",
+        "We implement industry-standard encryption for electronic payment transactions."
+      ],
+      "retention": [
+        "Customer records are retained for as long as necessary to provide services and comply with statutory tax laws."
+      ],
+      "user_rights": [
+        "Users may write to grievance.officer@croma.com to access, update, or request deletion of their profile records."
+      ]
+    },
+    "key_concerns": [
+      "Retargeting cookies and advertising pixels are utilized across partner networks."
+    ],
+    "category": "E-Commerce & Retail",
+    "source": "verified_policy"
   }
 ]
