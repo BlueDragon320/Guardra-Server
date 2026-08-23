@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="dark selection-coral">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,7 +8,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -16,13 +16,14 @@
         extend: {
           colors: {
             brand: '#10b981',
-            darkbg: '#09090b',
-            surface: '#121214',
-            surfaceHover: '#1c1c20',
-            bordercol: '#27272a'
+            accent: '#FF6B50',
+            darkbg: '#050505',
+            surface: '#111111',
+            surfaceHover: '#181818',
+            bordercol: '#222222'
           },
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
+            sans: ['Satoshi', 'Inter', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace']
           }
         }
@@ -30,25 +31,33 @@
     }
   </script>
   <style>
-    body { background-color: #09090b; color: #f4f4f5; font-family: 'Inter', sans-serif; }
+    @font-face {
+      font-family: 'Satoshi';
+      src: url('https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/4aed2f49-a476-436f-bae8-f31aa18f46fa/1767920861040-60c1c779/Satoshi-Variable.woff2') format('woff2');
+      font-weight: 300 900;
+      font-display: swap;
+      font-style: normal;
+    }
+    body { background-color: #050505; color: #ebebeb; font-family: 'Satoshi', 'Inter', sans-serif; }
+    .selection-coral::selection { background-color: #FF6B50; color: white; }
     ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #09090b; }
-    ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+    ::-webkit-scrollbar-track { background: #050505; }
+    ::-webkit-scrollbar-thumb { background: #222222; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #333333; }
   </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased">
+<body class="min-h-screen flex flex-col antialiased selection-coral">
 
   <!-- Top Navbar -->
-  <header class="h-14 border-b border-bordercol px-6 flex items-center justify-between bg-surface sticky top-0 z-30">
+  <header class="h-14 border-b border-bordercol px-6 flex items-center justify-between bg-surface/90 backdrop-blur-md sticky top-0 z-30">
     <div class="flex items-center gap-3">
-      <div class="w-7 h-7 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center text-brand font-mono font-bold text-xs">
-        🛡️
+      <div class="w-8 h-8 rounded bg-white flex items-center justify-center text-black font-black text-lg transition-transform hover:rotate-12 cursor-pointer">
+        G.
       </div>
       <div>
-        <h1 class="text-sm font-semibold tracking-tight text-zinc-100 flex items-center gap-2">
+        <h1 class="text-sm font-bold tracking-tight text-zinc-100 flex items-center gap-2">
           Guardra Server Admin
-          <span class="text-[10px] font-mono text-zinc-400 px-1.5 py-0.5 rounded bg-zinc-800 border border-bordercol">Production v1.0</span>
+          <span class="text-[10px] font-mono text-zinc-400 px-1.5 py-0.5 rounded bg-zinc-900 border border-bordercol">Midnight v2.0</span>
         </h1>
       </div>
     </div>

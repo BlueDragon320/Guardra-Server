@@ -172,12 +172,20 @@ def _seed_cached_policies():
         conn.close()
 
 
+from fastapi import FastAPI, Response, Request
+
 @app.get("/")
-async def root():
+async def root(request: Request):
+    static_landing = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", "landing.html")
+    accept = request.headers.get("accept", "")
+    if "text/html" in accept and os.path.exists(static_landing):
+        from fastapi.responses import FileResponse
+        return FileResponse(static_landing)
     return {
         "service": "Guardra Privacy Suite API",
         "version": "2.0.0",
         "status": "online",
+        "portal": "/admin",
         "documentation": "/docs",
         "admin_endpoints": "/api/admin/stats",
         "health": "/api/health"

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guardra | Autonomous Privacy & DPDP Compliance Engine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    @font-face {
+      font-family: 'Satoshi';
+      src: url('https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/4aed2f49-a476-436f-bae8-f31aa18f46fa/1767920861040-60c1c779/Satoshi-Variable.woff2') format('woff2');
+      font-weight: 300 900;
+      font-display: swap;
+      font-style: normal;
+    }
+
+    :root {
+      --font-satoshi: 'Satoshi', 'Inter', sans-serif;
+      --color-bg: #050505;
+      --color-accent: #FF6B50;
+      --color-emerald: #10B981;
+    }
+
+    body {
+      font-family: var(--font-satoshi);
+      background-color: var(--color-bg);
+      color: #ebebeb;
+      scroll-behavior: smooth;
+    }
+
+    .selection-coral::selection {
+      background-color: var(--color-accent);
+      color: white;
+    }
+
+    .glass-nav {
+      background: rgba(17, 17, 17, 0.82);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-text {
+      font-size: 13vw;
+      line-height: 0.88;
+      letter-spacing: -0.05em;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .animate-float {
+      animation: float 4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#050505] selection-coral overflow-x-hidden antialiased">
+  
+  <!-- Top Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-[100] px-6 lg:px-12 py-5 flex items-center justify-between text-sm font-medium tracking-tight glass-nav">
+    <div class="flex items-center gap-10">
+      <a href="/" id="nav-logo" class="flex items-center gap-3 group">
+        <div class="w-8 h-8 bg-white rounded flex items-center justify-center text-black font-black text-xl transition-transform group-hover:rotate-12">
+          G.
+        </div>
+        <span class="font-bold text-white tracking-tight hidden sm:inline">Guardra</span>
+      </a>
+      
+      <div class="hidden lg:flex items-center gap-8 text-[#888888]">
+        <a href="#features" class="hover:text-white transition-colors">Capabilities</a>
+        <a href="#scanner" class="hover:text-white transition-colors">Live Policy Scanner</a>
+        <a href="#showcase" class="hover:text-white transition-colors">1000+ Monitored Sites</a>
+        <a href="/admin" class="hover:text-[#FF6B50] transition-colors">Admin Portal</a>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4 sm:gap-6">
+      <a href="/docs" target="_blank" class="hidden md:block text-[#888888] hover:text-white transition-colors font-mono text-xs">
+        API Docs
+      </a>
+      <a href="/admin" class="px-4 py-2 bg-[#1a1a1a] hover:bg-white hover:text-black border border-[#333333] rounded-lg text-xs font-semibold tracking-wide transition-all duration-300">
+        Admin Portal &rarr;
+      </a>
+    </div>
+  </nav>
+
+  <!-- Floating Bottom Navigation Dock -->
+  <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[110] hidden md:flex items-center gap-2 p-2 glass-nav rounded-2xl shadow-2xl">
+    <div class="flex items-center gap-1 pr-4 border-r border-[#333333]">
+      <a href="/" class="p-3 hover:bg-[#222222] rounded-xl transition-all group" title="Home">
+        <iconify-icon icon="lucide:shield-check" class="text-xl text-white"></iconify-icon>
+      </a>
+      <a href="#scanner" class="p-3 hover:bg-[#222222] rounded-xl transition-all group" title="Scanner">
+        <iconify-icon icon="lucide:search" class="text-xl text-white"></iconify-icon>
+      </a>
+      <a href="#features" class="p-3 hover:bg-[#222222] rounded-xl transition-all group" title="Features">
+        <iconify-icon icon="lucide:cpu" class="text-xl text-white"></iconify-icon>
+      </a>
+      <a href="/admin" class="p-3 hover:bg-[#222222] rounded-xl transition-all group" title="Admin Analytics">
+        <iconify-icon icon="lucide:line-chart" class="text-xl text-emerald-400"></iconify-icon>
+      </a>
+    </div>
+    <a href="/admin" id="floating-admin-btn" class="px-6 py-3 bg-[#FF6B50] hover:bg-[#E55A40] text-black font-bold text-xs tracking-wider uppercase rounded-xl transition-all">
+      Open Admin
+    </a>
+  </div>
+
+  <!-- Hero Section (Midnight Editorial Display) -->
+  <header class="relative min-h-screen w-full flex flex-col items-center justify-center pt-24 pb-16 px-6">
+    <div class="absolute inset-0 z-0 pointer-events-none">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_#1a1a1a_0%,_#050505_70%)] opacity-70"></div>
+    </div>
+
+    <!-- Editorial Badge -->
+    <div class="relative z-10 flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#111111] border border-[#222222] text-[#888888] text-xs font-mono mb-8 tracking-wide">
+      <span class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
+      DPDP Act 2023 & GDPR Statutory Privacy Intelligence
+    </div>
+
+    <!-- Huge Display Headline -->
+    <div class="relative z-10 text-center select-none">
+      <h1 class="hero-text font-extrabold text-white text-center">
+        /privacy
+      </h1>
+      <p class="mt-6 text-lg sm:text-2xl text-[#888888] max-w-2xl mx-auto font-normal leading-relaxed tracking-tight">
+        Autonomous AI policy scoring, tracking neutralization, and statutory deletion requests for modern enterprises and privacy-conscious users.
+      </p>
+    </div>
+
+    <!-- Quick CTA & Search Input -->
+    <div class="relative z-10 mt-12 w-full max-w-xl flex flex-col sm:flex-row items-center gap-3">
+      <div class="relative w-full">
+        <input 
+          type="text" 
+          id="heroDomainInput" 
+          placeholder="Scan any domain (e.g. croma.com, swiggy.com)..." 
+          class="w-full bg-[#111111] border border-[#2a2a2a] focus:border-[#FF6B50] rounded-xl px-4 py-3.5 text-sm font-mono text-white placeholder-[#555555] focus:outline-none transition"
+          onkeydown="if(event.key==='Enter') executeLiveScan()"
+        />
+      </div>
+      <button 
+        onclick="executeLiveScan()" 
+        class="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-[#FF6B50] hover:text-white text-black font-bold rounded-xl text-sm transition-all duration-300 shrink-0 flex items-center justify-center gap-2 font-mono"
+      >
+        <span>Evaluate</span>
+        <iconify-icon icon="lucide:arrow-right"></iconify-icon>
+      </button>
+    </div>
+
+    <!-- Bottom UI Overlays -->
+    <div class="w-full max-w-7xl mx-auto mt-24 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 pt-8 border-t border-[#161616]">
+      <div class="flex items-center gap-4 group">
+        <div class="flex -space-x-3">
+          <div class="w-9 h-9 rounded-full bg-[#222222] border-2 border-[#050505] flex items-center justify-center font-mono font-bold text-[10px] text-emerald-400">92</div>
+          <div class="w-9 h-9 rounded-full bg-[#222222] border-2 border-[#050505] flex items-center justify-center font-mono font-bold text-[10px] text-amber-400">62</div>
+          <div class="w-9 h-9 rounded-full bg-[#222222] border-2 border-[#050505] flex items-center justify-center font-mono font-bold text-[10px] text-rose-400">42</div>
+        </div>
+        <p class="text-xs font-medium leading-tight text-[#888888] group-hover:text-white transition-colors">
+          1000+ Verified Policies.<br/><span class="font-mono text-[11px] text-[#666666]">Real-time DPDP Officer Audits</span>
+        </p>
+      </div>
+
+      <div class="flex items-center gap-6 text-xs text-[#666666] font-mono">
+        <span>⚡ 28ms Response Time</span>
+        <span>🛡️ Zero-Knowledge Radar</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Live Policy Scanner Section -->
+  <section id="scanner" class="py-28 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#161616]">
+    <div class="flex items-center gap-3 mb-8">
+      <div class="w-2 h-2 rounded-full bg-[#FF6B50] animate-pulse"></div>
+      <span class="text-[10px] font-bold tracking-[0.3em] text-[#666666] uppercase">Instant Verification Engine</span>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div class="lg:col-span-5 space-y-6">
+        <h2 class="text-3xl md:text-5xl font-bold leading-tight tracking-tight text-white">
+          Inspect how websites treat your data.
+        </h2>
+        <p class="text-[#888888] text-sm leading-relaxed">
+          Guardra analyzes live privacy notices against the 6 statutory pillars: vendor data sharing, retention limits, tracking cookies, user rights, breach history, and DPDP grievance redressal officers.
+        </p>
+
+        <div class="flex items-center gap-2 flex-wrap pt-2">
+          <span class="text-xs text-[#666666]">Quick test:</span>
+          <button onclick="setDomainAndScan('croma.com')" class="px-2.5 py-1 rounded-md bg-[#111111] border border-[#222222] hover:border-[#FF6B50] text-xs font-mono text-[#aaaaaa] transition">croma.com</button>
+          <button onclick="setDomainAndScan('kletech.ac.in')" class="px-2.5 py-1 rounded-md bg-[#111111] border border-[#222222] hover:border-[#FF6B50] text-xs font-mono text-[#aaaaaa] transition">kletech.ac.in</button>
+          <button onclick="setDomainAndScan('gonoise.com')" class="px-2.5 py-1 rounded-md bg-[#111111] border border-[#222222] hover:border-[#FF6B50] text-xs font-mono text-[#aaaaaa] transition">gonoise.com</button>
+          <button onclick="setDomainAndScan('swiggy.com')" class="px-2.5 py-1 rounded-md bg-[#111111] border border-[#222222] hover:border-[#FF6B50] text-xs font-mono text-[#aaaaaa] transition">swiggy.com</button>
+        </div>
+      </div>
+
+      <!-- Live Scan Result Card -->
+      <div class="lg:col-span-7 bg-[#111111] rounded-[2rem] border border-[#222222] p-6 sm:p-8 relative overflow-hidden">
+        <div id="scanLoading" class="hidden absolute inset-0 bg-black/80 backdrop-blur-sm z-20 flex flex-col items-center justify-center space-y-3">
+          <div class="w-8 h-8 rounded-full border-2 border-emerald-400 border-t-transparent animate-spin"></div>
+          <span class="text-xs font-mono text-emerald-400">Analyzing live legal text & DPDP clauses...</span>
+        </div>
+
+        <div class="flex items-start justify-between pb-6 border-b border-[#1c1c1c] gap-4">
+          <div>
+            <div id="resDomain" class="text-2xl font-bold font-mono text-white">croma.com</div>
+            <div id="resName" class="text-xs text-[#888888] mt-0.5">Infiniti Retail Limited (Tata Group)</div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div id="resGradeBadge" class="px-3 py-1 rounded-lg bg-amber-950/40 border border-amber-800 text-amber-400 font-mono font-bold text-lg">
+              C+
+            </div>
+            <div class="text-right">
+              <div id="resScore" class="text-2xl font-extrabold font-mono text-white">62</div>
+              <div class="text-[10px] text-[#666666] font-mono">OUT OF 100</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 Pillar Rubric Bars -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 py-6 border-b border-[#1c1c1c]" id="resRubricGrid">
+          <div class="bg-[#161616] p-3.5 rounded-xl border border-[#222222] space-y-1.5">
+            <div class="flex justify-between text-xs font-mono text-[#aaaaaa]">
+              <span>Data Sharing</span>
+              <span id="scoreSharing" class="font-bold text-amber-400">60%</span>
+            </div>
+            <div class="w-full bg-[#222222] h-1.5 rounded-full overflow-hidden">
+              <div id="barSharing" class="bg-amber-400 h-full rounded-full" style="width: 60%"></div>
+            </div>
+          </div>
+
+          <div class="bg-[#161616] p-3.5 rounded-xl border border-[#222222] space-y-1.5">
+            <div class="flex justify-between text-xs font-mono text-[#aaaaaa]">
+              <span>Data Retention</span>
+              <span id="scoreRetention" class="font-bold text-amber-400">65%</span>
+            </div>
+            <div class="w-full bg-[#222222] h-1.5 rounded-full overflow-hidden">
+              <div id="barRetention" class="bg-amber-400 h-full rounded-full" style="width: 65%"></div>
+            </div>
+          </div>
+
+          <div class="bg-[#161616] p-3.5 rounded-xl border border-[#222222] space-y-1.5">
+            <div class="flex justify-between text-xs font-mono text-[#aaaaaa]">
+              <span>Tracking Cookies</span>
+              <span id="scoreCookies" class="font-bold text-rose-400">45%</span>
+            </div>
+            <div class="w-full bg-[#222222] h-1.5 rounded-full overflow-hidden">
+              <div id="barCookies" class="bg-rose-400 h-full rounded-full" style="width: 45%"></div>
+            </div>
+          </div>
+
+          <div class="bg-[#161616] p-3.5 rounded-xl border border-[#222222] space-y-1.5">
+            <div class="flex justify-between text-xs font-mono text-[#aaaaaa]">
+              <span>User Deletion Rights</span>
+              <span id="scoreRights" class="font-bold text-emerald-400">75%</span>
+            </div>
+            <div class="w-full bg-[#222222] h-1.5 rounded-full overflow-hidden">
+              <div id="barRights" class="bg-emerald-400 h-full rounded-full" style="width: 75%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Statutory Proof & DPDP Officer Excerpt -->
+        <div class="pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <div class="text-[11px] text-[#666666] uppercase font-mono tracking-wider">Statutory Grievance Officer</div>
+            <div id="resOfficer" class="text-xs font-semibold text-white mt-0.5">Mr. Priyanand S • grievance.officer@croma.com</div>
+          </div>
+          <a id="resPolicyLink" href="https://www.croma.com/privacy-policy" target="_blank" class="px-4 py-2 bg-[#1c1c1c] hover:bg-white hover:text-black border border-[#333333] rounded-lg text-xs font-mono transition">
+            View Source Policy &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities Grid (Editorial Bento) -->
+  <section id="features" class="py-32 px-6 md:px-12 max-w-7xl mx-auto">
+    <div class="flex items-center gap-3 mb-10">
+      <div class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></div>
+      <span class="text-[10px] font-bold tracking-[0.3em] text-[#666666] uppercase">Why leave privacy to chance?</span>
+    </div>
+
+    <h2 class="text-4xl md:text-7xl font-medium leading-[1.05] tracking-tight text-white max-w-5xl mb-24">
+      Autonomous security that helps you <span class="text-[#666666]">control your digital identity</span> and enforce legal rights.
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Card 1 -->
+      <div class="bg-[#111111] rounded-[2.5rem] p-10 md:p-12 min-h-[480px] flex flex-col justify-between relative overflow-hidden group hover:bg-[#161616] transition-all duration-500 border border-[#1c1c1c]">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold text-[#FF6B50]">01 / ENGINE</span>
+          <div class="bg-[#1a1a1a] text-[10px] font-bold px-3.5 py-1.5 rounded-full uppercase tracking-widest text-[#888888] border border-[#333333]">
+            Statutory AI
+          </div>
+        </div>
+        
+        <div class="mt-auto space-y-3">
+          <h3 class="text-4xl md:text-6xl font-semibold tracking-tighter text-white">
+            Audit instantly.
+          </h3>
+          <h3 class="text-4xl md:text-6xl font-semibold tracking-tighter text-[#444444] group-hover:text-[#888888] transition-colors">
+            Know every clause.
+          </h3>
+          <p class="text-[#888888] text-xs pt-4 max-w-md">
+            Natural language extraction of corporate terms, DPDP Section 6 notices, data sharing partners, and maximum retention durations.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-gradient-to-br from-[#0c2a1e] to-[#111111] rounded-[2.5rem] p-10 md:p-12 min-h-[480px] flex flex-col justify-between relative overflow-hidden group border border-emerald-950">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold text-emerald-400">02 / EXTENSION</span>
+          <div class="bg-[#051a12] text-[10px] font-bold px-3.5 py-1.5 rounded-full uppercase tracking-widest text-emerald-400 border border-emerald-800">
+            In-Browser Shield
+          </div>
+        </div>
+        
+        <div class="mt-auto space-y-3">
+          <h3 class="text-4xl md:text-6xl font-semibold tracking-tighter text-white">
+            Neutralize trackers.
+          </h3>
+          <h3 class="text-4xl md:text-6xl font-semibold tracking-tighter text-emerald-600/70 group-hover:text-emerald-400 transition-colors">
+            Zero ad beacons.
+          </h3>
+          <p class="text-[#aaaaaa] text-xs pt-4 max-w-md">
+            Stops Meta Pixel, Google Analytics, and third-party tracking cookies directly at the browser runtime while keeping necessary functionality alive.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / Footer Section (Midnight Editorial Big Statement) -->
+  <footer class="relative pt-44 pb-28 px-6 md:px-12 border-t border-[#1a1a1a]">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-16">
+      
+      <div class="flex-1">
+        <h2 class="text-[14vw] md:text-[9.5vw] leading-[0.85] font-black tracking-tighter text-white mb-10 select-none">
+          DEFEND<br />PRIVACY.
+        </h2>
+        <div class="flex flex-col gap-5">
+          <a href="/admin" class="text-2xl md:text-3xl font-semibold hover:text-[#FF6B50] transition-all w-fit font-mono">
+            Launch Guardra Portal &rarr;
+          </a>
+          <p class="text-[#666666] flex items-center gap-2 text-xs font-mono">
+            <iconify-icon icon="lucide:shield"></iconify-icon>
+            Autonomous Digital Personal Data Protection (DPDP Act 2023).
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-3 md:mb-6">
+        <a href="/admin" class="px-5 py-3 rounded-xl border border-[#333333] text-xs font-mono font-bold hover:bg-white hover:text-black transition-all">
+          Admin Dashboard
+        </a>
+        <a href="/docs" target="_blank" class="px-5 py-3 rounded-xl border border-[#333333] text-xs font-mono font-bold hover:bg-[#FF6B50] hover:text-black transition-all">
+          API Specs
+        </a>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto mt-36 pt-10 border-t border-[#111111] flex flex-col md:flex-row justify-between text-[#444444] text-[10px] font-bold uppercase tracking-widest font-mono">
+      <p>&copy; 2026 Guardra Privacy Suite. All rights reserved.</p>
+      <div class="flex gap-8 mt-6 md:mt-0">
+        <a href="/api/health" class="hover:text-white transition-colors">Server Health</a>
+        <a href="/api/admin/stats" class="hover:text-white transition-colors">Directory Stats</a>
+        <a href="/admin" class="hover:text-[#FF6B50] transition-colors">Portal Login</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    async function executeLiveScan() {
+      const input = document.getElementById('heroDomainInput');
+      const domain = (input.value || '').trim();
+      if (!domain) return;
+      await performScan(domain);
+    }
+
+    async function setDomainAndScan(domain) {
+      document.getElementById('heroDomainInput').value = domain;
+      await performScan(domain);
+      document.getElementById('scanner').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function performScan(domain) {
+      const loader = document.getElementById('scanLoading');
+      loader.classList.remove('hidden');
+
+      try {
+        const res = await fetch(`/api/policy/rating?domain=${encodeURIComponent(domain)}`);
+        if (!res.ok) throw new Error('Rating fetch failed');
+        const data = await res.json();
+
+        document.getElementById('resDomain').innerText = data.domain || domain;
+        document.getElementById('resName').innerText = data.name || domain;
+        document.getElementById('resScore').innerText = Math.round(data.score || data.overall_score || 50);
+        
+        const grade = data.grade || 'C';
+        const badge = document.getElementById('resGradeBadge');
+        badge.innerText = grade;
+        badge.className = `px-3 py-1 rounded-lg font-mono font-bold text-lg border ${
+          (data.score >= 80) ? 'bg-emerald-950/40 border-emerald-800 text-emerald-400' :
+          (data.score >= 50) ? 'bg-amber-950/40 border-amber-800 text-amber-400' :
+          'bg-rose-950/40 border-rose-800 text-rose-400'
+        }`;
+
+        // Update rubric bars if available
+        if (data.rubric) {
+          const sharing = data.rubric.data_sharing?.score || 60;
+          document.getElementById('scoreSharing').innerText = `${sharing}%`;
+          document.getElementById('barSharing').style.width = `${sharing}%`;
+
+          const retention = data.rubric.retention?.score || 65;
+          document.getElementById('scoreRetention').innerText = `${retention}%`;
+          document.getElementById('barRetention').style.width = `${retention}%`;
+
+          const cookies = data.rubric.tracking_cookies?.score || 45;
+          document.getElementById('scoreCookies').innerText = `${cookies}%`;
+          document.getElementById('barCookies').style.width = `${cookies}%`;
+
+          const rights = data.rubric.user_rights?.score || 75;
+          document.getElementById('scoreRights').innerText = `${rights}%`;
+          document.getElementById('barRights').style.width = `${rights}%`;
+        }
+
+        const officer = data.compliance?.dpdp?.grievance_officer || 'Listed under DPDP Redressal';
+        const email = data.compliance?.dpdp?.grievance_email || 'privacy@' + domain;
+        document.getElementById('resOfficer').innerText = `${officer} • ${email}`;
+
+        const link = document.getElementById('resPolicyLink');
+        link.href = data.policy_url || `https://${domain}/privacy`;
+      } catch (e) {
+        console.error(e);
+      } finally {
+        loader.classList.add('hidden');
+      }
+    }
+  </script>
+</body>
+</html>
