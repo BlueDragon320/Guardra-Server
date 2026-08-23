@@ -160,7 +160,7 @@ async def get_all_sites(limit: int = 1000):
                 "key_clauses": d.get("key_clauses", []),
                 "snippets": d.get("key_clauses", []),
                 "breaches": d.get("breach_history", []),
-                "policy_url": d.get("policy_url") or f"https://{d.get('domain')}/privacy",
+                "policy_url": d.get("policy_url") or f"https://www.{d.get('domain')}/privacy-policy",
                 "summary": d.get("findings", {}).get("summary", "") if isinstance(d.get("findings"), dict) else (d.get("findings") or ""),
                 "last_analyzed_at": d.get("last_analyzed_at")
             })
