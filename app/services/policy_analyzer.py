@@ -513,6 +513,7 @@ def analyze_live_policy(url: str, html_text: str, tracker_data: List = None,
     return {
         "domain": domain,
         "name": site_title[:40],
+        "policy_url": url if url.startswith("http") else f"https://www.{domain}/privacy-policy",
         "grade": grade,
         "score": total_score,
         "color": color,
@@ -581,6 +582,69 @@ def _extract_concerns(text: str, score: int) -> List[str]:
     return concerns
 
 
+async def discover_and_fetch_policy(clean: str) -> tuple:
+    """Discovers and fetches the live privacy policy text and verified URL for a domain."""
+    from urllib.parse import urljoin
+    
+    # Priority list of direct paths on both www and apex domain
+    candidates = [
+        f"https://www.{clean}/privacy-policy",
+        f"https://{clean}/privacy-policy",
+        f"https://www.{clean}/privacy",
+        f"https://{clean}/privacy",
+        f"https://www.{clean}/privacy-policy/",
+        f"https://{clean}/privacy-policy/",
+        f"https://www.{clean}/privacy/",
+        f"https://{clean}/privacy/",
+        f"https://www.{clean}/legal/privacy-policy",
+        f"https://{clean}/legal/privacy",
+        f"https://www.{clean}/privacy-statement",
+        f"https://www.{clean}/privacypolicy",
+        f"http://www.{clean}/privacy-policy",
+        f"http://{clean}/privacy-policy",
+    ]
+    
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 Guardra/2.0"
+    }
+    
+    async with httpx.AsyncClient(timeout=10.0, follow_redirects=True, verify=False) as client:
+        # Phase 1: Try direct candidate paths
+        for u in candidates:
+            try:
+                resp = await client.get(u, headers=headers)
+                if resp.status_code == 200 and len(resp.text) > 400:
+                    text_lower = resp.text.lower()
+                    if "privacy" in text_lower or "personal data" in text_lower or "information" in text_lower:
+                        return str(resp.url), resp.text
+            except Exception:
+                continue
+                
+        # Phase 2: Fallback to crawling homepage HTML for privacy links
+        homepages = [f"https://www.{clean}", f"https://{clean}"]
+        for home in homepages:
+            try:
+                resp = await client.get(home, headers=headers)
+                if resp.status_code == 200 and len(resp.text) > 200:
+                    soup = BeautifulSoup(resp.text, "html.parser")
+                    links = soup.find_all("a", href=True)
+                    for a in links:
+                        href = a["href"].strip()
+                        anchor_text = a.get_text().strip().lower()
+                        if re.search(r"privacy|privacy-policy|privacypolicy|legal/privacy", href, re.I) or "privacy policy" in anchor_text or "privacy notice" in anchor_text:
+                            full_url = urljoin(str(resp.url), href)
+                            try:
+                                p_resp = await client.get(full_url, headers=headers)
+                                if p_resp.status_code == 200 and len(p_resp.text) > 400:
+                                    return str(p_resp.url), p_resp.text
+                            except Exception:
+                                pass
+            except Exception:
+                continue
+                
+    return None, None
+
+
 async def get_site_rating(domain_or_url: str, tracker_data: List = None,
                            cookie_data: List = None, dark_patterns: List = None) -> Dict[str, Any]:
     """Get privacy rating for a domain. Enhanced with real tracker/cookie data integration."""
@@ -598,38 +662,25 @@ async def get_site_rating(domain_or_url: str, tracker_data: List = None,
             result = dict(site)
             result["source"] = "cache"
             result["breaches"] = domain_breaches if domain_breaches else result.get("breaches", [])
+            result["policy_url"] = result.get("policy_url") or f"https://www.{clean}/privacy-policy"
             return result
             
-    # Try fetching live privacy policy
-    target_urls = [
-        f"https://{clean}/privacy",
-        f"https://{clean}/privacy-policy",
-        f"https://{clean}/legal/privacy",
-        f"https://{clean}"
-    ]
+    # Try discovering live privacy policy
+    policy_url, policy_html = await discover_and_fetch_policy(clean)
+    if policy_url and policy_html:
+        live_res = analyze_live_policy(clean, policy_html, tracker_data, cookie_data, dark_patterns)
+        live_res["policy_url"] = policy_url
+        live_res["breaches"] = domain_breaches
+        return live_res
     
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Guardra/1.0"
-    }
-    
-    async with httpx.AsyncClient(timeout=6.0, follow_redirects=True) as client:
-        for url in target_urls:
-            try:
-                resp = await client.get(url, headers=headers)
-                if resp.status_code == 200 and len(resp.text) > 500:
-                    live_res = analyze_live_policy(clean, resp.text, tracker_data, cookie_data, dark_patterns)
-                    live_res["breaches"] = domain_breaches
-                    return live_res
-            except Exception:
-                continue
-    
-    # Fallback for unreachable sites — automatic low score
+    # Fallback for unreachable sites — automatic baseline score
     fallback_score = 38 if domain_breaches else 50
     grade, color = _get_grade(fallback_score)
     
     return {
         "domain": clean,
         "name": clean.split(".")[0].title(),
+        "policy_url": f"https://www.{clean}/privacy-policy",
         "grade": grade,
         "score": fallback_score,
         "color": color,
