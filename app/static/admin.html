@@ -334,16 +334,16 @@
           <div class="flex items-center justify-between border-b border-bordercol pb-3">
             <div>
               <h3 class="text-sm font-semibold text-zinc-100 flex items-center gap-2">
-                <span>📊 Website Visits & Unique Domains (Linear Time-Series)</span>
+                <span>📊 Website Visits & Unique Domains (Bar + Line Graph Combined)</span>
               </h3>
-              <p class="text-[11px] text-zinc-400">Live linear traffic volume across the selected timeframe.</p>
+              <p class="text-[11px] text-zinc-400">Total Visits shown as Emerald Bars + Unique Domains shown as Cyan Trendline.</p>
             </div>
             <div class="flex items-center gap-3 text-[11px] font-mono">
-              <span class="flex items-center gap-1.5 text-emerald-400">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> Total Visits
+              <span class="flex items-center gap-1.5 text-emerald-400 font-medium">
+                <span class="w-2.5 h-3 rounded-sm bg-emerald-400 inline-block"></span> Total Visits (Bars)
               </span>
-              <span class="flex items-center gap-1.5 text-cyan-400">
-                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span> Unique Domains
+              <span class="flex items-center gap-1.5 text-cyan-400 font-medium">
+                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 inline-block"></span> Unique Domains (Line)
               </span>
             </div>
           </div>
@@ -780,12 +780,14 @@
       const height = 260;
       const paddingLeft = 45;
       const paddingRight = 20;
-      const paddingTop = 20;
+      const paddingTop = 25;
       const paddingBottom = 35;
       const width = 800;
 
       const plotW = width - paddingLeft - paddingRight;
       const plotH = height - paddingTop - paddingBottom;
+      const slotW = plotW / labels.length;
+      const barW = Math.max(3, Math.min(22, slotW * 0.55));
 
       // Grid lines and Y axis ticks (4 steps)
       let gridLinesSvg = '';
@@ -798,57 +800,63 @@
         `;
       }
 
-      // Calculate points
-      const stepX = labels.length > 1 ? plotW / (labels.length - 1) : plotW;
-      
-      const visitPoints = visits.map((v, i) => ({
-        x: paddingLeft + i * stepX,
-        y: height - paddingBottom - (v / maxVal) * plotH,
-        val: v,
-        label: labels[i]
-      }));
+      // Calculate Bars and Line Points
+      let barsSvg = '';
+      const linePoints = [];
 
-      const uniquePoints = unique.map((u, i) => ({
-        x: paddingLeft + i * stepX,
-        y: height - paddingBottom - (u / maxVal) * plotH,
-        val: u,
-        label: labels[i]
-      }));
+      labels.forEach((lbl, i) => {
+        const cx = paddingLeft + i * slotW + slotW / 2;
+        const v = visits[i] || 0;
+        const u = unique[i] || 0;
 
-      let visitPathD = visitPoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
-      let visitAreaD = `${visitPathD} L ${visitPoints[visitPoints.length - 1].x.toFixed(1)} ${height - paddingBottom} L ${visitPoints[0].x.toFixed(1)} ${height - paddingBottom} Z`;
+        const barH = (v / maxVal) * plotH;
+        const barY = height - paddingBottom - barH;
+        const barX = cx - barW / 2;
 
-      let uniquePathD = uniquePoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+        const lineY = height - paddingBottom - (u / maxVal) * plotH;
+        linePoints.push({ x: cx, y: lineY, val: u, label: lbl, visits: v });
+
+        // Bar Element for Total Visits
+        barsSvg += `
+          <g class="chart-bar group cursor-pointer">
+            <rect x="${barX.toFixed(1)}" y="${barY.toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(1.5, barH).toFixed(1)}" rx="3" fill="url(#barEmeraldGrad)" stroke="#10b981" stroke-width="1" class="transition-all duration-200 group-hover:brightness-125" />
+            <title>${lbl} ➔ Total Visits (Bars): ${v} | Unique Domains (Line): ${u}</title>
+          </g>
+        `;
+      });
+
+      // Line Graph Path for Unique Domains
+      let linePathD = linePoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+
+      // Line Graph Dots
+      let lineDotsSvg = '';
+      linePoints.forEach(p => {
+        lineDotsSvg += `
+          <g class="chart-line-point cursor-pointer transition-transform duration-150 hover:scale-125">
+            <circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4.5" fill="#06b6d4" stroke="#09090b" stroke-width="2" />
+            <title>${p.label} ➔ Unique Domains (Line): ${p.val} | Total Visits (Bars): ${p.visits}</title>
+          </g>
+        `;
+      });
 
       // X Axis Ticks (Show every Nth label)
       const stepLabel = Math.ceil(labels.length / 10);
       let xLabelsSvg = '';
       labels.forEach((lbl, i) => {
         if (i % stepLabel === 0 || i === labels.length - 1) {
-          const xPos = paddingLeft + i * stepX;
+          const cx = paddingLeft + i * slotW + slotW / 2;
           xLabelsSvg += `
-            <text x="${xPos.toFixed(1)}" y="${height - 10}" fill="#71717a" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="middle">${lbl}</text>
+            <text x="${cx.toFixed(1)}" y="${height - 10}" fill="#71717a" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="middle">${lbl}</text>
           `;
         }
-      });
-
-      // Interactive Hover Dots
-      let dotsSvg = '';
-      visitPoints.forEach((p, i) => {
-        dotsSvg += `
-          <g class="chart-point cursor-pointer transition-transform duration-150 hover:scale-125">
-            <circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4.5" fill="#10b981" stroke="#09090b" stroke-width="2" />
-            <title>${p.label} ➔ Visits: ${p.val} | Unique Sites: ${uniquePoints[i] ? uniquePoints[i].val : 0}</title>
-          </g>
-        `;
       });
 
       const svgHtml = `
         <svg viewBox="0 0 ${width} ${height}" class="w-full h-full overflow-visible">
           <defs>
-            <linearGradient id="emeraldGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#10b981" stop-opacity="0.30" />
-              <stop offset="100%" stop-color="#10b981" stop-opacity="0.0" />
+            <linearGradient id="barEmeraldGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#10b981" stop-opacity="0.85" />
+              <stop offset="100%" stop-color="#10b981" stop-opacity="0.20" />
             </linearGradient>
           </defs>
           
@@ -856,15 +864,14 @@
           ${gridLinesSvg}
           ${xLabelsSvg}
 
-          <!-- Filled Gradient Area -->
-          <path d="${visitAreaD}" fill="url(#emeraldGrad)" />
+          <!-- Bars (Total Visits) -->
+          ${barsSvg}
 
-          <!-- Linear Path Lines -->
-          <path d="${visitPathD}" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="${uniquePathD}" fill="none" stroke="#06b6d4" stroke-width="2" stroke-dasharray="3,3" stroke-linecap="round" />
+          <!-- Line Graph (Unique Domains) -->
+          <path d="${linePathD}" fill="none" stroke="#06b6d4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
 
-          <!-- Interactive Dots -->
-          ${dotsSvg}
+          <!-- Line Graph Dots -->
+          ${lineDotsSvg}
         </svg>
       `;
 
