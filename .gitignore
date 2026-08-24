@@ -8,3 +8,9 @@ env/
 guardra.db
 app/guardra.db
 .DS_Store
+implementation_plan.md
+walkthrough.md
+task.md
+plan.md
+.gemini/
+.antigravity/
