@@ -574,7 +574,6 @@ def analyze_live_policy(url: str, html_text: str, tracker_data: List = None,
 
     return {
         "domain": domain,
-        "policy_url": url,
         "name": site_title[:40],
         "policy_url": url if url.startswith("http") else f"https://www.{domain}/privacy-policy",
         "grade": grade,

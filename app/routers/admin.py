@@ -1,3 +1,4 @@
+import os
 import json
 import logging
 from datetime import datetime, timedelta
@@ -113,9 +114,6 @@ async def _scan_and_store(domain: str, source: str = "admin") -> dict:
         return _parse_json_fields(result)
     finally:
         conn.close()
-
-
-import os
 
 ADMIN_SECRET_KEY = os.getenv("ADMIN_SECRET_KEY", "guardra_admin_secret_2026")
 
@@ -727,33 +725,6 @@ async def scan_top_1000(background_tasks: BackgroundTasks):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
-
-@router.get("/pings")
-async def get_pings():
-    conn = get_db_connection()
-    try:
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM browser_pings ORDER BY id DESC LIMIT 100")
-        rows = cursor.fetchall()
-        return [dict(r) for r in rows]
-    finally:
-        conn.close()
-
-@router.get("/pings/stats")
-async def get_pings_stats():
-    conn = get_db_connection()
-    try:
-        cursor = conn.cursor()
-        cursor.execute("SELECT COUNT(*) as total_pings, COUNT(DISTINCT domain) as unique_domains, AVG(response_time_ms) as avg_latency_ms FROM browser_pings")
-        row = cursor.fetchone()
-        return {
-            "total_pings": row["total_pings"] or 0,
-            "unique_domains": row["unique_domains"] or 0,
-            "avg_latency_ms": row["avg_latency_ms"] or 0.0
-        }
-    finally:
-        conn.close()
 
 
 @router.get("/analytics/visits")

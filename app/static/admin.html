@@ -584,82 +584,175 @@
 
   <!-- Site Detail Modal -->
   <div id="siteDetailModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-surface border border-bordercol rounded-xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl">
-      <div class="p-5 border-b border-bordercol flex items-center justify-between">
-        <div>
-          <h2 class="text-lg font-bold text-zinc-100 flex items-center gap-3">
-            <span id="detailDomain" class="font-mono text-brand">example.com</span>
-            <span id="detailGrade" class="px-2 py-0.5 rounded font-mono font-bold text-sm border">A</span>
-            <span id="detailScore" class="font-mono text-sm text-zinc-300">90/100</span>
-          </h2>
-          <div class="text-xs text-zinc-400 mt-1 flex items-center gap-3">
-            <span id="detailCategory">Web Platform</span>
-            <span>&bull;</span>
-            <span id="detailDate">Last Analyzed: 2026-08-23</span>
+    <div class="bg-surface border border-bordercol rounded-xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
+      <!-- Modal Header -->
+      <div class="p-5 border-b border-bordercol flex items-center justify-between bg-darkbg">
+        <div class="flex items-center gap-4">
+          <div id="detailGradeCircle" class="w-12 h-12 rounded-xl flex flex-col items-center justify-center font-mono font-bold border">
+            <span id="detailGrade" class="text-xl leading-none">A</span>
+            <span id="detailScore" class="text-[10px] text-zinc-400 font-normal">90/100</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2.5">
+              <h2 id="detailDomain" class="text-base font-bold text-zinc-100 font-mono">example.com</h2>
+              <span id="detailName" class="text-xs text-zinc-400">Example Corp</span>
+              <span id="detailVerdictTag" class="text-[10px] px-2 py-0.5 rounded-full font-mono font-semibold uppercase tracking-wider bg-emerald-950/60 border border-emerald-800 text-emerald-400">Safe Site</span>
+            </div>
+            <div class="text-xs text-zinc-500 mt-1 flex items-center gap-2">
+              <span id="detailCategory" class="text-zinc-400">Web Platform</span>
+              <span>&bull;</span>
+              <span id="detailDate">Last Analyzed: 2026-08-27</span>
+              <span>&bull;</span>
+              <span id="detailSource" class="capitalize font-mono text-[11px] text-zinc-400">Source: Live Radar</span>
+            </div>
           </div>
         </div>
-        <button onclick="closeSiteDetailModal()" class="text-zinc-400 hover:text-zinc-200 text-xl">&times;</button>
+        <div class="flex items-center gap-2">
+          <button onclick="rescanFromDetailModal()" id="btnDetailRescan" class="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded text-xs flex items-center gap-1.5 transition">
+            <span>🔄 Rescan</span>
+          </button>
+          <button onclick="closeSiteDetailModal()" class="text-zinc-400 hover:text-zinc-200 text-2xl p-1 leading-none">&times;</button>
+        </div>
       </div>
 
-      <div class="p-5 overflow-y-auto space-y-6 flex-1 text-sm text-zinc-300">
-        <!-- Source Proof Link -->
-        <div>
-          <a id="detailPolicyLink" href="#" target="_blank" class="block w-full py-3 bg-zinc-800 hover:bg-zinc-700 border border-bordercol rounded-lg text-center font-semibold text-brand transition">
-            🔗 View Source Privacy Policy
+      <!-- Modal Body -->
+      <div class="p-6 overflow-y-auto space-y-6 flex-1 text-sm text-zinc-300">
+        <!-- Quick Action Bar -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <a id="detailPolicyLink" href="#" target="_blank" class="py-2.5 px-4 bg-zinc-900 hover:bg-zinc-800 border border-bordercol rounded-lg flex items-center justify-center gap-2 text-xs font-semibold text-brand transition">
+            <span>🔗 View Verified Source Policy</span>
           </a>
+          <button onclick="generateAndCopyNoticeFromModal()" class="py-2.5 px-4 bg-emerald-950/40 hover:bg-emerald-900/50 border border-emerald-800 rounded-lg flex items-center justify-center gap-2 text-xs font-semibold text-emerald-400 transition">
+            <span>📋 Copy Statutory DPDP Deletion Notice</span>
+          </button>
         </div>
 
-        <!-- 6-Pillar Rubric Breakdown -->
+        <!-- Executive Summary -->
+        <div class="bg-darkbg border border-bordercol rounded-xl p-4 space-y-1.5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-zinc-400 font-mono">Executive Privacy Assessment</span>
+            <span id="detailRiskLevelBadge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300">Low Exposure Risk</span>
+          </div>
+          <p id="detailSummary" class="text-xs text-zinc-300 leading-relaxed pt-1">
+            Analyzing privacy disclosures...
+          </p>
+        </div>
+
+        <!-- 6-Pillar Statutory Privacy Rubric -->
         <div>
-          <h3 class="font-semibold text-zinc-100 mb-3 border-b border-bordercol pb-1">6-Pillar Privacy Breakdown</h3>
-          <div id="detailRubric" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="flex items-center justify-between mb-3 border-b border-bordercol pb-1.5">
+            <h3 class="font-semibold text-zinc-100 text-xs uppercase tracking-wider font-mono">6-Pillar Privacy Rubric Breakdown</h3>
+            <span class="text-[11px] text-zinc-500 font-mono">Normalized against DPDP Act 2023 & GDPR</span>
+          </div>
+          <div id="detailRubric" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <!-- Dynamically populated -->
           </div>
         </div>
 
-        <!-- Evidence & Policy Excerpts -->
+        <!-- Regional Statutory Compliance (India DPDP / EU GDPR / CCPA) -->
         <div>
-          <h3 class="font-semibold text-zinc-100 mb-3 border-b border-bordercol pb-1">Evidence & Policy Excerpts</h3>
-          <div class="bg-darkbg border border-bordercol rounded-lg p-4 space-y-3">
-            <div>
-              <span class="font-medium text-zinc-200 block mb-1">Executive Summary</span>
-              <div id="detailSummary" class="text-xs text-zinc-400">No summary available.</div>
+          <h3 class="font-semibold text-zinc-100 text-xs uppercase tracking-wider font-mono mb-3 border-b border-bordercol pb-1.5">
+            Statutory Legal Compliance (DPDP & GDPR)
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <!-- DPDP India -->
+            <div class="bg-darkbg border border-bordercol rounded-xl p-4 space-y-2 text-xs">
+              <div class="flex items-center justify-between pb-1.5 border-b border-zinc-800">
+                <span class="font-bold text-zinc-200">🇮🇳 India DPDP 2023</span>
+                <span id="detailDpdpStatus" class="font-mono text-[10px] px-1.5 py-0.5 rounded font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-800">Compliant</span>
+              </div>
+              <div>
+                <span class="text-zinc-500 block text-[11px]">Grievance Officer</span>
+                <span id="detailOfficer" class="font-medium text-zinc-200">Mr. Priyanand S</span>
+              </div>
+              <div>
+                <span class="text-zinc-500 block text-[11px]">Grievance Email</span>
+                <span id="detailEmail" class="font-mono text-zinc-200 text-[11px] break-all">grievance@domain.com</span>
+              </div>
+              <div>
+                <span class="text-zinc-500 block text-[11px]">Statutory SLA</span>
+                <span id="detailSla" class="text-zinc-300">30-Day Mandatory Redressal</span>
+              </div>
             </div>
-            <div>
-              <span class="font-medium text-zinc-200 block mb-1">Key Concerns</span>
-              <ul id="detailConcerns" class="list-disc list-inside text-xs text-rose-400 space-y-1">
-                <!-- Dynamically populated -->
-              </ul>
+
+            <!-- EU GDPR -->
+            <div class="bg-darkbg border border-bordercol rounded-xl p-4 space-y-2 text-xs">
+              <div class="flex items-center justify-between pb-1.5 border-b border-zinc-800">
+                <span class="font-bold text-zinc-200">🇪🇺 EU GDPR</span>
+                <span id="detailGdprStatus" class="font-mono text-[10px] px-1.5 py-0.5 rounded font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-800">Art. 17 Ready</span>
+              </div>
+              <div>
+                <span class="text-zinc-500 block text-[11px]">Data Protection Officer (DPO)</span>
+                <span id="detailDpo" class="font-mono text-zinc-200 text-[11px] break-all">dpo@domain.com</span>
+              </div>
+              <div>
+                <span class="text-zinc-500 block text-[11px]">Right to Erasure</span>
+                <span id="detailErasure" class="text-zinc-300">Disclosed & Active</span>
+              </div>
             </div>
-            <div>
-              <span class="font-medium text-zinc-200 block mb-1">Extracted Snippets</span>
-              <div id="detailSnippets" class="space-y-2 text-xs font-mono bg-zinc-900 p-3 rounded border border-zinc-800">
-                <!-- Dynamically populated -->
+
+            <!-- CCPA -->
+            <div class="bg-darkbg border border-bordercol rounded-xl p-4 space-y-2 text-xs">
+              <div class="flex items-center justify-between pb-1.5 border-b border-zinc-800">
+                <span class="font-bold text-zinc-200">🇺🇸 California CCPA</span>
+                <span id="detailCcpaStatus" class="font-mono text-[10px] px-1.5 py-0.5 rounded font-bold text-zinc-300 bg-zinc-800">Active</span>
+              </div>
+              <div>
+                <span class="text-zinc-500 block text-[11px]">Do-Not-Sell Selling Status</span>
+                <span id="detailDoNotSell" class="text-zinc-300">Supported / No Sale</span>
+              </div>
+              <div>
+                <span class="text-zinc-500 block text-[11px]">Consumer Opt-Out</span>
+                <span id="detailOptOut" class="text-zinc-300">Available</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- DPDP Compliance -->
+        <!-- Verified Data Breach History -->
         <div>
-          <h3 class="font-semibold text-zinc-100 mb-3 border-b border-bordercol pb-1">DPDP Statutory Compliance (India)</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-darkbg border border-bordercol rounded-lg p-4 text-xs">
-            <div>
-              <span class="text-zinc-500 block">Grievance Officer</span>
-              <span id="detailOfficer" class="font-medium text-zinc-200">Not Listed</span>
-            </div>
-            <div>
-              <span class="text-zinc-500 block">Grievance Email</span>
-              <span id="detailEmail" class="font-medium text-zinc-200">Not Listed</span>
-            </div>
-            <div>
-              <span class="text-zinc-500 block">Address</span>
-              <span id="detailAddress" class="font-medium text-zinc-200">Not Listed</span>
-            </div>
-            <div>
-              <span class="text-zinc-500 block">Status</span>
-              <span id="detailDpdpStatus" class="font-medium text-rose-400">Non-Compliant</span>
-            </div>
+          <div class="flex items-center justify-between mb-3 border-b border-bordercol pb-1.5">
+            <h3 class="font-semibold text-zinc-100 text-xs uppercase tracking-wider font-mono flex items-center gap-1.5">
+              <span>🚨 Verified Data Breach History & Public Security Incidents</span>
+            </h3>
+            <span id="detailBreachBadge" class="text-[10px] font-mono px-2 py-0.5 rounded border bg-emerald-950/40 text-emerald-400 border-emerald-800">0 Breaches (Clean Record)</span>
+          </div>
+          <div id="detailBreachesContainer" class="space-y-2.5">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Key Concerns & Safeguards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Concerns -->
+          <div class="bg-darkbg border border-bordercol rounded-xl p-4 space-y-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-rose-400 font-mono flex items-center gap-1.5">
+              <span>⚠️ Key Privacy Concerns & Red Flags</span>
+            </span>
+            <ul id="detailConcerns" class="space-y-1.5 text-xs text-zinc-300 pt-1">
+              <!-- Dynamically populated -->
+            </ul>
+          </div>
+
+          <!-- Positive Protections -->
+          <div class="bg-darkbg border border-bordercol rounded-xl p-4 space-y-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono flex items-center gap-1.5">
+              <span>🛡️ Consumer Protections & Safeguards</span>
+            </span>
+            <ul id="detailSafeguards" class="space-y-1.5 text-xs text-zinc-300 pt-1">
+              <!-- Dynamically populated -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- Evidence & Policy Excerpts (Snippets without [object Object]) -->
+        <div>
+          <div class="flex items-center justify-between mb-3 border-b border-bordercol pb-1.5">
+            <h3 class="font-semibold text-zinc-100 text-xs uppercase tracking-wider font-mono">Evidence & Policy Excerpts</h3>
+            <span class="text-[11px] text-zinc-500 font-mono">Direct NLP Extracts from Legal Text</span>
+          </div>
+          <div id="detailSnippets" class="space-y-2.5">
+            <!-- Dynamically populated -->
           </div>
         </div>
       </div>
@@ -1233,20 +1326,49 @@
     }
 
     // Modal Actions
+    let currentDetailSite = null;
+
     function openSiteDetailModal(domain) {
       const site = allSites.find(s => s.domain === domain);
       if (!site) return;
+      currentDetailSite = site;
 
-      document.getElementById('detailDomain').innerText = site.name || domain;
-      document.getElementById('detailGrade').innerText = site.grade || 'N/A';
-      document.getElementById('detailScore').innerText = `${site.score || 0}/100`;
+      const score = Math.round(site.score || site.overall_score || 0);
+      const grade = site.grade || (score >= 80 ? 'A' : (score >= 50 ? 'C' : 'F'));
+
+      document.getElementById('detailDomain').innerText = domain;
+      document.getElementById('detailName').innerText = site.name && site.name !== domain ? site.name : domain.split('.')[0].toUpperCase();
+      document.getElementById('detailGrade').innerText = grade;
+      document.getElementById('detailScore').innerText = `${score}/100`;
       
-      const gradeColor = (site.score >= 80) ? 'text-emerald-400 border-emerald-400 bg-emerald-950/40' :
-                         (site.score >= 50) ? 'text-amber-400 border-amber-400 bg-amber-950/40' : 'text-rose-400 border-rose-400 bg-rose-950/40';
-      document.getElementById('detailGrade').className = `px-2 py-0.5 rounded font-mono font-bold text-sm border ${gradeColor}`;
+      const gradeCircle = document.getElementById('detailGradeCircle');
+      const verdictTag = document.getElementById('detailVerdictTag');
+      const riskLevelBadge = document.getElementById('detailRiskLevelBadge');
+
+      if (score >= 80) {
+        gradeCircle.className = 'w-12 h-12 rounded-xl flex flex-col items-center justify-center font-mono font-bold border border-emerald-500 bg-emerald-950/40 text-emerald-400';
+        verdictTag.className = 'text-[10px] px-2 py-0.5 rounded-full font-mono font-semibold uppercase tracking-wider bg-emerald-950/60 border border-emerald-800 text-emerald-400';
+        verdictTag.innerText = '🛡️ Safe Site';
+        riskLevelBadge.innerText = '🟢 Low Privacy Risk';
+        riskLevelBadge.className = 'text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/50 border border-emerald-800 text-emerald-400';
+      } else if (score >= 50) {
+        gradeCircle.className = 'w-12 h-12 rounded-xl flex flex-col items-center justify-center font-mono font-bold border border-amber-500 bg-amber-950/40 text-amber-400';
+        verdictTag.className = 'text-[10px] px-2 py-0.5 rounded-full font-mono font-semibold uppercase tracking-wider bg-amber-950/60 border border-amber-800 text-amber-400';
+        verdictTag.innerText = '⚠️ Moderate Exposure';
+        riskLevelBadge.innerText = '🟡 Moderate Privacy Risk';
+        riskLevelBadge.className = 'text-[10px] font-mono px-2 py-0.5 rounded bg-amber-950/50 border border-amber-800 text-amber-400';
+      } else {
+        gradeCircle.className = 'w-12 h-12 rounded-xl flex flex-col items-center justify-center font-mono font-bold border border-rose-500 bg-rose-950/40 text-rose-400';
+        verdictTag.className = 'text-[10px] px-2 py-0.5 rounded-full font-mono font-semibold uppercase tracking-wider bg-rose-950/60 border border-rose-800 text-rose-400';
+        verdictTag.innerText = '🚨 Critical Exposure';
+        riskLevelBadge.innerText = '🔴 High / Critical Exposure';
+        riskLevelBadge.className = 'text-[10px] font-mono px-2 py-0.5 rounded bg-rose-950/50 border border-rose-800 text-rose-400';
+      }
       
       document.getElementById('detailCategory').innerText = site.category || 'Web Platform';
-      document.getElementById('detailDate').innerText = `Last Analyzed: ${site.last_analyzed || new Date().toISOString().split('T')[0]}`;
+      const lastScanned = site.last_analyzed || site.last_analyzed_at || new Date().toISOString().split('T')[0];
+      document.getElementById('detailDate').innerText = `Last Analyzed: ${lastScanned.substring(0, 10)}`;
+      document.getElementById('detailSource').innerText = `Source: ${site.source || 'Live Radar'}`;
       
       let pUrl = site.policy_url;
       if (!pUrl || pUrl === `https://${domain}/privacy` || pUrl === `https://${domain}`) {
@@ -1256,60 +1378,233 @@
       else if (domain === 'kletech.ac.in') pUrl = 'https://www.kletech.ac.in/privacy-policy';
       else if (domain === 'flipkart.com') pUrl = 'https://www.flipkart.com/pages/privacypolicy';
       else if (domain === 'boat-lifestyle.com') pUrl = 'https://www.boat-lifestyle.com/pages/privacy-policy';
+      else if (domain === 'google.com') pUrl = 'https://policies.google.com/privacy';
+      else if (domain === 'meta.com') pUrl = 'https://www.facebook.com/privacy/policy/';
+      else if (domain === 'apple.com') pUrl = 'https://www.apple.com/legal/privacy/en-ww/';
       document.getElementById('detailPolicyLink').href = pUrl;
 
+      // Executive Summary
+      let summaryText = site.summary || (typeof site.findings === 'object' && site.findings?.summary) || '';
+      if (!summaryText || summaryText === 'No summary available.') {
+        if (score >= 80) {
+          summaryText = `${site.name || domain} demonstrates strong consumer privacy safeguards with transparent statutory disclosures, clear retention limits, and recognized user rights under the DPDP Act 2023.`;
+        } else if (score >= 50) {
+          summaryText = `${site.name || domain} maintains standard commercial privacy disclosures but engages in third-party tracking, advertising telemetry, or vendor data sharing practices that warrant caution.`;
+        } else {
+          summaryText = `Critical privacy exposure detected for ${site.name || domain}. Invasive cross-device tracking, undisclosed data retention policies, or active behavioral advertising networks identified.`;
+        }
+      }
+      document.getElementById('detailSummary').innerText = summaryText;
+
+      // 6-Pillar Rubric Breakdown
       const rubricDiv = document.getElementById('detailRubric');
       rubricDiv.innerHTML = '';
-      if (site.rubric) {
+      const rubricNames = {
+        data_sharing: "Third-Party Data Sharing",
+        retention: "Data Retention Limits",
+        tracking_cookies: "Cookies & Tracker Density",
+        user_rights: "User Rights & Erasure Flow",
+        breach_history: "Breach History & Safeguards",
+        readability: "Plain-Language Clarity"
+      };
+
+      if (site.rubric && Object.keys(site.rubric).length > 0) {
         Object.entries(site.rubric).forEach(([k, v]) => {
-          const c = v.score >= 70 ? 'text-emerald-400' : (v.score >= 45 ? 'text-amber-400' : 'text-rose-400');
+          const s = Math.round(v.score || 0);
+          const colorClass = s >= 70 ? 'text-emerald-400 bg-emerald-400' : (s >= 45 ? 'text-amber-400 bg-amber-400' : 'text-rose-400 bg-rose-400');
+          const borderClass = s >= 70 ? 'border-emerald-800/40' : (s >= 45 ? 'border-amber-800/40' : 'border-rose-800/40');
+          const title = rubricNames[k] || v.label || k.replace('_', ' ').toUpperCase();
+          const riskTag = s >= 70 ? 'Low Risk' : (s >= 45 ? 'Moderate Risk' : 'High Risk');
+
           rubricDiv.innerHTML += `
-            <div class="bg-darkbg border border-bordercol rounded p-3">
-              <div class="flex justify-between items-center mb-1">
-                <span class="font-medium text-zinc-200">${v.label || k}</span>
-                <span class="font-mono font-bold ${c}">${v.score}/100</span>
+            <div class="bg-darkbg border ${borderClass} rounded-xl p-3.5 space-y-2">
+              <div class="flex justify-between items-center text-xs">
+                <span class="font-semibold text-zinc-200">${title}</span>
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-mono text-zinc-500">${riskTag}</span>
+                  <span class="font-mono font-bold ${colorClass.split(' ')[0]}">${s}/100</span>
+                </div>
               </div>
-              <p class="text-[11px] text-zinc-400">${v.explanation || 'Score derived from NLP analysis.'}</p>
+              <div class="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden">
+                <div class="${colorClass.split(' ')[1]} h-full rounded-full" style="width: ${Math.max(4, s)}%"></div>
+              </div>
+              <p class="text-[11px] text-zinc-400 leading-snug">${v.label || v.explanation || 'Evaluated via statutory NLP rubric.'}</p>
             </div>
           `;
         });
       } else {
-        rubricDiv.innerHTML = `<div class="text-zinc-500">No detailed rubric available.</div>`;
+        rubricDiv.innerHTML = `<div class="text-zinc-500 text-xs p-3">No rubric evaluation details recorded.</div>`;
       }
 
-      document.getElementById('detailSummary').innerText = site.summary || 'No summary available.';
-      
-      const concernsList = document.getElementById('detailConcerns');
-      concernsList.innerHTML = '';
-      if (site.concerns && site.concerns.length) {
-        site.concerns.forEach(c => {
-          concernsList.innerHTML += `<li>${c}</li>`;
-        });
-      } else {
-        concernsList.innerHTML = `<li class="text-zinc-500 list-none">No major concerns highlighted.</li>`;
-      }
-
-      const snippetsDiv = document.getElementById('detailSnippets');
-      snippetsDiv.innerHTML = '';
-      if (site.snippets && site.snippets.length) {
-        site.snippets.forEach(s => {
-          snippetsDiv.innerHTML += `<div class="p-2 bg-zinc-800 rounded border border-bordercol">"${s}"</div>`;
-        });
-      } else {
-        snippetsDiv.innerHTML = `<div class="text-zinc-500">No exact snippets extracted.</div>`;
-      }
-
+      // Regional Compliance
       const dpdp = site.compliance?.dpdp || {};
+      const gdpr = site.compliance?.gdpr || {};
+      const ccpa = site.compliance?.ccpa || {};
+
       document.getElementById('detailOfficer').innerText = dpdp.grievance_officer || 'Not Listed';
       document.getElementById('detailEmail').innerText = dpdp.grievance_email || 'Not Listed';
-      document.getElementById('detailAddress').innerText = dpdp.address || 'Not Listed';
-      const statusEl = document.getElementById('detailDpdpStatus');
+      document.getElementById('detailSla').innerText = `${dpdp.redressal_period_days || 30}-Day Mandatory Redressal`;
+      
+      const dpdpStatusEl = document.getElementById('detailDpdpStatus');
       if (dpdp.compliant) {
-        statusEl.innerText = 'Compliant';
-        statusEl.className = 'font-medium text-emerald-400';
+        dpdpStatusEl.innerText = 'Compliant';
+        dpdpStatusEl.className = 'font-mono text-[10px] px-1.5 py-0.5 rounded font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-800';
       } else {
-        statusEl.innerText = 'Non-Compliant';
-        statusEl.className = 'font-medium text-rose-400';
+        dpdpStatusEl.innerText = 'Undisclosed';
+        dpdpStatusEl.className = 'font-mono text-[10px] px-1.5 py-0.5 rounded font-bold text-amber-400 bg-amber-950/40 border border-amber-800';
+      }
+
+      document.getElementById('detailDpo').innerText = gdpr.dpo_contact || (gdpr.compliant ? 'Designated EU Representative' : 'Not Listed');
+      document.getElementById('detailErasure').innerText = gdpr.erasure_art17_disclosed ? 'Art. 17 Explicitly Supported' : (gdpr.compliant ? 'Standard Statutory Flow' : 'Undisclosed');
+      const gdprStatusEl = document.getElementById('detailGdprStatus');
+      if (gdpr.compliant) {
+        gdprStatusEl.innerText = 'Art. 17 Ready';
+        gdprStatusEl.className = 'font-mono text-[10px] px-1.5 py-0.5 rounded font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-800';
+      } else {
+        gdprStatusEl.innerText = 'Standard';
+        gdprStatusEl.className = 'font-mono text-[10px] px-1.5 py-0.5 rounded font-bold text-zinc-400 bg-zinc-800';
+      }
+
+      document.getElementById('detailDoNotSell').innerText = ccpa.do_not_sell ? 'Supported (No Sale of Data)' : 'Not Disclosed';
+      document.getElementById('detailOptOut').innerText = ccpa.opt_out_link ? 'Direct Link Disclosed' : (ccpa.compliant ? 'Available' : 'N/A');
+      const ccpaStatusEl = document.getElementById('detailCcpaStatus');
+      if (ccpa.compliant || ccpa.do_not_sell) {
+        ccpaStatusEl.innerText = 'Active';
+        ccpaStatusEl.className = 'font-mono text-[10px] px-1.5 py-0.5 rounded font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-800';
+      } else {
+        ccpaStatusEl.innerText = 'Standard';
+        ccpaStatusEl.className = 'font-mono text-[10px] px-1.5 py-0.5 rounded font-bold text-zinc-400 bg-zinc-800';
+      }
+
+      // Verified Data Breach History
+      const breachBadge = document.getElementById('detailBreachBadge');
+      const breachesContainer = document.getElementById('detailBreachesContainer');
+      breachesContainer.innerHTML = '';
+      const breaches = site.breaches || site.breach_history || [];
+
+      if (breaches && breaches.length > 0) {
+        breachBadge.innerText = `${breaches.length} Incident(s) Recorded`;
+        breachBadge.className = 'text-[10px] font-mono px-2 py-0.5 rounded border bg-rose-950/40 text-rose-400 border-rose-800';
+
+        breaches.forEach(b => {
+          const pwnFormatted = b.pwn_count ? `• ${Number(b.pwn_count).toLocaleString()} Records Leaked` : '';
+          const dataClasses = Array.isArray(b.data_classes) ? b.data_classes : [];
+          
+          breachesContainer.innerHTML += `
+            <div class="p-3.5 bg-rose-950/20 border border-rose-900/40 rounded-xl space-y-2 text-xs">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <span class="font-bold text-zinc-100">${b.name || 'Security Breach Incident'}</span>
+                  <span class="text-[11px] font-mono text-rose-400 ml-2">${pwnFormatted}</span>
+                </div>
+                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800 shrink-0">
+                  ${b.breach_date || 'Disclosed'}
+                </span>
+              </div>
+              <p class="text-zinc-400 text-xs leading-relaxed">${b.description || 'Public database breach recorded.'}</p>
+              ${dataClasses.length > 0 ? `
+                <div class="flex items-center gap-1.5 flex-wrap pt-1">
+                  <span class="text-[10px] text-zinc-500">Compromised Data:</span>
+                  ${dataClasses.map(c => `<span class="text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-300 font-mono">${c}</span>`).join('')}
+                </div>
+              ` : ''}
+              ${b.article_url ? `
+                <div class="pt-1">
+                  <a href="${b.article_url}" target="_blank" class="inline-flex items-center gap-1 text-[11px] text-brand hover:underline font-medium">
+                    <span>🔗 Read Verified Investigative Report &rarr;</span>
+                  </a>
+                </div>
+              ` : ''}
+            </div>
+          `;
+        });
+      } else {
+        breachBadge.innerText = '0 Breaches (Clean Record)';
+        breachBadge.className = 'text-[10px] font-mono px-2 py-0.5 rounded border bg-emerald-950/40 text-emerald-400 border-emerald-800';
+        breachesContainer.innerHTML = `
+          <div class="p-3 bg-emerald-950/20 border border-emerald-900/30 rounded-xl text-xs text-emerald-400 flex items-center gap-2">
+            <span>✓</span>
+            <span>Clean Security Profile: No major publicly exposed data breaches or uncontained leaks identified for this domain.</span>
+          </div>
+        `;
+      }
+
+      // Key Concerns & Red Flags
+      const concernsList = document.getElementById('detailConcerns');
+      concernsList.innerHTML = '';
+      const rawConcerns = site.concerns || site.key_concerns || [];
+      if (rawConcerns && rawConcerns.length > 0) {
+        rawConcerns.forEach(c => {
+          const text = (typeof c === 'object' && c !== null) ? (c.text || c.concern || c.description || JSON.stringify(c)) : String(c);
+          concernsList.innerHTML += `
+            <li class="flex items-start gap-1.5 text-zinc-300">
+              <span class="text-rose-400 font-bold shrink-0">•</span>
+              <span>${text}</span>
+            </li>
+          `;
+        });
+      } else {
+        concernsList.innerHTML = `<li class="text-zinc-500 list-none text-xs">No critical privacy concerns flagged.</li>`;
+      }
+
+      // Positive Consumer Safeguards
+      const safeguardsList = document.getElementById('detailSafeguards');
+      safeguardsList.innerHTML = '';
+      const safeguards = [];
+      if (score >= 60) safeguards.push("Explicit statutory disclosures provided for digital data handling.");
+      if (dpdp.compliant) safeguards.push("Indian Grievance Redressal Officer clearly designated with contact details.");
+      if (gdpr.erasure_art17_disclosed || gdpr.compliant) safeguards.push("Right to Erasure and account deletion flow supported.");
+      if (ccpa.do_not_sell) safeguards.push("No selling of personal data to third-party data brokers.");
+      if (breaches.length === 0) safeguards.push("Zero verified public security breaches or uncontained data leaks.");
+      if (safeguards.length === 0) safeguards.push("Standard web operational disclosures provided in legal notice.");
+
+      safeguards.forEach(sg => {
+        safeguardsList.innerHTML += `
+          <li class="flex items-start gap-1.5 text-zinc-300">
+            <span class="text-emerald-400 font-bold shrink-0">✓</span>
+            <span>${sg}</span>
+          </li>
+        `;
+      });
+
+      // Extracted Snippets (FIXING [object Object])
+      const snippetsDiv = document.getElementById('detailSnippets');
+      snippetsDiv.innerHTML = '';
+      const rawSnippets = site.snippets || site.key_clauses || [];
+
+      if (rawSnippets && rawSnippets.length > 0) {
+        rawSnippets.forEach(s => {
+          let snippetText = '';
+          let snippetType = 'neutral';
+
+          if (typeof s === 'object' && s !== null) {
+            snippetText = s.text || s.clause || s.snippet || s.description || JSON.stringify(s);
+            snippetType = s.type || s.category || 'neutral';
+          } else {
+            snippetText = String(s);
+          }
+
+          let badgeHtml = '';
+          if (snippetType === 'negative' || snippetType.includes('risk') || snippetType.includes('concern')) {
+            badgeHtml = `<span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-rose-950/60 text-rose-400 border border-rose-800 uppercase font-semibold">Risk Clause</span>`;
+          } else if (snippetType === 'positive' || snippetType.includes('safe') || snippetType.includes('protection')) {
+            badgeHtml = `<span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-800 uppercase font-semibold">Protective</span>`;
+          } else {
+            badgeHtml = `<span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700 uppercase font-semibold">Excerpt</span>`;
+          }
+
+          snippetsDiv.innerHTML += `
+            <div class="p-3 bg-zinc-900/80 border border-zinc-800/80 rounded-xl space-y-1.5 text-xs font-sans">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] text-zinc-500 font-mono">“Policy Statement”</span>
+                ${badgeHtml}
+              </div>
+              <p class="text-zinc-200 italic leading-relaxed">"${snippetText}"</p>
+            </div>
+          `;
+        });
+      } else {
+        snippetsDiv.innerHTML = `<div class="text-zinc-500 text-xs p-3">No specific policy clause snippets extracted yet.</div>`;
       }
 
       document.getElementById('siteDetailModal').classList.remove('hidden');
@@ -1317,6 +1612,39 @@
 
     function closeSiteDetailModal() {
       document.getElementById('siteDetailModal').classList.add('hidden');
+      currentDetailSite = null;
+    }
+
+    async function rescanFromDetailModal() {
+      if (!currentDetailSite) return;
+      const btn = document.getElementById('btnDetailRescan');
+      btn.innerHTML = '<span>⏳ Rescanning...</span>';
+      btn.disabled = true;
+      try {
+        await rescanSite(currentDetailSite.domain);
+        await loadSites();
+        openSiteDetailModal(currentDetailSite.domain);
+      } catch (e) {
+        alert('Error rescanning site: ' + e.message);
+      } finally {
+        btn.innerHTML = '<span>🔄 Rescan</span>';
+        btn.disabled = false;
+      }
+    }
+
+    function generateAndCopyNoticeFromModal() {
+      if (!currentDetailSite) return;
+      const s = currentDetailSite;
+      const dpdpEmail = s.compliance?.dpdp?.grievance_email || s.compliance?.gdpr?.dpo_contact || `grievance@${s.domain}`;
+      const officer = s.compliance?.dpdp?.grievance_officer || 'Designated Grievance Officer';
+      
+      const noticeText = `To: ${officer} <${dpdpEmail}>\nSubject: Formal Statutory Data Erasure & Consent Withdrawal Notice - DPDP Act 2023 (Section 12)\n\nDear ${officer},\n\nI am writing to formally exercise my statutory right to data erasure and withdrawal of consent pursuant to Section 12 of the Digital Personal Data Protection Act, 2023 (DPDP Act 2023) and applicable data protection regulations regarding my personal data held by ${s.name || s.domain}.\n\nDomain: ${s.domain}\nDate: ${new Date().toISOString().split('T')[0]}\n\nPlease confirm complete erasure of all associated personal identifiers, telemetry, and account data within the statutory 30-day resolution timeline.\n\nSincerely,\nDigital Privacy Principal`;
+      
+      navigator.clipboard.writeText(noticeText).then(() => {
+        alert(`Statutory DPDP Deletion Notice for ${s.domain} copied to clipboard!\n\nRecipient: ${dpdpEmail}`);
+      }).catch(() => {
+        prompt('Copy the statutory notice below:', noticeText);
+      });
     }
 
     document.addEventListener('keydown', (e) => {

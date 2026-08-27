@@ -1,7 +1,7 @@
 import os
 import json
-from datetime import datetime
-from fastapi import APIRouter, HTTPException
+from datetime import datetime, timedelta
+from fastapi import APIRouter, HTTPException, Request
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel
 from app.services.footprint_service import get_footprint_data, toggle_action
@@ -153,11 +153,6 @@ async def receive_scan_result(payload: ScanPayload):
     finally:
         conn.close()
 
-
-from fastapi import Request
-from pydantic import BaseModel
-from typing import Optional
-
 class PingPayload(BaseModel):
     domain: str
     score: Optional[float] = 0.0
@@ -167,8 +162,6 @@ class PingPayload(BaseModel):
 
 async def _record_ping_db(payload: PingPayload, request: Request):
     from app.services.policy_analyzer import clean_domain, get_site_rating
-    from datetime import datetime, timedelta
-    import json
     
     clean = clean_domain(payload.domain)
     if not clean:
@@ -259,52 +252,3 @@ telemetry_router = APIRouter(prefix="/api/telemetry", tags=["Telemetry"])
 async def telemetry_ping_root(payload: PingPayload, request: Request):
     return await _record_ping_db(payload, request)
 
-
-
-@router.on_event("startup")
-async def startup_migration():
-    import asyncio
-    import json
-    from datetime import datetime, timedelta
-    from app.database import get_db_connection
-    from app.services.policy_analyzer import get_site_rating
-    
-    conn = get_db_connection()
-    try:
-        cursor = conn.cursor()
-        cursor.execute("SELECT DISTINCT domain FROM browser_pings WHERE domain NOT IN (SELECT domain FROM websites)")
-        domains = [row["domain"] for row in cursor.fetchall()]
-    finally:
-        conn.close()
-        
-    for domain in domains:
-        try:
-            rating = await get_site_rating(domain)
-        except Exception:
-            rating = {}
-            
-        now = datetime.utcnow()
-        now_iso = now.isoformat()
-        expires_at = (now + timedelta(hours=24)).isoformat()
-        
-        conn = get_db_connection()
-        try:
-            cursor = conn.cursor()
-            cursor.execute('''
-                INSERT INTO websites (
-                    domain, name, category, overall_score, grade, grade_color,
-                    pillar_scores, compliance, findings, key_concerns, key_clauses,
-                    breach_history, source, scan_count, first_analyzed_at, 
-                    last_analyzed_at, expires_at, updated_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'extension_telemetry', 1, ?, ?, ?, ?)
-            ''', (
-                domain, rating.get("name", domain), rating.get("category", "Web Service"),
-                rating.get("score", 0), rating.get("grade", "N/A"), rating.get("color", "gray"),
-                json.dumps(rating.get("rubric", {})), json.dumps(rating.get("compliance", {})),
-                json.dumps(rating.get("findings", {})), json.dumps(rating.get("key_concerns", [])),
-                json.dumps(rating.get("key_clauses", [])), json.dumps(rating.get("breaches", [])),
-                now_iso, now_iso, expires_at, now_iso
-            ))
-            conn.commit()
-        finally:
-            conn.close()

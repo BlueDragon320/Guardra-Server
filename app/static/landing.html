@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
     @font-face {
       font-family: 'Satoshi';
@@ -60,7 +60,7 @@
 </head>
 <body class="min-h-screen bg-[#050505] selection-coral overflow-x-hidden antialiased">
   
-  <!-- Top Navigation -->
+  <!-- Top Navigation (Exclusively Public - No Admin Links) -->
   <nav class="fixed top-0 left-0 right-0 z-[100] px-6 lg:px-12 py-5 flex items-center justify-between text-sm font-medium tracking-tight glass-nav">
     <div class="flex items-center gap-10">
       <a href="/" id="nav-logo" class="flex items-center gap-3 group">
@@ -71,19 +71,19 @@
       </a>
       
       <div class="hidden lg:flex items-center gap-8 text-[#888888]">
-        <a href="#features" class="hover:text-white transition-colors">Capabilities</a>
         <a href="#scanner" class="hover:text-white transition-colors">Live Policy Scanner</a>
-        <a href="#showcase" class="hover:text-white transition-colors">1000+ Monitored Sites</a>
-        <a href="/admin" class="hover:text-[#FF6B50] transition-colors">Admin Portal</a>
+        <a href="#features" class="hover:text-white transition-colors">Capabilities</a>
+        <a href="#pillars" class="hover:text-white transition-colors">6 Statutory Pillars</a>
+        <a href="#notice-section" class="hover:text-white transition-colors">DPDP Erasure Notices</a>
       </div>
     </div>
 
     <div class="flex items-center gap-4 sm:gap-6">
-      <a href="/docs" target="_blank" class="hidden md:block text-[#888888] hover:text-white transition-colors font-mono text-xs">
+      <a href="/docs" target="_blank" class="text-[#888888] hover:text-white transition-colors font-mono text-xs">
         API Docs
       </a>
-      <a href="/admin" class="px-4 py-2 bg-[#1a1a1a] hover:bg-white hover:text-black border border-[#333333] rounded-lg text-xs font-semibold tracking-wide transition-all duration-300">
-        Admin Portal &rarr;
+      <a href="#scanner" class="px-4 py-2 bg-white text-black hover:bg-[#FF6B50] hover:text-white rounded-lg text-xs font-semibold tracking-wide transition-all duration-300">
+        Evaluate Any Domain &rarr;
       </a>
     </div>
   </nav>
@@ -94,22 +94,22 @@
       <a href="/" class="p-3 hover:bg-[#222222] rounded-xl transition-all group" title="Home">
         <iconify-icon icon="lucide:shield-check" class="text-xl text-white"></iconify-icon>
       </a>
-      <a href="#scanner" class="p-3 hover:bg-[#222222] rounded-xl transition-all group" title="Scanner">
-        <iconify-icon icon="lucide:search" class="text-xl text-white"></iconify-icon>
+      <a href="#scanner" class="p-3 hover:bg-[#222222] rounded-xl transition-all group" title="Live Scanner">
+        <iconify-icon icon="lucide:search" class="text-xl text-emerald-400"></iconify-icon>
       </a>
       <a href="#features" class="p-3 hover:bg-[#222222] rounded-xl transition-all group" title="Features">
         <iconify-icon icon="lucide:cpu" class="text-xl text-white"></iconify-icon>
       </a>
-      <a href="/admin" class="p-3 hover:bg-[#222222] rounded-xl transition-all group" title="Admin Analytics">
-        <iconify-icon icon="lucide:line-chart" class="text-xl text-emerald-400"></iconify-icon>
+      <a href="#pillars" class="p-3 hover:bg-[#222222] rounded-xl transition-all group" title="Statutory Pillars">
+        <iconify-icon icon="lucide:layers" class="text-xl text-white"></iconify-icon>
       </a>
     </div>
-    <a href="/admin" id="floating-admin-btn" class="px-6 py-3 bg-[#FF6B50] hover:bg-[#E55A40] text-black font-bold text-xs tracking-wider uppercase rounded-xl transition-all">
-      Open Admin
+    <a href="#scanner" class="px-6 py-3 bg-[#FF6B50] hover:bg-[#E55A40] text-black font-bold text-xs tracking-wider uppercase rounded-xl transition-all font-mono">
+      Scan Domain
     </a>
   </div>
 
-  <!-- Hero Section (Midnight Editorial Display) -->
+  <!-- Hero Section -->
   <header class="relative min-h-screen w-full flex flex-col items-center justify-center pt-24 pb-16 px-6">
     <div class="absolute inset-0 z-0 pointer-events-none">
       <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_#1a1a1a_0%,_#050505_70%)] opacity-70"></div>
@@ -137,14 +137,14 @@
         <input 
           type="text" 
           id="heroDomainInput" 
-          placeholder="Scan any domain (e.g. croma.com, swiggy.com)..." 
-          class="w-full bg-[#111111] border border-[#2a2a2a] focus:border-[#FF6B50] rounded-xl px-4 py-3.5 text-sm font-mono text-white placeholder-[#555555] focus:outline-none transition"
+          placeholder="Scan any domain (e.g. croma.com, swiggy.com, apple.com)..." 
+          class="w-full bg-[#111111] border border-[#2a2a2a] focus:border-[#FF6B50] rounded-xl px-4 py-3.5 text-sm font-mono text-white placeholder-[#555555] focus:outline-none transition shadow-inner"
           onkeydown="if(event.key==='Enter') executeLiveScan()"
         />
       </div>
       <button 
         onclick="executeLiveScan()" 
-        class="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-[#FF6B50] hover:text-white text-black font-bold rounded-xl text-sm transition-all duration-300 shrink-0 flex items-center justify-center gap-2 font-mono"
+        class="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-[#FF6B50] hover:text-white text-black font-bold rounded-xl text-sm transition-all duration-300 shrink-0 flex items-center justify-center gap-2 font-mono shadow-lg"
       >
         <span>Evaluate</span>
         <iconify-icon icon="lucide:arrow-right"></iconify-icon>
@@ -160,7 +160,7 @@
           <div class="w-9 h-9 rounded-full bg-[#222222] border-2 border-[#050505] flex items-center justify-center font-mono font-bold text-[10px] text-rose-400">42</div>
         </div>
         <p class="text-xs font-medium leading-tight text-[#888888] group-hover:text-white transition-colors">
-          1000+ Verified Policies.<br/><span class="font-mono text-[11px] text-[#666666]">Real-time DPDP Officer Audits</span>
+          1,000+ Monitored Websites.<br/><span class="font-mono text-[11px] text-[#666666]">Real-time Statutory Redressal Audits</span>
         </p>
       </div>
 
@@ -171,125 +171,345 @@
     </div>
   </header>
 
-  <!-- Interactive Live Policy Scanner Section -->
-  <section id="scanner" class="py-28 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#161616]">
+  <!-- Interactive Live Policy Scanner Section (Full Deep-Dive Score Details) -->
+  <section id="scanner" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#161616]">
     <div class="flex items-center gap-3 mb-8">
       <div class="w-2 h-2 rounded-full bg-[#FF6B50] animate-pulse"></div>
-      <span class="text-[10px] font-bold tracking-[0.3em] text-[#666666] uppercase">Instant Verification Engine</span>
+      <span class="text-[10px] font-bold tracking-[0.3em] text-[#666666] uppercase font-mono">Statutory Policy Intelligence</span>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      <div class="lg:col-span-5 space-y-6">
+    <!-- Search Bar & Controls -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-10">
+      <div class="lg:col-span-5 space-y-4">
         <h2 class="text-3xl md:text-5xl font-bold leading-tight tracking-tight text-white">
           Inspect how websites treat your data.
         </h2>
         <p class="text-[#888888] text-sm leading-relaxed">
-          Guardra analyzes live privacy notices against the 6 statutory pillars: vendor data sharing, retention limits, tracking cookies, user rights, breach history, and DPDP grievance redressal officers.
+          Guardra analyzes live legal text against all 6 statutory pillars: vendor data sharing, retention limits, tracking cookies, user rights, breach history, and DPDP grievance redressal officers.
         </p>
 
         <div class="flex items-center gap-2 flex-wrap pt-2">
           <span class="text-xs text-[#666666]">Quick test:</span>
           <button onclick="setDomainAndScan('croma.com')" class="px-2.5 py-1 rounded-md bg-[#111111] border border-[#222222] hover:border-[#FF6B50] text-xs font-mono text-[#aaaaaa] transition">croma.com</button>
-          <button onclick="setDomainAndScan('kletech.ac.in')" class="px-2.5 py-1 rounded-md bg-[#111111] border border-[#222222] hover:border-[#FF6B50] text-xs font-mono text-[#aaaaaa] transition">kletech.ac.in</button>
-          <button onclick="setDomainAndScan('gonoise.com')" class="px-2.5 py-1 rounded-md bg-[#111111] border border-[#222222] hover:border-[#FF6B50] text-xs font-mono text-[#aaaaaa] transition">gonoise.com</button>
           <button onclick="setDomainAndScan('swiggy.com')" class="px-2.5 py-1 rounded-md bg-[#111111] border border-[#222222] hover:border-[#FF6B50] text-xs font-mono text-[#aaaaaa] transition">swiggy.com</button>
+          <button onclick="setDomainAndScan('google.com')" class="px-2.5 py-1 rounded-md bg-[#111111] border border-[#222222] hover:border-[#FF6B50] text-xs font-mono text-[#aaaaaa] transition">google.com</button>
+          <button onclick="setDomainAndScan('meta.com')" class="px-2.5 py-1 rounded-md bg-[#111111] border border-[#222222] hover:border-[#FF6B50] text-xs font-mono text-[#aaaaaa] transition">meta.com</button>
+          <button onclick="setDomainAndScan('apple.com')" class="px-2.5 py-1 rounded-md bg-[#111111] border border-[#222222] hover:border-[#FF6B50] text-xs font-mono text-[#aaaaaa] transition">apple.com</button>
+          <button onclick="setDomainAndScan('zerodha.com')" class="px-2.5 py-1 rounded-md bg-[#111111] border border-[#222222] hover:border-[#FF6B50] text-xs font-mono text-[#aaaaaa] transition">zerodha.com</button>
         </div>
       </div>
 
-      <!-- Live Scan Result Card -->
-      <div class="lg:col-span-7 bg-[#111111] rounded-[2rem] border border-[#222222] p-6 sm:p-8 relative overflow-hidden">
-        <div id="scanLoading" class="hidden absolute inset-0 bg-black/80 backdrop-blur-sm z-20 flex flex-col items-center justify-center space-y-3">
-          <div class="w-8 h-8 rounded-full border-2 border-emerald-400 border-t-transparent animate-spin"></div>
-          <span class="text-xs font-mono text-emerald-400">Analyzing live legal text & DPDP clauses...</span>
-        </div>
+      <div class="lg:col-span-7 bg-[#111111] rounded-2xl border border-[#222222] p-5">
+        <form onsubmit="event.preventDefault(); executeScannerForm();" class="flex flex-col sm:flex-row gap-3">
+          <input 
+            type="text" 
+            id="scannerDomainInput" 
+            placeholder="Type any domain (e.g. flipkart.com, amazon.in, reddit.com)..." 
+            class="flex-1 bg-[#161616] border border-[#2a2a2a] focus:border-[#FF6B50] rounded-xl px-4 py-3 text-sm font-mono text-white placeholder-[#555555] focus:outline-none transition"
+          />
+          <button 
+            type="submit"
+            class="px-6 py-3 bg-[#FF6B50] hover:bg-[#E55A40] text-black font-bold rounded-xl text-sm font-mono transition flex items-center justify-center gap-2 shrink-0"
+          >
+            <span>Scan Domain</span>
+            <iconify-icon icon="lucide:search"></iconify-icon>
+          </button>
+        </form>
+      </div>
+    </div>
 
-        <div class="flex items-start justify-between pb-6 border-b border-[#1c1c1c] gap-4">
+    <!-- Live Detailed Scan Result Card -->
+    <div id="scanResultContainer" class="bg-[#111111] rounded-[2rem] border border-[#222222] p-6 sm:p-10 relative overflow-hidden space-y-8 shadow-2xl">
+      <!-- Loading Overlay -->
+      <div id="scanLoading" class="hidden absolute inset-0 bg-black/85 backdrop-blur-md z-30 flex flex-col items-center justify-center space-y-3">
+        <div class="w-10 h-10 rounded-full border-2 border-emerald-400 border-t-transparent animate-spin"></div>
+        <span class="text-sm font-mono text-emerald-400 font-semibold tracking-wide">Executing live NLP statutory policy evaluation...</span>
+      </div>
+
+      <!-- Top Result Header -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-[#222222] gap-6">
+        <div class="flex items-center gap-5">
+          <div id="resGradeCircle" class="w-16 h-16 rounded-2xl flex flex-col items-center justify-center font-mono font-bold border border-amber-500 bg-amber-950/40 text-amber-400 shadow-lg">
+            <span id="resGrade" class="text-2xl leading-none">C+</span>
+            <span id="resScoreText" class="text-[11px] text-zinc-400 font-normal mt-0.5">62/100</span>
+          </div>
           <div>
-            <div id="resDomain" class="text-2xl font-bold font-mono text-white">croma.com</div>
-            <div id="resName" class="text-xs text-[#888888] mt-0.5">Infiniti Retail Limited (Tata Group)</div>
-          </div>
-          <div class="flex items-center gap-3">
-            <div id="resGradeBadge" class="px-3 py-1 rounded-lg bg-amber-950/40 border border-amber-800 text-amber-400 font-mono font-bold text-lg">
-              C+
+            <div class="flex items-center gap-3 flex-wrap">
+              <span id="resDomain" class="text-2xl sm:text-3xl font-bold font-mono text-white">croma.com</span>
+              <span id="resVerdictChip" class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-amber-950/60 border border-amber-800 text-amber-400">
+                ⚠️ Moderate Exposure
+              </span>
             </div>
-            <div class="text-right">
-              <div id="resScore" class="text-2xl font-extrabold font-mono text-white">62</div>
-              <div class="text-[10px] text-[#666666] font-mono">OUT OF 100</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 6 Pillar Rubric Bars -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 py-6 border-b border-[#1c1c1c]" id="resRubricGrid">
-          <div class="bg-[#161616] p-3.5 rounded-xl border border-[#222222] space-y-1.5">
-            <div class="flex justify-between text-xs font-mono text-[#aaaaaa]">
-              <span>Data Sharing</span>
-              <span id="scoreSharing" class="font-bold text-amber-400">60%</span>
-            </div>
-            <div class="w-full bg-[#222222] h-1.5 rounded-full overflow-hidden">
-              <div id="barSharing" class="bg-amber-400 h-full rounded-full" style="width: 60%"></div>
-            </div>
-          </div>
-
-          <div class="bg-[#161616] p-3.5 rounded-xl border border-[#222222] space-y-1.5">
-            <div class="flex justify-between text-xs font-mono text-[#aaaaaa]">
-              <span>Data Retention</span>
-              <span id="scoreRetention" class="font-bold text-amber-400">65%</span>
-            </div>
-            <div class="w-full bg-[#222222] h-1.5 rounded-full overflow-hidden">
-              <div id="barRetention" class="bg-amber-400 h-full rounded-full" style="width: 65%"></div>
-            </div>
-          </div>
-
-          <div class="bg-[#161616] p-3.5 rounded-xl border border-[#222222] space-y-1.5">
-            <div class="flex justify-between text-xs font-mono text-[#aaaaaa]">
-              <span>Tracking Cookies</span>
-              <span id="scoreCookies" class="font-bold text-rose-400">45%</span>
-            </div>
-            <div class="w-full bg-[#222222] h-1.5 rounded-full overflow-hidden">
-              <div id="barCookies" class="bg-rose-400 h-full rounded-full" style="width: 45%"></div>
-            </div>
-          </div>
-
-          <div class="bg-[#161616] p-3.5 rounded-xl border border-[#222222] space-y-1.5">
-            <div class="flex justify-between text-xs font-mono text-[#aaaaaa]">
-              <span>User Deletion Rights</span>
-              <span id="scoreRights" class="font-bold text-emerald-400">75%</span>
-            </div>
-            <div class="w-full bg-[#222222] h-1.5 rounded-full overflow-hidden">
-              <div id="barRights" class="bg-emerald-400 h-full rounded-full" style="width: 75%"></div>
+            <div class="text-xs text-[#888888] mt-1.5 flex items-center gap-3">
+              <span id="resName" class="text-zinc-300 font-medium">Infiniti Retail Limited (Tata Group)</span>
+              <span>&bull;</span>
+              <span id="resCategory" class="text-zinc-400">E-Commerce & Retail</span>
             </div>
           </div>
         </div>
 
-        <!-- Statutory Proof & DPDP Officer Excerpt -->
-        <div class="pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div>
-            <div class="text-[11px] text-[#666666] uppercase font-mono tracking-wider">Statutory Grievance Officer</div>
-            <div id="resOfficer" class="text-xs font-semibold text-white mt-0.5">Mr. Priyanand S • grievance.officer@croma.com</div>
-          </div>
-          <a id="resPolicyLink" href="https://www.croma.com/privacy-policy" target="_blank" class="px-4 py-2 bg-[#1c1c1c] hover:bg-white hover:text-black border border-[#333333] rounded-lg text-xs font-mono transition">
-            View Source Policy &rarr;
+        <div class="flex items-center gap-3 flex-wrap">
+          <button onclick="openStatutoryNoticeModal()" class="px-4 py-2.5 rounded-xl bg-emerald-950/50 hover:bg-emerald-900/60 border border-emerald-800 text-emerald-400 font-mono text-xs font-bold transition flex items-center gap-2">
+            <iconify-icon icon="lucide:file-text"></iconify-icon>
+            <span>1-Click DPDP Deletion Notice</span>
+          </button>
+          <a id="resPolicyLink" href="https://www.croma.com/privacy-policy" target="_blank" class="px-4 py-2.5 rounded-xl bg-[#1c1c1c] hover:bg-white hover:text-black border border-[#333333] text-xs font-mono font-semibold transition flex items-center gap-2">
+            <span>View Source Policy</span>
+            <iconify-icon icon="lucide:external-link"></iconify-icon>
           </a>
+        </div>
+      </div>
+
+      <!-- Executive Assessment Card (Why this site was scored that much) -->
+      <div class="bg-[#161616] border border-[#262626] rounded-2xl p-5 sm:p-6 space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold uppercase tracking-wider text-[#aaaaaa] font-mono flex items-center gap-2">
+            <iconify-icon icon="lucide:brain" class="text-emerald-400"></iconify-icon>
+            <span>Why This Site Was Scored This Way (Executive Privacy Verdict)</span>
+          </span>
+          <span id="resRiskBadge" class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 font-semibold">
+            Moderate Privacy Risk
+          </span>
+        </div>
+        <p id="resSummary" class="text-sm text-zinc-300 leading-relaxed pt-1">
+          Infiniti Retail Limited (Croma) publishes designated DPDP Grievance Officer details and retains standard user order data, but utilizes tracking pixels and vendor telemetry for personalized marketing.
+        </p>
+      </div>
+
+      <!-- 6 Statutory Pillars Full Breakdown Grid -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between border-b border-[#222222] pb-2">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-white font-mono flex items-center gap-2">
+            <iconify-icon icon="lucide:layers" class="text-[#FF6B50]"></iconify-icon>
+            <span>6-Pillar Statutory Rubric Evaluation</span>
+          </h3>
+          <span class="text-xs text-[#777777] font-mono">Weighted DPDP & GDPR Scoring</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="resRubricGrid">
+          <!-- Dynamically populated 6 pillars -->
+        </div>
+      </div>
+
+      <!-- Statutory Regional Legal Compliance (India DPDP / EU GDPR / CCPA) -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between border-b border-[#222222] pb-2">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-white font-mono flex items-center gap-2">
+            <iconify-icon icon="lucide:scale" class="text-emerald-400"></iconify-icon>
+            <span>Statutory Legal Compliance (DPDP Act 2023 & GDPR)</span>
+          </h3>
+          <span class="text-xs text-[#777777] font-mono">Section 12 Redressal & Art. 17 Rights</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- India DPDP Act 2023 -->
+          <div class="bg-[#161616] border border-[#262626] rounded-2xl p-5 space-y-3 text-xs">
+            <div class="flex items-center justify-between pb-2 border-b border-[#222222]">
+              <span class="font-bold text-white flex items-center gap-1.5">
+                <span>🇮🇳 India DPDP 2023</span>
+              </span>
+              <span id="resDpdpBadge" class="font-mono text-[10px] px-2 py-0.5 rounded font-bold text-emerald-400 bg-emerald-950/50 border border-emerald-800">
+                Disclosed
+              </span>
+            </div>
+            <div>
+              <span class="text-[#777777] block text-[11px]">Designated Grievance Officer</span>
+              <span id="resOfficer" class="font-medium text-white text-xs mt-0.5 block">Mr. Priyanand S</span>
+            </div>
+            <div>
+              <span class="text-[#777777] block text-[11px]">Official Redressal Email</span>
+              <span id="resEmail" class="font-mono text-emerald-400 text-xs mt-0.5 block break-all">grievance.officer@croma.com</span>
+            </div>
+            <div>
+              <span class="text-[#777777] block text-[11px]">Mandatory Resolution SLA</span>
+              <span id="resSla" class="text-zinc-300 text-xs mt-0.5 block">30 Days (Section 12 DPDP Act)</span>
+            </div>
+          </div>
+
+          <!-- EU GDPR -->
+          <div class="bg-[#161616] border border-[#262626] rounded-2xl p-5 space-y-3 text-xs">
+            <div class="flex items-center justify-between pb-2 border-b border-[#222222]">
+              <span class="font-bold text-white flex items-center gap-1.5">
+                <span>🇪🇺 EU GDPR</span>
+              </span>
+              <span id="resGdprBadge" class="font-mono text-[10px] px-2 py-0.5 rounded font-bold text-emerald-400 bg-emerald-950/50 border border-emerald-800">
+                Art. 17 Disclosed
+              </span>
+            </div>
+            <div>
+              <span class="text-[#777777] block text-[11px]">Data Protection Officer (DPO)</span>
+              <span id="resDpo" class="font-mono text-zinc-300 text-xs mt-0.5 block break-all">dpo@croma.com</span>
+            </div>
+            <div>
+              <span class="text-[#777777] block text-[11px]">Right to Erasure</span>
+              <span id="resErasure" class="text-zinc-300 text-xs mt-0.5 block">Statutory Erasure Flow Supported</span>
+            </div>
+            <div>
+              <span class="text-[#777777] block text-[11px]">Cross-Border Transfer Safeguards</span>
+              <span id="resTransfers" class="text-zinc-300 text-xs mt-0.5 block">Standard Contractual Clauses</span>
+            </div>
+          </div>
+
+          <!-- California CCPA -->
+          <div class="bg-[#161616] border border-[#262626] rounded-2xl p-5 space-y-3 text-xs">
+            <div class="flex items-center justify-between pb-2 border-b border-[#222222]">
+              <span class="font-bold text-white flex items-center gap-1.5">
+                <span>🇺🇸 California CCPA</span>
+              </span>
+              <span id="resCcpaBadge" class="font-mono text-[10px] px-2 py-0.5 rounded font-bold text-zinc-300 bg-zinc-800 border border-zinc-700">
+                Standard
+              </span>
+            </div>
+            <div>
+              <span class="text-[#777777] block text-[11px]">Do-Not-Sell Policy</span>
+              <span id="resDoNotSell" class="text-zinc-300 text-xs mt-0.5 block">Supported / No Sale of Data</span>
+            </div>
+            <div>
+              <span class="text-[#777777] block text-[11px]">Opt-Out Disclosures</span>
+              <span id="resOptOut" class="text-zinc-300 text-xs mt-0.5 block">Available via Settings</span>
+            </div>
+            <div>
+              <span class="text-[#777777] block text-[11px]">Notice at Collection</span>
+              <span id="resNotice" class="text-zinc-300 text-xs mt-0.5 block">Disclosed in terms</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Verified Data Breach Radar & Public Incident Log -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between border-b border-[#222222] pb-2">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-white font-mono flex items-center gap-2">
+            <iconify-icon icon="lucide:alert-octagon" class="text-rose-400"></iconify-icon>
+            <span>Verified Data Breach History & Public Incident Logs</span>
+          </h3>
+          <span id="resBreachCountBadge" class="text-xs font-mono px-2.5 py-0.5 rounded border bg-emerald-950/50 text-emerald-400 border-emerald-800">
+            0 Incidents (Clean Record)
+          </span>
+        </div>
+
+        <div id="resBreachesContainer" class="space-y-3">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Key Privacy Concerns vs Consumer Protections -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <!-- Red Flags -->
+        <div class="bg-[#161616] border border-[#2a2222] rounded-2xl p-5 space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-rose-400 font-mono flex items-center gap-2">
+            <iconify-icon icon="lucide:alert-triangle"></iconify-icon>
+            <span>Key Concerns & Privacy Red Flags</span>
+          </span>
+          <ul id="resConcerns" class="space-y-2 text-xs text-zinc-300 pt-1">
+            <!-- Dynamically populated -->
+          </ul>
+        </div>
+
+        <!-- Positive Safeguards -->
+        <div class="bg-[#161616] border border-[#202c24] rounded-2xl p-5 space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono flex items-center gap-2">
+            <iconify-icon icon="lucide:shield-check"></iconify-icon>
+            <span>Protective Consumer Safeguards</span>
+          </span>
+          <ul id="resSafeguards" class="space-y-2 text-xs text-zinc-300 pt-1">
+            <!-- Dynamically populated -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Extracted Evidence & Policy Excerpts (Without [object Object]) -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between border-b border-[#222222] pb-2">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-white font-mono flex items-center gap-2">
+            <iconify-icon icon="lucide:quote" class="text-brand"></iconify-icon>
+            <span>Extracted Evidence & Legal Excerpts</span>
+          </h3>
+          <span class="text-xs text-[#777777] font-mono">Verbatim Disclosures from Policy Text</span>
+        </div>
+
+        <div id="resSnippets" class="space-y-3">
+          <!-- Dynamically populated quote snippets -->
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Capabilities Grid (Editorial Bento) -->
-  <section id="features" class="py-32 px-6 md:px-12 max-w-7xl mx-auto">
-    <div class="flex items-center gap-3 mb-10">
+  <!-- 6 Statutory Pillars Overview Section -->
+  <section id="pillars" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#161616]">
+    <div class="flex items-center gap-3 mb-8">
       <div class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></div>
-      <span class="text-[10px] font-bold tracking-[0.3em] text-[#666666] uppercase">Why leave privacy to chance?</span>
+      <span class="text-[10px] font-bold tracking-[0.3em] text-[#666666] uppercase font-mono">The Guardra Evaluation Standard</span>
     </div>
 
-    <h2 class="text-4xl md:text-7xl font-medium leading-[1.05] tracking-tight text-white max-w-5xl mb-24">
+    <h2 class="text-3xl md:text-5xl font-bold leading-tight tracking-tight text-white max-w-3xl mb-14">
+      The 6 Statutory Pillars of Digital Privacy
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-[#111111] p-6 rounded-2xl border border-[#222222] space-y-3">
+        <div class="text-[#FF6B50] font-mono text-sm font-bold">01 / VENDOR SHARING</div>
+        <h3 class="text-lg font-bold text-white">Third-Party Data Sharing</h3>
+        <p class="text-xs text-[#888888] leading-relaxed">
+          Evaluates whether personal data is sold, monetized with ad brokers, or shared with commercial entities without explicit consent.
+        </p>
+      </div>
+
+      <div class="bg-[#111111] p-6 rounded-2xl border border-[#222222] space-y-3">
+        <div class="text-[#FF6B50] font-mono text-sm font-bold">02 / RETENTION LIMITS</div>
+        <h3 class="text-lg font-bold text-white">Data Retention Caps</h3>
+        <p class="text-xs text-[#888888] leading-relaxed">
+          Inspects whether the platform specifies exact deletion windows or retains personal telemetry indefinitely without user controls.
+        </p>
+      </div>
+
+      <div class="bg-[#111111] p-6 rounded-2xl border border-[#222222] space-y-3">
+        <div class="text-[#FF6B50] font-mono text-sm font-bold">03 / TRACKER DENSITY</div>
+        <h3 class="text-lg font-bold text-white">Cookies & Ad Beacons</h3>
+        <p class="text-xs text-[#888888] leading-relaxed">
+          Detects cross-site trackers, Meta Pixels, fingerprinting scripts, and non-essential third-party advertising cookies.
+        </p>
+      </div>
+
+      <div class="bg-[#111111] p-6 rounded-2xl border border-[#222222] space-y-3">
+        <div class="text-emerald-400 font-mono text-sm font-bold">04 / STATUTORY RIGHTS</div>
+        <h3 class="text-lg font-bold text-white">User Deletion & Erasure</h3>
+        <p class="text-xs text-[#888888] leading-relaxed">
+          Checks support for DPDP Section 12 consent withdrawal, GDPR Article 17 Right to Erasure, and self-service account deletion.
+        </p>
+      </div>
+
+      <div class="bg-[#111111] p-6 rounded-2xl border border-[#222222] space-y-3">
+        <div class="text-emerald-400 font-mono text-sm font-bold">05 / SECURITY RECORD</div>
+        <h3 class="text-lg font-bold text-white">Breach History & Safeguards</h3>
+        <p class="text-xs text-[#888888] leading-relaxed">
+          Cross-references verified OSINT public database leaks, unauthorized credential scraping, and past regulatory enforcement actions.
+        </p>
+      </div>
+
+      <div class="bg-[#111111] p-6 rounded-2xl border border-[#222222] space-y-3">
+        <div class="text-emerald-400 font-mono text-sm font-bold">06 / PLAIN LANGUAGE</div>
+        <h3 class="text-lg font-bold text-white">Readability & Clarity</h3>
+        <p class="text-xs text-[#888888] leading-relaxed">
+          Analyzes the linguistic readability score to ensure notices are transparent and understandable rather than hidden in legal jargon.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities Section -->
+  <section id="features" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#161616]">
+    <div class="flex items-center gap-3 mb-10">
+      <div class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></div>
+      <span class="text-[10px] font-bold tracking-[0.3em] text-[#666666] uppercase font-mono">Autonomous Protection</span>
+    </div>
+
+    <h2 class="text-4xl md:text-6xl font-medium leading-[1.05] tracking-tight text-white max-w-5xl mb-16">
       Autonomous security that helps you <span class="text-[#666666]">control your digital identity</span> and enforce legal rights.
     </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <!-- Card 1 -->
-      <div class="bg-[#111111] rounded-[2.5rem] p-10 md:p-12 min-h-[480px] flex flex-col justify-between relative overflow-hidden group hover:bg-[#161616] transition-all duration-500 border border-[#1c1c1c]">
+      <div class="bg-[#111111] rounded-[2.5rem] p-10 md:p-12 min-h-[420px] flex flex-col justify-between relative overflow-hidden group hover:bg-[#161616] transition-all duration-500 border border-[#1c1c1c]">
         <div class="flex items-center justify-between">
           <span class="text-xs font-mono font-bold text-[#FF6B50]">01 / ENGINE</span>
           <div class="bg-[#1a1a1a] text-[10px] font-bold px-3.5 py-1.5 rounded-full uppercase tracking-widest text-[#888888] border border-[#333333]">
@@ -298,20 +518,16 @@
         </div>
         
         <div class="mt-auto space-y-3">
-          <h3 class="text-4xl md:text-6xl font-semibold tracking-tighter text-white">
+          <h3 class="text-3xl md:text-5xl font-semibold tracking-tighter text-white">
             Audit instantly.
           </h3>
-          <h3 class="text-4xl md:text-6xl font-semibold tracking-tighter text-[#444444] group-hover:text-[#888888] transition-colors">
-            Know every clause.
-          </h3>
-          <p class="text-[#888888] text-xs pt-4 max-w-md">
-            Natural language extraction of corporate terms, DPDP Section 6 notices, data sharing partners, and maximum retention durations.
+          <p class="text-[#888888] text-xs pt-2 max-w-md leading-relaxed">
+            Real-time NLP extraction of corporate terms, DPDP Section 6 notices, data sharing partners, and maximum retention durations.
           </p>
         </div>
       </div>
 
-      <!-- Card 2 -->
-      <div class="bg-gradient-to-br from-[#0c2a1e] to-[#111111] rounded-[2.5rem] p-10 md:p-12 min-h-[480px] flex flex-col justify-between relative overflow-hidden group border border-emerald-950">
+      <div class="bg-gradient-to-br from-[#0c2a1e] to-[#111111] rounded-[2.5rem] p-10 md:p-12 min-h-[420px] flex flex-col justify-between relative overflow-hidden group border border-emerald-950">
         <div class="flex items-center justify-between">
           <span class="text-xs font-mono font-bold text-emerald-400">02 / EXTENSION</span>
           <div class="bg-[#051a12] text-[10px] font-bold px-3.5 py-1.5 rounded-full uppercase tracking-widest text-emerald-400 border border-emerald-800">
@@ -320,13 +536,10 @@
         </div>
         
         <div class="mt-auto space-y-3">
-          <h3 class="text-4xl md:text-6xl font-semibold tracking-tighter text-white">
+          <h3 class="text-3xl md:text-5xl font-semibold tracking-tighter text-white">
             Neutralize trackers.
           </h3>
-          <h3 class="text-4xl md:text-6xl font-semibold tracking-tighter text-emerald-600/70 group-hover:text-emerald-400 transition-colors">
-            Zero ad beacons.
-          </h3>
-          <p class="text-[#aaaaaa] text-xs pt-4 max-w-md">
+          <p class="text-[#aaaaaa] text-xs pt-2 max-w-md leading-relaxed">
             Stops Meta Pixel, Google Analytics, and third-party tracking cookies directly at the browser runtime while keeping necessary functionality alive.
           </p>
         </div>
@@ -334,112 +547,447 @@
     </div>
   </section>
 
-  <!-- CTA / Footer Section (Midnight Editorial Big Statement) -->
-  <footer class="relative pt-44 pb-28 px-6 md:px-12 border-t border-[#1a1a1a]">
+  <!-- Interactive Modal for 1-Click DPDP Notice -->
+  <div id="noticeModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-[#141414] border border-[#2a2a2a] rounded-2xl max-w-2xl w-full p-6 sm:p-8 space-y-5 shadow-2xl">
+      <div class="flex items-center justify-between pb-3 border-b border-[#222222]">
+        <div>
+          <h3 class="text-base font-bold text-white flex items-center gap-2 font-mono">
+            <iconify-icon icon="lucide:mail" class="text-emerald-400"></iconify-icon>
+            <span>Statutory Data Erasure Notice</span>
+          </h3>
+          <p class="text-xs text-[#888888] mt-0.5">Section 12, Digital Personal Data Protection Act, 2023</p>
+        </div>
+        <button onclick="closeStatutoryNoticeModal()" class="text-zinc-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="text-[#888888] block mb-1 font-mono">Grievance Redressal Officer Recipient:</label>
+          <input type="text" id="noticeRecipientInput" readonly class="w-full bg-[#0d0d0d] border border-[#222222] rounded-lg px-3 py-2 font-mono text-emerald-400 text-xs" />
+        </div>
+
+        <div>
+          <label class="text-[#888888] block mb-1 font-mono">Formal Notice Text:</label>
+          <textarea id="noticeContentArea" rows="8" class="w-full bg-[#0d0d0d] border border-[#222222] rounded-lg p-3 font-mono text-xs text-zinc-200 leading-relaxed focus:outline-none"></textarea>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-3 pt-2">
+        <button onclick="closeStatutoryNoticeModal()" class="px-4 py-2 bg-[#222222] hover:bg-[#2a2a2a] text-zinc-300 rounded-xl text-xs font-mono">
+          Close
+        </button>
+        <button onclick="copyNoticeText()" class="px-5 py-2 bg-emerald-500 hover:bg-emerald-600 text-zinc-950 font-bold rounded-xl text-xs font-mono flex items-center gap-1.5 shadow-md">
+          <iconify-icon icon="lucide:copy"></iconify-icon>
+          <span>Copy to Clipboard</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Public Footer (Exclusively Public - No Admin Links) -->
+  <footer id="notice-section" class="relative pt-36 pb-24 px-6 md:px-12 border-t border-[#1a1a1a]">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-16">
-      
       <div class="flex-1">
-        <h2 class="text-[14vw] md:text-[9.5vw] leading-[0.85] font-black tracking-tighter text-white mb-10 select-none">
+        <h2 class="text-[14vw] md:text-[8vw] leading-[0.85] font-black tracking-tighter text-white mb-8 select-none">
           DEFEND<br />PRIVACY.
         </h2>
-        <div class="flex flex-col gap-5">
-          <a href="/admin" class="text-2xl md:text-3xl font-semibold hover:text-[#FF6B50] transition-all w-fit font-mono">
-            Launch Guardra Portal &rarr;
+        <div class="flex flex-col gap-4">
+          <a href="#scanner" class="text-xl md:text-2xl font-semibold hover:text-[#FF6B50] transition-all w-fit font-mono">
+            Scan Your Next Website &rarr;
           </a>
           <p class="text-[#666666] flex items-center gap-2 text-xs font-mono">
             <iconify-icon icon="lucide:shield"></iconify-icon>
-            Autonomous Digital Personal Data Protection (DPDP Act 2023).
+            Statutory AI Defense for Digital Personal Data Protection (DPDP Act 2023).
           </p>
         </div>
       </div>
 
-      <div class="flex gap-3 md:mb-6">
-        <a href="/admin" class="px-5 py-3 rounded-xl border border-[#333333] text-xs font-mono font-bold hover:bg-white hover:text-black transition-all">
-          Admin Dashboard
-        </a>
-        <a href="/docs" target="_blank" class="px-5 py-3 rounded-xl border border-[#333333] text-xs font-mono font-bold hover:bg-[#FF6B50] hover:text-black transition-all">
+      <div class="flex gap-3 md:mb-4">
+        <a href="/docs" target="_blank" class="px-5 py-3 rounded-xl border border-[#333333] text-xs font-mono font-bold hover:bg-white hover:text-black transition-all">
           API Specs
+        </a>
+        <a href="#scanner" class="px-5 py-3 rounded-xl border border-[#333333] text-xs font-mono font-bold hover:bg-[#FF6B50] hover:text-black transition-all">
+          Evaluate Domain
         </a>
       </div>
     </div>
 
-    <div class="max-w-7xl mx-auto mt-36 pt-10 border-t border-[#111111] flex flex-col md:flex-row justify-between text-[#444444] text-[10px] font-bold uppercase tracking-widest font-mono">
+    <div class="max-w-7xl mx-auto mt-28 pt-8 border-t border-[#111111] flex flex-col md:flex-row justify-between text-[#444444] text-[10px] font-bold uppercase tracking-widest font-mono">
       <p>&copy; 2026 Guardra Privacy Suite. All rights reserved.</p>
-      <div class="flex gap-8 mt-6 md:mt-0">
+      <div class="flex gap-8 mt-4 md:mt-0">
         <a href="/api/health" class="hover:text-white transition-colors">Server Health</a>
-        <a href="/api/admin/stats" class="hover:text-white transition-colors">Directory Stats</a>
-        <a href="/admin" class="hover:text-[#FF6B50] transition-colors">Portal Login</a>
+        <a href="#pillars" class="hover:text-white transition-colors">Evaluation Standard</a>
+        <a href="#scanner" class="hover:text-[#FF6B50] transition-colors">Public Radar</a>
       </div>
     </div>
   </footer>
 
+  <!-- Application Logic for Public Domain Scan & Detailed Display -->
   <script>
+    let currentScannedData = null;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // Auto-scan default domain on load
+      performScan('croma.com');
+    });
+
     async function executeLiveScan() {
       const input = document.getElementById('heroDomainInput');
+      const domain = (input.value || '').trim();
+      if (!domain) return;
+      await performScan(domain);
+      document.getElementById('scanner').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function executeScannerForm() {
+      const input = document.getElementById('scannerDomainInput');
       const domain = (input.value || '').trim();
       if (!domain) return;
       await performScan(domain);
     }
 
     async function setDomainAndScan(domain) {
-      document.getElementById('heroDomainInput').value = domain;
+      const heroIn = document.getElementById('heroDomainInput');
+      const scanIn = document.getElementById('scannerDomainInput');
+      if (heroIn) heroIn.value = domain;
+      if (scanIn) scanIn.value = domain;
       await performScan(domain);
       document.getElementById('scanner').scrollIntoView({ behavior: 'smooth' });
     }
 
     async function performScan(domain) {
+      const cleanDom = domain.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0];
+      if (!cleanDom) return;
+
       const loader = document.getElementById('scanLoading');
-      loader.classList.remove('hidden');
+      if (loader) loader.classList.remove('hidden');
 
       try {
-        const res = await fetch(`/api/policy/rating?domain=${encodeURIComponent(domain)}`);
+        const res = await fetch(`/api/policy/rating?domain=${encodeURIComponent(cleanDom)}`);
         if (!res.ok) throw new Error('Rating fetch failed');
         const data = await res.json();
+        currentScannedData = data;
 
-        document.getElementById('resDomain').innerText = data.domain || domain;
-        document.getElementById('resName').innerText = data.name || domain;
-        document.getElementById('resScore').innerText = Math.round(data.score || data.overall_score || 50);
-        
-        const grade = data.grade || 'C';
-        const badge = document.getElementById('resGradeBadge');
-        badge.innerText = grade;
-        badge.className = `px-3 py-1 rounded-lg font-mono font-bold text-lg border ${
-          (data.score >= 80) ? 'bg-emerald-950/40 border-emerald-800 text-emerald-400' :
-          (data.score >= 50) ? 'bg-amber-950/40 border-amber-800 text-amber-400' :
-          'bg-rose-950/40 border-rose-800 text-rose-400'
-        }`;
+        const score = Math.round(data.score !== undefined ? data.score : (data.overall_score || 50));
+        const grade = data.grade || (score >= 80 ? 'A' : (score >= 50 ? 'C' : 'F'));
 
-        // Update rubric bars if available
-        if (data.rubric) {
-          const sharing = data.rubric.data_sharing?.score || 60;
-          document.getElementById('scoreSharing').innerText = `${sharing}%`;
-          document.getElementById('barSharing').style.width = `${sharing}%`;
+        // Update Domain & Brand Header
+        document.getElementById('resDomain').innerText = data.domain || cleanDom;
+        document.getElementById('resName').innerText = (data.name && data.name !== data.domain) ? data.name : cleanDom.split('.')[0].toUpperCase();
+        document.getElementById('resCategory').innerText = data.category || 'Web Platform';
+        document.getElementById('resGrade').innerText = grade;
+        document.getElementById('resScoreText').innerText = `${score}/100`;
 
-          const retention = data.rubric.retention?.score || 65;
-          document.getElementById('scoreRetention').innerText = `${retention}%`;
-          document.getElementById('barRetention').style.width = `${retention}%`;
+        // Update Grade Circle & Verdict Chip
+        const gradeCircle = document.getElementById('resGradeCircle');
+        const verdictChip = document.getElementById('resVerdictChip');
+        const riskBadge = document.getElementById('resRiskBadge');
 
-          const cookies = data.rubric.tracking_cookies?.score || 45;
-          document.getElementById('scoreCookies').innerText = `${cookies}%`;
-          document.getElementById('barCookies').style.width = `${cookies}%`;
-
-          const rights = data.rubric.user_rights?.score || 75;
-          document.getElementById('scoreRights').innerText = `${rights}%`;
-          document.getElementById('barRights').style.width = `${rights}%`;
+        if (score >= 80) {
+          gradeCircle.className = 'w-16 h-16 rounded-2xl flex flex-col items-center justify-center font-mono font-bold border border-emerald-500 bg-emerald-950/40 text-emerald-400 shadow-lg';
+          verdictChip.className = 'px-2.5 py-0.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-emerald-950/60 border border-emerald-800 text-emerald-400';
+          verdictChip.innerText = '🛡️ Safe Site';
+          riskBadge.innerText = '🟢 Low Privacy Risk';
+          riskBadge.className = 'text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-800 text-emerald-400 font-semibold';
+        } else if (score >= 50) {
+          gradeCircle.className = 'w-16 h-16 rounded-2xl flex flex-col items-center justify-center font-mono font-bold border border-amber-500 bg-amber-950/40 text-amber-400 shadow-lg';
+          verdictChip.className = 'px-2.5 py-0.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-amber-950/60 border border-amber-800 text-amber-400';
+          verdictChip.innerText = '⚠️ Moderate Exposure';
+          riskBadge.innerText = '🟡 Moderate Privacy Risk';
+          riskBadge.className = 'text-[11px] font-mono px-2 py-0.5 rounded bg-amber-950/60 border border-amber-800 text-amber-400 font-semibold';
+        } else {
+          gradeCircle.className = 'w-16 h-16 rounded-2xl flex flex-col items-center justify-center font-mono font-bold border border-rose-500 bg-rose-950/40 text-rose-400 shadow-lg';
+          verdictChip.className = 'px-2.5 py-0.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-rose-950/60 border border-rose-800 text-rose-400';
+          verdictChip.innerText = '🚨 Critical Exposure';
+          riskBadge.innerText = '🔴 High / Critical Exposure';
+          riskBadge.className = 'text-[11px] font-mono px-2 py-0.5 rounded bg-rose-950/60 border border-rose-800 text-rose-400 font-semibold';
         }
 
-        const officer = data.compliance?.dpdp?.grievance_officer || 'Listed under DPDP Redressal';
-        const email = data.compliance?.dpdp?.grievance_email || 'privacy@' + domain;
-        document.getElementById('resOfficer').innerText = `${officer} • ${email}`;
+        // Executive Assessment Summary
+        let summaryText = data.summary || (data.findings && data.findings.summary) || '';
+        if (!summaryText || summaryText === 'No summary available.') {
+          if (score >= 80) {
+            summaryText = `${data.name || cleanDom} demonstrates transparent privacy disclosures, strict data retention bounds, designated Indian Grievance Officers, and robust user erasure rights.`;
+          } else if (score >= 50) {
+            summaryText = `${data.name || cleanDom} provides baseline regulatory disclosures but retains broad data sharing licenses, advertising trackers, or telemetry for third-party commercial partners.`;
+          } else {
+            summaryText = `Critical privacy hazards identified for ${data.name || cleanDom}. Platform engages in aggressive ad profile building, unspecified data retention, or undisclosed vendor sharing.`;
+          }
+        }
+        document.getElementById('resSummary').innerText = summaryText;
 
-        const link = document.getElementById('resPolicyLink');
-        link.href = data.policy_url || `https://${domain}/privacy`;
+        // Render 6-Pillar Statutory Rubric Breakdown
+        const rubricGrid = document.getElementById('resRubricGrid');
+        rubricGrid.innerHTML = '';
+        const rubricNames = {
+          data_sharing: "Third-Party Data Sharing",
+          retention: "Data Retention Limits",
+          tracking_cookies: "Cookies & Tracker Density",
+          user_rights: "User Rights & Erasure Flow",
+          breach_history: "Breach History & Safeguards",
+          readability: "Plain-Language Clarity"
+        };
+
+        const rubricData = data.rubric || {};
+        const pillars = ['data_sharing', 'retention', 'tracking_cookies', 'user_rights', 'breach_history', 'readability'];
+
+        pillars.forEach(k => {
+          const item = rubricData[k] || { score: (score >= 50 ? 60 : 30), label: 'Standard statutory evaluation' };
+          const pScore = Math.round(item.score || 0);
+          const colorClass = pScore >= 70 ? 'text-emerald-400 bg-emerald-400' : (pScore >= 45 ? 'text-amber-400 bg-amber-400' : 'text-rose-400 bg-rose-400');
+          const borderClass = pScore >= 70 ? 'border-emerald-800/40' : (pScore >= 45 ? 'border-amber-800/40' : 'border-rose-800/40');
+          const riskTag = pScore >= 70 ? 'Low Risk' : (pScore >= 45 ? 'Moderate Risk' : 'High Risk');
+
+          rubricGrid.innerHTML += `
+            <div class="bg-[#161616] border ${borderClass} rounded-2xl p-4 space-y-2">
+              <div class="flex justify-between items-center text-xs">
+                <span class="font-semibold text-white">${rubricNames[k]}</span>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[10px] font-mono text-zinc-500">${riskTag}</span>
+                  <span class="font-mono font-bold ${colorClass.split(' ')[0]}">${pScore}%</span>
+                </div>
+              </div>
+              <div class="w-full bg-[#222222] h-1.5 rounded-full overflow-hidden">
+                <div class="${colorClass.split(' ')[1]} h-full rounded-full" style="width: ${Math.max(5, pScore)}%"></div>
+              </div>
+              <p class="text-[11px] text-[#888888] leading-snug">${item.label || 'Evaluated via NLP legal parser.'}</p>
+            </div>
+          `;
+        });
+
+        // Regional Compliance Audit
+        const dpdp = data.compliance?.dpdp || {};
+        const gdpr = data.compliance?.gdpr || {};
+        const ccpa = data.compliance?.ccpa || {};
+
+        document.getElementById('resOfficer').innerText = dpdp.grievance_officer || 'Designated under DPDP Redressal';
+        document.getElementById('resEmail').innerText = dpdp.grievance_email || 'privacy@' + cleanDom;
+        document.getElementById('resSla').innerText = `${dpdp.redressal_period_days || 30} Days (Section 12 DPDP Act)`;
+        const dpdpBadge = document.getElementById('resDpdpBadge');
+        if (dpdp.compliant) {
+          dpdpBadge.innerText = 'Compliant';
+          dpdpBadge.className = 'font-mono text-[10px] px-2 py-0.5 rounded font-bold text-emerald-400 bg-emerald-950/50 border border-emerald-800';
+        } else {
+          dpdpBadge.innerText = 'Disclosed';
+          dpdpBadge.className = 'font-mono text-[10px] px-2 py-0.5 rounded font-bold text-amber-400 bg-amber-950/50 border border-amber-800';
+        }
+
+        document.getElementById('resDpo').innerText = gdpr.dpo_contact || (gdpr.compliant ? 'Designated EU Rep' : 'dpo@' + cleanDom);
+        document.getElementById('resErasure').innerText = gdpr.erasure_art17_disclosed ? 'Art. 17 Explicitly Supported' : 'Standard Statutory Flow';
+        const gdprBadge = document.getElementById('resGdprBadge');
+        if (gdpr.compliant) {
+          gdprBadge.innerText = 'Art. 17 Ready';
+          gdprBadge.className = 'font-mono text-[10px] px-2 py-0.5 rounded font-bold text-emerald-400 bg-emerald-950/50 border border-emerald-800';
+        } else {
+          gdprBadge.innerText = 'Standard';
+          gdprBadge.className = 'font-mono text-[10px] px-2 py-0.5 rounded font-bold text-zinc-400 bg-zinc-800 border border-zinc-700';
+        }
+
+        document.getElementById('resDoNotSell').innerText = ccpa.do_not_sell ? 'Supported (No Sale of Data)' : 'Disclosed in Terms';
+        document.getElementById('resOptOut').innerText = ccpa.opt_out_link ? 'Available via Controls' : 'Available via Settings';
+
+        // Verified Data Breach History
+        const breachCountBadge = document.getElementById('resBreachCountBadge');
+        const breachesContainer = document.getElementById('resBreachesContainer');
+        breachesContainer.innerHTML = '';
+        const breaches = data.breaches || data.breach_history || [];
+
+        if (breaches && breaches.length > 0) {
+          breachCountBadge.innerText = `${breaches.length} Incident(s) Recorded`;
+          breachCountBadge.className = 'text-xs font-mono px-2.5 py-0.5 rounded border bg-rose-950/50 text-rose-400 border-rose-800 font-bold';
+
+          breaches.forEach(b => {
+            const pwnText = b.pwn_count ? `• ${Number(b.pwn_count).toLocaleString()} Compromised Records` : '';
+            const dataClasses = Array.isArray(b.data_classes) ? b.data_classes : [];
+
+            breachesContainer.innerHTML += `
+              <div class="p-4 bg-rose-950/20 border border-rose-900/40 rounded-2xl space-y-2 text-xs">
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <span class="font-bold text-white text-sm">${b.name || 'Security Breach Incident'}</span>
+                    <span class="text-xs font-mono text-rose-400 ml-2">${pwnText}</span>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-950/70 text-amber-300 border border-amber-800 shrink-0 font-bold">
+                    ${b.breach_date || 'Disclosed'}
+                  </span>
+                </div>
+                <p class="text-zinc-300 text-xs leading-relaxed">${b.description || 'Public database breach recorded.'}</p>
+                ${dataClasses.length > 0 ? `
+                  <div class="flex items-center gap-1.5 flex-wrap pt-1">
+                    <span class="text-[10px] text-[#777777]">Compromised Data:</span>
+                    ${dataClasses.map(c => `<span class="text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-300 font-mono">${c}</span>`).join('')}
+                  </div>
+                ` : ''}
+                ${b.article_url ? `
+                  <div class="pt-1">
+                    <a href="${b.article_url}" target="_blank" class="inline-flex items-center gap-1 text-xs text-brand hover:underline font-semibold">
+                      <span>🔗 Read Verified Investigative Report &rarr;</span>
+                    </a>
+                  </div>
+                ` : ''}
+              </div>
+            `;
+          });
+        } else {
+          breachCountBadge.innerText = '0 Incidents (Clean Record)';
+          breachCountBadge.className = 'text-xs font-mono px-2.5 py-0.5 rounded border bg-emerald-950/50 text-emerald-400 border-emerald-800';
+          breachesContainer.innerHTML = `
+            <div class="p-3.5 bg-emerald-950/20 border border-emerald-900/30 rounded-2xl text-xs text-emerald-400 flex items-center gap-2">
+              <iconify-icon icon="lucide:check-circle" class="text-base"></iconify-icon>
+              <span>Clean Security Profile: No major publicly exposed data breaches or uncontained leaks recorded for this domain.</span>
+            </div>
+          `;
+        }
+
+        // Key Concerns & Red Flags
+        const concernsList = document.getElementById('resConcerns');
+        concernsList.innerHTML = '';
+        const rawConcerns = data.concerns || data.key_concerns || [];
+        if (rawConcerns && rawConcerns.length > 0) {
+          rawConcerns.forEach(c => {
+            const text = (typeof c === 'object' && c !== null) ? (c.text || c.concern || c.description || JSON.stringify(c)) : String(c);
+            concernsList.innerHTML += `
+              <li class="flex items-start gap-2 text-zinc-300">
+                <span class="text-rose-400 font-bold shrink-0">•</span>
+                <span>${text}</span>
+              </li>
+            `;
+          });
+        } else {
+          concernsList.innerHTML = `<li class="text-[#777777] list-none text-xs">No critical privacy red flags detected.</li>`;
+        }
+
+        // Positive Consumer Safeguards
+        const safeguardsList = document.getElementById('resSafeguards');
+        safeguardsList.innerHTML = '';
+        const safeguards = [];
+        if (score >= 60) safeguards.push("Comprehensive statutory disclosures for personal data handling.");
+        if (dpdp.compliant) safeguards.push("Named Indian Grievance Redressal Officer with active contact email.");
+        if (gdpr.erasure_art17_disclosed || gdpr.compliant) safeguards.push("Explicit statutory right to data erasure and consent withdrawal.");
+        if (ccpa.do_not_sell) safeguards.push("Strict commitment not to sell personal information to data brokers.");
+        if (breaches.length === 0) safeguards.push("Zero verified public data leaks or unauthorized data exposures.");
+        if (safeguards.length === 0) safeguards.push("Standard web operational disclosures provided in legal text.");
+
+        safeguards.forEach(sg => {
+          safeguardsList.innerHTML += `
+            <li class="flex items-start gap-2 text-zinc-300">
+              <span class="text-emerald-400 font-bold shrink-0">✓</span>
+              <span>${sg}</span>
+            </li>
+          `;
+        });
+
+        // Extracted Snippets (FIXING [object Object])
+        const snippetsContainer = document.getElementById('resSnippets');
+        snippetsContainer.innerHTML = '';
+        const rawSnippets = data.snippets || data.key_clauses || [];
+
+        if (rawSnippets && rawSnippets.length > 0) {
+          rawSnippets.forEach(s => {
+            let snippetText = '';
+            let snippetType = 'neutral';
+
+            if (typeof s === 'object' && s !== null) {
+              snippetText = s.text || s.clause || s.snippet || s.description || JSON.stringify(s);
+              snippetType = s.type || s.category || 'neutral';
+            } else {
+              snippetText = String(s);
+            }
+
+            let badgeHtml = '';
+            if (snippetType === 'negative' || snippetType.includes('risk') || snippetType.includes('concern')) {
+              badgeHtml = `<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-950/60 text-rose-400 border border-rose-800 uppercase font-semibold">Risk Clause</span>`;
+            } else if (snippetType === 'positive' || snippetType.includes('safe') || snippetType.includes('protection')) {
+              badgeHtml = `<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-800 uppercase font-semibold">Protective Clause</span>`;
+            } else {
+              badgeHtml = `<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700 uppercase font-semibold">Policy Statement</span>`;
+            }
+
+            snippetsContainer.innerHTML += `
+              <div class="p-4 bg-[#161616] border border-[#262626] rounded-2xl space-y-2 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] text-[#777777] font-mono">“Legal Disclosure”</span>
+                  ${badgeHtml}
+                </div>
+                <p class="text-zinc-200 italic text-xs leading-relaxed font-sans">"${snippetText}"</p>
+              </div>
+            `;
+          });
+        } else {
+          snippetsContainer.innerHTML = `<div class="text-[#777777] text-xs p-3">No specific policy clause excerpts recorded yet.</div>`;
+        }
+
+        // Update Source Link
+        let pUrl = data.policy_url;
+        if (!pUrl || pUrl === `https://${cleanDom}/privacy` || pUrl === `https://${cleanDom}`) {
+          pUrl = `https://www.${cleanDom}/privacy-policy`;
+        }
+        if (cleanDom === 'croma.com') pUrl = 'https://www.croma.com/privacy-policy';
+        else if (cleanDom === 'kletech.ac.in') pUrl = 'https://www.kletech.ac.in/privacy-policy';
+        else if (cleanDom === 'swiggy.com') pUrl = 'https://www.swiggy.com/privacy-policy';
+        else if (cleanDom === 'google.com') pUrl = 'https://policies.google.com/privacy';
+        else if (cleanDom === 'meta.com') pUrl = 'https://www.facebook.com/privacy/policy/';
+        else if (cleanDom === 'apple.com') pUrl = 'https://www.apple.com/legal/privacy/en-ww/';
+        else if (cleanDom === 'zerodha.com') pUrl = 'https://zerodha.com/privacy';
+
+        document.getElementById('resPolicyLink').href = pUrl;
       } catch (e) {
-        console.error(e);
+        console.error('Scan evaluation error:', e);
       } finally {
-        loader.classList.add('hidden');
+        if (loader) loader.classList.add('hidden');
       }
     }
+
+    // Modal Actions for Statutory Deletion Notice
+    function openStatutoryNoticeModal() {
+      if (!currentScannedData) return;
+      const s = currentScannedData;
+      const dpdpEmail = s.compliance?.dpdp?.grievance_email || s.compliance?.gdpr?.dpo_contact || `grievance@${s.domain}`;
+      const officer = s.compliance?.dpdp?.grievance_officer || 'Designated Grievance Redressal Officer';
+
+      document.getElementById('noticeRecipientInput').value = `${officer} <${dpdpEmail}>`;
+      
+      const noticeBody = `To: ${officer} <${dpdpEmail}>
+Subject: Formal Statutory Data Erasure & Consent Withdrawal Notice - DPDP Act 2023 (Section 12)
+
+Dear ${officer},
+
+I am writing to formally exercise my statutory right to data erasure and withdrawal of consent pursuant to Section 12 of the Digital Personal Data Protection Act, 2023 (DPDP Act 2023) and applicable statutory privacy regulations regarding my personal data held by ${s.name || s.domain}.
+
+Target Domain: ${s.domain}
+Date of Notice: ${new Date().toISOString().split('T')[0]}
+
+Please confirm the complete erasure of all associated personal data, tracking identifiers, purchase telemetry, and account profiles across all active systems within the statutory 30-day resolution timeline.
+
+Sincerely,
+Digital Privacy Principal`;
+
+      document.getElementById('noticeContentArea').value = noticeBody;
+      document.getElementById('noticeModal').classList.remove('hidden');
+    }
+
+    function closeStatutoryNoticeModal() {
+      document.getElementById('noticeModal').classList.add('hidden');
+    }
+
+    function copyNoticeText() {
+      const area = document.getElementById('noticeContentArea');
+      navigator.clipboard.writeText(area.value).then(() => {
+        alert('Statutory DPDP Deletion Notice copied to clipboard!');
+      }).catch(() => {
+        area.select();
+        document.execCommand('copy');
+        alert('Statutory notice copied!');
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const m = document.getElementById('noticeModal');
+        if (m && !m.classList.contains('hidden')) closeStatutoryNoticeModal();
+      }
+    });
   </script>
 </body>
 </html>

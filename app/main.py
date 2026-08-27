@@ -4,7 +4,7 @@ import json
 import zipfile
 import logging
 from datetime import datetime
-from fastapi import FastAPI, Response
+from fastapi import FastAPI, Response, Request
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import get_db_connection, init_db
 from app.routers import policy, deletion, breach, hub
@@ -80,8 +80,8 @@ def _migrate_and_fix_policy_urls():
                 new_url = f"https://www.{dom}/privacy-policy"
                 cursor.execute("UPDATE websites SET policy_url = ? WHERE domain = ?", (new_url, dom))
         conn.commit()
-    except Exception:
-        pass
+    except Exception as e:
+        logger.error(f"Error migrating policy URLs: {e}")
     finally:
         conn.close()
 
@@ -105,11 +105,11 @@ def _sync_visited_pings_to_websites():
                     INSERT INTO websites (
                         domain, name, category, policy_url, overall_score, grade, grade_color,
                         pillar_scores, compliance, source, scan_count, first_analyzed_at, last_analyzed_at, expires_at, updated_at
-                    ) VALUES (?, ?, 'Visited Site', 60, 'C', 'amber', '{}', '{}', 'extension_visited', 1, ?, ?, ?, ?)
+                    ) VALUES (?, ?, 'Visited Site', '', 60, 'C', 'amber', '{}', '{}', 'extension_visited', 1, ?, ?, ?, ?)
                 """, (dom, dom.split(".")[0].upper(), now_iso, now_iso, expires_iso, now_iso))
         conn.commit()
-    except Exception:
-        pass
+    except Exception as e:
+        logger.error(f"Error syncing visited pings to websites: {e}")
     finally:
         conn.close()
 
@@ -172,8 +172,6 @@ def _seed_cached_policies():
         conn.close()
 
 
-from fastapi import FastAPI, Response, Request
-
 @app.get("/")
 async def root(request: Request):
     static_landing = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", "landing.html")
@@ -229,16 +227,23 @@ async def health_check():
 @app.get("/api/extension/download")
 async def download_extension_zip():
     """Package the /extension directory into a zip file and stream it for direct installation"""
-    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    ext_dir = os.path.join(base_dir, "extension")
+    server_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    cih_root = os.path.dirname(server_root)
+    candidates = [
+        os.path.join(cih_root, "Guardra", "extension"),
+        os.path.join(server_root, "extension"),
+        os.path.join(cih_root, "extension")
+    ]
+    ext_dir = next((c for c in candidates if os.path.exists(c) and os.path.isdir(c)), candidates[0])
     
     zip_buffer = io.BytesIO()
     with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zf:
-        for root, dirs, files in os.walk(ext_dir):
-            for file in files:
-                abs_file = os.path.join(root, file)
-                rel_file = os.path.relpath(abs_file, ext_dir)
-                zf.write(abs_file, rel_file)
+        if os.path.exists(ext_dir):
+            for root, dirs, files in os.walk(ext_dir):
+                for file in files:
+                    abs_file = os.path.join(root, file)
+                    rel_file = os.path.relpath(abs_file, ext_dir)
+                    zf.write(abs_file, rel_file)
                 
     zip_buffer.seek(0)
     return Response(

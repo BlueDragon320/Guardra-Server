@@ -12,6 +12,11 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Tabl
 
 from app.database import get_db_connection
 
+def requests_quote(string: str) -> str:
+    """URL-encode a string for use in mailto links."""
+    import urllib.parse
+    return urllib.parse.quote(string)
+
 def generate_notice_text(
     site_domain: str,
     site_name: str,
@@ -163,10 +168,6 @@ Generated via Guardra Privacy Suite
         "mailto_url": mailto_url,
         "legal_basis_name": "Digital Personal Data Protection Act 2023 (India)" if legal_basis == "dpdp" else ("GDPR Article 17 (EU)" if legal_basis == "gdpr" else "CCPA / CPRA (California)")
     }
-
-def requests_quote(string: str) -> str:
-    import urllib.parse
-    return urllib.parse.quote(string)
 
 def generate_pdf_notice(
     site_domain: str,
