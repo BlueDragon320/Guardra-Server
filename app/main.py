@@ -105,7 +105,7 @@ def _sync_visited_pings_to_websites():
                     INSERT INTO websites (
                         domain, name, category, policy_url, overall_score, grade, grade_color,
                         pillar_scores, compliance, source, scan_count, first_analyzed_at, last_analyzed_at, expires_at, updated_at
-                    ) VALUES (?, ?, 'Visited Site', '', 60, 'C', 'amber', '{}', '{}', 'extension_visited', 1, ?, ?, ?, ?)
+                    ) VALUES (?, ?, 'Visited Site', 60, 'C', 'amber', '{}', '{}', 'extension_visited', 1, ?, ?, ?, ?)
                 """, (dom, dom.split(".")[0].upper(), now_iso, now_iso, expires_iso, now_iso))
         conn.commit()
     except Exception as e:
@@ -172,11 +172,28 @@ def _seed_cached_policies():
         conn.close()
 
 
+def _find_html_file(filename: str):
+    candidates = [
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", filename),
+        os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), filename),
+        os.path.join(os.getcwd(), filename),
+        filename
+    ]
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    return None
+
+
 @app.get("/")
 async def root(request: Request):
-    static_landing = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", "landing.html")
+    static_landing = _find_html_file("landing.html")
     accept = request.headers.get("accept", "")
-    if "text/html" in accept and os.path.exists(static_landing):
+    # Default to serving the visual landing page if available, or API status if JSON explicitly requested
+    if static_landing and ("application/json" not in accept or "text/html" in accept):
+        from fastapi.responses import FileResponse
+        return FileResponse(static_landing)
+    elif static_landing and not accept:
         from fastapi.responses import FileResponse
         return FileResponse(static_landing)
     return {
@@ -190,10 +207,20 @@ async def root(request: Request):
     }
 
 
+@app.get("/audit")
+@app.get("/report")
+async def audit_page():
+    static_landing = _find_html_file("landing.html")
+    if static_landing:
+        from fastapi.responses import FileResponse
+        return FileResponse(static_landing)
+    return {"message": "Audit UI unavailable"}
+
+
 @app.get("/admin")
 async def admin_root():
-    static_admin = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", "admin.html")
-    if os.path.exists(static_admin):
+    static_admin = _find_html_file("admin.html")
+    if static_admin:
         from fastapi.responses import FileResponse
         return FileResponse(static_admin)
     from app.routers.admin import get_admin_dashboard_stats
@@ -204,6 +231,18 @@ async def admin_root():
 async def admin_api_root():
     from app.routers.admin import get_admin_dashboard_stats
     return await get_admin_dashboard_stats()
+
+
+@app.get("/favicon.ico")
+@app.get("/favicon.png")
+async def favicon_route():
+    ico_path = _find_html_file("favicon.png")
+    if ico_path and os.path.exists(ico_path):
+        from fastapi.responses import FileResponse
+        return FileResponse(ico_path, media_type="image/png")
+    from fastapi.responses import Response
+    svg_icon = """<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='#050505'/><rect x='2.5' y='2.5' width='27' height='27' rx='5.5' fill='#FFFFFF'/><text x='16' y='22.5' font-family='-apple-system,BlinkMacSystemFont,sans-serif' font-weight='900' font-size='18' text-anchor='middle' fill='#050505'>G.</text></svg>"""
+    return Response(content=svg_icon, media_type="image/svg+xml")
 
 
 @app.get("/api/health")
@@ -227,23 +266,16 @@ async def health_check():
 @app.get("/api/extension/download")
 async def download_extension_zip():
     """Package the /extension directory into a zip file and stream it for direct installation"""
-    server_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    cih_root = os.path.dirname(server_root)
-    candidates = [
-        os.path.join(cih_root, "Guardra", "extension"),
-        os.path.join(server_root, "extension"),
-        os.path.join(cih_root, "extension")
-    ]
-    ext_dir = next((c for c in candidates if os.path.exists(c) and os.path.isdir(c)), candidates[0])
+    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    ext_dir = os.path.join(base_dir, "extension")
     
     zip_buffer = io.BytesIO()
     with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zf:
-        if os.path.exists(ext_dir):
-            for root, dirs, files in os.walk(ext_dir):
-                for file in files:
-                    abs_file = os.path.join(root, file)
-                    rel_file = os.path.relpath(abs_file, ext_dir)
-                    zf.write(abs_file, rel_file)
+        for root, dirs, files in os.walk(ext_dir):
+            for file in files:
+                abs_file = os.path.join(root, file)
+                rel_file = os.path.relpath(abs_file, ext_dir)
+                zf.write(abs_file, rel_file)
                 
     zip_buffer.seek(0)
     return Response(

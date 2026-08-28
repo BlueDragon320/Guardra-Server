@@ -1,6 +1,7 @@
 
 from fastapi import APIRouter, Query, HTTPException, Request
-from typing import List, Dict, Any
+from fastapi.responses import RedirectResponse
+from typing import List, Dict, Any, Optional
 import json
 import time
 from datetime import datetime, timedelta
@@ -11,12 +12,21 @@ from app.database import get_db_connection
 router = APIRouter(prefix="/api/policy", tags=["Policy Rating"])
 
 @router.get("/rating")
-async def get_rating(request: Request, domain: str = Query(..., description="Target site domain, e.g. google.com or swiggy.com")):
+async def get_rating(
+    request: Request,
+    domain: str = Query(..., description="Target site domain, e.g. google.com or swiggy.com"),
+    format: Optional[str] = Query(None, description="Response format: json or html")
+):
     if not domain:
         raise HTTPException(status_code=400, detail="Domain parameter is required")
         
     start_time = time.time()
     clean = clean_domain(domain)
+
+    # If opened directly in a browser without explicit JSON accept, redirect to the visual Audit UI
+    accept_header = request.headers.get("accept", "")
+    if format == "html" or ("text/html" in accept_header and "application/json" not in accept_header):
+        return RedirectResponse(url=f"/?domain={clean}#scanner", status_code=302)
     client_ip = request.client.host if request.client else "unknown"
     now = datetime.utcnow()
     now_iso = now.isoformat()

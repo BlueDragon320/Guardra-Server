@@ -305,7 +305,7 @@ def _check_compliance(text_lower: str) -> Dict[str, Any]:
     """
     # DPDP Act 2023 (India)
     dpdp_grievance_match = re.search(
-        r'(?:grievance\s+officer|nodal\s+officer|grievance\s+redressal\s+officer)[\s\w\:\.\,\-]{1,80}', text_lower)
+        r'(?:grievance\s+officer|nodal\s+officer|grievance\s+redressal\s+officer)(?:[^\.\;\n\!\?]{0,80})', text_lower)
     
     # Extract email associated with grievance/privacy/dpo in text
     all_emails = re.findall(r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+', text_lower)
@@ -318,9 +318,20 @@ def _check_compliance(text_lower: str) -> Dict[str, Any]:
     # DPDP is ONLY genuinely compliant if an explicit Grievance Officer AND valid email are found
     dpdp_compliant = bool(dpdp_grievance_match and dpdp_email)
     
+    raw_officer = dpdp_grievance_match.group(0) if dpdp_grievance_match else None
+    cleaned_officer = None
+    if raw_officer:
+        # Strip trailing fragments like 'if you are not', 'please contact', etc.
+        raw_officer = re.split(r'\b(?:if\s+you|please|in\s+case|write\s+to|reach\s+out|contact|appointed|under\s+section|email)\b', raw_officer, flags=re.I)[0]
+        cleaned_officer = raw_officer.strip(" :,-.\t\r\n").title()
+        if not cleaned_officer or len(cleaned_officer) < 5 or cleaned_officer.lower() in ["grievance officer", "nodal officer"]:
+            cleaned_officer = "Designated Grievance Officer"
+        elif len(cleaned_officer) > 50:
+            cleaned_officer = cleaned_officer[:50].strip()
+
     dpdp_info = {
         "compliant": dpdp_compliant,
-        "grievance_officer": dpdp_grievance_match.group(0).title()[:50].strip() if dpdp_grievance_match else None,
+        "grievance_officer": cleaned_officer,
         "grievance_email": dpdp_email,
         "redressal_period_days": 30 if dpdp_compliant else None,
         "erasure_right_disclosed": dpdp_erasure,
@@ -329,7 +340,7 @@ def _check_compliance(text_lower: str) -> Dict[str, Any]:
 
     # GDPR (EU)
     gdpr_dpo_match = re.search(
-        r'(?:data\s+protection\s+officer|dpo|eu\s+representative)[\s\w\:\.\,\-]{1,80}', text_lower)
+        r'(?:data\s+protection\s+officer|dpo|eu\s+representative)(?:[^\.\;\n\!\?]{0,80})', text_lower)
     gdpr_email = [e for e in all_emails if "dpo" in e or "privacy" in e]
     gdpr_dpo_contact = gdpr_email[0] if gdpr_email else (all_emails[0] if gdpr_dpo_match and all_emails else None)
     
