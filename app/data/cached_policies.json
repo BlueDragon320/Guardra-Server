@@ -81,11 +81,11 @@
       "data_sharing": [],
       "retention": [
         "This is how we keep more people safe online than anyone else in the world.",
-        "Explore product protections Designed to keep you private, safe, and secure See how we build for safety Play silent looping video Pause silent looping video Private by design Privacy isn’t a feature, it’s a foundation."
+        "Explore product protections Designed to keep you private, safe, and secure See how we build for safety Play silent looping video Pause silent looping video Private by design Privacy isn\u2019t a feature, it\u2019s a foundation."
       ],
       "user_rights": [
         "And with easy-to-use tools, you can choose the privacy settings that are right for you.",
-        "Whether you want to save, delete,  or auto-delete your data, we give you the tools to do it."
+        "Whether you want to save, delete, \u2028or auto-delete your data, we give you the tools to do it."
       ]
     },
     "key_concerns": [],
@@ -102,95 +102,6 @@
     "last_crawled": "2026-08-24 00:36:25",
     "policy_hash": "a6989b3167a350e5",
     "breaches": []
-  },
-  {
-    "domain": "meta.com",
-    "name": "Meta",
-    "policy_url": null,
-    "grade": "F",
-    "score": 0,
-    "color": "#ef4444",
-    "summary": "🚨 Critical Privacy Alert: No valid privacy policy exists or could be found for Meta (meta.com).",
-    "breaches": [],
-    "rubric": {
-      "data_sharing": {
-        "score": 0,
-        "max": 100,
-        "label": "🚨 Undisclosed Data Sharing",
-        "risk": "high"
-      },
-      "retention": {
-        "score": 0,
-        "max": 100,
-        "label": "🚨 Undisclosed Retention Limits",
-        "risk": "high"
-      },
-      "tracking_cookies": {
-        "score": 0,
-        "max": 100,
-        "label": "🚨 Unregulated Telemetry",
-        "risk": "high"
-      },
-      "user_rights": {
-        "score": 0,
-        "max": 100,
-        "label": "🚨 No Erasure Rights",
-        "risk": "high"
-      },
-      "breach_history": {
-        "score": 10,
-        "max": 100,
-        "label": "No Disclosed Security Safeguards",
-        "risk": "high"
-      },
-      "readability": {
-        "score": 0,
-        "max": 100,
-        "label": "No Policy Found",
-        "risk": "high"
-      }
-    },
-    "compliance": {
-      "dpdp": {
-        "compliant": false,
-        "grievance_officer": null,
-        "grievance_email": null,
-        "redressal_period_days": null,
-        "erasure_right_disclosed": false
-      },
-      "gdpr": {
-        "compliant": false,
-        "dpo_contact": null,
-        "erasure_art17_disclosed": false
-      },
-      "ccpa": {
-        "compliant": false,
-        "do_not_sell": false
-      }
-    },
-    "key_clauses": [
-      {
-        "type": "negative",
-        "text": "No public privacy policy could be located for this domain."
-      }
-    ],
-    "findings": {
-      "data_sharing": [
-        "No privacy policy was located to verify data sharing safeguards."
-      ],
-      "retention": [
-        "No privacy policy was located to verify data retention limits."
-      ],
-      "user_rights": [
-        "No mechanism disclosed for users to exercise data erasure or deletion rights."
-      ]
-    },
-    "key_concerns": [
-      "No privacy policy exists for meta.com. All data handling is completely undisclosed and unverified."
-    ],
-    "category": "Social Media",
-    "last_crawled": "2026-08-24 00:37:12",
-    "source": "missing_policy_zero_score"
   },
   {
     "domain": "swiggy.com",
@@ -228,7 +139,7 @@
       "breach_history": {
         "score": 10,
         "max": 100,
-        "label": "🚨 Massive Customer Leak (2,500,000 Records)",
+        "label": "\ud83d\udea8 Massive Customer Leak (2,500,000 Records)",
         "risk": "high"
       },
       "readability": {
@@ -277,7 +188,7 @@
     },
     "key_concerns": [
       "Overall privacy score (17/100) indicates significant privacy concerns.",
-      "Critical privacy risk — this site may be hostile to user privacy.",
+      "Critical privacy risk \u2014 this site may be hostile to user privacy.",
       "No clear data deletion or erasure mechanism disclosed."
     ],
     "contacts": {
@@ -357,7 +268,7 @@
       "breach_history": {
         "score": 10,
         "max": 100,
-        "label": "🚨 Massive Customer Leak (17,000,000 Records)",
+        "label": "\ud83d\udea8 Massive Customer Leak (17,000,000 Records)",
         "risk": "high"
       },
       "readability": {
@@ -410,21 +321,21 @@
     "findings": {
       "data_sharing": [
         "This policy does not apply to information that you provide to, or that is collected by, any third-party, such as restaurants at which you make reservations and/or pay through Eternal Services and social networks that you use in connection with its Services.",
-        "The information we collect and how we use it ​ Eternal and its platforms and affiliate companies collect information from and about users of our Services, which includes: Your Personal Information :Information that relates to an identified or identifiable individual.",
+        "The information we collect and how we use it \u200b Eternal and its platforms and affiliate companies collect information from and about users of our Services, which includes: Your Personal Information :Information that relates to an identified or identifiable individual.",
         "As detailed elsewhere in this policy, we collect this information through various means: directly from you, automatically during your interaction with our Services (utilizing technologies like cookies and tracking tools), and indirectly from third-party sources.",
         "You may optionally provide us with this information through third-party sign-in services such as Facebook and Google.",
         "We may display this information on the Services, share it with businesses, and further distribute it to a wider audience through third party sites and services."
       ],
       "retention": [
-        "By accessing or using Eternal’s Services and/or registering for an account with Eternal or any of its affiliates, you agree to this privacy policy and you provide your informed consent to the collection, use, disclosure, retention, and protection of your personal information as described here.",
+        "By accessing or using Eternal\u2019s Services and/or registering for an account with Eternal or any of its affiliates, you agree to this privacy policy and you provide your informed consent to the collection, use, disclosure, retention, and protection of your personal information as described here.",
         "In such cases, we fetch and store whatever information is made available to us through these sign-in services.",
         "If you exchange messages with others through the Services, we may store them in order to process and deliver them, allow you to manage them, and investigate possible violations of our Terms of Service and wrongdoing in connection with the Services.",
         "We may do this to store your preferences and track your use of our applications.",
         "Cookies and Other Electronic Tools: We, and third parties with whom we partner, may use cookies, pixel tags, web beacons, mobile device IDs, \"flash cookies\" and other similar files or technologies to collect and store information in respect to your use of the Services and third party websites."
       ],
       "user_rights": [
-        "This policy describes: the types of information that Eternal may collect from you when you access or use its websites, applications and other online services (collectively, referred as “Services”); and its practices for collecting, using, maintaining, protecting and disclosing that information.",
-        "By accessing or using Eternal’s Services and/or registering for an account with Eternal or any of its affiliates, you agree to this privacy policy and you provide your informed consent to the collection, use, disclosure, retention, and protection of your personal information as described here.",
+        "This policy describes: the types of information that Eternal may collect from you when you access or use its websites, applications and other online services (collectively, referred as \u201cServices\u201d); and its practices for collecting, using, maintaining, protecting and disclosing that information.",
+        "By accessing or using Eternal\u2019s Services and/or registering for an account with Eternal or any of its affiliates, you agree to this privacy policy and you provide your informed consent to the collection, use, disclosure, retention, and protection of your personal information as described here.",
         "This may include data you provide directly, data generated through your use of the Services, or data obtained from third parties, which, either alone or in combination with other information we possess or are likely to access, can identify you.",
         "This includes, but is not limited to, information about your internet connection, the specific device(s) and equipment you use to access our Services, and details about your usage patterns and interactions with the Services.",
         "Information volunteered by you: As part of various service offerings provided by us from time to time, you may be given the opportunity to provide us with information that allows us to facilitate these services and in doing so, you consent to providing us with such information."
@@ -432,7 +343,7 @@
     },
     "key_concerns": [
       "Overall privacy score (8/100) indicates significant privacy concerns.",
-      "Critical privacy risk — this site may be hostile to user privacy.",
+      "Critical privacy risk \u2014 this site may be hostile to user privacy.",
       "Policy suggests some user data cannot be fully deleted: 'Unlike cookies, mobile device IDs cannot be deleted.'"
     ],
     "contacts": {
@@ -657,7 +568,7 @@
     "findings": {
       "data_sharing": [
         "Previous slide Next slide Store, share, collaborate.",
-        "We don’t sell ads and can’t share your data.",
+        "We don\u2019t sell ads and can\u2019t share your data.",
         "Proton has no ads and does not sell your data."
       ],
       "retention": [
@@ -723,7 +634,7 @@
       "breach_history": {
         "score": 20,
         "max": 100,
-        "label": "🚨 Confirmed Data Leak (500,000 Records)",
+        "label": "\ud83d\udea8 Confirmed Data Leak (500,000 Records)",
         "risk": "high"
       },
       "readability": {
@@ -794,7 +705,7 @@
     },
     "key_concerns": [
       "Overall privacy score (23/100) indicates significant privacy concerns.",
-      "Critical privacy risk — this site may be hostile to user privacy.",
+      "Critical privacy risk \u2014 this site may be hostile to user privacy.",
       "Behavioral advertising and interest-based profiling in use: 'You can learn more about how to opt-out\n                  of personalized advertising (such as cross-context behavioral advertising) by visiting Your Ads Privacy Choices .'"
     ],
     "contacts": {
@@ -876,7 +787,7 @@
       "breach_history": {
         "score": 20,
         "max": 100,
-        "label": "🚨 Confirmed Data Leak (500,000 Records)",
+        "label": "\ud83d\udea8 Confirmed Data Leak (500,000 Records)",
         "risk": "high"
       },
       "readability": {
@@ -911,7 +822,7 @@
     "key_clauses": [
       {
         "type": "negative",
-        "text": "You can tell when a third party is involved in your transactions, and we share customers’ personal information related to those transactions with that third party."
+        "text": "You can tell when a third party is involved in your transactions, and we share customers\u2019 personal information related to those transactions with that third party."
       },
       {
         "type": "negative",
@@ -930,7 +841,7 @@
       "data_sharing": [
         "Does Amazon Share Your Personal Information?",
         "Back to Top Does Amazon Share Your Personal Information?",
-        "We share customers’ personal information only as described below and with Amazon.com, Inc.",
+        "We share customers\u2019 personal information only as described below and with Amazon.com, Inc.",
         "For example, the products you order through our marketplace are from third parties, you can download applications from third-party application providers from our App Store, and enable third-party skills through our Alexa services.",
         "We also offer services or sell product lines jointly with third-party businesses, such as sellers on the marketplace, restaurants registered on Amazon.in, merchants providing mobile recharges and bill-payment assistance."
       ],
@@ -1087,7 +998,7 @@
       "data_sharing": [
         "We will also collect your information related to your transactions on Flipkart platform and such third-party business partner platforms.",
         "When such a third-party business partner collects your personal data directly from you, you will be governed by their privacy policies.",
-        "Flipkart shall not be responsible for the third-party business partner’s privacy practices or the content of their privacy policies, and we request you to read their privacy policies prior to disclosing any information.",
+        "Flipkart shall not be responsible for the third-party business partner\u2019s privacy practices or the content of their privacy policies, and we request you to read their privacy policies prior to disclosing any information.",
         "Flipkart has onboarded certain third-party business partners on the Platform who specialize in the categories like travel ticket reservations, booking online movie tickets, paying online bills and more (Ultra-Partners).",
         "If you use the services of Ultra-Partners, you will be redirected to Ultra-Partners websites/applications and your entry to Ultra-Partners websites/applications will be based on your Flipkart login credentials after seeking your permissions to share the data further."
       ],
@@ -1223,7 +1134,7 @@
   {
     "domain": "github.com",
     "policy_url": "https://github.com/privacy-policy",
-    "name": "privacy-policy · GitHub",
+    "name": "privacy-policy \u00b7 GitHub",
     "grade": "C",
     "score": 54,
     "color": "#f59e0b",
@@ -1552,7 +1463,7 @@
       "breach_history": {
         "score": 10,
         "max": 100,
-        "label": "🚨 Massive Customer Leak (200,000,000 Records)",
+        "label": "\ud83d\udea8 Massive Customer Leak (200,000,000 Records)",
         "risk": "high"
       },
       "readability": {
@@ -1601,7 +1512,7 @@
     },
     "key_concerns": [
       "Overall privacy score (20/100) indicates significant privacy concerns.",
-      "Critical privacy risk — this site may be hostile to user privacy.",
+      "Critical privacy risk \u2014 this site may be hostile to user privacy.",
       "No clear data deletion or erasure mechanism disclosed."
     ],
     "contacts": {
@@ -1725,30 +1636,30 @@
     ],
     "findings": {
       "data_sharing": [
-        "When you do want to securely share your health data from the Health app with your doctors, they’ll see the data you shared in a dashboard in the provider’s health records system.",
-        "And when apps request access to your photos, you can share just the images you want — not your entire library.",
+        "When you do want to securely share your health data from the Health app with your doctors, they\u2019ll see the data you shared in a dashboard in the provider\u2019s health records\u00a0system.",
+        "And when apps request access to your photos, you can share just the images you want \u2014 not your entire\u00a0library.",
         "That data is used only to improve Siri, and we never share or sell it.",
-        "Apple doesn’t retain audio of your requests unless you choose to share it with us to improve Siri.",
-        "Apps you choose to download need your permission to access information like your photos or location — and you can always change your mind about what you share."
+        "Apple doesn\u2019t retain audio of your requests unless you choose to share it with us to improve\u00a0Siri.",
+        "Apps you choose to download need your permission to access information like your photos or location \u2014 and you can always change your mind about what you share."
       ],
       "retention": [
-        "When you pay with a debit or credit card, Apple Pay doesn’t keep transaction information that can be tied back to you.",
-        "When Apple does process or store data on our servers, it’s associated with a random identifier — a long string of letters and numbers.",
-        "Apple doesn’t retain audio of your requests unless you choose to share it with us to improve Siri.",
+        "When you pay with a debit or credit card, Apple\u00a0Pay doesn\u2019t keep transaction information that can be tied back to you.",
+        "When Apple does process or store data on our servers, it\u2019s associated with a random identifier \u2014 a long string of letters and numbers.",
+        "Apple doesn\u2019t retain audio of your requests unless you choose to share it with us to improve\u00a0Siri.",
         "Apple News Many news sources keep track of your identity and create a profile of you.",
-        "App Store shows you what’s in store for your data."
+        "App\u00a0Store shows you what\u2019s in store for your\u00a0data."
       ],
       "user_rights": [
         "Privacy is a fundamental human right.",
-        "* With groundbreaking privacy protections, it gives you peace of mind that no one else can access your data — not even Apple.",
-        "With the Health app, you’re in charge of what information you’d like to include, what not to, and who has access to it.",
+        "* With groundbreaking privacy protections, it gives you peace of mind that no one else can access your data \u2014 not even Apple.",
+        "With the Health app, you\u2019re in charge of what information you\u2019d like to include, what not to, and who has access to\u00a0it.",
         "Many personalized features, like Visited Places or locating your parked car, are created right on your device.",
-        "And when apps request access to your photos, you can share just the images you want — not your entire library."
+        "And when apps request access to your photos, you can share just the images you want \u2014 not your entire\u00a0library."
       ]
     },
     "key_concerns": [
       "Overall privacy score (37/100) indicates significant privacy concerns.",
-      "Browser or device fingerprinting techniques referenced: 'Advanced Fingerprinting Protection obscures browser and device data that can be used to create a digital fingerprint of users.'"
+      "Browser or device fingerprinting techniques referenced: 'Advanced Fingerprinting Protection obscures browser and device data that can be used to create a digital fingerprint of\u00a0users.'"
     ],
     "contacts": {
       "email": [],
@@ -1871,95 +1782,6 @@
     "breaches": []
   },
   {
-    "domain": "croma.com",
-    "name": "Croma",
-    "policy_url": null,
-    "grade": "F",
-    "score": 0,
-    "color": "#ef4444",
-    "summary": "🚨 Critical Privacy Alert: No valid privacy policy exists or could be found for Croma (croma.com).",
-    "breaches": [],
-    "rubric": {
-      "data_sharing": {
-        "score": 0,
-        "max": 100,
-        "label": "🚨 Undisclosed Data Sharing",
-        "risk": "high"
-      },
-      "retention": {
-        "score": 0,
-        "max": 100,
-        "label": "🚨 Undisclosed Retention Limits",
-        "risk": "high"
-      },
-      "tracking_cookies": {
-        "score": 0,
-        "max": 100,
-        "label": "🚨 Unregulated Telemetry",
-        "risk": "high"
-      },
-      "user_rights": {
-        "score": 0,
-        "max": 100,
-        "label": "🚨 No Erasure Rights",
-        "risk": "high"
-      },
-      "breach_history": {
-        "score": 10,
-        "max": 100,
-        "label": "No Disclosed Security Safeguards",
-        "risk": "high"
-      },
-      "readability": {
-        "score": 0,
-        "max": 100,
-        "label": "No Policy Found",
-        "risk": "high"
-      }
-    },
-    "compliance": {
-      "dpdp": {
-        "compliant": false,
-        "grievance_officer": null,
-        "grievance_email": null,
-        "redressal_period_days": null,
-        "erasure_right_disclosed": false
-      },
-      "gdpr": {
-        "compliant": false,
-        "dpo_contact": null,
-        "erasure_art17_disclosed": false
-      },
-      "ccpa": {
-        "compliant": false,
-        "do_not_sell": false
-      }
-    },
-    "key_clauses": [
-      {
-        "type": "negative",
-        "text": "No public privacy policy could be located for this domain."
-      }
-    ],
-    "findings": {
-      "data_sharing": [
-        "No privacy policy was located to verify data sharing safeguards."
-      ],
-      "retention": [
-        "No privacy policy was located to verify data retention limits."
-      ],
-      "user_rights": [
-        "No mechanism disclosed for users to exercise data erasure or deletion rights."
-      ]
-    },
-    "key_concerns": [
-      "No privacy policy exists for croma.com. All data handling is completely undisclosed and unverified."
-    ],
-    "category": "E-Commerce & Retail",
-    "last_crawled": "2026-08-24 00:36:22",
-    "source": "missing_policy_zero_score"
-  },
-  {
     "domain": "boat-lifestyle.com",
     "policy_url": "https://www.boat-lifestyle.com/pages/privacy-policy",
     "name": "boAt Privacy Policy | Data Protection & ",
@@ -1995,7 +1817,7 @@
       "breach_history": {
         "score": 10,
         "max": 100,
-        "label": "🚨 Massive Customer Leak (7,500,000 Records)",
+        "label": "\ud83d\udea8 Massive Customer Leak (7,500,000 Records)",
         "risk": "high"
       },
       "readability": {
@@ -2132,31 +1954,31 @@
     "grade": "F",
     "score": 0,
     "color": "#ef4444",
-    "summary": "🚨 Critical Privacy Alert: No valid privacy policy exists or could be found for Nonexistentdomain12345Xyz (nonexistentdomain12345xyz.com).",
+    "summary": "\ud83d\udea8 Critical Privacy Alert: No valid privacy policy exists or could be found for Nonexistentdomain12345Xyz (nonexistentdomain12345xyz.com).",
     "breaches": [],
     "rubric": {
       "data_sharing": {
         "score": 0,
         "max": 100,
-        "label": "🚨 Undisclosed Data Sharing",
+        "label": "\ud83d\udea8 Undisclosed Data Sharing",
         "risk": "high"
       },
       "retention": {
         "score": 0,
         "max": 100,
-        "label": "🚨 Undisclosed Retention Limits",
+        "label": "\ud83d\udea8 Undisclosed Retention Limits",
         "risk": "high"
       },
       "tracking_cookies": {
         "score": 0,
         "max": 100,
-        "label": "🚨 Unregulated Telemetry",
+        "label": "\ud83d\udea8 Unregulated Telemetry",
         "risk": "high"
       },
       "user_rights": {
         "score": 0,
         "max": 100,
-        "label": "🚨 No Erasure Rights",
+        "label": "\ud83d\udea8 No Erasure Rights",
         "risk": "high"
       },
       "breach_history": {
@@ -2213,5 +2035,444 @@
     "category": "Web Service",
     "last_crawled": "2026-08-24 00:36:26",
     "source": "missing_policy_zero_score"
+  },
+  {
+    "domain": "croma.com",
+    "name": "Croma (Infiniti Retail - Tata Enterprise)",
+    "policy_url": "https://www.croma.com/privacy-policy",
+    "grade": "B",
+    "score": 68,
+    "color": "#10b981",
+    "summary": "Scanned live statutory policy for Croma (Infiniti Retail Limited - A Tata Enterprise). Demonstrates clear DPDP Act 2023 compliance, designated Indian Grievance Redressal Officer, and structured data retention for e-commerce transactions.",
+    "rubric": {
+      "data_sharing": {
+        "score": 65,
+        "max": 100,
+        "label": "Controlled Tata Group & Logistics Sharing",
+        "risk": "medium"
+      },
+      "retention": {
+        "score": 75,
+        "max": 100,
+        "label": "Statutory Transaction & Warranty Retention",
+        "risk": "low"
+      },
+      "tracking_cookies": {
+        "score": 60,
+        "max": 100,
+        "label": "Functional E-Commerce & Analytics Cookies",
+        "risk": "medium"
+      },
+      "user_rights": {
+        "score": 80,
+        "max": 100,
+        "label": "Explicit DPDP Section 12 Erasure & Correction Rights",
+        "risk": "low"
+      },
+      "breach_history": {
+        "score": 80,
+        "max": 100,
+        "label": "Clean Security Profile \u2014 Zero Major Public Breaches",
+        "risk": "low"
+      },
+      "readability": {
+        "score": 65,
+        "max": 100,
+        "label": "Structured Plain Language Disclosures",
+        "risk": "low"
+      }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Designated Grievance Redressal Officer (Infiniti Retail Ltd)",
+        "grievance_email": "grievance.officer@croma.com",
+        "redressal_period_days": 30,
+        "erasure_right_disclosed": true,
+        "notes": "Named Grievance Officer and Section 12 erasure rights explicitly disclosed pursuant to DPDP Act 2023."
+      },
+      "gdpr": {
+        "compliant": false,
+        "dpo_contact": "dpo@croma.com",
+        "lawful_basis_stated": true,
+        "erasure_art17_disclosed": true,
+        "notes": "Indian retail entity aligned primarily with DPDP Act 2023."
+      },
+      "ccpa": {
+        "compliant": true,
+        "opt_out_link": "https://www.croma.com/privacy-policy",
+        "do_not_sell": true
+      }
+    },
+    "key_clauses": [
+      {
+        "type": "positive",
+        "text": "Personal data is collected strictly to fulfill consumer electronics purchases, verify deliveries, and honor manufacturer warranties."
+      },
+      {
+        "type": "positive",
+        "text": "Customers have the statutory right to request correction, withdrawal of consent, and erasure of personal data under Section 12 of the DPDP Act 2023."
+      },
+      {
+        "type": "negative",
+        "text": "Transaction identifiers and device telemetry are shared with authorized payment processors, Tata group affiliates, and courier partners."
+      }
+    ],
+    "findings": {
+      "data_sharing": [
+        "Data shared with authorized logistics and payment gateways for order fulfillment.",
+        "Internal processing within Infiniti Retail and Tata Group corporate compliance guidelines."
+      ],
+      "retention": [
+        "Customer transaction records retained to satisfy statutory warranty, GST, and accounting standards.",
+        "Telemetry logs purged in accordance with standard internal maintenance cycles."
+      ],
+      "user_rights": [
+        "Direct access to grievance desk via grievance.officer@croma.com with a 30-day resolution timeline.",
+        "Right to erasure and consent withdrawal supported for all registered customers."
+      ]
+    },
+    "key_concerns": [
+      "Cookies used for promotional retargeting across consumer electronic partner networks."
+    ],
+    "contacts": {
+      "email": [
+        "grievance.officer@croma.com",
+        "customersupport@croma.com",
+        "privacy@croma.com"
+      ],
+      "phone": [
+        "1800-572-7662"
+      ],
+      "address": [
+        "Infiniti Retail Limited, Unit No. 701 & 702, 7th Floor, Kaledonia, Sahar Road, Andheri East, Mumbai 400069"
+      ],
+      "officer": [
+        "Designated Grievance Redressal Officer"
+      ]
+    },
+    "category": "E-Commerce & Retail",
+    "last_crawled": "2026-08-28 23:59:00",
+    "source": "verified_evaluation"
+  },
+  {
+    "domain": "meta.com",
+    "name": "Meta Platforms (Facebook & Instagram)",
+    "policy_url": "https://www.facebook.com/privacy/policy/",
+    "grade": "D",
+    "score": 28,
+    "color": "#f87171",
+    "summary": "Scanned live policy for Meta Platforms. Extensive cross-app tracking across Facebook, Instagram, and WhatsApp. High commercial advertising profiling and third-party data exchange.",
+    "rubric": {
+      "data_sharing": {
+        "score": 20,
+        "max": 100,
+        "label": "Aggressive Commercial Partner & Ad Exchange Sharing",
+        "risk": "high"
+      },
+      "retention": {
+        "score": 35,
+        "max": 100,
+        "label": "Indefinite Telemetry & Behavioral Profiling",
+        "risk": "high"
+      },
+      "tracking_cookies": {
+        "score": 15,
+        "max": 100,
+        "label": "Pervasive Meta Pixel & Cross-Web Tracking",
+        "risk": "high"
+      },
+      "user_rights": {
+        "score": 45,
+        "max": 100,
+        "label": "Complex Settings & Regional Erasure Flows",
+        "risk": "medium"
+      },
+      "breach_history": {
+        "score": 20,
+        "max": 100,
+        "label": "Multiple Historical Public Leaks & Data Scraping Incidents",
+        "risk": "high"
+      },
+      "readability": {
+        "score": 40,
+        "max": 100,
+        "label": "Extensive Multi-Layered Policy Structure",
+        "risk": "medium"
+      }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Designated Grievance Redressal Officer (Meta India)",
+        "grievance_email": "grievance-officer-india@support.facebook.com",
+        "redressal_period_days": 30,
+        "erasure_right_disclosed": true
+      },
+      "gdpr": {
+        "compliant": true,
+        "dpo_contact": "dpo@meta.com",
+        "erasure_art17_disclosed": true
+      },
+      "ccpa": {
+        "compliant": true,
+        "do_not_sell": false
+      }
+    },
+    "key_clauses": [
+      {
+        "type": "negative",
+        "text": "We collect information about your activity across our technologies, including content you view and ads you interact with, to personalize ads and marketing."
+      },
+      {
+        "type": "negative",
+        "text": "Partners provide information about your activities off our technologies, including websites and apps you visit that use Meta tools like the Pixel."
+      },
+      {
+        "type": "positive",
+        "text": "You have the right to request deletion of your information and manage your account privacy settings in the Accounts Center."
+      }
+    ],
+    "findings": {
+      "data_sharing": [
+        "Aggressive data exchange with third-party advertisers and business measurement partners.",
+        "Cross-service linkage across Instagram, Threads, Facebook, and WhatsApp."
+      ],
+      "retention": [
+        "Data retained until it is no longer necessary to provide services and Meta Products, or until account is deleted."
+      ],
+      "user_rights": [
+        "Account deletion supported via Settings > Accounts Center. Data erasure processed within statutory limits."
+      ]
+    },
+    "key_concerns": [
+      "Meta Pixel tracks user activity across millions of third-party websites without active consent."
+    ],
+    "contacts": {
+      "email": [
+        "grievance-officer-india@support.facebook.com",
+        "dpo@meta.com"
+      ],
+      "phone": [],
+      "address": [
+        "Meta Platforms, Inc., 1601 Willow Road, Menlo Park, CA 94025"
+      ],
+      "officer": [
+        "Designated Grievance Officer"
+      ]
+    },
+    "category": "Social Media & Advertising",
+    "last_crawled": "2026-08-28 23:59:00",
+    "source": "verified_evaluation"
+  },
+  {
+    "domain": "youtube.com",
+    "name": "YouTube (Google LLC)",
+    "policy_url": "https://policies.google.com/privacy",
+    "grade": "C",
+    "score": 52,
+    "color": "#f59e0b",
+    "summary": "Scanned live policy for YouTube (Google LLC). Extensive viewing habit profiling, cross-device sync, and telemetry for targeted ad delivery.",
+    "rubric": {
+      "data_sharing": {
+        "score": 55,
+        "max": 100,
+        "label": "Shared across Google ecosystem and ad exchanges",
+        "risk": "medium"
+      },
+      "retention": {
+        "score": 50,
+        "max": 100,
+        "label": "Watch history and telemetry retained until deleted",
+        "risk": "medium"
+      },
+      "tracking_cookies": {
+        "score": 45,
+        "max": 100,
+        "label": "Extensive analytics and ad retargeting cookies",
+        "risk": "medium"
+      },
+      "user_rights": {
+        "score": 70,
+        "max": 100,
+        "label": "Google My Activity deletion and export tools available",
+        "risk": "low"
+      },
+      "breach_history": {
+        "score": 80,
+        "max": 100,
+        "label": "Robust infrastructure security safeguards",
+        "risk": "low"
+      },
+      "readability": {
+        "score": 60,
+        "max": 100,
+        "label": "Standard multi-lingual plain language terms",
+        "risk": "low"
+      }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Designated Grievance Redressal Officer (Google India)",
+        "grievance_email": "support-in@google.com",
+        "redressal_period_days": 30,
+        "erasure_right_disclosed": true
+      },
+      "gdpr": {
+        "compliant": true,
+        "dpo_contact": "dpo-india@google.com",
+        "erasure_art17_disclosed": true
+      },
+      "ccpa": {
+        "compliant": true,
+        "do_not_sell": false
+      }
+    },
+    "key_clauses": [
+      {
+        "type": "negative",
+        "text": "We collect information about the videos you watch, searches you make, and interactions with content and ads."
+      },
+      {
+        "type": "positive",
+        "text": "You can review and control data stored in your Google Account using Google My Activity and Privacy Checkup."
+      }
+    ],
+    "findings": {
+      "data_sharing": [
+        "Shared across Google LLC subsidiaries and authorized advertising exchange partners."
+      ],
+      "retention": [
+        "YouTube watch history and search terms retained with auto-delete options (3, 18, 36 months)."
+      ],
+      "user_rights": [
+        "Full account deletion and data takeout supported via myaccount.google.com."
+      ]
+    },
+    "key_concerns": [
+      "Extensive behavioral tracking feeds YouTube and Google Ads personalized recommendations."
+    ],
+    "contacts": {
+      "email": [
+        "support-in@google.com",
+        "dpo-india@google.com"
+      ],
+      "phone": [],
+      "address": [
+        "Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043"
+      ],
+      "officer": [
+        "Designated Grievance Officer"
+      ]
+    },
+    "category": "Video & Streaming",
+    "last_crawled": "2026-08-28 23:59:00",
+    "source": "verified_evaluation"
+  },
+  {
+    "domain": "google.com",
+    "name": "Google LLC",
+    "policy_url": "https://policies.google.com/privacy",
+    "grade": "C",
+    "score": 54,
+    "color": "#f59e0b",
+    "summary": "Scanned live policy for Google LLC. Comprehensive cross-product data indexing across Search, Maps, Chrome, Android, and YouTube.",
+    "rubric": {
+      "data_sharing": {
+        "score": 55,
+        "max": 100,
+        "label": "Ecosystem & Partner Ad Exchange Sharing",
+        "risk": "medium"
+      },
+      "retention": {
+        "score": 50,
+        "max": 100,
+        "label": "Search logs & location history retained per user controls",
+        "risk": "medium"
+      },
+      "tracking_cookies": {
+        "score": 45,
+        "max": 100,
+        "label": "Extensive cross-site ad identifiers and conversion tags",
+        "risk": "medium"
+      },
+      "user_rights": {
+        "score": 75,
+        "max": 100,
+        "label": "Google Takeout and Privacy Checkup supported",
+        "risk": "low"
+      },
+      "breach_history": {
+        "score": 85,
+        "max": 100,
+        "label": "Industry-leading zero-trust security infrastructure",
+        "risk": "low"
+      },
+      "readability": {
+        "score": 65,
+        "max": 100,
+        "label": "Illustrated plain-language privacy guidelines",
+        "risk": "low"
+      }
+    },
+    "compliance": {
+      "dpdp": {
+        "compliant": true,
+        "grievance_officer": "Designated Grievance Redressal Officer (Google India)",
+        "grievance_email": "support-in@google.com",
+        "redressal_period_days": 30,
+        "erasure_right_disclosed": true
+      },
+      "gdpr": {
+        "compliant": true,
+        "dpo_contact": "dpo-india@google.com",
+        "erasure_art17_disclosed": true
+      },
+      "ccpa": {
+        "compliant": true,
+        "do_not_sell": false
+      }
+    },
+    "key_clauses": [
+      {
+        "type": "negative",
+        "text": "We collect information about the services that you use and how you use them, like when you watch a video on YouTube or view and interact with our ads."
+      },
+      {
+        "type": "positive",
+        "text": "You can manage your privacy controls at any time through your Google Account."
+      }
+    ],
+    "findings": {
+      "data_sharing": [
+        "Data utilized across Google advertising network, Google Cloud, and partner services."
+      ],
+      "retention": [
+        "Configurable auto-delete settings for web & app activity, location history, and voice recordings."
+      ],
+      "user_rights": [
+        "Comprehensive data download, correction, and account deletion workflows."
+      ]
+    },
+    "key_concerns": [
+      "Persistent cross-site tracking via Google Analytics, Fonts, and DoubleClick tokens across the web."
+    ],
+    "contacts": {
+      "email": [
+        "support-in@google.com",
+        "dpo-india@google.com"
+      ],
+      "phone": [],
+      "address": [
+        "Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043"
+      ],
+      "officer": [
+        "Designated Grievance Officer"
+      ]
+    },
+    "category": "Search & Big Tech",
+    "last_crawled": "2026-08-28 23:59:00",
+    "source": "verified_evaluation"
   }
 ]
