@@ -675,11 +675,65 @@ def _extract_concerns(text: str, score: int) -> List[str]:
     return concerns
 
 
+KNOWN_CANONICAL_POLICY_URLS = {
+    "youtube.com": "https://policies.google.com/privacy",
+    "youtu.be": "https://policies.google.com/privacy",
+    "youtube-nocookie.com": "https://policies.google.com/privacy",
+    "google.com": "https://policies.google.com/privacy",
+    "google.co.in": "https://policies.google.com/privacy",
+    "meta.com": "https://www.facebook.com/privacy/policy/",
+    "facebook.com": "https://www.facebook.com/privacy/policy/",
+    "instagram.com": "https://privacycenter.instagram.com/policy",
+    "whatsapp.com": "https://www.whatsapp.com/legal/privacy-policy",
+    "apple.com": "https://www.apple.com/legal/privacy/en-ww/",
+    "croma.com": "https://www.croma.com/privacy-policy",
+    "kletech.ac.in": "https://www.kletech.ac.in/privacy-policy",
+    "swiggy.com": "https://www.swiggy.com/privacy-policy",
+    "zomato.com": "https://www.zomato.com/privacy",
+    "flipkart.com": "https://www.flipkart.com/pages/privacypolicy",
+    "boat-lifestyle.com": "https://www.boat-lifestyle.com/pages/privacy-policy",
+    "zerodha.com": "https://zerodha.com/privacy",
+    "amazon.in": "https://www.amazon.in/gp/help/customer/display.html?nodeId=200534380",
+    "amazon.com": "https://www.amazon.com/gp/help/customer/display.html?nodeId=468496",
+    "paytm.com": "https://paytm.com/privacy-policy",
+    "netflix.com": "https://help.netflix.com/legal/privacy",
+    "twitter.com": "https://twitter.com/en/privacy",
+    "x.com": "https://x.com/en/privacy",
+    "linkedin.com": "https://www.linkedin.com/legal/privacy-policy"
+}
+
+
 async def discover_and_fetch_policy(clean_domain: str) -> tuple[str, str]:
     """
-    Builds candidate URLs checking BOTH https://www.{clean}/... and https://{clean}/...
-    including Shopify /pages/privacy-policy, /policies/privacy-policy, and legal portal paths.
+    Builds candidate URLs checking canonical overrides, standard paths, Shopify /pages/, and legal portals.
     """
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9"
+    }
+
+    # 1. Check known canonical policy URLs first (e.g. YouTube -> Google Policies, Meta -> Facebook Privacy)
+    canonical = KNOWN_CANONICAL_POLICY_URLS.get(clean_domain)
+    if not canonical:
+        for k, v in KNOWN_CANONICAL_POLICY_URLS.items():
+            if clean_domain == k or clean_domain.endswith("." + k):
+                canonical = v
+                break
+
+    if canonical:
+        try:
+            async with httpx.AsyncClient(timeout=10.0, follow_redirects=True, verify=False) as client:
+                resp = await client.get(canonical, headers=headers)
+                if resp.status_code == 200 and len(resp.text) > 400:
+                    return canonical, resp.text
+        except Exception:
+            pass
+
+    # 2. Prevent probing false channel URLs on YouTube
+    if "youtube.com" in clean_domain or "youtu.be" in clean_domain:
+        return "https://policies.google.com/privacy", ""
+
     paths = [
         # Standard paths
         "/privacy-policy", "/privacy-policy/", "/privacy", "/privacy/",
@@ -696,12 +750,6 @@ async def discover_and_fetch_policy(clean_domain: str) -> tuple[str, str]:
     for p in paths:
         candidates.append(f"https://www.{clean_domain}{p}")
         candidates.append(f"https://{clean_domain}{p}")
-        
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.9"
-    }
     
     async with httpx.AsyncClient(timeout=10.0, follow_redirects=True, verify=False) as client:
         for url in candidates:

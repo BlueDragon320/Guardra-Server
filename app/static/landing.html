@@ -985,14 +985,18 @@
 
         // Update Source Link
         let pUrl = data.policy_url;
-        if (!pUrl || pUrl === `https://${cleanDom}/privacy` || pUrl === `https://${cleanDom}`) {
+        if (!pUrl || pUrl.includes('youtube.com/privacy') || pUrl === `https://${cleanDom}/privacy` || pUrl === `https://${cleanDom}`) {
           pUrl = `https://www.${cleanDom}/privacy-policy`;
         }
-        if (cleanDom === 'croma.com') pUrl = 'https://www.croma.com/privacy-policy';
+        if (cleanDom === 'youtube.com' || cleanDom === 'youtu.be' || cleanDom === 'google.com' || cleanDom === 'google.co.in') {
+          pUrl = 'https://policies.google.com/privacy';
+        } else if (cleanDom === 'croma.com') pUrl = 'https://www.croma.com/privacy-policy';
         else if (cleanDom === 'kletech.ac.in') pUrl = 'https://www.kletech.ac.in/privacy-policy';
         else if (cleanDom === 'swiggy.com') pUrl = 'https://www.swiggy.com/privacy-policy';
-        else if (cleanDom === 'google.com') pUrl = 'https://policies.google.com/privacy';
-        else if (cleanDom === 'meta.com') pUrl = 'https://www.facebook.com/privacy/policy/';
+        else if (cleanDom === 'zomato.com') pUrl = 'https://www.zomato.com/privacy';
+        else if (cleanDom === 'boat-lifestyle.com') pUrl = 'https://www.boat-lifestyle.com/pages/privacy-policy';
+        else if (cleanDom === 'meta.com' || cleanDom === 'facebook.com') pUrl = 'https://www.facebook.com/privacy/policy/';
+        else if (cleanDom === 'instagram.com') pUrl = 'https://privacycenter.instagram.com/policy';
         else if (cleanDom === 'apple.com') pUrl = 'https://www.apple.com/legal/privacy/en-ww/';
         else if (cleanDom === 'zerodha.com') pUrl = 'https://zerodha.com/privacy';
 
